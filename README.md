@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-128 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, and PM tools.
+134 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, and content design.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -17,7 +17,7 @@ Or use the branded CLI for a guided scope prompt:
 npx design-agent-skills
 ```
 
-Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 128 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
+Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 134 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
 
 ## Commands
 
@@ -67,7 +67,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 122 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 128 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -161,7 +161,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (28), `community` (35), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (28), `community` (41), `experimental` (60) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -180,7 +180,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [figma-catalogue](skills/figma-catalogue/SKILL.md) | Figma, design-to-code, tokens, platform suites |
 | [accessibility-catalogue](skills/accessibility-catalogue/SKILL.md) | Accessibility, WCAG, web performance |
 | [design-engineering-catalogue](skills/design-engineering-catalogue/SKILL.md) | UI craft, visual design, brand, mobile |
-| [content-catalogue](skills/content-catalogue/SKILL.md) | Slides, diagrams, data viz, PM, design review |
+| [content-catalogue](skills/content-catalogue/SKILL.md) | Slides, diagrams, data viz, PM, design review, copywriting, UX writing |
 
 ### Design Engineering
 
@@ -198,6 +198,8 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [logo-designer-skill](skills/logo-designer-skill/SKILL.md) | package | design-systems | [neonwatty/logo-designer-skill](https://github.com/neonwatty/logo-designer-skill) |
 | [distinctive-frontend](skills/distinctive-frontend/SKILL.md) | package | design-systems | [Koomook/claude-frontend-skills](https://github.com/Koomook/claude-frontend-skills) |
 | [design-for-ai](skills/design-for-ai/SKILL.md) | package | design-systems | [ryanthedev/design-for-ai](https://github.com/ryanthedev/design-for-ai) |
+| [styleseed](skills/styleseed/SKILL.md) | package | design-systems | [bitjaru/styleseed](https://github.com/bitjaru/styleseed) |
+| [awesome-design-skills](skills/awesome-design-skills/SKILL.md) | package | design-systems | [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) |
 
 ### Motion & Animation
 
@@ -249,6 +251,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [sleek-design-mobile-apps](skills/sleek-design-mobile-apps/SKILL.md) | platform | visual-components | [sleekdotdesign/agent-skills](https://github.com/sleekdotdesign/agent-skills) |
 | [liquid-glass-skill](skills/liquid-glass-skill/SKILL.md) | package | visual-components | [haider-nawaz/liquid-glass-skill](https://github.com/haider-nawaz/liquid-glass-skill) |
 | [swiftui-claude-skills](skills/swiftui-claude-skills/SKILL.md) | package | visual-components | [199-biotechnologies/swiftui-claude-skills](https://github.com/199-biotechnologies/swiftui-claude-skills) |
+| [material-3-skill](skills/material-3-skill/SKILL.md) | package | visual-components | [hamen/material-3-skill](https://github.com/hamen/material-3-skill) |
 
 ### Accessibility & Quality
 
@@ -366,6 +369,14 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [coreyhaines-marketing](skills/coreyhaines-marketing/SKILL.md) | package | product-pm | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) |
 | [pm-skills](skills/pm-skills/SKILL.md) | package | product-pm | [product-on-purpose/pm-skills](https://github.com/product-on-purpose/pm-skills) |
 | [claude-pm-skills](skills/claude-pm-skills/SKILL.md) | package | product-pm | [pratikshadake/claude-product-management-skills](https://github.com/pratikshadake/claude-product-management-skills) |
+
+### Content Design & Copy
+
+| Skill | Type | Category | Upstream |
+|-------|------|----------|----------|
+| [ux-writing-skill](skills/ux-writing-skill/SKILL.md) | skill | content-design | [content-designer/ux-writing-skill](https://github.com/content-designer/ux-writing-skill) |
+| [copywriting-skill](skills/copywriting-skill/SKILL.md) | skill | content-design | [judicael-s/Copywriting-skill](https://github.com/judicael-s/Copywriting-skill) |
+| [humanize-text](skills/humanize-text/SKILL.md) | package | content-design | [gregorymm/humanize-text](https://github.com/gregorymm/humanize-text) |
 
 ### Email Design
 
