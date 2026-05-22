@@ -39,6 +39,10 @@ Do **not** activate if the user already named a specific skill — route directl
 3. Show the stub's install command for the match
 4. Ask if they want to install and invoke it
 
+> For `type:package` and `type:platform` stubs (e.g. impeccable): show the per-agent
+> install table from the stub instead of a single curl command. These packages must
+> not be curl'd directly — they use their own install mechanisms.
+
 ## Catalogue index
 
 | Skill | Category | Best for |

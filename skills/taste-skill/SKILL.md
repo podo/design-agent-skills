@@ -23,24 +23,22 @@ das:
 
 # taste-skill
 
-> Catalogue stub — full skill lives at [@Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
+> Catalogue stub — full skill: [@Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)
 
-## When to use this skill
+## Decision tree
 
-Use when the user asks for any of:
+Run this before any UI design work:
 
-- Premium, non-generic frontend UI — components, pages, dashboards, landing pages
-- Explicit anti-slop / anti-AI-default design ("make it look good", "not generic", "with taste")
-- Tunable design dials — they mention variance, motion level, or density preferences
-- Any trigger phrase: "design taste", "good taste", "anti slop", "visual density", "premium UI"
+1. **Is the full skill already installed?**
+   Check: `~/.claude/skills/taste-skill/SKILL.md` exists AND does NOT contain a `das:` block.
+   - Yes → invoke `taste-skill` or `design-taste-frontend` and proceed
+   - No → go to step 2
 
-**Do not use** for backend code, data pipelines, CLI tools, or pure logic — this skill is UI-only.
+2. **Do you have shell access?**
+   - Yes → run the install command below, then invoke the skill
+   - No → show the user the install command, ask them to run it, then proceed once confirmed
 
-## How to install
-
-This is a catalogue stub. The full skill (10 sections, ~600 lines of design directives) lives upstream.
-
-**As an agent:** If the user triggers this skill and you do not have the full upstream installed, present them the command below and ask them to run it — or run it yourself if you have shell access.
+## Install command
 
 ```bash
 mkdir -p ~/.claude/skills/taste-skill && \
@@ -49,24 +47,16 @@ mkdir -p ~/.claude/skills/taste-skill && \
     -o ~/.claude/skills/taste-skill/SKILL.md
 ```
 
-Verify the install succeeded:
+Verify install: `head -3 ~/.claude/skills/taste-skill/SKILL.md` — output must NOT contain `das:`.
 
-```bash
-head -5 ~/.claude/skills/taste-skill/SKILL.md
-```
+## Invoke after install
 
-## How to invoke after install
-
-Once installed, invoke by skill name or any trigger phrase:
-
-- **Skill name:** `taste-skill` or `design-taste-frontend`
-- **Trigger phrases:** "design taste", "good taste", "anti slop", "visual density", "premium UI"
-
-The full skill activates with baseline dials already set — no config needed.
+- Skill name: `taste-skill` or `design-taste-frontend`  
+- Trigger phrases: "design taste", "good taste", "anti slop", "visual density", "premium UI"
 
 ## What it does
 
-Applies senior UI/UX engineer taste via three configurable dials:
+Applies senior UI/UX engineer taste via three tunable dials:
 
 | Dial | Default | Range | Effect |
 |------|---------|-------|--------|
@@ -74,9 +64,9 @@ Applies senior UI/UX engineer taste via three configurable dials:
 | `MOTION_INTENSITY` | `6` | 1–10 | 1 = static → 10 = cinematic spring physics |
 | `VISUAL_DENSITY` | `4` | 1–10 | 1 = art gallery / airy → 10 = cockpit / data-packed |
 
-Users can override dials in chat ("set motion to 3", "max density"). The full skill adjusts all
-layout, typography, animation, and component rules to match.
+Override dials in chat: "set motion to 3", "max density". Enforces strict bans against AI design tells: Inter font, centered heroes, 3-column equal card rows, neon glows, pure black (#000), AI-purple gradients, emoji in UI.
 
-**Enforces strict bans against AI design tells:** Inter font, centered hero sections, 3-column
-equal card rows, neon glows, pure black (#000), AI-purple gradients, emoji in UI, Unsplash URLs,
-and generic placeholder names (John Doe, Acme Corp).
+## When NOT to use
+
+- Backend code, APIs, data pipelines, CLI tools, or any non-UI task
+- When the user explicitly wants generic or template-style UI
