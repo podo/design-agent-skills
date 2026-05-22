@@ -42,16 +42,14 @@ design-catalogue        stub        stub        stub
 taste-skill             upgraded    stub        -
 ```
 
-- `stub` — pointer installed, upstream skill not yet fetched
-- `upgraded` — upstream skill installed, stub replaced
-- `BROKEN` — symlink target missing, run `./install.sh fix`
+- `stub` — skill pointer installed; full skill not yet fetched
+- `upgraded` — full skill installed, pointer replaced
+- `BROKEN` — symlink target missing, run `fix`
 - `-` — not installed for this agent
 
-### How stubs become upgraded
+### How skills install on demand
 
-Each stub contains a `curl` install command. When an agent runs it, the upstream
-`SKILL.md` overwrites the stub file **through the symlink** at the same path.
-Because all agents share the same symlink target, one install upgrades all of them.
+Each skill pointer contains a `curl` install command. When an agent reads the pointer and runs it, the full upstream `SKILL.md` overwrites the pointer **through the symlink** at the same path. All agents share the same symlink target — one install upgrades all of them.
 
 ```bash
 # example from skills/taste-skill/SKILL.md:
@@ -61,18 +59,18 @@ mkdir -p ~/.claude/skills/taste-skill && \
     -o ~/.claude/skills/taste-skill/SKILL.md
 ```
 
-After this runs, `./install.sh status` shows `upgraded` for every agent.
+After this runs, `status` shows `upgraded` for every agent.
 
 ## How it works
 
-Skills live in `skills/<name>/SKILL.md`. Two types:
+Each skill is a `SKILL.md` file in `skills/<name>/`. Most are **skill pointers** — lightweight entries that tell an agent what a skill does and how to install the full version when needed. A few are **native skills** that live entirely in this repo.
 
-| Type | Description |
+| Kind | Description |
 |------|-------------|
-| **stub** | Pointer to an upstream skill. Has `das:` frontmatter. Agent reads it to discover and install the full skill. |
-| **native** | Full skill that lives in this repo. No install step needed. |
+| **skill pointer** | `das:` frontmatter marks it as a pointer. Agent reads it, discovers the upstream skill, installs on demand. |
+| **native** | Full skill content lives here. No install step. |
 
-## Stub anatomy
+### Pointer anatomy
 
 ```yaml
 ---
@@ -83,7 +81,7 @@ triggers:
   - "phrase that activates this skill"
 das:
   type: <type>                # skill | package | platform
-  category: <category>        # design-systems, testing, devops, …
+  category: <category>        # design-systems, motion, accessibility, …
   upstream: <github-url>
   upstream_path: <path>       # skill type only
   version: latest
@@ -91,7 +89,7 @@ das:
 ---
 ```
 
-### Stub types
+### Pointer types
 
 | Type | `install.sh` behaviour | Example |
 |------|------------------------|---------|
@@ -103,7 +101,7 @@ das:
 
 **When to use** · **How to install** · **How to invoke after install** · **What it does**
 
-## Adding a stub
+## Adding a skill
 
 1. `mkdir skills/<name> && touch skills/<name>/SKILL.md`
 2. Fill frontmatter + four body sections
@@ -173,11 +171,23 @@ point `upstream_path` in `stub.yaml` to your fork.
 
 ## Skills
 
+### Catalogue Routers
+
+Domain routers — activate when the user asks for a skill by domain. Route to the right implementation skill.
+
+| Skill | Routes to |
+|-------|-----------|
+| [design-catalogue](skills/design-catalogue/SKILL.md) | Top-level router across all domains |
+| [motion-catalogue](skills/motion-catalogue/SKILL.md) | Motion, 3D, shaders, generative art |
+| [figma-catalogue](skills/figma-catalogue/SKILL.md) | Figma, design-to-code, tokens, platform suites |
+| [accessibility-catalogue](skills/accessibility-catalogue/SKILL.md) | Accessibility, WCAG, web performance |
+| [design-engineering-catalogue](skills/design-engineering-catalogue/SKILL.md) | UI craft, visual design, brand, mobile |
+| [content-catalogue](skills/content-catalogue/SKILL.md) | Slides, diagrams, data viz, PM, design review |
+
 ### Design Engineering
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [design-catalogue](skills/design-catalogue/SKILL.md) | native | meta | — |
 | [taste-skill](skills/taste-skill/SKILL.md) | skill | design-systems | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) |
 | [impeccable](skills/impeccable/SKILL.md) | platform | design-systems | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [emilkowalski-skill](skills/emilkowalski-skill/SKILL.md) | package | design-systems | [emilkowalski/skill](https://github.com/emilkowalski/skill) |

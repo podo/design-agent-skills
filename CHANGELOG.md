@@ -5,6 +5,33 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.2.0] — 2026-05-22
+
+### Added
+
+- **npm package** — `npx design-agent-skills` now works as the primary install path. On first run: clones to `~/.design-agent-skills`. On subsequent runs: pulls latest, then installs.
+- **5 domain catalogue routers** — `motion-catalogue`, `figma-catalogue`, `accessibility-catalogue`, `design-engineering-catalogue`, `content-catalogue`. Route by domain before reaching implementation skills.
+- **`remove` command** — `install.sh remove <skill>` unlinks a specific skill from all detected agents. `remove --all` unlinks everything.
+- **`doctor` command** — detects exact trigger collisions, substring overlaps (`--substr`), orphaned symlinks, and relocated installs.
+- **`update --dry-run` / `--frozen`** — preview changes without applying; warn on upstream drift vs lockfile.
+- **`lock` command** — generates `design-agent-skills.lock` (SHA256 of every installed skill).
+- **Tier classification** — all 128 skills classified as `official` (28), `community` (35), or `experimental` (60). Experimental excluded by default; opt in with `--include-experimental`.
+- **`--scope=project`** — link skills to project-level `.claude/skills/` instead of `~`. Warns when user-scope-only agents (codex, droid) are detected but skipped.
+- **`installed_as` field** — multi-skill packages (expo-skills: 15 skills, software-mansion-skills: 5 skills, and others) now declare the exact skill names they install, enabling partial-install detection.
+- **Symlink fragility detection** — `doctor` reports `BROKEN` (target missing) and `RELOCATED` (target outside current install dir) with recovery instructions.
+
+### Fixed
+
+- `"frontend design"` trigger on `anthropics-skills` renamed to `"Anthropic frontend design"` — previously bled into `microsoft-skills` `"frontend design review"`.
+- `"flow field"` trigger on `algorithmic-art` renamed to `"flow field art"` — previously bled into `p5js-hermes` `"flow field p5"`.
+- 10 exact trigger collisions across the catalogue resolved.
+
+### Changed
+
+- README rewritten: stubs framing replaced with skill pointer language; domain catalogues documented; trigger routing and overlap map added; supply chain position documented.
+
+---
+
 ## [1.1.0] — 2026-05-22
 
 ### Added
