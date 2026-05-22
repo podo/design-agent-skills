@@ -93,3 +93,4 @@ Body sections: **When to use** · **How to install** · **How to invoke after in
 |-------|------|----------|----------|
 | [design-catalogue](skills/design-catalogue/SKILL.md) | native | meta | — |
 | [taste-skill](skills/taste-skill/SKILL.md) | stub | design-systems | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) |
+| [impeccable](skills/impeccable/SKILL.md) | platform | design-systems | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |

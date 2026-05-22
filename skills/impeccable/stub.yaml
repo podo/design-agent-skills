@@ -1,0 +1,7 @@
+type: platform
+upstream: https://github.com/pbakaus/impeccable
+version: latest
+install_default: "npx skills add impeccable"
+install_claude: "claude plugin install pbakaus/impeccable"
+install_npm: "npm install -g impeccable"
+note: "SKILL.md contains unresolved template vars — do not curl directly"
