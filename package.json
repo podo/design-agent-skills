@@ -1,9 +1,9 @@
 {
   "name": "design-agent-skills",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and Droid",
   "bin": {
-    "design-agent-skills": "./bin/cli.js"
+    "design-agent-skills": "./bin/cli.mjs"
   },
   "engines": {
     "node": ">=18"
@@ -12,7 +12,14 @@
     "test": "node --test --experimental-test-coverage test/*.test.js"
   },
   "type": "module",
-  "keywords": ["claude", "cursor", "codex", "agent", "skills", "design"],
+  "keywords": [
+    "claude",
+    "cursor",
+    "codex",
+    "agent",
+    "skills",
+    "design"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

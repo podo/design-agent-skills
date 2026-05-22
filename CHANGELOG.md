@@ -5,6 +5,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.4.2] — 2026-05-22
+
+### Fixed
+
+- **bin entry** — renamed `bin/cli.js` → `bin/cli.mjs` so npm publish retains the bin entry in ESM packages (was silently stripped under `"type": "module"`)
+
+---
+
+## [1.4.1] — 2026-05-22
+
+### Fixed
+
+- **ESM conversion** — converted `bin/cli.js` from CommonJS `require()` to ESM `import` to match `"type": "module"` package setting
+
+---
+
 ## [1.4.0] — 2026-05-22
 
 ### Added

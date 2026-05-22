@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../../');
-const CLI  = path.join(ROOT, 'bin', 'cli.js');
+const CLI  = path.join(ROOT, 'bin', 'cli.mjs');
 
 describe('bin/cli.js', () => {
   it('exists', () => {
