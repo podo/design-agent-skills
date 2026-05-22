@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/garrytan/gstack
+upstream_path: design-review/SKILL.md
+version: latest
