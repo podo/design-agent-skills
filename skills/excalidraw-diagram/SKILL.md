@@ -24,27 +24,29 @@ das:
 
 ## Decision tree
 
-Run this before any Excalidraw diagram work:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/excalidraw-diagram/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `excalidraw-diagram` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/excalidraw-diagram/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/excalidraw-diagram/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/excalidraw-diagram ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/excalidraw-diagram && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/coleam00/excalidraw-diagram-skill/main/SKILL.md \
-    -o ~/.design-agent-skills/skills/excalidraw-diagram/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add coleam00/excalidraw-diagram-skill --skill excalidraw-diagram -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/excalidraw-diagram/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add coleam00/excalidraw-diagram-skill --skill excalidraw-diagram -y
+   ```
 
 ## Invoke after install
 

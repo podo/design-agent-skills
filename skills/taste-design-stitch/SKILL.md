@@ -24,27 +24,29 @@ das:
 
 ## Decision tree
 
-Run this when working with Google Stitch UI output:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/taste-design-stitch/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `taste-design-stitch` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/taste-design-stitch/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/taste-design-stitch/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/taste-design-stitch ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/taste-design-stitch && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/google-labs-code/stitch-skills/main/plugins/stitch-utilities/skills/taste-design/SKILL.md \
-    -o ~/.design-agent-skills/skills/taste-design-stitch/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add google-labs-code/stitch-skills --skill taste-design-stitch -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/taste-design-stitch/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add google-labs-code/stitch-skills --skill taste-design-stitch -y
+   ```
 
 ## Invoke after install
 

@@ -25,19 +25,29 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/mobile-app-ui-design/SKILL.md` — no `das:` block = installed.
-   - Yes → invoke and proceed
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/mobile-app-ui-design/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/mobile-app-ui-design/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Shell access?** Yes → install below. No → show user the command.
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/mobile-app-ui-design ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/mobile-app-ui-design && curl -fsSL https://raw.githubusercontent.com/ceorkm/mobile-app-ui-design/main/SKILL.md -o ~/.design-agent-skills/skills/mobile-app-ui-design/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add ceorkm/mobile-app-ui-design --skill mobile-app-ui-design -g -y
+   ```
 
-Verify: `head -3 ~/.design-agent-skills/skills/mobile-app-ui-design/SKILL.md` — must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add ceorkm/mobile-app-ui-design --skill mobile-app-ui-design -y
+   ```
 
 ## Invoke after install
 

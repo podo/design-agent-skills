@@ -26,27 +26,29 @@ das:
 
 ## Decision tree
 
-Run this before any data visualization or charting work:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/data-viz-agent/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `data-viz-agent` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/data-viz-agent/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/data-viz-agent/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/data-viz-agent ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/data-viz-agent && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/rohitg00/awesome-claude-code-toolkit/main/agents/data-ai/data-visualization.md \
-    -o ~/.design-agent-skills/skills/data-viz-agent/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add rohitg00/awesome-claude-code-toolkit --skill data-viz-agent -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/data-viz-agent/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add rohitg00/awesome-claude-code-toolkit --skill data-viz-agent -y
+   ```
 
 ## Invoke after install
 

@@ -26,27 +26,29 @@ das:
 
 ## Decision tree
 
-Run this before any GLSL shader or WebGL visual effect work:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/shader-dev/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `shader-dev` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/shader-dev/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/shader-dev/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/shader-dev ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/shader-dev && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/MiniMax-AI/skills/main/skills/shader-dev/SKILL.md \
-    -o ~/.design-agent-skills/skills/shader-dev/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add MiniMax-AI/skills --skill shader-dev -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/shader-dev/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add MiniMax-AI/skills --skill shader-dev -y
+   ```
 
 ## Invoke after install
 

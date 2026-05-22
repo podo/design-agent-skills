@@ -24,27 +24,29 @@ das:
 
 ## Decision tree
 
-Run this before any PowerPoint or presentation generation:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/guizang-ppt/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `guizang-ppt` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/guizang-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/guizang-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/guizang-ppt ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/guizang-ppt && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/op7418/guizang-ppt-skill/main/SKILL.md \
-    -o ~/.design-agent-skills/skills/guizang-ppt/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add op7418/guizang-ppt-skill --skill guizang-ppt -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/guizang-ppt/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add op7418/guizang-ppt-skill --skill guizang-ppt -y
+   ```
 
 ## Invoke after install
 

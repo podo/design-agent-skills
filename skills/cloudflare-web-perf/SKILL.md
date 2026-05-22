@@ -26,27 +26,29 @@ das:
 
 ## Decision tree
 
-Run this before any web performance audit or optimization:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/cloudflare-web-perf/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `cloudflare-web-perf` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/cloudflare-web-perf/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/cloudflare-web-perf/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/cloudflare-web-perf ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/cloudflare-web-perf && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/cloudflare/skills/main/skills/web-perf/SKILL.md \
-    -o ~/.design-agent-skills/skills/cloudflare-web-perf/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add cloudflare/skills --skill cloudflare-web-perf -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/cloudflare-web-perf/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add cloudflare/skills --skill cloudflare-web-perf -y
+   ```
 
 ## Invoke after install
 

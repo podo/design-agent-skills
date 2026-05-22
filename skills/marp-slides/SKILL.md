@@ -24,17 +24,29 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/marp-slides/SKILL.md` — no `das:` = installed.
-   - Yes → invoke and proceed. No → go to step 2.
-2. **Shell access?** Yes → install. No → show user the command.
+1. **Is the full skill already installed?**
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/marp-slides/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/marp-slides/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-## Install command
+2. **Detect scope, then install:**
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/marp-slides && curl -fsSL https://raw.githubusercontent.com/robonuggets/marp-slides/main/SKILL.md -o ~/.design-agent-skills/skills/marp-slides/SKILL.md
-```
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/marp-slides ] && echo "global" || echo "project"
+   ```
 
-Verify: `head -3 ~/.design-agent-skills/skills/marp-slides/SKILL.md` — must NOT contain `das:`.
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add robonuggets/marp-slides --skill marp-slides -g -y
+   ```
+
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add robonuggets/marp-slides --skill marp-slides -y
+   ```
 
 ## Invoke after install
 

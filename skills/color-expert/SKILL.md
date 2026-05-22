@@ -28,27 +28,29 @@ das:
 
 ## Decision tree
 
-Run this before any color system or palette work:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/color-expert/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `color-expert` and proceed
-   - No → go to step 2
+   Check whether the skill at this location still has a `das:` block:
+   - Global: `grep -q "^das:" ~/.agents/skills/color-expert/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - Project: `grep -q "^das:" .agents/skills/color-expert/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
+   - No `das:` block → full skill installed, invoke it and proceed
+   - `das:` block present → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+2. **Detect scope, then install:**
 
-## Install command
+   To detect scope:
+   ```bash
+   [ -e ~/.agents/skills/color-expert ] && echo "global" || echo "project"
+   ```
 
-```bash
-mkdir -p ~/.design-agent-skills/skills/color-expert && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/meodai/skill.color-expert/main/SKILL.md \
-    -o ~/.design-agent-skills/skills/color-expert/SKILL.md
-```
+   **Global** (installed with `-g`):
+   ```bash
+   npx skills add meodai/skill.color-expert --skill color-expert -g -y
+   ```
 
-Verify install: `head -3 ~/.design-agent-skills/skills/color-expert/SKILL.md` — output must NOT contain `das:`.
+   **Project** (installed without `-g`):
+   ```bash
+   npx skills add meodai/skill.color-expert --skill color-expert -y
+   ```
 
 ## Invoke after install
 
