@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-134 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, and content design.
+135 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, and content design.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -17,7 +17,7 @@ Or use the branded CLI for a guided scope prompt:
 npx design-agent-skills
 ```
 
-Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 134 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
+Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 135 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
 
 ## Commands
 
@@ -67,7 +67,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 128 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 129 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -161,7 +161,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (28), `community` (41), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (28), `community` (42), `experimental` (60) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -389,3 +389,4 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [tui-design-skill](skills/tui-design-skill/SKILL.md) | package | tui-terminal | [gfargo/tui-design-skill](https://github.com/gfargo/tui-design-skill) |
+| [textual-tui-skill](skills/textual-tui-skill/SKILL.md) | package | tui-terminal | [aperepel/textual-tui-skill](https://github.com/aperepel/textual-tui-skill) |

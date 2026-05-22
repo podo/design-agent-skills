@@ -264,6 +264,7 @@ instead of scrolling the full index below:
 | Skill | Best for |
 |-------|----------|
 | [`tui-design-skill`](../tui-design-skill/SKILL.md) | Terminal UI design: Bubble Tea (Go), Ratatui (Rust), Textual (Python), Ink (TS) |
+| [`textual-tui-skill`](../textual-tui-skill/SKILL.md) | Textual (Python) deep-dive: 40+ widgets, TCSS, reactive, workers, Pilot testing |
 
 ---
 
@@ -354,6 +355,7 @@ instead of scrolling the full index below:
 | "Material Design 3", "Material You", "MD3", "Jetpack Compose design" | `material-3-skill` |
 | "brand skin", "design token engine", "styleseed" | `styleseed` |
 | "design aesthetic", "glassmorphism", "brutalism style", "claymorphism" | `awesome-design-skills` |
+| "Textual TUI", "Textual Python", "Textual widget", "TCSS" | `textual-tui-skill` |
 
 ## No match
 

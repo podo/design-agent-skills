@@ -5,6 +5,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.7.0] — 2026-05-22
+
+### Added
+
+- **`textual-tui-skill`** — Textual (Python) deep-dive: 40+ widgets, TCSS styling, reactive attrs, background workers, Pilot API testing, 10 common pitfalls (`aperepel/textual-tui-skill`)
+- **`CLAUDE.md`** — Contributor guide: evaluation criteria, stub.yaml/SKILL.md format, router update checklist, versioning, category reference, common mistakes
+
+### Changed
+
+- **`design-catalogue` + `content-catalogue` routers** — Added textual-tui-skill to TUI & Terminal Design section
+
+Catalogue grows from 134 → 135 skills.
+
+---
+
 ## [1.6.0] — 2026-05-22
 
 ### Added

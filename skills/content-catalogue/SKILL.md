@@ -119,3 +119,4 @@ Activate when the user:
 |-------|----------|
 | [`email-html-mjml`](../email-html-mjml/SKILL.md) | MJML 4.x → cross-client HTML email, WCAG 2.1 AA, Outlook-safe |
 | [`tui-design-skill`](../tui-design-skill/SKILL.md) | Terminal UI design: Bubble Tea (Go), Ratatui (Rust), Textual (Python), Ink (TS) |
+| [`textual-tui-skill`](../textual-tui-skill/SKILL.md) | Textual (Python) deep-dive: 40+ widgets, TCSS, workers, Pilot testing, 10 pitfalls |
