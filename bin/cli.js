@@ -1,8 +1,6 @@
 #!/usr/bin/env node
-'use strict';
-
-const { spawnSync } = require('child_process');
-const readline = require('readline');
+import { spawnSync } from 'node:child_process';
+import { createInterface } from 'node:readline';
 
 const PACKAGE = 'podo/design-agent-skills';
 const args = process.argv.slice(2);
@@ -19,7 +17,7 @@ function run(command, extraArgs = []) {
 
 function askScope() {
   return new Promise((resolve) => {
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    const rl = createInterface({ input: process.stdin, output: process.stdout });
     process.stdout.write(
       '\nInstall scope:\n' +
       '  1) User    — ~/.agents/skills/  (all projects, all agents)\n' +
@@ -38,14 +36,10 @@ const scopeSet  = args.some(a => a === '-g' || a === '--global' || a === '-p' ||
 
 if (isInstall && !scopeSet && process.stdin.isTTY) {
   askScope().then((scope) => {
-    const scopeFlag = scope === 'global' ? ['-g'] : [];
-    run('add', [PACKAGE, ...scopeFlag]);
+    run('add', [PACKAGE, ...(scope === 'global' ? ['-g'] : [])]);
   });
 } else if (isInstall) {
-  // Non-interactive or scope already set — pass through
-  const passthroughFlags = args.filter(a => a !== 'install');
-  run('add', [PACKAGE, ...passthroughFlags]);
+  run('add', [PACKAGE, ...args.filter(a => a !== 'install')]);
 } else {
-  // update, remove, list etc — delegate to skills CLI directly
   run(cmd, args.slice(1));
 }
