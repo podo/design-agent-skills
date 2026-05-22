@@ -1,74 +1,73 @@
 # design-agent-skills
 
-A catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and other AI coding agents.
+A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
 128 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, and PM tools.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
 
 ```bash
+npx skills add podo/design-agent-skills -g     # user scope — all projects
+npx skills add podo/design-agent-skills        # project scope — this project only
+```
+
+Or use the branded CLI for a guided scope prompt:
+
+```bash
 npx design-agent-skills
 ```
 
-Or without npm:
-
-```bash
-git clone https://github.com/podo/design-agent-skills ~/.design-agent-skills
-~/.design-agent-skills/install.sh
-```
-
-Auto-detects Claude Code, Cursor, Codex, OpenCode, and Droid. Links each skill pointer into their skills directories — one source, all agents.
+Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 128 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
 
 ## Commands
 
 ```bash
-npx design-agent-skills              # install or update
-npx design-agent-skills status       # show installed / stub / BROKEN per skill per agent
-npx design-agent-skills update       # pull new skills from upstream
-npx design-agent-skills remove <skill>  # unlink a specific skill
-npx design-agent-skills remove --all    # unlink everything
-npx design-agent-skills fix          # remove broken symlinks
-npx design-agent-skills doctor       # scan for trigger collisions and symlink health
+# Installation
+npx skills add podo/design-agent-skills -g    # install globally
+npx skills add podo/design-agent-skills       # install for this project
+
+# Keeping skills current
+npx skills update                             # update all skills
+npx skills update <name>                      # update one skill
+
+# Inspection
+npx skills list                               # list installed skills
+npx skills list -g                            # global skills only
+
+# Removal
+npx skills remove <skill>                     # remove a specific skill
+npx skills remove --all                       # remove everything
+
+# Health checks (catalogue-specific)
+npx design-agent-skills doctor                # trigger collisions + symlink health
 ```
-
-Or run `install.sh` directly from `~/.design-agent-skills/` if you installed via git.
-
-### Status output
-
-```
-skill                   claude      cursor      codex
-──────────────────────  ──────────  ──────────  ──────────
-design-catalogue        stub        stub        stub
-taste-skill             upgraded    stub        -
-```
-
-- `stub` — skill pointer installed; full skill not yet fetched
-- `upgraded` — full skill installed, pointer replaced
-- `BROKEN` — symlink target missing, run `fix`
-- `-` — not installed for this agent
 
 ### How skills install on demand
 
-Each skill pointer contains a `curl` install command. When an agent reads the pointer and runs it, the full upstream `SKILL.md` overwrites the pointer **through the symlink** at the same path. All agents share the same symlink target — one install upgrades all of them.
+The catalogue has two tiers:
+
+**Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
+
+**Tier 2 — Implementation pointers** (122 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
-# example from skills/taste-skill/SKILL.md:
-mkdir -p ~/.claude/skills/taste-skill && \
-  curl -fsSL \
-    https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/skills/taste-skill/SKILL.md \
-    -o ~/.claude/skills/taste-skill/SKILL.md
+# Global install:
+npx skills add owner/repo --skill <name> -g -y
+
+# Project install:
+npx skills add owner/repo --skill <name> -y
 ```
 
-After this runs, `status` shows `upgraded` for every agent.
+The full skill lands at `~/.agents/skills/<name>/` (global) or `.agents/skills/<name>/` (project) — overwriting the pointer at the same canonical path. All 30+ agent symlinks pick up the change automatically. One install, all agents updated.
 
 ## How it works
 
-Each skill is a `SKILL.md` file in `skills/<name>/`. Most are **skill pointers** — lightweight entries that tell an agent what a skill does and how to install the full version when needed. A few are **native skills** that live entirely in this repo.
+Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured in two permanent tiers:
 
-| Kind | Description |
-|------|-------------|
-| **skill pointer** | `das:` frontmatter marks it as a pointer. Agent reads it, discovers the upstream skill, installs on demand. |
-| **native** | Full skill content lives here. No install step. |
+| Tier | Type | Count | Owned by | Updates |
+|------|------|-------|----------|---------|
+| **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
+| **Implementation** | `skill` / `package` / `platform` | 122 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -80,33 +79,34 @@ description: |
 triggers:
   - "phrase that activates this skill"
 das:
-  type: <type>                # skill | package | platform
+  type: <type>                # router | skill | package | platform
   category: <category>        # design-systems, motion, accessibility, …
-  upstream: <github-url>
+  upstream: <github-url>      # skill/package/platform only
   upstream_path: <path>       # skill type only
   version: latest
-  install: true               # skill type only
 ---
 ```
 
 ### Pointer types
 
-| Type | `install.sh` behaviour | Example |
-|------|------------------------|---------|
-| `skill` | Symlinks SKILL.md; `update` re-fetches from upstream | taste-skill |
-| `package` | Skips symlink; `update` prints per-agent install commands | ui-craft |
-| `platform` | Same as package; SKILL.md has template vars — never curl directly | impeccable |
+| Type | Role | Upgrade path | Example |
+|------|------|-------------|---------|
+| `router` | Domain navigator — routes to the right skill | Never upgraded; always from this repo | design-catalogue |
+| `skill` | Single `SKILL.md` from upstream | `skills add owner/repo --skill <name>` | taste-skill |
+| `package` | Multi-skill GitHub package | `skills add owner/repo` | ui-craft |
+| `platform` | Platform with template vars — never fetch directly | Manual per platform docs | impeccable |
 
 ### Body sections
 
-**When to use** · **How to install** · **How to invoke after install** · **What it does**
+**Decision tree** · **Install the full skill** · **Invoke after install** · **What it does**
 
 ## Adding a skill
 
-1. `mkdir skills/<name> && touch skills/<name>/SKILL.md`
-2. Fill frontmatter + four body sections
-3. Add a row to the table below
-4. Open a PR — no review of upstream content required
+1. `mkdir skills/<name> && touch skills/<name>/SKILL.md skills/<name>/stub.yaml`
+2. Fill frontmatter + body sections (decision tree, install, invoke, what it does)
+3. Set `type: skill`, `type: package`, or `type: router` in `stub.yaml`
+4. Add a row to the table below
+5. Open a PR — no review of upstream content required
 
 ## Trigger routing and known overlaps
 
@@ -146,7 +146,7 @@ triggers like `"GSAP skill"` and `"GSAP timeline"` for direct invocation.
 
 These overlaps are harmless: when both a catalogue and an impl skill activate,
 the impl skill handles the request directly while the catalogue is redundant noise.
-Run `./install.sh doctor --substr` to see the full list at any time.
+Run `npx design-agent-skills doctor --substr` to see the full list at any time.
 
 **Fixed impl→impl conflicts** (triggers that previously caused two unrelated skills to compete):
 
@@ -157,17 +157,15 @@ Run `./install.sh doctor --substr` to see the full list at any time.
 
 ## Supply chain
 
-Skills install from GitHub via `npx skills add`. The `npx skills add` ecosystem does not
-publish versioned releases or stable commit SHAs, so pre-install pinning is not possible.
+Skills install from GitHub via `npx skills add`. Upstream repos don't publish versioned releases or stable SHAs, so pre-install pinning isn't possible.
 
 **What we do instead:**
 
-- **Lockfile** (`design-agent-skills.lock`) — SHA256 of every installed `SKILL.md` captured at install time
-- **Drift detection** — `update --frozen` compares current upstream against the lockfile and warns on any change
 - **Tier classification** — `official` (28), `community` (35), `experimental` (60) — experimental excluded by default
+- **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
+- **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
-If you need stronger guarantees, clone the upstream repos at a specific commit and
-point `upstream_path` in `stub.yaml` to your fork.
+If you need stronger guarantees, clone an upstream repo at a specific commit and point `upstream` in `stub.yaml` to your fork.
 
 ## Skills
 

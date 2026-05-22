@@ -5,6 +5,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.3.0] — 2026-05-22
+
+### Changed
+
+- **Primary install path** — `npx skills add podo/design-agent-skills [-g]` replaces custom install.sh. Integrates with the [skills CLI ecosystem](https://github.com/vercel-labs/skills) and its 33+ supported agents.
+- **Two-tier model (Option C)** — catalogue now has explicit tiers:
+  - **Tier 1 — Routing layer** (6 domain catalogues): `type: router` in stub.yaml; permanently owned by this repo; `skills update` always reaches them.
+  - **Tier 2 — Implementation pointers** (122 skills): upgrade on first use via `skills add owner/repo --skill <name> [-g]`; ownership transfers to upstream post-upgrade.
+- **Upgrade path for type:skill pointers** — all 47 `type: skill` SKILL.md files rewritten: curl commands replaced with `skills add owner/repo --skill <name>` + scope detection (checks `~/.agents/skills/<name>` vs `.agents/skills/<name>` to select `-g` flag).
+- **Canonical install path** — full skills now land at `~/.agents/skills/<name>/` (global) or `.agents/skills/<name>/` (project) — the standard `skills` CLI canonical location. Previous `~/.design-agent-skills/` path retired.
+- **bin/cli.js** — rewritten as thin wrapper around `npx skills add podo/design-agent-skills`; scope TUI passes `-g` flag; `update`/`remove`/`list` delegated to `skills` CLI directly.
+- **README** — install section, commands, how it works, pointer types table, supply chain all updated to reflect new architecture.
+
+---
+
 ## [1.2.0] — 2026-05-22
 
 ### Added
