@@ -5,6 +5,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.6.0] — 2026-05-22
+
+### Added
+
+- **`ux-writing-skill`** — Systematic UX writing: microcopy, button labels, error messages, empty states, form copy, a11y writing, voice/tone framework. v1.6.0 (`content-designer/ux-writing-skill`, 85 ★)
+- **`copywriting-skill`** — 5-skill product copywriting toolkit: web copy, SEO copy, social copy, French copy, tone-of-voice generator; anti-AI-pattern layer (`judicael-s/Copywriting-skill`)
+- **`humanize-text`** — Scores and rewrites text across 7 AI-pattern dimensions (AI vocabulary, content inflation, UX copy quality…); works on raw text, Figma URLs, and screenshots (`gregorymm/humanize-text`)
+
+### Changed
+
+- **`content-catalogue` router** — Added "Content Design & Copy" section routing to new skills; extended description and triggers to include UX writing, copywriting, microcopy, and content design
+
+Catalogue grows from 131 → 134 skills.
+
+---
+
 ## [1.5.0] — 2026-05-22
 
 ### Added

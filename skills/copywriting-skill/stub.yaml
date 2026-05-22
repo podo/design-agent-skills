@@ -1,0 +1,5 @@
+type: skill
+tier: community
+upstream: https://github.com/judicael-s/Copywriting-skill
+upstream_path: SKILL.md
+version: latest

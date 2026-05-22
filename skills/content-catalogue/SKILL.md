@@ -2,8 +2,9 @@
 name: content-catalogue
 description: |
   Domain navigator for presentations, diagrams, wireframes, data visualization,
-  design review, product strategy, and communication design skills. Routes to
-  the right skill for slides, charts, UX strategy, PM frameworks, and email.
+  design review, product strategy, copywriting, UX writing, and content design
+  skills. Routes to the right skill for slides, charts, UX strategy, PM
+  frameworks, email, microcopy, and product copy.
 triggers:
   - "presentation skills"
   - "slides skill"
@@ -15,6 +16,10 @@ triggers:
   - "design review skills"
   - "UX strategy skills"
   - "email design skills"
+  - "UX writing skills"
+  - "copywriting skills"
+  - "content design skills"
+  - "microcopy skills"
 ---
 
 # content-catalogue
@@ -32,6 +37,9 @@ Activate when the user:
 - Needs data visualization or chart generation
 - Asks about design review, critique, or UX strategy
 - Needs PM frameworks, PRD templates, or product strategy tools
+- Needs to write or improve UI copy, microcopy, or error messages
+- Needs product or marketing copywriting
+- Wants to detect or remove AI writing patterns from text
 
 ## Presentations & Slides
 
@@ -96,6 +104,14 @@ Activate when the user:
 | [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
 | [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
+
+## Content Design & Copy
+
+| Skill | Best for |
+|-------|----------|
+| [`ux-writing-skill`](../ux-writing-skill/SKILL.md) | Microcopy, button labels, error messages, empty states, form copy, a11y writing |
+| [`copywriting-skill`](../copywriting-skill/SKILL.md) | Landing pages, product copy, email sequences, headlines, tone-of-voice (5 sub-skills) |
+| [`humanize-text`](../humanize-text/SKILL.md) | Score + rewrite text to remove AI patterns across 7 dimensions; works on Figma URLs + screenshots |
 
 ## Email & Terminal
 
