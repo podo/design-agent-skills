@@ -30,7 +30,13 @@ stub_yaml_value() {
 
 stub_type() {
   local yaml="$1/stub.yaml"
-  [ -f "$yaml" ] && stub_yaml_value type "$yaml" || echo "skill"
+  if [ -f "$yaml" ]; then
+    local t
+    t="$(stub_yaml_value type "$yaml")"
+    echo "${t:-skill}"
+  else
+    echo "skill"
+  fi
 }
 
 raw_url_from_stub() {
@@ -155,7 +161,7 @@ cmd_status() {
 cmd_update() {
   local agent_list
   agent_list="$(detected_agents)"
-  local refreshed=0 linked=0
+  local refreshed=0 linked=0 shown=0
 
   while IFS= read -r skill; do
     local src="$SKILLS_SRC/$skill"
@@ -169,7 +175,7 @@ cmd_update() {
       install_cmd="$(stub_yaml_value install_default "$yaml" 2>/dev/null || true)"
       if [ -n "$install_cmd" ]; then
         printf "  package  %-18s  run: %s\n" "$skill" "$install_cmd"
-        linked=$((linked + 1))
+        shown=$((shown + 1))
       fi
       continue
     fi
@@ -201,12 +207,12 @@ cmd_update() {
 
   done < <(skill_names)
 
-  if [ "$refreshed" -eq 0 ] && [ "$linked" -eq 0 ]; then
+  if [ "$refreshed" -eq 0 ] && [ "$linked" -eq 0 ] && [ "$shown" -eq 0 ]; then
     echo "Nothing to update."
   else
     [ "$refreshed" -gt 0 ] && echo "$refreshed skill(s) refreshed from upstream."
     [ "$linked" -gt 0 ]    && echo "$linked new link(s) added."
-    true
+    [ "$shown" -gt 0 ]     && echo "$shown package install command(s) shown."
   fi
 }
 
