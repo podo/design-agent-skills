@@ -265,9 +265,17 @@ cmd_status() {
 }
 
 cmd_update() {
+  local dry_run=0
+  for arg in "$@"; do
+    [ "$arg" = "--dry-run" ] && dry_run=1
+  done
+
   local agent_list
   agent_list="$(detected_agents)"
   local refreshed=0 linked=0 shown=0
+
+  [ "$dry_run" -eq 1 ] && echo "(dry run — no changes will be made)"
+  echo
 
   while IFS= read -r skill; do
     local src="$SKILLS_SRC/$skill"
@@ -290,12 +298,21 @@ cmd_update() {
     if has_stub_manifest "$src" && ! is_stub "$src"; then
       local url
       url="$(raw_url_from_stub "$yaml")"
-      printf "  updating  %s ... " "$skill"
-      if curl -fsSL "$url" -o "$src/SKILL.md" 2>/dev/null; then
-        echo "ok"
+      if [ "$dry_run" -eq 1 ]; then
+        printf "  would refresh  %s  ←  %s\n" "$skill" "$url"
         refreshed=$((refreshed + 1))
       else
-        echo "failed (upstream unreachable?)"
+        # Backup before overwrite
+        cp "$src/SKILL.md" "$src/SKILL.md.bak" 2>/dev/null || true
+        printf "  updating  %s ... " "$skill"
+        if curl -fsSL "$url" -o "$src/SKILL.md" 2>/dev/null; then
+          echo "ok"
+          refreshed=$((refreshed + 1))
+        else
+          # Restore backup on failure
+          mv "$src/SKILL.md.bak" "$src/SKILL.md" 2>/dev/null || true
+          echo "failed (upstream unreachable — backup restored)"
+        fi
       fi
       continue
     fi
@@ -305,9 +322,13 @@ cmd_update() {
     while IFS=: read -r name _root skills_dir; do
       local target="$skills_dir/$skill"
       if [ ! -L "$target" ] && [ ! -d "$target" ]; then
-        mkdir -p "$skills_dir"
-        ln -s "$src" "$target"
-        printf "  added  %-18s  %s\n" "$skill" "$name"
+        if [ "$dry_run" -eq 1 ]; then
+          printf "  would link  %-18s  →  %s\n" "$skill" "$name"
+        else
+          mkdir -p "$skills_dir"
+          ln -s "$src" "$target"
+          printf "  added  %-18s  %s\n" "$skill" "$name"
+        fi
         linked=$((linked + 1))
       fi
     done <<< "$agent_list"
@@ -317,9 +338,15 @@ cmd_update() {
   if [ "$refreshed" -eq 0 ] && [ "$linked" -eq 0 ] && [ "$shown" -eq 0 ]; then
     echo "Nothing to update."
   else
-    [ "$refreshed" -gt 0 ] && echo "$refreshed skill(s) refreshed from upstream."
-    [ "$linked" -gt 0 ]    && echo "$linked new link(s) added."
-    [ "$shown" -gt 0 ]     && echo "$shown package install command(s) shown."
+    if [ "$dry_run" -eq 1 ]; then
+      [ "$refreshed" -gt 0 ] && echo "$refreshed skill(s) would be refreshed from upstream."
+      [ "$linked" -gt 0 ]    && echo "$linked new link(s) would be added."
+      [ "$shown" -gt 0 ]     && echo "$shown package install command(s) shown."
+    else
+      [ "$refreshed" -gt 0 ] && echo "$refreshed skill(s) refreshed from upstream."
+      [ "$linked" -gt 0 ]    && echo "$linked new link(s) added."
+      [ "$shown" -gt 0 ]     && echo "$shown package install command(s) shown."
+    fi
   fi
 }
 
@@ -450,6 +477,7 @@ Commands:
   install          Symlink all stubs to detected agents (default)
   status           Show stub / upgraded / installed / BROKEN state per agent
   update           Re-fetch upgraded skills from upstream; add links for new stubs
+    --dry-run        Show what would change without making any changes
   fix              Remove broken symlinks
   doctor           Scan for trigger collisions across installed stubs
     --strict         Exit 1 if any collisions found (useful for CI)
@@ -468,9 +496,9 @@ shift 2>/dev/null || true
 case "$CMD" in
   install) cmd_install ;;
   status)  cmd_status  ;;
-  update)  cmd_update  ;;
+  update)  cmd_update  "$@" ;;
   fix)     cmd_fix     ;;
-  doctor)  cmd_doctor "$@" ;;
+  doctor)  cmd_doctor  "$@" ;;
   help|-h) cmd_help ;;
   *) echo "Unknown command: $CMD"; cmd_help; exit 1 ;;
 esac
