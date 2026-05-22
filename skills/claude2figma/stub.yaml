@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/senlindesign/claude2figma
+version: latest
+install_default: "npx skills add senlindesign/claude2figma"

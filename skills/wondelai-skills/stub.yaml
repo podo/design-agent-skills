@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/wondelai/skills
+version: latest
+install_default: "npx skills add wondelai/skills"

@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/Ashutos1997/claude-design-auditor-skill
+upstream_path: SKILL.md
+version: latest

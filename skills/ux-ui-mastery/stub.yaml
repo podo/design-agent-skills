@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/phazurlabs/ux-ui-mastery
+version: latest
+install_default: "/plugin marketplace add phazurlabs/ux-ui-mastery"

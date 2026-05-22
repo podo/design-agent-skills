@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/nibzard/marp-slide-quality
+upstream_path: SKILL.md
+version: latest

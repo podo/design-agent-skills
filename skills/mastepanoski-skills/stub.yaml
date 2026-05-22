@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/mastepanoski/claude-skills
+version: latest
+install_default: "npx skills add mastepanoski/claude-skills"

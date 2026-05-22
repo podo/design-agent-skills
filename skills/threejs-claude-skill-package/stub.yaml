@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/OpenAEC-Foundation/Three.js-Claude-Skill-Package
+version: latest
+install_default: "npx skills add OpenAEC-Foundation/Three.js-Claude-Skill-Package"

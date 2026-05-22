@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/msrbuilds/animate-css-skill
+version: latest
+install_default: "npx skills add msrbuilds/animate-css-skill"

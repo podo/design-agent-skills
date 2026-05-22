@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/dtran320/claud3
+version: latest
+install_default: "npx skills add dtran320/claud3"

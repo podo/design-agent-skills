@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/natdexterra/work-with-design-systems
+upstream_path: SKILL.md
+version: latest

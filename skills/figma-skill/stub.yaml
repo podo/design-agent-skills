@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/nafiurrahmanniloy/figma-skill
+version: latest
+install_default: "npx skills add nafiurrahmanniloy/figma-skill"

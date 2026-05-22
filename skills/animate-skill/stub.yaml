@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/delphi-ai/animate-skill
+upstream_path: SKILL.md
+version: latest

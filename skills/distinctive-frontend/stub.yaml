@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/Koomook/claude-frontend-skills
+version: latest
+install_default: "npm install -g @bong/claude-frontend-skills"

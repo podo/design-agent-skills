@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/designrique/ai-graphic-design-skill
+upstream_path: SKILL.md
+version: latest

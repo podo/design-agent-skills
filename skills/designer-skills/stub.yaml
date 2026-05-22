@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/Owl-Listener/designer-skills
+version: latest
+install_default: "/plugin marketplace add Owl-Listener/designer-skills"

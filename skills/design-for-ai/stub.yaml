@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/ryanthedev/design-for-ai
+version: latest
+install_default: "/plugin marketplace add ryanthedev/rtd-claude-inn"

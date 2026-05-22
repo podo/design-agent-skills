@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/Raze-Systems/wcag-ai-skill
+version: latest
+install_default: "npx skills add Raze-Systems/wcag-ai-skill"

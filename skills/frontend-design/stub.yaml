@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/Ilm-Alan/frontend-design
+upstream_path: SKILL.md
+version: latest

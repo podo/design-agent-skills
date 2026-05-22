@@ -1,0 +1,3 @@
+type: platform
+upstream: https://github.com/SamurAIGPT/Generative-Media-Skills
+version: latest

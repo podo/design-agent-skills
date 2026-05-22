@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/robonuggets/marp-slides
+upstream_path: SKILL.md
+version: latest

@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/dgreenheck/webgpu-claude-skill
+version: latest
+install_default: "npx skills add dgreenheck/webgpu-claude-skill"

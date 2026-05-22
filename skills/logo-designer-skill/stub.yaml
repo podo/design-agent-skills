@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/neonwatty/logo-designer-skill
+version: latest
+install_default: "claude plugin add neonwatty/logo-designer-skill"

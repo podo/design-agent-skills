@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/simota/agent-skills
+version: latest
+install_default: "npx skills add simota/agent-skills"
