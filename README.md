@@ -1,8 +1,8 @@
 # design-agent-skills
 
-A shareable catalogue of agent skill stubs. Each stub advertises an upstream skill for agent discovery and provides everything the agent needs to install and invoke the full skill.
+A shareable catalogue of agent skill stubs. Clone once, link to every AI coding tool you use.
 
-## Install the catalogue
+## Install
 
 ```bash
 git clone https://github.com/<you>/design-agent-skills
@@ -10,40 +10,57 @@ cd design-agent-skills
 ./install.sh
 ```
 
-This copies each stub from `skills/` into `~/.claude/skills/` — one directory per skill. Stubs that already exist at the target are skipped.
+Auto-detects Claude Code, Cursor, Codex, OpenCode, and Droid. Symlinks each stub into their skills directories — one source, all agents.
 
-**Why copy, not symlink:** when you install an upstream skill, the `curl` command overwrites the stub file in place. With a symlink that write would go back into the repo. Copies keep the repo clean.
+## Commands
 
-**Custom skills dir:**
 ```bash
-CLAUDE_SKILLS_DIR=~/.config/claude/skills ./install.sh
+./install.sh              # link all stubs to detected agents
+./install.sh status       # show stub / upgraded / BROKEN per skill per agent
+./install.sh update       # pick up new stubs added to the catalogue (after git pull)
+./install.sh fix          # remove broken symlinks
 ```
+
+### Status output
+
+```
+skill                   claude      cursor      codex
+──────────────────────  ──────────  ──────────  ──────────
+design-catalogue        stub        stub        stub
+taste-skill             upgraded    stub        -
+```
+
+- `stub` — pointer installed, upstream skill not yet fetched
+- `upgraded` — upstream skill installed, stub replaced
+- `BROKEN` — symlink target missing, run `./install.sh fix`
+- `-` — not installed for this agent
+
+### How stubs become upgraded
+
+Each stub contains a `curl` install command. When an agent runs it, the upstream
+`SKILL.md` overwrites the stub file **through the symlink** at the same path.
+Because all agents share the same symlink target, one install upgrades all of them.
+
+```bash
+# example from skills/taste-skill/SKILL.md:
+mkdir -p ~/.claude/skills/taste-skill && \
+  curl -fsSL \
+    https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/skills/taste-skill/SKILL.md \
+    -o ~/.claude/skills/taste-skill/SKILL.md
+```
+
+After this runs, `./install.sh status` shows `upgraded` for every agent.
 
 ## How it works
 
-Skills live in `skills/<skill-name>/SKILL.md`. Two types:
+Skills live in `skills/<name>/SKILL.md`. Two types:
 
-**Stubs (install-on-invoke):** Lightweight adapters pointing to an upstream skill.
-1. Expose triggers so agents discover the skill during planning
-2. Tell the agent **when and why** to use the skill
-3. Provide an **install command** to pull the full upstream skill locally
-4. Explain **how to invoke** the skill after install
-
-When the agent runs the install command, the upstream SKILL.md overwrites the stub at `~/.claude/skills/<skill-name>/SKILL.md`. The stub is gone; the full skill takes its place. That is the intended lifecycle.
-
-**Native skills:** Live fully in this repo, no install step. Used for catalogue-level tasks like browsing and routing.
-
-```
-skills/
-├── design-catalogue/
-│   └── SKILL.md   ← native: browse and route to stubs
-└── taste-skill/
-    └── SKILL.md   ← stub → https://github.com/Leonxlnx/taste-skill
-```
+| Type | Description |
+|------|-------------|
+| **stub** | Pointer to an upstream skill. Has `das:` frontmatter. Agent reads it to discover and install the full skill. |
+| **native** | Full skill that lives in this repo. No install step needed. |
 
 ## Stub anatomy
-
-### Frontmatter
 
 ```yaml
 ---
@@ -53,32 +70,24 @@ description: |
 triggers:
   - "phrase that activates this skill"
 das:
-  category: <category>           # e.g. design-systems, testing, devops
-  upstream: <github-url>         # full repo URL
-  upstream_path: <path>          # path to SKILL.md inside upstream repo
-  version: latest                # or a git tag
-  install: true                  # always true for install-on-invoke stubs
+  category: <category>        # design-systems, testing, devops, …
+  upstream: <github-url>
+  upstream_path: <path>       # path to SKILL.md inside upstream repo
+  version: latest
+  install: true
 ---
 ```
 
-### Body sections
+Body sections: **When to use** · **How to install** · **How to invoke after install** · **What it does**
 
-| Section | Purpose |
-|---------|---------|
-| **When to use** | Trigger phrases + use cases — agent reads this to decide whether to surface the skill |
-| **How to install** | Shell command to pull upstream SKILL.md into `~/.claude/skills/`; includes agent instructions |
-| **How to invoke after install** | Skill name + trigger phrases to use once installed |
-| **What it does** | Brief capability summary — enough for the agent to confirm this is the right skill |
+## Adding a stub
 
-## Adding a new stub
+1. `mkdir skills/<name> && touch skills/<name>/SKILL.md`
+2. Fill frontmatter + four body sections
+3. Add a row to the table below
+4. Open a PR — no review of upstream content required
 
-1. Create `skills/<skill-name>/SKILL.md`
-2. Fill in frontmatter (`name`, `description`, `triggers`, `das:` block)
-3. Write the four body sections
-4. Update the skills table below
-5. Open a PR
-
-## Skills in this catalogue
+## Skills
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
