@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/nousresearch/hermes-agent
+upstream_path: skills/creative/p5js/SKILL.md
+version: latest
