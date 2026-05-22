@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/antvis/chart-visualization-skills
 version: latest
 install_default: "npx skills add antvis/chart-visualization-skills"
+installed_as: chart-visualization

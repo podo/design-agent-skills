@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/CloudAI-X/threejs-skills
 version: latest
 install_default: "npx skills add CloudAI-X/threejs-skills"
+installed_as: threejs

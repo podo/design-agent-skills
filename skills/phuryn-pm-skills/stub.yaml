@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/phuryn/pm-skills
 version: latest
 install_default: "npx skills add phuryn/pm-skills"
+installed_as: create-prd

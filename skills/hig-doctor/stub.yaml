@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/raintree-technology/hig-doctor
 version: latest
 install_default: "npx skills add raintree-technology/hig-doctor"
+installed_as: hig-foundations

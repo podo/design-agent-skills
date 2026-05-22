@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/softaworks/agent-toolkit
 version: latest
 install_default: "npx skills add softaworks/agent-toolkit"
+installed_as: mermaid-diagrams

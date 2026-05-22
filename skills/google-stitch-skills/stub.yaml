@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/google-labs-code/stitch-skills
 version: latest
 install_default: "npx skills add google-labs-code/<skill>"
+installed_as: stitch-loop

@@ -1,13 +1,25 @@
 #!/usr/bin/env bash
 # design-agent-skills installer — works with bash 3.2+
-# Usage: ./install.sh [install|status|update|fix|help]
+# Usage: ./install.sh [--scope=user|project] [install|status|update|fix|help]
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 SKILLS_SRC="$REPO_DIR/skills"
 
+# ── Parse global flags ────────────────────────────────────────────────────────
+SCOPE="user"
+ARGS=()
+for arg in "$@"; do
+  case "$arg" in
+    --scope=user)    SCOPE="user"    ;;
+    --scope=project) SCOPE="project" ;;
+    *) ARGS+=("$arg") ;;
+  esac
+done
+set -- "${ARGS[@]+"${ARGS[@]}"}"
+
 # ── Agent registry (name:config_root:skills_dir) ──────────────────────────────
-AGENTS="
+USER_AGENTS="
 claude:$HOME/.claude:$HOME/.claude/skills
 cursor:$HOME/.cursor:$HOME/.cursor/skills
 codex:$HOME/.codex:$HOME/.codex/skills
@@ -15,11 +27,30 @@ opencode:$HOME/.config/opencode:$HOME/.config/opencode/skills
 droid:$HOME/.factory:$HOME/.factory/skills
 "
 
+PROJECT_AGENTS="
+claude:$(pwd)/.claude:$(pwd)/.claude/skills
+cursor:$(pwd)/.cursor:$(pwd)/.cursor/skills
+opencode:$(pwd)/.opencode:$(pwd)/.opencode/skills
+"
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+agent_list_for_scope() {
+  if [ "$SCOPE" = "project" ]; then
+    echo "$PROJECT_AGENTS"
+  else
+    echo "$USER_AGENTS"
+  fi
+}
+
 detected_agents() {
-  echo "$AGENTS" | grep -v '^$' | while IFS=: read -r name root _skills; do
-    [ -d "$root" ] && echo "$name:$root:$_skills"
+  agent_list_for_scope | grep -v '^$' | while IFS=: read -r name root _skills; do
+    if [ "$SCOPE" = "project" ]; then
+      # Project scope: include if the config dir exists OR we're creating it
+      [ -d "$(dirname "$root")" ] && echo "$name:$root:$_skills"
+    else
+      [ -d "$root" ] && echo "$name:$root:$_skills"
+    fi
   done
 }
 
@@ -66,7 +97,18 @@ skill_state() {
   local stype
   stype="$(stub_type "$src")"
   if [ "$stype" = "package" ] || [ "$stype" = "platform" ]; then
-    echo "package"
+    local yaml="$src/stub.yaml"
+    local installed_as
+    installed_as="$(stub_yaml_value installed_as "$yaml" 2>/dev/null || true)"
+    [ -z "$installed_as" ] && installed_as="$(basename "$src")"
+    local skills_dir
+    skills_dir="$(dirname "$target")"
+    local installed_target="$skills_dir/$installed_as"
+    if [ -d "$installed_target" ] && ! grep -q "^das:" "$installed_target/SKILL.md" 2>/dev/null; then
+      echo "installed"
+    else
+      echo "package"
+    fi
     return
   fi
   if [ -L "$target" ] && [ ! -e "$target" ]; then
@@ -117,7 +159,7 @@ cmd_install() {
   done <<< "$agent_list"
 
   echo
-  echo "Done. Run './install.sh status' to inspect skill states."
+  printf "scope: %s  |  run './install.sh status' to inspect states.\n" "$SCOPE"
 }
 
 cmd_status() {
@@ -154,7 +196,8 @@ cmd_status() {
   done < <(skill_names)
 
   echo
-  echo "stub=install pending  upgraded=full skill active  BROKEN=run fix"
+  printf "scope: %s\n" "$SCOPE"
+  echo "stub=pending  upgraded=full  installed=package installed  package=not installed  BROKEN=run fix"
   echo
 }
 
@@ -239,15 +282,21 @@ cmd_fix() {
 
 cmd_help() {
   cat <<HELP
-Usage: ./install.sh [command]
+Usage: ./install.sh [--scope=user|project] [command]
 
+Flags:
+  --scope=user     Link to agent user-level dirs (default): ~/.claude/skills/
+  --scope=project  Link to project-level dirs: ./.claude/skills/
+
+Commands:
   install   Symlink all stubs to detected agents (default)
-  status    Show stub / upgraded / BROKEN state per agent
+  status    Show stub / upgraded / installed / BROKEN state per agent
   update    Re-fetch upgraded skills from upstream; add links for new stubs
   fix       Remove broken symlinks
   help      Show this message
 
-Supported agents: claude  cursor  codex  opencode  droid
+User-scope agents:  claude  cursor  codex  opencode  droid
+Project-scope agents: claude  cursor  opencode
 HELP
 }
 
@@ -257,6 +306,6 @@ case "${1:-install}" in
   status)  cmd_status  ;;
   update)  cmd_update  ;;
   fix)     cmd_fix     ;;
-  help|--help|-h) cmd_help ;;
+  help|-h) cmd_help ;;
   *) echo "Unknown command: $1"; cmd_help; exit 1 ;;
 esac

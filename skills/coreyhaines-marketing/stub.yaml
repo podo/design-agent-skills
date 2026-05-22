@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/coreyhaines31/marketingskills
 version: latest
 install_default: "npx skills add coreyhaines31/marketingskills"
+installed_as: onboarding-cro

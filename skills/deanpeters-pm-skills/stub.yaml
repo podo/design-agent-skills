@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/deanpeters/Product-Manager-Skills
 version: latest
 install_default: "npx skills add deanpeters/Product-Manager-Skills"
+installed_as: customer-journey-map

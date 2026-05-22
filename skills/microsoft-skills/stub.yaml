@@ -2,3 +2,4 @@ type: package
 upstream: https://github.com/microsoft/skills
 version: latest
 install_default: "npx skills add microsoft/<skill>"
+installed_as: frontend-design-review
