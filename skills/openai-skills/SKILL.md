@@ -26,7 +26,7 @@ das:
 Run this before using OpenAI-specific skill workflows:
 
 1. **Is an OpenAI skill already installed?**
-   Check: `~/.claude/skills/frontend-skill/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/frontend-skill/SKILL.md` exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

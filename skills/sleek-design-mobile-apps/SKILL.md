@@ -24,7 +24,7 @@ das:
 
 ## Decision tree
 
-1. **Is the skill already installed?** Check `~/.claude/skills/sleek-design-mobile-apps/` for skill content.
+1. **Is the skill already installed?** Check `~/.design-agent-skills/skills/sleek-design-mobile-apps/` for skill content.
    - Yes → invoke and proceed
    - No → go to step 2
 

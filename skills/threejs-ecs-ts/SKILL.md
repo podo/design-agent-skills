@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/threejs-ecs-ts/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/threejs-ecs-ts/SKILL.md` exists.
    - Yes → invoke `threejs-ecs-ts` and proceed
    - No → go to step 2
 

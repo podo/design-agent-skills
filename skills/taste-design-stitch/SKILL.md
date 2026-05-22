@@ -27,7 +27,7 @@ das:
 Run this when working with Google Stitch UI output:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/taste-design-stitch/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/taste-design-stitch/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `taste-design-stitch` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this when working with Google Stitch UI output:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/taste-design-stitch && \
+mkdir -p ~/.design-agent-skills/skills/taste-design-stitch && \
   curl -fsSL \
     https://raw.githubusercontent.com/google-labs-code/stitch-skills/main/plugins/stitch-utilities/skills/taste-design/SKILL.md \
-    -o ~/.claude/skills/taste-design-stitch/SKILL.md
+    -o ~/.design-agent-skills/skills/taste-design-stitch/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/taste-design-stitch/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/taste-design-stitch/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

@@ -27,7 +27,7 @@ das:
 Run this before any PowerPoint or presentation generation:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/guizang-ppt/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/guizang-ppt/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `guizang-ppt` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before any PowerPoint or presentation generation:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/guizang-ppt && \
+mkdir -p ~/.design-agent-skills/skills/guizang-ppt && \
   curl -fsSL \
     https://raw.githubusercontent.com/op7418/guizang-ppt-skill/main/SKILL.md \
-    -o ~/.claude/skills/guizang-ppt/SKILL.md
+    -o ~/.design-agent-skills/skills/guizang-ppt/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/guizang-ppt/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/guizang-ppt/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

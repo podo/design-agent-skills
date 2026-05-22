@@ -26,7 +26,7 @@ das:
 Run this before any shadcn/ui component work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/shadcn-ui/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/shadcn-ui/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `shadcn-ui` and proceed
    - No → go to step 2
 

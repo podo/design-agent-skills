@@ -41,7 +41,7 @@ das:
 2. **Is muapi-cli authenticated?** Run `npx muapi-cli auth status`.
    - No → run `npx muapi-cli auth login`
    - Yes → go to step 3.
-3. **Are the skills installed?** Check `~/.claude/skills/` for generative-media skill directories.
+3. **Are the skills installed?** Check `~/.design-agent-skills/skills/` for generative-media skill directories.
    - No → run the install command above.
    - Yes → invoke the relevant skill by name.
 

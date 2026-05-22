@@ -27,7 +27,7 @@ das:
 Run this before building artifacts that connect to external services:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/composio-artifacts/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/composio-artifacts/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `composio-artifacts` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before building artifacts that connect to external services:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/composio-artifacts && \
+mkdir -p ~/.design-agent-skills/skills/composio-artifacts && \
   curl -fsSL \
     https://raw.githubusercontent.com/ComposioHQ/awesome-claude-skills/master/artifacts-builder/SKILL.md \
-    -o ~/.claude/skills/composio-artifacts/SKILL.md
+    -o ~/.design-agent-skills/skills/composio-artifacts/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/composio-artifacts/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/composio-artifacts/SKILL.md` — output must NOT contain `das:`.
 
 > **Required:** Set `COMPOSIO_API_KEY` environment variable. Get key at [composio.dev](https://composio.dev).
 

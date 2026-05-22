@@ -26,7 +26,7 @@ das:
 Run this before any baseline UI validation work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/baseline-ui/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/baseline-ui/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `baseline-ui` and proceed
    - No → go to step 2
 

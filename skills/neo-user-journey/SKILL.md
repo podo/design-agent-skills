@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/neo-user-journey/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/neo-user-journey/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `neo-user-journey` and proceed
    - No → go to step 2
 
@@ -35,13 +35,13 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/neo-user-journey && \
+mkdir -p ~/.design-agent-skills/skills/neo-user-journey && \
   curl -fsSL \
     https://raw.githubusercontent.com/Cornjebus/neo-user-journey/main/SKILL.md \
-    -o ~/.claude/skills/neo-user-journey/SKILL.md
+    -o ~/.design-agent-skills/skills/neo-user-journey/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/neo-user-journey/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/neo-user-journey/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

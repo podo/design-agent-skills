@@ -29,7 +29,7 @@ das:
 Run this before any GLSL shader or WebGL visual effect work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/shader-dev/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/shader-dev/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `shader-dev` and proceed
    - No → go to step 2
 
@@ -40,13 +40,13 @@ Run this before any GLSL shader or WebGL visual effect work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/shader-dev && \
+mkdir -p ~/.design-agent-skills/skills/shader-dev && \
   curl -fsSL \
     https://raw.githubusercontent.com/MiniMax-AI/skills/main/skills/shader-dev/SKILL.md \
-    -o ~/.claude/skills/shader-dev/SKILL.md
+    -o ~/.design-agent-skills/skills/shader-dev/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/shader-dev/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/shader-dev/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

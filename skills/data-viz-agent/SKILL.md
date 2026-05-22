@@ -29,7 +29,7 @@ das:
 Run this before any data visualization or charting work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/data-viz-agent/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/data-viz-agent/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `data-viz-agent` and proceed
    - No → go to step 2
 
@@ -40,13 +40,13 @@ Run this before any data visualization or charting work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/data-viz-agent && \
+mkdir -p ~/.design-agent-skills/skills/data-viz-agent && \
   curl -fsSL \
     https://raw.githubusercontent.com/rohitg00/awesome-claude-code-toolkit/main/agents/data-ai/data-visualization.md \
-    -o ~/.claude/skills/data-viz-agent/SKILL.md
+    -o ~/.design-agent-skills/skills/data-viz-agent/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/data-viz-agent/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/data-viz-agent/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

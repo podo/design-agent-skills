@@ -37,7 +37,7 @@ das:
 1. **Is @superdesign/cli installed?** Run `superdesign --version`.
    - No → install it: `npm install -g @superdesign/cli@latest`
    - Yes → go to step 2.
-2. **Is the skill installed?** Check `~/.claude/skills/superdesign-skill/SKILL.md`.
+2. **Is the skill installed?** Check `~/.design-agent-skills/skills/superdesign-skill/SKILL.md`.
    - No → `npx skills add superdesigndev/superdesign-skill`
    - Yes → invoke `superdesign-skill` and proceed.
 3. **Is the canvas running?** Open `superdesign` in a terminal if not already open.

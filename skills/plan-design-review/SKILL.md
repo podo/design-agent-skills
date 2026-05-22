@@ -27,7 +27,7 @@ das:
 Run this for structured design critique and scoring:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/plan-design-review/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/plan-design-review/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `plan-design-review` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this for structured design critique and scoring:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/plan-design-review && \
+mkdir -p ~/.design-agent-skills/skills/plan-design-review && \
   curl -fsSL \
     https://raw.githubusercontent.com/garrytan/gstack/main/plan-design-review/SKILL.md \
-    -o ~/.claude/skills/plan-design-review/SKILL.md
+    -o ~/.design-agent-skills/skills/plan-design-review/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/plan-design-review/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/plan-design-review/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

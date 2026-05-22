@@ -26,7 +26,7 @@ das:
 
 ## Decision tree
 
-1. **Is the skill already installed?** Check `~/.claude/skills/` for Callstack skill directories.
+1. **Is the skill already installed?** Check `~/.design-agent-skills/skills/` for Callstack skill directories.
    - Yes → invoke and proceed
    - No → go to step 2
 
@@ -42,7 +42,7 @@ das:
 
 ## Invoke after install
 
-- Skill names: check `ls ~/.claude/skills/` for installed skill names after install
+- Skill names: check `ls ~/.design-agent-skills/skills/` for installed skill names after install
 - Triggers: "Callstack", "React Native profiling", "Turbo Modules", "brownfield migration", "React Native upgrade"
 
 ## What it does

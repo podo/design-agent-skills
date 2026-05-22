@@ -27,7 +27,7 @@ das:
 Run this before applying ink-style visual design to any artifact:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/ink-google/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/ink-google/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `ink-google` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before applying ink-style visual design to any artifact:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/ink-google && \
+mkdir -p ~/.design-agent-skills/skills/ink-google && \
   curl -fsSL \
     "https://raw.githubusercontent.com/google-labs-code/design.md/main/.agents/skills/ink/SKILL.md" \
-    -o ~/.claude/skills/ink-google/SKILL.md
+    -o ~/.design-agent-skills/skills/ink-google/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/ink-google/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/ink-google/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

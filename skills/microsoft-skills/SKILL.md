@@ -23,7 +23,7 @@ das:
 ## Decision tree
 
 1. **Is a Microsoft skill already installed?**
-   Check: `~/.claude/skills/frontend-design-review/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/frontend-design-review/SKILL.md` exists.
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

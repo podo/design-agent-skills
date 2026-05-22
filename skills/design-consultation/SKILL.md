@@ -27,7 +27,7 @@ das:
 Run this before any design system creation work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/design-consultation/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/design-consultation/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `design-consultation` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before any design system creation work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/design-consultation && \
+mkdir -p ~/.design-agent-skills/skills/design-consultation && \
   curl -fsSL \
     https://raw.githubusercontent.com/garrytan/gstack/main/design-consultation/SKILL.md \
-    -o ~/.claude/skills/design-consultation/SKILL.md
+    -o ~/.design-agent-skills/skills/design-consultation/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/design-consultation/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/design-consultation/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

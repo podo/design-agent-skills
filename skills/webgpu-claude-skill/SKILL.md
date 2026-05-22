@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/webgpu-claude-skill/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/webgpu-claude-skill/SKILL.md` exists.
    - Yes → invoke `webgpu-claude-skill` and proceed
    - No → go to step 2
 

@@ -28,7 +28,7 @@ das:
 Run this before any cross-platform UI design work:
 
 1. **Is the platform-design skill already installed?**
-   Check: `~/.claude/skills/platform-design/SKILL.md` exists (representative).
+   Check: `~/.design-agent-skills/skills/platform-design/SKILL.md` exists (representative).
    - Yes → invoke the relevant platform skill and proceed
    - No → go to step 2
 
@@ -44,7 +44,7 @@ npx skills add ehmo/platform-design-skills
 
 ## Invoke after install
 
-- Check installed skill names with: `ls ~/.claude/skills/ | grep platform`
+- Check installed skill names with: `ls ~/.design-agent-skills/skills/ | grep platform`
 - Trigger phrases: "platform design", "HIG rules", "Material Design 3", "cross-platform"
 
 ## What it does

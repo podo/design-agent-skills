@@ -26,7 +26,7 @@ das:
 Run this before using fal.ai generation features:
 
 1. **Is a fal.ai skill already installed?**
-   Check: `~/.claude/skills/fal-generate/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/fal-generate/SKILL.md` exists.
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

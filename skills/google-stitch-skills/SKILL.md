@@ -27,7 +27,7 @@ das:
 Run this for any Google Stitch design workflow:
 
 1. **Is a Stitch skill already installed?**
-   Check: `~/.claude/skills/stitch-loop/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/stitch-loop/SKILL.md` exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

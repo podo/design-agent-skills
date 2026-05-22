@@ -27,7 +27,7 @@ das:
 Run this before any Excalidraw diagram work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/excalidraw-diagram/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/excalidraw-diagram/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `excalidraw-diagram` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before any Excalidraw diagram work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/excalidraw-diagram && \
+mkdir -p ~/.design-agent-skills/skills/excalidraw-diagram && \
   curl -fsSL \
     https://raw.githubusercontent.com/coleam00/excalidraw-diagram-skill/main/SKILL.md \
-    -o ~/.claude/skills/excalidraw-diagram/SKILL.md
+    -o ~/.design-agent-skills/skills/excalidraw-diagram/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/excalidraw-diagram/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/excalidraw-diagram/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

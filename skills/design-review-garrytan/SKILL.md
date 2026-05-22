@@ -27,7 +27,7 @@ das:
 Run this before any design review or UI audit:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/design-review-garrytan/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/design-review-garrytan/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `design-review-garrytan` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before any design review or UI audit:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/design-review-garrytan && \
+mkdir -p ~/.design-agent-skills/skills/design-review-garrytan && \
   curl -fsSL \
     https://raw.githubusercontent.com/garrytan/gstack/main/design-review/SKILL.md \
-    -o ~/.claude/skills/design-review-garrytan/SKILL.md
+    -o ~/.design-agent-skills/skills/design-review-garrytan/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/design-review-garrytan/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/design-review-garrytan/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

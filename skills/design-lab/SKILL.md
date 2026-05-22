@@ -26,7 +26,7 @@ das:
 Run this before any exploratory design session:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/design-lab/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/design-lab/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `design-lab` and proceed
    - No → go to step 2
 

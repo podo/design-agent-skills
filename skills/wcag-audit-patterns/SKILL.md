@@ -25,7 +25,7 @@ das:
 Run this before any WCAG compliance audit:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/wcag-audit-patterns/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/wcag-audit-patterns/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `wcag-audit-patterns` and proceed
    - No → go to step 2
 

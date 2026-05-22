@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/email-html-mjml/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/email-html-mjml/SKILL.md` exists.
    - Yes → invoke `email-html-mjml` and proceed
    - No → go to step 2
 

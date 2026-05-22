@@ -28,7 +28,7 @@ das:
 Run this before wireframing any screen or user flow:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/wireframer/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/wireframer/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `wireframer` and proceed
    - No → go to step 2
 
@@ -39,13 +39,13 @@ Run this before wireframing any screen or user flow:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/wireframer && \
+mkdir -p ~/.design-agent-skills/skills/wireframer && \
   curl -fsSL \
     https://raw.githubusercontent.com/agilek/wireframer-skill/main/SKILL.md \
-    -o ~/.claude/skills/wireframer/SKILL.md
+    -o ~/.design-agent-skills/skills/wireframer/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/wireframer/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/wireframer/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

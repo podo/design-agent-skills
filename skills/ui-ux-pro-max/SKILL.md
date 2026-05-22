@@ -26,7 +26,7 @@ das:
 Run this before any multi-style or multi-stack UI design:
 
 1. **Is the plugin already installed?**
-   Check: `~/.claude/skills/ui-ux-pro-max/` directory exists with content.
+   Check: `~/.design-agent-skills/skills/ui-ux-pro-max/` directory exists with content.
    - Yes → invoke `ui-ux-pro-max` and proceed
    - No → go to step 2
 

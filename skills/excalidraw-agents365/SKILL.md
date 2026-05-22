@@ -25,7 +25,7 @@ das:
 Run this before Excalidraw diagram generation in a coding context:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/excalidraw-agents365/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/excalidraw-agents365/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `excalidraw-agents365` and proceed
    - No → go to step 2
 
@@ -36,13 +36,13 @@ Run this before Excalidraw diagram generation in a coding context:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/excalidraw-agents365 && \
+mkdir -p ~/.design-agent-skills/skills/excalidraw-agents365 && \
   curl -fsSL \
     https://raw.githubusercontent.com/Agents365-ai/excalidraw-skill/main/SKILL.md \
-    -o ~/.claude/skills/excalidraw-agents365/SKILL.md
+    -o ~/.design-agent-skills/skills/excalidraw-agents365/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/excalidraw-agents365/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/excalidraw-agents365/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

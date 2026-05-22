@@ -28,7 +28,7 @@ das:
 Run this before any programmatic video creation:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/remotion/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/remotion/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `remotion` and proceed
    - No → go to step 2
 
@@ -39,13 +39,13 @@ Run this before any programmatic video creation:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/remotion && \
+mkdir -p ~/.design-agent-skills/skills/remotion && \
   curl -fsSL \
     https://raw.githubusercontent.com/remotion-dev/skills/main/skills/remotion/SKILL.md \
-    -o ~/.claude/skills/remotion/SKILL.md
+    -o ~/.design-agent-skills/skills/remotion/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/remotion/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/remotion/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

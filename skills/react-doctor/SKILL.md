@@ -27,7 +27,7 @@ das:
 Run this before any React code quality audit:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/react-doctor/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/react-doctor/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `react-doctor` and proceed
    - No → go to step 2
 

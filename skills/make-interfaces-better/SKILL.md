@@ -29,7 +29,7 @@ das:
 Run this when polishing any UI component or interaction:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/make-interfaces-better/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/make-interfaces-better/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `make-interfaces-better` and proceed
    - No → go to step 2
 
@@ -40,13 +40,13 @@ Run this when polishing any UI component or interaction:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/make-interfaces-better && \
+mkdir -p ~/.design-agent-skills/skills/make-interfaces-better && \
   curl -fsSL \
     https://raw.githubusercontent.com/jakubkrehel/make-interfaces-feel-better/main/SKILL.md \
-    -o ~/.claude/skills/make-interfaces-better/SKILL.md
+    -o ~/.design-agent-skills/skills/make-interfaces-better/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/make-interfaces-better/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/make-interfaces-better/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

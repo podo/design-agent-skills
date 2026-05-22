@@ -26,7 +26,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/brand-design-md/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/brand-design-md/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `brand-design-md` and proceed
    - No → go to step 2
 
@@ -37,13 +37,13 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/brand-design-md && \
+mkdir -p ~/.design-agent-skills/skills/brand-design-md && \
   curl -fsSL \
     https://raw.githubusercontent.com/zephyrwang6/brand-design-md/main/SKILL.md \
-    -o ~/.claude/skills/brand-design-md/SKILL.md
+    -o ~/.design-agent-skills/skills/brand-design-md/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/brand-design-md/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/brand-design-md/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

@@ -26,7 +26,7 @@ das:
 
 ## Decision tree
 
-1. **Is the skill already installed?** Check `~/.claude/skills/` for `claude2figma` or related skill directories.
+1. **Is the skill already installed?** Check `~/.design-agent-skills/skills/` for `claude2figma` or related skill directories.
    - Yes → invoke and proceed
    - No → go to step 2
 

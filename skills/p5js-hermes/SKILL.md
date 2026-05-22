@@ -31,7 +31,7 @@ das:
 Run this before any p5.js creative coding work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/p5js-hermes/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/p5js-hermes/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `p5js-hermes` and proceed
    - No → go to step 2
 
@@ -42,13 +42,13 @@ Run this before any p5.js creative coding work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/p5js-hermes && \
+mkdir -p ~/.design-agent-skills/skills/p5js-hermes && \
   curl -fsSL \
     https://raw.githubusercontent.com/nousresearch/hermes-agent/main/skills/creative/p5js/SKILL.md \
-    -o ~/.claude/skills/p5js-hermes/SKILL.md
+    -o ~/.design-agent-skills/skills/p5js-hermes/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/p5js-hermes/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/p5js-hermes/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

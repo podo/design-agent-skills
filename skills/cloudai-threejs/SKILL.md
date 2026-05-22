@@ -27,7 +27,7 @@ das:
 Run this before any Three.js or 3D web development:
 
 1. **Is the Three.js skill already installed?**
-   Check: `~/.claude/skills/threejs/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/threejs/SKILL.md` exists.
    - Yes → invoke `threejs` and proceed
    - No → go to step 2
 
@@ -43,7 +43,7 @@ npx skills add CloudAI-X/threejs-skills
 
 ## Invoke after install
 
-- Skill name: check installed skill names with `ls ~/.claude/skills/`
+- Skill name: check installed skill names with `ls ~/.design-agent-skills/skills/`
 - Trigger phrases: "Three.js", "3D web", "WebGL 3D", "3D scene"
 
 ## What it does

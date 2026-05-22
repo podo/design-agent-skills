@@ -28,7 +28,7 @@ das:
 Run this before any diagramming, documentation, or system design work:
 
 1. **Is the toolkit already installed?**
-   Check: `~/.claude/skills/mermaid-diagrams/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/mermaid-diagrams/SKILL.md` exists (representative skill).
    - Yes → invoke the relevant skill by name and proceed
    - No → go to step 2
 

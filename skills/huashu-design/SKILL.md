@@ -26,7 +26,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/huashu-design/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/huashu-design/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `huashu-design` and proceed
    - No → go to step 2
 
@@ -37,13 +37,13 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/huashu-design && \
+mkdir -p ~/.design-agent-skills/skills/huashu-design && \
   curl -fsSL \
     https://raw.githubusercontent.com/alchaincyf/huashu-design/main/SKILL.md \
-    -o ~/.claude/skills/huashu-design/SKILL.md
+    -o ~/.design-agent-skills/skills/huashu-design/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/huashu-design/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/huashu-design/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

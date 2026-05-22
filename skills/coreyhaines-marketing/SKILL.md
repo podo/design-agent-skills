@@ -27,7 +27,7 @@ das:
 Run this before any conversion rate optimization work:
 
 1. **Is a Corey Haines skill already installed?**
-   Check: `~/.claude/skills/onboarding-cro/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/onboarding-cro/SKILL.md` exists.
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

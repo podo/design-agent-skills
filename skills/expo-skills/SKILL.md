@@ -26,7 +26,7 @@ das:
 
 ## Decision tree
 
-1. **Is the skill already installed?** Check `~/.claude/skills/` for Expo skill directories.
+1. **Is the skill already installed?** Check `~/.design-agent-skills/skills/` for Expo skill directories.
    - Yes → invoke and proceed
    - No → go to step 2
 
@@ -42,7 +42,7 @@ npx skills add expo/skills
 
 ## Invoke after install
 
-- Skill names: check `ls ~/.claude/skills/` for installed skill names after install
+- Skill names: check `ls ~/.design-agent-skills/skills/` for installed skill names after install
 - Triggers: "Expo", "EAS", "expo-skills", "Expo Router", "Expo SDK", "EAS Build", "EAS Submit"
 
 ## What it does

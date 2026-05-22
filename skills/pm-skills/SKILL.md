@@ -25,7 +25,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/pm-skills/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/pm-skills/SKILL.md` exists.
    - Yes → invoke the relevant PM skill and proceed
    - No → go to step 2
 

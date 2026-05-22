@@ -29,7 +29,7 @@ das:
 Run this before any creative strategy or campaign work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/creative-director/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/creative-director/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `creative-director` and proceed
    - No → go to step 2
 
@@ -40,13 +40,13 @@ Run this before any creative strategy or campaign work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/creative-director && \
+mkdir -p ~/.design-agent-skills/skills/creative-director && \
   curl -fsSL \
     https://raw.githubusercontent.com/smixs/creative-director-skill/main/SKILL.md \
-    -o ~/.claude/skills/creative-director/SKILL.md
+    -o ~/.design-agent-skills/skills/creative-director/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/creative-director/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/creative-director/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

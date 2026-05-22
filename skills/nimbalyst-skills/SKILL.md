@@ -25,7 +25,7 @@ das:
 Run this for Nimbalyst IDE skill workflows:
 
 1. **Is a Nimbalyst skill already installed?**
-   Check: `~/.claude/skills/excalidraw/SKILL.md` exists (from Nimbalyst registry).
+   Check: `~/.design-agent-skills/skills/excalidraw/SKILL.md` exists (from Nimbalyst registry).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

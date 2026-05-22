@@ -27,7 +27,7 @@ das:
 Run this before using Vercel skill workflows:
 
 1. **Is a Vercel skill already installed?**
-   Check: `~/.claude/skills/building-components/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/building-components/SKILL.md` exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

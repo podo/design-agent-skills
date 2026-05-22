@@ -27,7 +27,7 @@ das:
 Run this before any design brief work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/design-brief/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/design-brief/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `design-brief` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before any design brief work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/design-brief && \
+mkdir -p ~/.design-agent-skills/skills/design-brief && \
   curl -fsSL \
     https://raw.githubusercontent.com/nexu-io/open-design/main/skills/design-brief/SKILL.md \
-    -o ~/.claude/skills/design-brief/SKILL.md
+    -o ~/.design-agent-skills/skills/design-brief/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/design-brief/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/design-brief/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

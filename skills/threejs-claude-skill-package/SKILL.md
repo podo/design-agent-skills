@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/threejs-claude-skill-package/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/threejs-claude-skill-package/SKILL.md` exists.
    - Yes → invoke the relevant skill and proceed
    - No → go to step 2
 

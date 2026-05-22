@@ -28,7 +28,7 @@ das:
 Run this before any web quality, performance, or accessibility audit:
 
 1. **Is an Osmani skill already installed?**
-   Check: `~/.claude/skills/web-quality-audit/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/web-quality-audit/SKILL.md` exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

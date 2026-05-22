@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/design-auditor/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/design-auditor/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `design-auditor` and proceed
    - No → go to step 2
 
@@ -35,13 +35,13 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/design-auditor && \
+mkdir -p ~/.design-agent-skills/skills/design-auditor && \
   curl -fsSL \
     https://raw.githubusercontent.com/Ashutos1997/claude-design-auditor-skill/main/SKILL.md \
-    -o ~/.claude/skills/design-auditor/SKILL.md
+    -o ~/.design-agent-skills/skills/design-auditor/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/design-auditor/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/design-auditor/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

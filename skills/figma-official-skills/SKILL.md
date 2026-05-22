@@ -28,7 +28,7 @@ das:
 Run this before any Figma ↔ code workflow:
 
 1. **Is a Figma skill already installed?**
-   Check: `~/.claude/skills/figma-use/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/figma-use/SKILL.md` exists (representative skill).
    - Yes → invoke the specific Figma skill by name and proceed
    - No → go to step 2
 

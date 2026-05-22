@@ -28,7 +28,7 @@ das:
 Run this before using Anthropic official skills:
 
 1. **Is an Anthropic skill already installed?**
-   Check: `~/.claude/skills/frontend-design/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/frontend-design/SKILL.md` exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 

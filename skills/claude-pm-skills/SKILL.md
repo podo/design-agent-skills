@@ -23,7 +23,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/claude-pm-skills/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/claude-pm-skills/SKILL.md` exists.
    - Yes → invoke the relevant skill and proceed
    - No → go to step 2
 

@@ -27,7 +27,7 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.claude/skills/work-with-design-systems/SKILL.md` — no `das:` block = installed.
+1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/work-with-design-systems/SKILL.md` — no `das:` block = installed.
    - Yes → invoke and proceed
    - No → go to step 2
 
@@ -36,10 +36,10 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/work-with-design-systems && curl -fsSL https://raw.githubusercontent.com/natdexterra/work-with-design-systems/main/SKILL.md -o ~/.claude/skills/work-with-design-systems/SKILL.md
+mkdir -p ~/.design-agent-skills/skills/work-with-design-systems && curl -fsSL https://raw.githubusercontent.com/natdexterra/work-with-design-systems/main/SKILL.md -o ~/.design-agent-skills/skills/work-with-design-systems/SKILL.md
 ```
 
-Verify: `head -3 ~/.claude/skills/work-with-design-systems/SKILL.md` — must NOT contain `das:`.
+Verify: `head -3 ~/.design-agent-skills/skills/work-with-design-systems/SKILL.md` — must NOT contain `das:`.
 
 ## Invoke after install
 

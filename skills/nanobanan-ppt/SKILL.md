@@ -28,7 +28,7 @@ das:
 Run this for AI-powered slide generation with images:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/nanobanan-ppt/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/nanobanan-ppt/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `nanobanan-ppt` and proceed
    - No → go to step 2
 
@@ -39,13 +39,13 @@ Run this for AI-powered slide generation with images:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/nanobanan-ppt && \
+mkdir -p ~/.design-agent-skills/skills/nanobanan-ppt && \
   curl -fsSL \
     https://raw.githubusercontent.com/op7418/NanoBanana-PPT-Skills/main/SKILL.md \
-    -o ~/.claude/skills/nanobanan-ppt/SKILL.md
+    -o ~/.design-agent-skills/skills/nanobanan-ppt/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/nanobanan-ppt/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/nanobanan-ppt/SKILL.md` — output must NOT contain `das:`.
 
 > **Note:** Image generation features require API credentials — check the README after install for configuration.
 

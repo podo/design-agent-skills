@@ -30,7 +30,7 @@ das:
 Run this before any chart, diagram, or infographic work:
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/vega/SKILL.md` exists (representative skill).
+   Check: `~/.design-agent-skills/skills/vega/SKILL.md` exists (representative skill).
    - Yes → invoke the relevant skill by name and proceed
    - No → go to step 2
 

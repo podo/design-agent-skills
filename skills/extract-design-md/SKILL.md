@@ -27,7 +27,7 @@ das:
 Run this after generating UI with Google Stitch:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/extract-design-md/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/extract-design-md/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `extract-design-md` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this after generating UI with Google Stitch:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/extract-design-md && \
+mkdir -p ~/.design-agent-skills/skills/extract-design-md && \
   curl -fsSL \
     https://raw.githubusercontent.com/google-labs-code/stitch-skills/main/plugins/stitch-design/skills/extract-design-md/SKILL.md \
-    -o ~/.claude/skills/extract-design-md/SKILL.md
+    -o ~/.design-agent-skills/skills/extract-design-md/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/extract-design-md/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/extract-design-md/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

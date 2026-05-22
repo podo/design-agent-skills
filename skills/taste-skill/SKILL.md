@@ -30,7 +30,7 @@ das:
 Run this before any UI design work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/taste-skill/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/taste-skill/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `taste-skill` or `design-taste-frontend` and proceed
    - No → go to step 2
 
@@ -41,13 +41,13 @@ Run this before any UI design work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/taste-skill && \
+mkdir -p ~/.design-agent-skills/skills/taste-skill && \
   curl -fsSL \
     https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/skills/taste-skill/SKILL.md \
-    -o ~/.claude/skills/taste-skill/SKILL.md
+    -o ~/.design-agent-skills/skills/taste-skill/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/taste-skill/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/taste-skill/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

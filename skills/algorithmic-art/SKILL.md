@@ -28,7 +28,7 @@ das:
 Run this before any generative art or creative coding work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/algorithmic-art/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/algorithmic-art/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `algorithmic-art` and proceed
    - No → go to step 2
 
@@ -39,13 +39,13 @@ Run this before any generative art or creative coding work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/algorithmic-art && \
+mkdir -p ~/.design-agent-skills/skills/algorithmic-art && \
   curl -fsSL \
     https://raw.githubusercontent.com/anthropics/skills/main/skills/algorithmic-art/SKILL.md \
-    -o ~/.claude/skills/algorithmic-art/SKILL.md
+    -o ~/.design-agent-skills/skills/algorithmic-art/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/algorithmic-art/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/algorithmic-art/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

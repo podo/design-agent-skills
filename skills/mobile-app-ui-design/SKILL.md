@@ -25,7 +25,7 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.claude/skills/mobile-app-ui-design/SKILL.md` — no `das:` block = installed.
+1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/mobile-app-ui-design/SKILL.md` — no `das:` block = installed.
    - Yes → invoke and proceed
    - No → go to step 2
 
@@ -34,10 +34,10 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/mobile-app-ui-design && curl -fsSL https://raw.githubusercontent.com/ceorkm/mobile-app-ui-design/main/SKILL.md -o ~/.claude/skills/mobile-app-ui-design/SKILL.md
+mkdir -p ~/.design-agent-skills/skills/mobile-app-ui-design && curl -fsSL https://raw.githubusercontent.com/ceorkm/mobile-app-ui-design/main/SKILL.md -o ~/.design-agent-skills/skills/mobile-app-ui-design/SKILL.md
 ```
 
-Verify: `head -3 ~/.claude/skills/mobile-app-ui-design/SKILL.md` — must NOT contain `das:`.
+Verify: `head -3 ~/.design-agent-skills/skills/mobile-app-ui-design/SKILL.md` — must NOT contain `das:`.
 
 ## Invoke after install
 

@@ -31,7 +31,7 @@ das:
 Run this before any color system or palette work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/color-expert/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/color-expert/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `color-expert` and proceed
    - No → go to step 2
 
@@ -42,13 +42,13 @@ Run this before any color system or palette work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/color-expert && \
+mkdir -p ~/.design-agent-skills/skills/color-expert && \
   curl -fsSL \
     https://raw.githubusercontent.com/meodai/skill.color-expert/main/SKILL.md \
-    -o ~/.claude/skills/color-expert/SKILL.md
+    -o ~/.design-agent-skills/skills/color-expert/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/color-expert/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/color-expert/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

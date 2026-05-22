@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/ux-designer-skill/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/ux-designer-skill/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `ux-designer-skill` and proceed
    - No → go to step 2
 
@@ -35,13 +35,13 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/ux-designer-skill && \
+mkdir -p ~/.design-agent-skills/skills/ux-designer-skill && \
   curl -fsSL \
     https://raw.githubusercontent.com/szilu/ux-designer-skill/main/SKILL.md \
-    -o ~/.claude/skills/ux-designer-skill/SKILL.md
+    -o ~/.design-agent-skills/skills/ux-designer-skill/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/ux-designer-skill/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/ux-designer-skill/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

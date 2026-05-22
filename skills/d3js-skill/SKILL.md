@@ -27,7 +27,7 @@ das:
 Run this before any D3.js visualization work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/d3js-skill/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/d3js-skill/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `d3js-skill` and proceed
    - No → go to step 2
 
@@ -38,13 +38,13 @@ Run this before any D3.js visualization work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/d3js-skill && \
+mkdir -p ~/.design-agent-skills/skills/d3js-skill && \
   curl -fsSL \
     https://raw.githubusercontent.com/chrisvoncsefalvay/claude-d3js-skill/main/SKILL.md \
-    -o ~/.claude/skills/d3js-skill/SKILL.md
+    -o ~/.design-agent-skills/skills/d3js-skill/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/d3js-skill/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/d3js-skill/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

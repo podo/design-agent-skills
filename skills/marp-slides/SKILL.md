@@ -24,17 +24,17 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.claude/skills/marp-slides/SKILL.md` — no `das:` = installed.
+1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/marp-slides/SKILL.md` — no `das:` = installed.
    - Yes → invoke and proceed. No → go to step 2.
 2. **Shell access?** Yes → install. No → show user the command.
 
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/marp-slides && curl -fsSL https://raw.githubusercontent.com/robonuggets/marp-slides/main/SKILL.md -o ~/.claude/skills/marp-slides/SKILL.md
+mkdir -p ~/.design-agent-skills/skills/marp-slides && curl -fsSL https://raw.githubusercontent.com/robonuggets/marp-slides/main/SKILL.md -o ~/.design-agent-skills/skills/marp-slides/SKILL.md
 ```
 
-Verify: `head -3 ~/.claude/skills/marp-slides/SKILL.md` — must NOT contain `das:`.
+Verify: `head -3 ~/.design-agent-skills/skills/marp-slides/SKILL.md` — must NOT contain `das:`.
 
 ## Invoke after install
 

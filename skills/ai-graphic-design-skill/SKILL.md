@@ -26,7 +26,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/ai-graphic-design-skill/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/ai-graphic-design-skill/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `ai-graphic-design-skill` and proceed
    - No → go to step 2
 
@@ -37,13 +37,13 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/ai-graphic-design-skill && \
+mkdir -p ~/.design-agent-skills/skills/ai-graphic-design-skill && \
   curl -fsSL \
     https://raw.githubusercontent.com/designrique/ai-graphic-design-skill/main/SKILL.md \
-    -o ~/.claude/skills/ai-graphic-design-skill/SKILL.md
+    -o ~/.design-agent-skills/skills/ai-graphic-design-skill/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/ai-graphic-design-skill/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/ai-graphic-design-skill/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

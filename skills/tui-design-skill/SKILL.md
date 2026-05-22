@@ -26,7 +26,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/tui-design-skill/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/tui-design-skill/SKILL.md` exists.
    - Yes → invoke `tui-design-skill` and proceed
    - No → go to step 2
 

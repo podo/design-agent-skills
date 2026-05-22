@@ -27,7 +27,7 @@ das:
 
 ## Decision tree
 
-1. **Is the skill already installed?** Check `~/.claude/skills/` for wondelai skill directories (e.g. `refactoring-ui`, `lean-ux`).
+1. **Is the skill already installed?** Check `~/.design-agent-skills/skills/` for wondelai skill directories (e.g. `refactoring-ui`, `lean-ux`).
    - Yes → invoke the relevant skill and proceed
    - No → go to step 2
 
@@ -39,7 +39,7 @@ das:
 npx skills add wondelai/skills
 ```
 
-> This installs the full suite. Individual skills from this package include: `refactoring-ui`, `design-everyday-things`, `microinteractions`, `lean-ux`, `design-sprint`. Check `ls ~/.claude/skills/` after install.
+> This installs the full suite. Individual skills from this package include: `refactoring-ui`, `design-everyday-things`, `microinteractions`, `lean-ux`, `design-sprint`. Check `ls ~/.design-agent-skills/skills/` after install.
 
 ## Invoke after install
 

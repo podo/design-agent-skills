@@ -29,7 +29,7 @@ das:
 Run this for any product management or strategy work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/digidai-pm/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/digidai-pm/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `digidai-pm` and proceed
    - No → go to step 2
 
@@ -40,13 +40,13 @@ Run this for any product management or strategy work:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/digidai-pm && \
+mkdir -p ~/.design-agent-skills/skills/digidai-pm && \
   curl -fsSL \
     https://raw.githubusercontent.com/Digidai/product-manager-skills/main/SKILL.md \
-    -o ~/.claude/skills/digidai-pm/SKILL.md
+    -o ~/.design-agent-skills/skills/digidai-pm/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/digidai-pm/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/digidai-pm/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

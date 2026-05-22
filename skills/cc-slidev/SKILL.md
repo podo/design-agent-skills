@@ -23,7 +23,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.claude/skills/cc-slidev/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/cc-slidev/SKILL.md` exists.
    - Yes → invoke `cc-slidev` and proceed
    - No → go to step 2
 

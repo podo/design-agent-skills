@@ -28,7 +28,7 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.claude/skills/design-tokens-skill/SKILL.md` — no `das:` block = installed.
+1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/design-tokens-skill/SKILL.md` — no `das:` block = installed.
    - Yes → invoke and proceed
    - No → go to step 2
 
@@ -37,10 +37,10 @@ das:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/design-tokens-skill && curl -fsSL https://raw.githubusercontent.com/ilikescience/design-tokens-skill/main/SKILL.md -o ~/.claude/skills/design-tokens-skill/SKILL.md
+mkdir -p ~/.design-agent-skills/skills/design-tokens-skill && curl -fsSL https://raw.githubusercontent.com/ilikescience/design-tokens-skill/main/SKILL.md -o ~/.design-agent-skills/skills/design-tokens-skill/SKILL.md
 ```
 
-Verify: `head -3 ~/.claude/skills/design-tokens-skill/SKILL.md` — must NOT contain `das:`.
+Verify: `head -3 ~/.design-agent-skills/skills/design-tokens-skill/SKILL.md` — must NOT contain `das:`.
 
 ## Invoke after install
 

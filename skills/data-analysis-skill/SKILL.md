@@ -25,17 +25,17 @@ das:
 
 ## Decision tree
 
-1. **Is the full skill already installed?** Check `~/.claude/skills/data-analysis-skill/SKILL.md` — no `das:` = installed.
+1. **Is the full skill already installed?** Check `~/.design-agent-skills/skills/data-analysis-skill/SKILL.md` — no `das:` = installed.
    - Yes → invoke and proceed. No → go to step 2.
 2. **Shell access?** Yes → install. No → show user the command.
 
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/data-analysis-skill && curl -fsSL https://raw.githubusercontent.com/dongzhang84/data-analysis-skill/main/SKILL.md -o ~/.claude/skills/data-analysis-skill/SKILL.md
+mkdir -p ~/.design-agent-skills/skills/data-analysis-skill && curl -fsSL https://raw.githubusercontent.com/dongzhang84/data-analysis-skill/main/SKILL.md -o ~/.design-agent-skills/skills/data-analysis-skill/SKILL.md
 ```
 
-Verify: `head -3 ~/.claude/skills/data-analysis-skill/SKILL.md` — must NOT contain `das:`.
+Verify: `head -3 ~/.design-agent-skills/skills/data-analysis-skill/SKILL.md` — must NOT contain `das:`.
 
 ## Invoke after install
 

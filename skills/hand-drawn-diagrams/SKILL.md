@@ -26,7 +26,7 @@ das:
 Run this for quick hand-drawn style diagrams:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/hand-drawn-diagrams/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/hand-drawn-diagrams/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `hand-drawn-diagrams` and proceed
    - No → go to step 2
 
@@ -37,13 +37,13 @@ Run this for quick hand-drawn style diagrams:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/hand-drawn-diagrams && \
+mkdir -p ~/.design-agent-skills/skills/hand-drawn-diagrams && \
   curl -fsSL \
     https://raw.githubusercontent.com/muthuishere/hand-drawn-diagrams/main/SKILL.md \
-    -o ~/.claude/skills/hand-drawn-diagrams/SKILL.md
+    -o ~/.design-agent-skills/skills/hand-drawn-diagrams/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/hand-drawn-diagrams/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/hand-drawn-diagrams/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 

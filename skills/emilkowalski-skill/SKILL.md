@@ -26,7 +26,7 @@ das:
 Run this before any animation or design engineering work:
 
 1. **Is the skill already installed?**
-   Check: `~/.claude/skills/emil-design-eng/SKILL.md` exists.
+   Check: `~/.design-agent-skills/skills/emil-design-eng/SKILL.md` exists.
    - Yes → invoke `emil-design-eng` and proceed
    - No → go to step 2
 

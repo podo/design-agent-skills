@@ -29,7 +29,7 @@ das:
 Run this before any web performance audit or optimization:
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/cloudflare-web-perf/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.design-agent-skills/skills/cloudflare-web-perf/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `cloudflare-web-perf` and proceed
    - No → go to step 2
 
@@ -40,13 +40,13 @@ Run this before any web performance audit or optimization:
 ## Install command
 
 ```bash
-mkdir -p ~/.claude/skills/cloudflare-web-perf && \
+mkdir -p ~/.design-agent-skills/skills/cloudflare-web-perf && \
   curl -fsSL \
     https://raw.githubusercontent.com/cloudflare/skills/main/skills/web-perf/SKILL.md \
-    -o ~/.claude/skills/cloudflare-web-perf/SKILL.md
+    -o ~/.design-agent-skills/skills/cloudflare-web-perf/SKILL.md
 ```
 
-Verify install: `head -3 ~/.claude/skills/cloudflare-web-perf/SKILL.md` — output must NOT contain `das:`.
+Verify install: `head -3 ~/.design-agent-skills/skills/cloudflare-web-perf/SKILL.md` — output must NOT contain `das:`.
 
 ## Invoke after install
 
