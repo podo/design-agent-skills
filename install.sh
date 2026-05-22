@@ -23,17 +23,31 @@ detected_agents() {
   done
 }
 
-agent_skills_dir() {
-  # $1 = agent name, returns skills dir
-  echo "$AGENTS" | grep -v '^$' | while IFS=: read -r name _root skills; do
-    [ "$name" = "$1" ] && echo "$skills" && break
-  done
+stub_yaml_value() {
+  # $1=key  $2=stub.yaml path — minimal key: value parser
+  grep "^${1}:" "$2" | sed 's/^[^:]*: *//' | tr -d '"'
+}
+
+raw_url_from_stub() {
+  # Derive raw GitHub URL from stub.yaml fields
+  local yaml="$1"
+  local upstream upstream_path version repo branch
+  upstream="$(stub_yaml_value upstream "$yaml")"
+  upstream_path="$(stub_yaml_value upstream_path "$yaml")"
+  version="$(stub_yaml_value version "$yaml")"
+  repo="$(echo "$upstream" | sed 's|https://github.com/||')"
+  branch="$([ "$version" = "latest" ] && echo "main" || echo "$version")"
+  echo "https://raw.githubusercontent.com/$repo/$branch/$upstream_path"
 }
 
 is_stub() {
   # Stub = SKILL.md still has das: frontmatter block
   local md="$1/SKILL.md"
   [ -f "$md" ] && grep -q "^das:" "$md"
+}
+
+has_stub_manifest() {
+  [ -f "$1/stub.yaml" ]
 }
 
 skill_state() {
@@ -60,14 +74,11 @@ skill_names() {
 # ── Commands ──────────────────────────────────────────────────────────────────
 
 cmd_install() {
-  local found=0
   local agent_list
   agent_list="$(detected_agents)"
-
   [ -z "$agent_list" ] && { echo "No supported agents found."; exit 0; }
 
   while IFS=: read -r name _root skills_dir; do
-    found=1
     mkdir -p "$skills_dir"
     local linked=0 skipped=0
     while IFS= read -r skill; do
@@ -91,7 +102,6 @@ cmd_status() {
   agent_list="$(detected_agents)"
   [ -z "$agent_list" ] && { echo "No supported agents found."; exit 0; }
 
-  # Collect agent names and dirs into indexed arrays (bash 3.2 safe)
   local names=() dirs=()
   while IFS=: read -r name _root skills_dir; do
     names+=("$name")
@@ -100,7 +110,6 @@ cmd_status() {
 
   local ncols=${#names[@]}
 
-  # Header
   printf "\n%-22s" "skill"
   for name in "${names[@]}"; do printf "  %-10s" "$name"; done
   echo
@@ -115,9 +124,7 @@ cmd_status() {
     while [ $i -lt $ncols ]; do
       local target="${dirs[$i]}/$skill"
       local src="$SKILLS_SRC/$skill"
-      local state
-      state="$(skill_state "$target" "$src")"
-      printf "  %-10s" "$state"
+      printf "  %-10s" "$(skill_state "$target" "$src")"
       i=$((i + 1))
     done
     echo
@@ -131,21 +138,46 @@ cmd_status() {
 cmd_update() {
   local agent_list
   agent_list="$(detected_agents)"
-  local total=0
+  local refreshed=0 linked=0
 
-  while IFS=: read -r name _root skills_dir; do
-    mkdir -p "$skills_dir"
-    while IFS= read -r skill; do
+  while IFS= read -r skill; do
+    local src="$SKILLS_SRC/$skill"
+    local yaml="$src/stub.yaml"
+
+    # Upgraded stub with manifest → re-fetch from upstream
+    if has_stub_manifest "$src" && ! is_stub "$src"; then
+      local url
+      url="$(raw_url_from_stub "$yaml")"
+      printf "  updating  %s ... " "$skill"
+      if curl -fsSL "$url" -o "$src/SKILL.md" 2>/dev/null; then
+        echo "ok"
+        refreshed=$((refreshed + 1))
+      else
+        echo "failed (upstream unreachable?)"
+      fi
+      continue
+    fi
+
+    # New stub not yet linked to all agents → add missing links
+    while IFS=: read -r name _root skills_dir; do
       local target="$skills_dir/$skill"
       if [ ! -L "$target" ] && [ ! -d "$target" ]; then
-        ln -s "$SKILLS_SRC/$skill" "$target"
+        mkdir -p "$skills_dir"
+        ln -s "$src" "$target"
         printf "  added  %-18s  %s\n" "$skill" "$name"
-        total=$((total + 1))
+        linked=$((linked + 1))
       fi
-    done < <(skill_names)
-  done <<< "$agent_list"
+    done <<< "$agent_list"
 
-  [ "$total" -eq 0 ] && echo "All agents up to date." || echo "Added $total link(s)."
+  done < <(skill_names)
+
+  if [ "$refreshed" -eq 0 ] && [ "$linked" -eq 0 ]; then
+    echo "Nothing to update."
+  else
+    [ "$refreshed" -gt 0 ] && echo "$refreshed skill(s) refreshed from upstream."
+    [ "$linked" -gt 0 ]    && echo "$linked new link(s) added."
+    true
+  fi
 }
 
 cmd_fix() {
@@ -175,7 +207,7 @@ Usage: ./install.sh [command]
 
   install   Symlink all stubs to detected agents (default)
   status    Show stub / upgraded / BROKEN state per agent
-  update    Add links for new stubs added since last install
+  update    Re-fetch upgraded skills from upstream; add links for new stubs
   fix       Remove broken symlinks
   help      Show this message
 
