@@ -28,6 +28,11 @@ stub_yaml_value() {
   grep "^${1}:" "$2" | sed 's/^[^:]*: *//' | tr -d '"'
 }
 
+stub_type() {
+  local yaml="$1/stub.yaml"
+  [ -f "$yaml" ] && stub_yaml_value type "$yaml" || echo "skill"
+}
+
 raw_url_from_stub() {
   # Derive raw GitHub URL from stub.yaml fields
   local yaml="$1"
@@ -52,6 +57,12 @@ has_stub_manifest() {
 
 skill_state() {
   local target="$1" src="$2"
+  local stype
+  stype="$(stub_type "$src")"
+  if [ "$stype" = "package" ] || [ "$stype" = "platform" ]; then
+    echo "package"
+    return
+  fi
   if [ -L "$target" ] && [ ! -e "$target" ]; then
     echo "BROKEN"
   elif [ -L "$target" ] && is_stub "$src"; then
@@ -83,11 +94,17 @@ cmd_install() {
     local linked=0 skipped=0
     while IFS= read -r skill; do
       local target="$skills_dir/$skill"
-      if [ -L "$target" ] || [ -d "$target" ]; then
-        skipped=$((skipped + 1))
+      local stype
+      stype="$(stub_type "$SKILLS_SRC/$skill")"
+      if [ "$stype" = "skill" ]; then
+        if [ -L "$target" ] || [ -d "$target" ]; then
+          skipped=$((skipped + 1))
+        else
+          ln -s "$SKILLS_SRC/$skill" "$target"
+          linked=$((linked + 1))
+        fi
       else
-        ln -s "$SKILLS_SRC/$skill" "$target"
-        linked=$((linked + 1))
+        skipped=$((skipped + 1))
       fi
     done < <(skill_names)
     printf "  %-12s  +%d linked  %d skipped\n" "$name" "$linked" "$skipped"
@@ -143,6 +160,19 @@ cmd_update() {
   while IFS= read -r skill; do
     local src="$SKILLS_SRC/$skill"
     local yaml="$src/stub.yaml"
+
+    # Package/platform types — print install command instead of symlinking
+    local stype
+    stype="$(stub_type "$src")"
+    if [ "$stype" = "package" ] || [ "$stype" = "platform" ]; then
+      local install_cmd
+      install_cmd="$(stub_yaml_value install_default "$yaml" 2>/dev/null || true)"
+      if [ -n "$install_cmd" ]; then
+        printf "  package  %-18s  run: %s\n" "$skill" "$install_cmd"
+        linked=$((linked + 1))
+      fi
+      continue
+    fi
 
     # Upgraded stub with manifest → re-fetch from upstream
     if has_stub_manifest "$src" && ! is_stub "$src"; then
