@@ -54,6 +54,7 @@ README.md       — skills table, router table, supply chain section
 7. Run `npm test` — must pass 100%
 8. Bump version (see versioning section)
 9. Commit and push to `main`
+10. Create a GitHub release (`gh release create`) with the CHANGELOG body
 
 ---
 
@@ -334,6 +335,34 @@ npm version 1.7.0 --no-git-tag-version
 
 # 3. CHANGELOG.md — add entry at the top (after the header)
 ```
+
+### Creating a GitHub release
+
+After pushing the version bump, create a GitHub release. Use the CHANGELOG entry as the release body.
+
+```bash
+gh release create v<version> \
+  --title "v<version> — Short description of what's new" \
+  --latest \
+  --notes "$(cat <<'EOF'
+## Added
+
+- **`skill-name`** — One-line description. (`owner/repo`, N ★)
+
+## Changed
+
+- **`router-name` router** — What changed.
+
+Catalogue grows from N → M skills.
+EOF
+)"
+```
+
+**Rules:**
+- Tag must match the `VERSION` file exactly (e.g. `v1.7.0`)
+- Always pass `--latest` on the newest release so GitHub surfaces it correctly
+- Copy the body verbatim from `CHANGELOG.md` — no paraphrasing
+- Create the release **after** pushing to main (the tag must exist on the remote)
 
 ### CHANGELOG format
 
