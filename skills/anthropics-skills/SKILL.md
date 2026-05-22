@@ -6,7 +6,7 @@ description: |
   professional theme application, brand guidelines, and PowerPoint creation.
 triggers:
   - "Anthropic skill"
-  - "frontend design"
+  - "Anthropic frontend design"
   - "web artifacts"
   - "canvas design"
   - "theme factory"

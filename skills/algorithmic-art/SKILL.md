@@ -7,7 +7,7 @@ description: |
 triggers:
   - "algorithmic art"
   - "generative art"
-  - "flow field"
+  - "flow field art"
   - "particle system"
   - "procedural art"
   - "creative coding art"

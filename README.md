@@ -1,25 +1,37 @@
 # design-agent-skills
 
-A shareable catalogue of agent skill stubs. Clone once, link to every AI coding tool you use.
+A catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and other AI coding agents.
+128 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, and PM tools.
+Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
 
 ```bash
-git clone https://github.com/<you>/design-agent-skills
-cd design-agent-skills
-./install.sh
+npx design-agent-skills
 ```
 
-Auto-detects Claude Code, Cursor, Codex, OpenCode, and Droid. Symlinks each stub into their skills directories — one source, all agents.
+Or without npm:
+
+```bash
+git clone https://github.com/podo/design-agent-skills ~/.design-agent-skills
+~/.design-agent-skills/install.sh
+```
+
+Auto-detects Claude Code, Cursor, Codex, OpenCode, and Droid. Links each skill pointer into their skills directories — one source, all agents.
 
 ## Commands
 
 ```bash
-./install.sh              # link all stubs to detected agents
-./install.sh status       # show stub / upgraded / BROKEN per skill per agent
-./install.sh update       # pick up new stubs added to the catalogue (after git pull)
-./install.sh fix          # remove broken symlinks
+npx design-agent-skills              # install or update
+npx design-agent-skills status       # show installed / stub / BROKEN per skill per agent
+npx design-agent-skills update       # pull new skills from upstream
+npx design-agent-skills remove <skill>  # unlink a specific skill
+npx design-agent-skills remove --all    # unlink everything
+npx design-agent-skills fix          # remove broken symlinks
+npx design-agent-skills doctor       # scan for trigger collisions and symlink health
 ```
+
+Or run `install.sh` directly from `~/.design-agent-skills/` if you installed via git.
 
 ### Status output
 
@@ -97,6 +109,67 @@ das:
 2. Fill frontmatter + four body sections
 3. Add a row to the table below
 4. Open a PR — no review of upstream content required
+
+## Trigger routing and known overlaps
+
+Skills activate when an agent reads a trigger phrase from a user message.
+The catalogue uses a two-level routing structure:
+
+```
+User asks → design-catalogue (top-level router)
+                → domain catalogue (motion-catalogue, figma-catalogue, …)
+                    → implementation skill (gsap-skills, figma-official-skills, …)
+```
+
+**Intentional broad triggers** — catalogue skills carry generic triggers by design so
+they fire before a more specific skill does. For example, `design-catalogue` owns
+`"excalidraw"`, `"wireframe"`, `"Three.js"`, and `"GSAP"` to route the user to the
+right domain. The specific implementation skills (e.g. `gsap-skills`) own longer
+triggers like `"GSAP skill"` and `"GSAP timeline"` for direct invocation.
+
+**Known overlaps by domain:**
+
+| Short trigger | On catalogue | Longer triggers also matched | On impl skill |
+|---|---|---|---|
+| `excalidraw` | design-catalogue | excalidraw diagram, excalidraw for agents, excalidraw sketch | excalidraw-diagram, excalidraw-agents365 |
+| `wireframe` | design-catalogue | wireframe skills, wireframe-skill, JSON wireframe, interactive wireframe HTML | wireframer, wireframe-skill, claude-wireframe-skill |
+| `Three.js` | design-catalogue | Three.js skill, Three.js ECS, IFC Three.js, TSL Three.js | cloudai-threejs, threejs-ecs-ts |
+| `GSAP` | design-catalogue | GSAP skill, GSAP timeline, useGSAP | gsap-skills |
+| `shader` | design-catalogue | shader skill, WebGL shader, GPU compute shaders | shader-dev |
+| `Framer Motion` | design-catalogue | Framer Motion skill | framer-motion-skills |
+| `Marp` | design-catalogue | Marp presentation | marp-slides |
+| `Slidev` | design-catalogue | Slidev presentation | slidev-skill |
+| `shadcn` | design-catalogue | shadcn/ui, shadcn component, stitch shadcn | shadcn-ui |
+| `Expo` | design-catalogue | Expo SDK, Expo Router | expo-skills |
+| `EAS` | expo-skills | EAS Build, EAS Submit | — |
+| `Apple HIG` | design-catalogue | Apple HIG audit, Apple HIG rules, fix Apple HIG | apple-hig-skills |
+| `generative art` | design-catalogue | generative art p5, generative art skill | algorithmic-art |
+| `animate` | animate-skill | animate-css, animated GIF, animated prototype, animated slides | animate-css-skill |
+
+These overlaps are harmless: when both a catalogue and an impl skill activate,
+the impl skill handles the request directly while the catalogue is redundant noise.
+Run `./install.sh doctor --substr` to see the full list at any time.
+
+**Fixed impl→impl conflicts** (triggers that previously caused two unrelated skills to compete):
+
+| Trigger | Was on | Conflicted with | Fix |
+|---|---|---|---|
+| `frontend design` | anthropics-skills | microsoft-skills `frontend design review` | renamed to `Anthropic frontend design` |
+| `flow field` | algorithmic-art | p5js-hermes `flow field p5` | renamed to `flow field art` |
+
+## Supply chain
+
+Skills install from GitHub via `npx skills add`. The `npx skills add` ecosystem does not
+publish versioned releases or stable commit SHAs, so pre-install pinning is not possible.
+
+**What we do instead:**
+
+- **Lockfile** (`design-agent-skills.lock`) — SHA256 of every installed `SKILL.md` captured at install time
+- **Drift detection** — `update --frozen` compares current upstream against the lockfile and warns on any change
+- **Tier classification** — `official` (28), `community` (35), `experimental` (60) — experimental excluded by default
+
+If you need stronger guarantees, clone the upstream repos at a specific commit and
+point `upstream_path` in `stub.yaml` to your fork.
 
 ## Skills
 
