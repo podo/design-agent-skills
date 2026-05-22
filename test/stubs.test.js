@@ -1,0 +1,192 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = path.resolve(fileURLToPath(import.meta.url), '../../');
+const SKILLS_DIR = path.join(ROOT, 'skills');
+
+const VALID_TYPES = new Set(['router', 'skill', 'package', 'platform']);
+const VALID_TIERS = new Set(['official', 'community', 'experimental']);
+
+// ── helpers ──────────────────────────────────────────────────────────────────
+
+function skillDirs() {
+  return fs.readdirSync(SKILLS_DIR).filter(n =>
+    fs.statSync(path.join(SKILLS_DIR, n)).isDirectory()
+  );
+}
+
+function readFile(skillName, filename) {
+  return fs.readFileSync(path.join(SKILLS_DIR, skillName, filename), 'utf8');
+}
+
+function hasFile(skillName, filename) {
+  return fs.existsSync(path.join(SKILLS_DIR, skillName, filename));
+}
+
+/** Extract YAML frontmatter from a SKILL.md (between first pair of ---) */
+function parseFrontmatter(content) {
+  const m = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return null;
+  return m[1];
+}
+
+/** Pull a scalar value from raw YAML text */
+function yamlGet(yaml, key) {
+  const m = yaml.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
+  return m ? m[1].trim().replace(/^["']|["']$/g, '') : null;
+}
+
+/** Check if a key exists anywhere in raw YAML */
+function yamlHas(yaml, key) {
+  return new RegExp(`^${key}:`, 'm').test(yaml);
+}
+
+/** Pull triggers list from frontmatter */
+function parseTriggers(frontmatter) {
+  const m = frontmatter.match(/^triggers:\n((?:  - .+\n?)+)/m);
+  if (!m) return [];
+  return m[1].trim().split('\n').map(l => l.replace(/^\s*-\s*/, '').replace(/^["']|["']$/g, '').trim());
+}
+
+// ── load all skills once ──────────────────────────────────────────────────────
+
+const skills = skillDirs().map(name => {
+  const stubPath = path.join(SKILLS_DIR, name, 'stub.yaml');
+  const skillPath = path.join(SKILLS_DIR, name, 'SKILL.md');
+  const stub  = fs.existsSync(stubPath)  ? fs.readFileSync(stubPath,  'utf8') : null;
+  const skill = fs.existsSync(skillPath) ? fs.readFileSync(skillPath, 'utf8') : null;
+  const fm = skill ? parseFrontmatter(skill) : null;
+  return { name, stub, skill, fm };
+});
+
+// ── tests ─────────────────────────────────────────────────────────────────────
+
+describe('file presence', () => {
+  for (const { name } of skills) {
+    it(`${name} has stub.yaml`, () => {
+      assert.ok(hasFile(name, 'stub.yaml'), `missing stub.yaml`);
+    });
+    it(`${name} has SKILL.md`, () => {
+      assert.ok(hasFile(name, 'SKILL.md'), `missing SKILL.md`);
+    });
+  }
+});
+
+describe('stub.yaml validity', () => {
+  for (const { name, stub } of skills) {
+    if (!stub) continue;
+
+    it(`${name}: type is valid`, () => {
+      const type = yamlGet(stub, 'type');
+      assert.ok(type, 'missing type field');
+      assert.ok(VALID_TYPES.has(type), `invalid type "${type}" — must be one of: ${[...VALID_TYPES].join(', ')}`);
+    });
+
+    it(`${name}: tier is valid`, () => {
+      const tier = yamlGet(stub, 'tier');
+      assert.ok(tier, 'missing tier field');
+      assert.ok(VALID_TIERS.has(tier), `invalid tier "${tier}" — must be one of: ${[...VALID_TIERS].join(', ')}`);
+    });
+
+    it(`${name}: router type has no upstream`, () => {
+      const type = yamlGet(stub, 'type');
+      if (type !== 'router') return;
+      assert.ok(!yamlHas(stub, 'upstream'), 'router skills must not have an upstream field');
+    });
+
+    it(`${name}: skill type has upstream`, () => {
+      const type = yamlGet(stub, 'type');
+      if (type !== 'skill') return;
+      assert.ok(yamlHas(stub, 'upstream'), 'type:skill must have an upstream field');
+    });
+  }
+});
+
+describe('SKILL.md frontmatter', () => {
+  for (const { name, fm } of skills) {
+    if (!fm) continue;
+
+    it(`${name}: has name field`, () => {
+      assert.ok(yamlGet(fm, 'name'), 'missing name in frontmatter');
+    });
+
+    it(`${name}: name matches directory`, () => {
+      const skillName = yamlGet(fm, 'name');
+      assert.equal(skillName, name, `name "${skillName}" does not match directory "${name}"`);
+    });
+
+    it(`${name}: has description`, () => {
+      // description can be multiline — just check the key exists
+      assert.ok(/^description:/m.test(fm), 'missing description in frontmatter');
+    });
+
+    it(`${name}: has at least one trigger`, () => {
+      const triggers = parseTriggers(fm);
+      assert.ok(triggers.length > 0, 'must have at least one trigger phrase');
+    });
+
+    it(`${name}: triggers are non-empty strings`, () => {
+      const triggers = parseTriggers(fm);
+      for (const t of triggers) {
+        assert.ok(t.length > 0, `empty trigger found`);
+      }
+    });
+  }
+});
+
+describe('type:skill upgrade commands', () => {
+  for (const { name, stub, skill } of skills) {
+    if (!stub || !skill) continue;
+    const type = yamlGet(stub, 'type');
+    if (type !== 'skill') continue;
+
+    it(`${name}: uses skills add (not curl) for upgrade`, () => {
+      assert.ok(
+        skill.includes('npx skills add'),
+        'type:skill must use "npx skills add" for upgrade, not curl'
+      );
+      assert.ok(
+        !skill.includes('~/.design-agent-skills/'),
+        'must not reference legacy ~/.design-agent-skills/ path'
+      );
+    });
+
+    it(`${name}: upgrade command includes skill name`, () => {
+      assert.ok(
+        skill.includes(`--skill ${name}`),
+        `upgrade command must include "--skill ${name}"`
+      );
+    });
+  }
+});
+
+describe('catalogue-level invariants', () => {
+  it('has exactly 6 router skills', () => {
+    const routers = skills.filter(s => s.stub && yamlGet(s.stub, 'type') === 'router');
+    assert.equal(routers.length, 6, `expected 6 router skills, got ${routers.length}: ${routers.map(s => s.name).join(', ')}`);
+  });
+
+  it('no duplicate trigger phrases across all skills', () => {
+    const seen = new Map(); // trigger → first skill name
+    const dupes = [];
+    for (const { name, fm } of skills) {
+      if (!fm) continue;
+      for (const t of parseTriggers(fm)) {
+        if (seen.has(t)) {
+          dupes.push(`"${t}" on both ${seen.get(t)} and ${name}`);
+        } else {
+          seen.set(t, name);
+        }
+      }
+    }
+    assert.equal(dupes.length, 0, `duplicate triggers found:\n  ${dupes.join('\n  ')}`);
+  });
+
+  it('all skill directories have both stub.yaml and SKILL.md', () => {
+    const missing = skills.filter(s => !s.stub || !s.skill).map(s => s.name);
+    assert.equal(missing.length, 0, `skills missing files: ${missing.join(', ')}`);
+  });
+});

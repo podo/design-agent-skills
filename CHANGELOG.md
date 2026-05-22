@@ -5,6 +5,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.4.0] — 2026-05-22
+
+### Added
+
+- **Test suite** — 1510 tests across 6 suites using `node:test` (zero dependencies):
+  - `test/stubs.test.js` — file presence, stub.yaml validity (type, tier), SKILL.md frontmatter (name, description, triggers), type:skill upgrade commands use `skills add` not curl, catalogue-level invariants (6 routers, no duplicate triggers)
+  - `test/cli.test.js` — bin/cli.js exists, is executable, references correct package and delegates to skills CLI
+- **`npm test`** script added to package.json
+- **`"type": "module"`** — package is now ESM
+- **Engine bumped** to `>=18` (required for `node:test`)
+
+---
+
 ## [1.3.0] — 2026-05-22
 
 ### Changed
