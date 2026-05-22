@@ -248,6 +248,19 @@ cmd_install() {
   else
     printf "scope: %s  |  run './install.sh status' to inspect states.\n" "$SCOPE"
   fi
+
+  # Warn about user-scope-only agents when running project scope
+  if [ "$SCOPE" = "project" ]; then
+    local skipped_agents=""
+    for _entry in "codex:$HOME/.codex" "droid:$HOME/.factory"; do
+      local _aname _aroot
+      IFS=: read -r _aname _aroot <<< "$_entry"
+      [ -d "$_aroot" ] && skipped_agents="${skipped_agents:+$skipped_agents, }$_aname"
+    done
+    if [ -n "$skipped_agents" ]; then
+      printf "note: %s detected but not linked (user-scope only) — omit --scope=project to include.\n" "$skipped_agents"
+    fi
+  fi
 }
 
 cmd_status() {
@@ -583,6 +596,53 @@ cmd_doctor() {
   fi
 }
 
+cmd_remove() {
+  local skill="${1:-}"
+  if [ -z "$skill" ]; then
+    echo "Usage: ./install.sh remove <skill-name>"
+    echo "       ./install.sh remove --all"
+    exit 1
+  fi
+
+  local agent_list
+  agent_list="$(detected_agents)"
+  local removed=0
+
+  if [ "$skill" = "--all" ]; then
+    while IFS=: read -r _name _root skills_dir; do
+      [ -d "$skills_dir" ] || continue
+      while IFS= read -r sk; do
+        local target="$skills_dir/$sk"
+        [ -L "$target" ] || continue
+        rm "$target"
+        printf "  removed: %s\n" "$target"
+        removed=$((removed + 1))
+      done < <(skill_names)
+    done <<< "$agent_list"
+    printf "%d link(s) removed.\n" "$removed"
+    return
+  fi
+
+  if [ ! -d "$SKILLS_SRC/$skill" ]; then
+    echo "Unknown skill: $skill"
+    echo "Run './install.sh status' to see available skills."
+    exit 1
+  fi
+
+  while IFS=: read -r name _root skills_dir; do
+    local target="$skills_dir/$skill"
+    if [ -L "$target" ] || [ -d "$target" ]; then
+      rm -rf "$target"
+      printf "  removed from %s\n" "$name"
+      removed=$((removed + 1))
+    fi
+  done <<< "$agent_list"
+
+  [ "$removed" -eq 0 ] \
+    && echo "No links found for: $skill" \
+    || printf "%d link(s) removed.\n" "$removed"
+}
+
 cmd_help() {
   cat <<HELP
 Usage: ./install.sh [flags] [command]
@@ -600,6 +660,8 @@ Commands:
     --frozen         Skip re-fetching; warn if content has drifted from lockfile
   lock             Generate design-agent-skills.lock from current upgraded skill state
   fix              Remove broken symlinks
+  remove <skill>   Remove a specific skill's links from all agents
+  remove --all     Remove all skill links (uninstall)
   doctor           Scan for trigger collisions and orphaned/relocated symlinks
     --strict         Exit 1 if any issues found (useful for CI)
     --substr         Also report substring overlaps (broad triggers subsuming narrow ones)
@@ -618,8 +680,9 @@ case "$CMD" in
   install) cmd_install ;;
   status)  cmd_status  ;;
   update)  cmd_update  "$@" ;;
-  fix)     cmd_fix     ;;
-  lock)    cmd_lock    ;;
+  fix)     cmd_fix        ;;
+  remove)  cmd_remove "$@" ;;
+  lock)    cmd_lock       ;;
   doctor)  cmd_doctor  "$@" ;;
   help|-h) cmd_help ;;
   *) echo "Unknown command: $CMD"; cmd_help; exit 1 ;;

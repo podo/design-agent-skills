@@ -3,3 +3,9 @@ tier: official
 upstream: https://github.com/software-mansion-labs/skills
 version: latest
 install_default: "/plugin marketplace add software-mansion-labs/skills"
+installed_as:
+  - expo-horizon
+  - radon-mcp
+  - react-native-best-practices
+  - rnrepo
+  - typegpu

@@ -3,3 +3,19 @@ tier: official
 upstream: https://github.com/expo/skills
 version: latest
 install_default: "npx skills add expo/skills"
+installed_as:
+  - add-app-clip
+  - building-native-ui
+  - eas-update-insights
+  - expo-api-routes
+  - expo-brownfield
+  - expo-cicd-workflows
+  - expo-deployment
+  - expo-dev-client
+  - expo-module
+  - expo-tailwind-setup
+  - expo-ui-jetpack-compose
+  - expo-ui-swift-ui
+  - native-data-fetching
+  - upgrading-expo
+  - use-dom
