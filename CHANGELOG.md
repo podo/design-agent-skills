@@ -5,6 +5,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.5.0] — 2026-05-22
+
+### Added
+
+- **`material-3-skill`** — Material Design 3 / Material You for Jetpack Compose (primary) and Flutter (secondary); dynamic color, tonal surfaces, 30+ components, 10-category MD3 compliance audit (`hamen/material-3-skill`)
+- **`styleseed`** — Design engine with 69 brand-agnostic rules, 60+ interchangeable brand skins (Toss, Stripe, Linear, Vercel, Notion…), 13 slash commands incl. `/ss-tokens`; Tailwind v4 + Radix UI (`bitjaru/styleseed`)
+- **`awesome-design-skills`** — Pointer to bergside's 67-skill aesthetic registry (glassmorphism, brutalism, claymorphism, neumorphism, editorial, bento, riso…) distributed via `npx typeui.sh pull <slug>`
+
+Catalogue grows from 128 → 131 skills.
+
+---
+
 ## [1.4.2] — 2026-05-22
 
 ### Fixed
