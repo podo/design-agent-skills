@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/wshobson/wcag-audit-patterns
+version: latest
+install_default: "npx skills add wshobson/wcag-audit-patterns"

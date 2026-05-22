@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/ibelick/fixing-accessibility
+version: latest
+install_default: "npx skills add ibelick/fixing-accessibility"

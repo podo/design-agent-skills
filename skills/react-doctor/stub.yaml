@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/millionco/react-doctor
+version: latest
+install_default: "npx skills add millionco/react-doctor"

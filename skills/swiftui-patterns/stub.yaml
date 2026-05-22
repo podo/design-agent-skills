@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/dimillian/swiftui-ui-patterns
+version: latest
+install_default: "npx skills add dimillian/swiftui-ui-patterns"
