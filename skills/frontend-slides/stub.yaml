@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/zarazhangrui/frontend-slides
+upstream_path: SKILL.md
+version: latest

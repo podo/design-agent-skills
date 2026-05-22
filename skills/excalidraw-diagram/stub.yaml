@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/coleam00/excalidraw-diagram-skill
+upstream_path: SKILL.md
+version: latest
