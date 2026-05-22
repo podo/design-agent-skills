@@ -1,0 +1,6 @@
+type: platform
+upstream: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+version: latest
+install_default: "npx skills add nextlevelbuilder/ui-ux-pro-max-skill"
+install_claude: "claude plugin install nextlevelbuilder/ui-ux-pro-max-skill"
+note: "Installs via .claude-plugin — not a standard SKILL.md package"
