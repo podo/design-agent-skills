@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/google-labs-code/stitch-skills
+upstream_path: plugins/stitch-design/skills/extract-design-md/SKILL.md
+version: latest

@@ -1,0 +1,4 @@
+type: skill
+upstream: https://github.com/anthropics/skills
+upstream_path: skills/algorithmic-art/SKILL.md
+version: latest
