@@ -1,3 +1,4 @@
+type: skill
 upstream: https://github.com/Leonxlnx/taste-skill
 upstream_path: skills/taste-skill/SKILL.md
 version: latest
