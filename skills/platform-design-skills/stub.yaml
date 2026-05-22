@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/ehmo/platform-design-skills
+version: latest
+install_default: "npx skills add ehmo/platform-design-skills"

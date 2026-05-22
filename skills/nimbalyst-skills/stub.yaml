@@ -1,0 +1,5 @@
+type: package
+upstream: https://nimbalyst.com/skills
+version: latest
+install_default: "npx skills add nimbalyst/<skill>"
+note: "Custom registry at nimbalyst.com/skills"

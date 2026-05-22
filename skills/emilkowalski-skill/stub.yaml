@@ -1,0 +1,5 @@
+type: package
+upstream: https://github.com/emilkowalski/skill
+version: latest
+install_default: "npx skills add emilkowalski/skill"
+note: "Use --skill emil-design-eng to install just the design engineering skill"

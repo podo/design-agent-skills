@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/openai/skills
+version: latest
+install_default: "npx skills add openai/<skill>"
