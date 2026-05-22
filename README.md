@@ -70,15 +70,26 @@ description: |
 triggers:
   - "phrase that activates this skill"
 das:
+  type: <type>                # skill | package | platform
   category: <category>        # design-systems, testing, devops, …
   upstream: <github-url>
-  upstream_path: <path>       # path to SKILL.md inside upstream repo
+  upstream_path: <path>       # skill type only
   version: latest
-  install: true
+  install: true               # skill type only
 ---
 ```
 
-Body sections: **When to use** · **How to install** · **How to invoke after install** · **What it does**
+### Stub types
+
+| Type | `install.sh` behaviour | Example |
+|------|------------------------|---------|
+| `skill` | Symlinks SKILL.md; `update` re-fetches from upstream | taste-skill |
+| `package` | Skips symlink; `update` prints per-agent install commands | ui-craft |
+| `platform` | Same as package; SKILL.md has template vars — never curl directly | impeccable |
+
+### Body sections
+
+**When to use** · **How to install** · **How to invoke after install** · **What it does**
 
 ## Adding a stub
 
