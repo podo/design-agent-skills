@@ -1,0 +1,4 @@
+type: package
+tier: community
+upstream: https://github.com/hamen/material-3-skill
+version: latest

@@ -1,0 +1,4 @@
+type: package
+tier: community
+upstream: https://github.com/bitjaru/styleseed
+version: latest

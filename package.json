@@ -3,7 +3,7 @@
   "version": "1.4.2",
   "description": "Catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and Droid",
   "bin": {
-    "design-agent-skills": "./bin/cli.mjs"
+    "design-agent-skills": "bin/cli.mjs"
   },
   "engines": {
     "node": ">=18"
@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/podo/design-agent-skills.git"
+    "url": "git+https://github.com/podo/design-agent-skills.git"
   },
   "files": [
     "bin/",
