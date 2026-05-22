@@ -1,4 +1,5 @@
 type: package
+tier: official
 upstream: https://github.com/vercel-labs/skills
 version: latest
 install_default: "npx skills add vercel-labs/<skill>"

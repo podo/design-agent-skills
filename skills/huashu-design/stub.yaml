@@ -1,4 +1,5 @@
 type: skill
+tier: experimental
 upstream: https://github.com/alchaincyf/huashu-design
 upstream_path: SKILL.md
 version: latest

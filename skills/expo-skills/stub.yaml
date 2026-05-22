@@ -1,4 +1,5 @@
 type: package
+tier: official
 upstream: https://github.com/expo/skills
 version: latest
 install_default: "npx skills add expo/skills"

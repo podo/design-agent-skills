@@ -1,4 +1,5 @@
 type: package
+tier: experimental
 upstream: https://github.com/gfargo/tui-design-skill
 version: latest
 install_default: "/plugin marketplace add gfargo/tui-design-skill"

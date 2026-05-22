@@ -1,4 +1,5 @@
 type: skill
+tier: experimental
 upstream: https://github.com/nibzard/marp-slide-quality
 upstream_path: SKILL.md
 version: latest

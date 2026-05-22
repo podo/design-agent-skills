@@ -1,4 +1,5 @@
 type: skill
+tier: community
 upstream: https://github.com/garrytan/gstack
 upstream_path: design-html/SKILL.md
 version: latest

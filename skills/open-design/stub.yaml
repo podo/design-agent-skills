@@ -1,3 +1,4 @@
 type: platform
+tier: experimental
 upstream: https://github.com/nexu-io/open-design
 version: latest

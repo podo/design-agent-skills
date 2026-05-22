@@ -1,4 +1,5 @@
 type: package
+tier: community
 upstream: https://github.com/raintree-technology/apple-hig-skills
 version: latest
 install_default: "npx skills add raintree-technology/apple-hig-skills"

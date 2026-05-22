@@ -1,4 +1,5 @@
 type: package
+tier: experimental
 upstream: https://github.com/imsaif/design-with-claude
 version: latest
 install_default: "/plugin marketplace add imsaif/design-with-claude"

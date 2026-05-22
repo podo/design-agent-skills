@@ -1,4 +1,5 @@
 type: package
+tier: experimental
 upstream: https://github.com/0xdesign/design-lab
 version: latest
 install_default: "npx skills add 0xdesign/design-lab"

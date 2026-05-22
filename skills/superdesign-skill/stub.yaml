@@ -1,3 +1,4 @@
 type: platform
+tier: community
 upstream: https://github.com/superdesigndev/superdesign-skill
 version: latest

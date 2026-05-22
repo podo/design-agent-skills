@@ -1,4 +1,5 @@
 type: package
+tier: experimental
 upstream: https://github.com/pratikshadake/claude-product-management-skills
 version: latest
 install_default: "npx skills add pratikshadake/claude-product-management-skills"

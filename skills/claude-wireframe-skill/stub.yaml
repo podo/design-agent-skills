@@ -1,4 +1,5 @@
 type: skill
+tier: experimental
 upstream: https://github.com/Magdoub/claude-wireframe-skill
 upstream_path: SKILL.md
 version: latest

@@ -8,11 +8,13 @@ SKILLS_SRC="$REPO_DIR/skills"
 
 # ── Parse global flags ────────────────────────────────────────────────────────
 SCOPE="user"
+INCLUDE_EXPERIMENTAL=0
 ARGS=()
 for arg in "$@"; do
   case "$arg" in
-    --scope=user)    SCOPE="user"    ;;
-    --scope=project) SCOPE="project" ;;
+    --scope=user)             SCOPE="user"             ;;
+    --scope=project)          SCOPE="project"          ;;
+    --include-experimental)   INCLUDE_EXPERIMENTAL=1   ;;
     *) ARGS+=("$arg") ;;
   esac
 done
@@ -57,6 +59,19 @@ detected_agents() {
 stub_yaml_value() {
   # $1=key  $2=stub.yaml path — minimal key: value parser
   grep "^${1}:" "$2" | sed 's/^[^:]*: *//' | tr -d '"'
+}
+
+stub_tier() {
+  local yaml="$1/stub.yaml"
+  [ -f "$yaml" ] && stub_yaml_value tier "$yaml" 2>/dev/null || echo "experimental"
+}
+
+is_allowed_tier() {
+  local src="$1"
+  [ "$INCLUDE_EXPERIMENTAL" -eq 1 ] && return 0
+  local tier
+  tier="$(stub_tier "$src")"
+  [ "$tier" != "experimental" ]
 }
 
 stub_type() {
@@ -145,7 +160,9 @@ cmd_install() {
       local stype
       stype="$(stub_type "$SKILLS_SRC/$skill")"
       if [ "$stype" = "skill" ]; then
-        if [ -L "$target" ] || [ -d "$target" ]; then
+        if ! is_allowed_tier "$SKILLS_SRC/$skill"; then
+          skipped=$((skipped + 1))
+        elif [ -L "$target" ] || [ -d "$target" ]; then
           skipped=$((skipped + 1))
         else
           ln -s "$SKILLS_SRC/$skill" "$target"
@@ -159,7 +176,11 @@ cmd_install() {
   done <<< "$agent_list"
 
   echo
-  printf "scope: %s  |  run './install.sh status' to inspect states.\n" "$SCOPE"
+  if [ "$INCLUDE_EXPERIMENTAL" -eq 0 ]; then
+    printf "scope: %s  |  experimental skills skipped (add --include-experimental to install all)\n" "$SCOPE"
+  else
+    printf "scope: %s  |  run './install.sh status' to inspect states.\n" "$SCOPE"
+  fi
 }
 
 cmd_status() {
@@ -175,20 +196,27 @@ cmd_status() {
 
   local ncols=${#names[@]}
 
-  printf "\n%-22s" "skill"
+  printf "\n%-22s  %-4s" "skill" "tier"
   for name in "${names[@]}"; do printf "  %-10s" "$name"; done
   echo
 
-  printf "%-22s" "──────────────────────"
+  printf "%-22s  %-4s" "──────────────────────" "────"
   for _ in "${names[@]}"; do printf "  %-10s" "──────────"; done
   echo
 
   while IFS= read -r skill; do
-    printf "%-22s" "$skill"
+    local src="$SKILLS_SRC/$skill"
+    local tier_char
+    case "$(stub_tier "$src")" in
+      official)     tier_char="O" ;;
+      community)    tier_char="C" ;;
+      experimental) tier_char="E" ;;
+      *)            tier_char="?" ;;
+    esac
+    printf "%-22s  %-4s" "$skill" "$tier_char"
     local i=0
     while [ $i -lt $ncols ]; do
       local target="${dirs[$i]}/$skill"
-      local src="$SKILLS_SRC/$skill"
       printf "  %-10s" "$(skill_state "$target" "$src")"
       i=$((i + 1))
     done
@@ -197,6 +225,7 @@ cmd_status() {
 
   echo
   printf "scope: %s\n" "$SCOPE"
+  echo "tier: O=official  C=community  E=experimental"
   echo "stub=pending  upgraded=full  installed=package installed  package=not installed  BROKEN=run fix"
   echo
 }
@@ -237,7 +266,8 @@ cmd_update() {
       continue
     fi
 
-    # New stub not yet linked to all agents → add missing links
+    # New stub not yet linked to all agents → add missing links (respects tier filter)
+    is_allowed_tier "$src" || continue
     while IFS=: read -r name _root skills_dir; do
       local target="$skills_dir/$skill"
       if [ ! -L "$target" ] && [ ! -d "$target" ]; then
@@ -375,11 +405,12 @@ cmd_doctor() {
 
 cmd_help() {
   cat <<HELP
-Usage: ./install.sh [--scope=user|project] [command]
+Usage: ./install.sh [flags] [command]
 
-Flags:
-  --scope=user     Link to agent user-level dirs (default): ~/.claude/skills/
-  --scope=project  Link to project-level dirs: ./.claude/skills/
+Global flags:
+  --scope=user              Link to agent user-level dirs (default): ~/.claude/skills/
+  --scope=project           Link to project-level dirs: ./.claude/skills/
+  --include-experimental    Also install experimental-tier skills (default: official+community only)
 
 Commands:
   install          Symlink all stubs to detected agents (default)
@@ -391,6 +422,7 @@ Commands:
     --substr         Also report substring overlaps (broad triggers subsuming narrow ones)
   help             Show this message
 
+Skill tiers:  official (28)  community (35)  experimental (60)
 User-scope agents:  claude  cursor  codex  opencode  droid
 Project-scope agents: claude  cursor  opencode
 HELP

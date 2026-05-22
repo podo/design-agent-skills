@@ -1,4 +1,5 @@
 type: package
+tier: experimental
 upstream: https://github.com/Dammyjay93/interface-design
 version: latest
 install_default: "npx skills add Dammyjay93/interface-design"

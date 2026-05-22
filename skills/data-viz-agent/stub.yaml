@@ -1,4 +1,5 @@
 type: skill
+tier: experimental
 upstream: https://github.com/rohitg00/awesome-claude-code-toolkit
 upstream_path: agents/data-ai/data-visualization.md
 version: latest

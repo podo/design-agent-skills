@@ -1,4 +1,5 @@
 type: skill
+tier: official
 upstream: https://github.com/MiniMax-AI/skills
 upstream_path: skills/shader-dev/SKILL.md
 version: latest

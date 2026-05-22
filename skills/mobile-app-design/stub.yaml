@@ -1,4 +1,5 @@
 type: skill
+tier: official
 upstream: https://github.com/awesome-skills/mobile-app-design
 upstream_path: SKILL.md
 version: latest

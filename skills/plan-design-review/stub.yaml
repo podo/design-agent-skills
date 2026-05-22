@@ -1,4 +1,5 @@
 type: skill
+tier: community
 upstream: https://github.com/garrytan/gstack
 upstream_path: plan-design-review/SKILL.md
 version: latest

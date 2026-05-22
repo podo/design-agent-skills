@@ -1,4 +1,5 @@
 type: skill
+tier: official
 upstream: https://github.com/google-labs-code/design.md
 upstream_path: .agents/skills/ink/SKILL.md
 version: latest

@@ -1,4 +1,5 @@
 type: package
+tier: community
 upstream: https://github.com/coreyhaines31/marketingskills
 version: latest
 install_default: "npx skills add coreyhaines31/marketingskills"

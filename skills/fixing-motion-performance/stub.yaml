@@ -1,4 +1,5 @@
 type: package
+tier: community
 upstream: https://github.com/ibelick/fixing-motion-performance
 version: latest
 install_default: "npx skills add ibelick/fixing-motion-performance"

@@ -1,4 +1,5 @@
 type: package
+tier: experimental
 upstream: https://nimbalyst.com/skills
 version: latest
 install_default: "npx skills add nimbalyst/<skill>"

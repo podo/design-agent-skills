@@ -1,4 +1,5 @@
 type: skill
+tier: official
 upstream: https://github.com/google-labs-code/stitch-skills
 upstream_path: plugins/stitch-utilities/skills/taste-design/SKILL.md
 version: latest

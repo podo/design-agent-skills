@@ -1,4 +1,5 @@
 type: skill
+tier: community
 upstream: https://github.com/op7418/guizang-ppt-skill
 upstream_path: SKILL.md
 version: latest

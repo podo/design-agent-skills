@@ -1,4 +1,5 @@
 type: package
+tier: community
 upstream: https://github.com/addyosmani/skills
 version: latest
 install_default: "npx skills add addyosmani/<skill>"

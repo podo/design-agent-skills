@@ -1,4 +1,5 @@
 type: skill
+tier: community
 upstream: https://github.com/op7418/NanoBanana-PPT-Skills
 upstream_path: SKILL.md
 version: latest

@@ -1,4 +1,5 @@
 type: package
+tier: official
 upstream: https://github.com/heygen-com/hyperframes
 version: latest
 install_default: "npx skills add heygen-com/hyperframes"
