@@ -50,6 +50,8 @@ Activate when the user:
 | [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | 4 themed design systems (Cyberpunk, Brutalist, Vaporwave, Nordic) with staggered animations |
 | [`design-for-ai`](../design-for-ai/SKILL.md) | CHECKER (7-category audit) + APPLIER (6-phase creation) dual-mode |
 | [`superdesign-skill`](../superdesign-skill/SKILL.md) | Infinite-canvas ideation: brand extraction, design drafts, IDE-native |
+| [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
+| [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
 
 ## Color, Typography & Components
 
@@ -63,6 +65,7 @@ Activate when the user:
 | [`design-tokens-skill`](../design-tokens-skill/SKILL.md) | W3C DTCG token spec: OKLCH, references/aliasing, Terrazzo, Figma exports |
 | [`ink-google`](../ink-google/SKILL.md) | Ink-style editorial design for artifacts |
 | [`open-design`](../open-design/SKILL.md) | 31 skills + 71 brand design systems — local-first Claude Design alternative |
+| [`material-3-skill`](../material-3-skill/SKILL.md) | Material Design 3 / Material You: dynamic color, tonal surfaces, 30+ components (Compose + Flutter) |
 
 ## Mobile & Platform Design
 

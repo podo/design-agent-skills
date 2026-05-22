@@ -53,7 +53,7 @@ instead of scrolling the full index below:
 | Figma, design-to-code, tokens, platform suites | `figma-catalogue` | Figma skills, Stitch, design tokens, Anthropic/Vercel/Expo suites |
 | Accessibility, WCAG, web performance | `accessibility-catalogue` | a11y audit, WCAG 2.2, Core Web Vitals, React quality |
 | UI craft, visual design, brand, mobile | `design-engineering-catalogue` | Taste, color, typography, iOS/Android, brand identity |
-| Slides, diagrams, data viz, PM, design review | `content-catalogue` | Presentations, wireframes, charts, UX strategy, product frameworks |
+| Slides, diagrams, data viz, PM, design review, copy | `content-catalogue` | Presentations, wireframes, charts, UX strategy, PM frameworks, UX writing, copywriting |
 
 ## Catalogue index
 
@@ -73,6 +73,8 @@ instead of scrolling the full index below:
 | [`logo-designer-skill`](../logo-designer-skill/SKILL.md) | Brand interview → 3-5 SVG concepts → PNG export 16px–2048px |
 | [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | 4 themed design systems (Cyberpunk, Brutalist, Vaporwave, Nordic) with staggered animations |
 | [`design-for-ai`](../design-for-ai/SKILL.md) | CHECKER (7-category audit) + APPLIER (6-phase creation) dual-mode plugin |
+| [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
+| [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
 
 ### Motion & Animation
 
@@ -124,6 +126,7 @@ instead of scrolling the full index below:
 | [`sleek-design-mobile-apps`](../sleek-design-mobile-apps/SKILL.md) | Sleek platform: design screens, projects, assets via natural language (account req.) |
 | [`liquid-glass-skill`](../liquid-glass-skill/SKILL.md) | iOS 26 Liquid Glass: .glassEffect(), GlassEffectContainer, migration patterns |
 | [`swiftui-claude-skills`](../swiftui-claude-skills/SKILL.md) | WWDC 2025 verified SwiftUI, iOS 26.4 RC, Xcode 26 |
+| [`material-3-skill`](../material-3-skill/SKILL.md) | Material Design 3 / Material You: dynamic color, tonal surfaces, 30+ components (Compose + Flutter) |
 
 ### Accessibility & Quality
 
@@ -242,6 +245,14 @@ instead of scrolling the full index below:
 | [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 
+### Content Design & Copy
+
+| Skill | Best for |
+|-------|----------|
+| [`ux-writing-skill`](../ux-writing-skill/SKILL.md) | Microcopy, button labels, error messages, empty states, form copy, a11y writing |
+| [`copywriting-skill`](../copywriting-skill/SKILL.md) | Landing pages, product copy, email sequences, headlines, tone-of-voice (5 sub-skills) |
+| [`humanize-text`](../humanize-text/SKILL.md) | Score + rewrite text across 7 AI-pattern dimensions; works on raw text, Figma URLs, screenshots |
+
 ### Email Design
 
 | Skill | Best for |
@@ -337,6 +348,12 @@ instead of scrolling the full index below:
 | "aesthetic anchor", "Brutalist CSS", "Nordic design" | `frontend-design` |
 | "logo SVG", "brand interview", "logo PNG" | `logo-designer-skill` |
 | "AI Midjourney design", "AI Creative Director" | `ai-graphic-design-skill` |
+| "button label", "error message copy", "empty state", "microcopy" | `ux-writing-skill` |
+| "landing page copy", "product copy", "tone of voice", "headline" | `copywriting-skill` |
+| "remove AI patterns", "de-slop", "AI writing", "humanize text" | `humanize-text` |
+| "Material Design 3", "Material You", "MD3", "Jetpack Compose design" | `material-3-skill` |
+| "brand skin", "design token engine", "styleseed" | `styleseed` |
+| "design aesthetic", "glassmorphism", "brutalism style", "claymorphism" | `awesome-design-skills` |
 
 ## No match
 
