@@ -61,6 +61,18 @@ stub_yaml_value() {
   grep "^${1}:" "$2" | sed 's/^[^:]*: *//' | tr -d '"'
 }
 
+stub_yaml_list() {
+  # $1=key  $2=stub.yaml path — parse block-sequence list (- item per line)
+  awk -v key="$1" '
+    $0 ~ ("^" key ":") { in_list=1; next }
+    in_list && /^[[:space:]]*-[[:space:]]/ {
+      line=$0; sub(/^[[:space:]]*-[[:space:]]+/,"",line); gsub(/"/,"",line)
+      print line; next
+    }
+    in_list && /^[^[:space:]]/ { exit }
+  ' "$2"
+}
+
 stub_tier() {
   local yaml="$1/stub.yaml"
   [ -f "$yaml" ] && stub_yaml_value tier "$yaml" 2>/dev/null || echo "experimental"
@@ -113,11 +125,33 @@ skill_state() {
   stype="$(stub_type "$src")"
   if [ "$stype" = "package" ] || [ "$stype" = "platform" ]; then
     local yaml="$src/stub.yaml"
+    local skills_dir
+    skills_dir="$(dirname "$target")"
+    # Check for block-list installed_as first
+    local list_items
+    list_items="$(stub_yaml_list installed_as "$yaml" 2>/dev/null || true)"
+    if [ -n "$list_items" ]; then
+      local total=0 found=0
+      while IFS= read -r item; do
+        total=$((total + 1))
+        local t="$skills_dir/$item"
+        if [ -d "$t" ] && ! grep -q "^das:" "$t/SKILL.md" 2>/dev/null; then
+          found=$((found + 1))
+        fi
+      done <<< "$list_items"
+      if [ "$found" -eq 0 ]; then
+        echo "package"
+      elif [ "$found" -eq "$total" ]; then
+        echo "installed"
+      else
+        echo "${found}/${total}"
+      fi
+      return
+    fi
+    # Scalar installed_as
     local installed_as
     installed_as="$(stub_yaml_value installed_as "$yaml" 2>/dev/null || true)"
     [ -z "$installed_as" ] && installed_as="$(basename "$src")"
-    local skills_dir
-    skills_dir="$(dirname "$target")"
     local installed_target="$skills_dir/$installed_as"
     if [ -d "$installed_target" ] && ! grep -q "^das:" "$installed_target/SKILL.md" 2>/dev/null; then
       echo "installed"

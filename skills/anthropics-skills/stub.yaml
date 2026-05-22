@@ -3,3 +3,10 @@ tier: official
 upstream: https://github.com/anthropics/skills
 version: latest
 install_default: "npx skills add anthropics/<skill>"
+installed_as:
+  - frontend-design
+  - web-artifacts-builder
+  - canvas-design
+  - theme-factory
+  - brand-guidelines
+  - pptx

@@ -3,3 +3,9 @@ tier: community
 upstream: https://github.com/wondelai/skills
 version: latest
 install_default: "npx skills add wondelai/skills"
+installed_as:
+  - refactoring-ui
+  - design-everyday-things
+  - microinteractions
+  - lean-ux
+  - design-sprint

@@ -3,3 +3,4 @@ tier: official
 upstream: https://github.com/callstackincubator/agent-skills
 version: latest
 install_default: "/plugin install react-native-best-practices@callstack-agent-skills"
+installed_as: react-native-best-practices
