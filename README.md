@@ -109,6 +109,7 @@ das:
 | [impeccable](skills/impeccable/SKILL.md) | platform | design-systems | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [emilkowalski-skill](skills/emilkowalski-skill/SKILL.md) | package | design-systems | [emilkowalski/skill](https://github.com/emilkowalski/skill) |
 | [make-interfaces-better](skills/make-interfaces-better/SKILL.md) | skill | design-systems | [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) |
+| [ui-craft](skills/ui-craft/SKILL.md) | package | design-systems | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
 
 ### Motion & Animation
 

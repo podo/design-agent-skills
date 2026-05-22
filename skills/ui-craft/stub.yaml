@@ -1,0 +1,4 @@
+type: package
+upstream: https://github.com/educlopez/ui-craft
+version: latest
+install_default: "npx skills add educlopez/ui-craft"

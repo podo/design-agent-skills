@@ -52,6 +52,7 @@ Do **not** activate if the user already named a specific skill — route directl
 | [`impeccable`](../impeccable/SKILL.md) | 23 commands, Chrome extension, Live Mode browser iteration |
 | [`emilkowalski-skill`](../emilkowalski-skill/SKILL.md) | Animation decision framework, easing curves, interaction principles |
 | [`make-interfaces-better`](../make-interfaces-better/SKILL.md) | Polish: micro-interactions, typography details, visual refinement |
+| [`ui-craft`](../ui-craft/SKILL.md) | 18 slash commands, anti-slop CLI, 3 style variants — deepest design engineering skill |
 
 ### Motion & Animation
 
@@ -175,9 +176,10 @@ Do **not** activate if the user already named a specific skill — route directl
 
 | User says | Route to |
 |-----------|----------|
-| "good taste", "anti slop", "premium UI", "not generic" | `taste-skill` |
+| "good taste", "anti slop", "premium UI", "not generic" | `taste-skill` or `ui-craft` |
 | "design variance", "motion intensity", "visual density" | `taste-skill` |
-| "no Inter font", "no 3-column cards", "no centered hero" | `taste-skill` |
+| "no Inter font", "no 3-column cards", "no centered hero" | `taste-skill` or `ui-craft` |
+| "anti-slop detector", "33 rules", "ui-craft", "18 slash commands" | `ui-craft` |
 | "polish", "micro-interactions", "make it feel better" | `make-interfaces-better` |
 | "animation principles", "easing curves" | `emilkowalski-skill` |
 | "GLSL", "ray march", "WebGL shader" | `shader-dev` |
