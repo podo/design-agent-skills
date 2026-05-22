@@ -280,6 +280,99 @@ cmd_fix() {
   [ "$fixed" -eq 0 ] && echo "No broken links found." || echo "Fixed $fixed broken link(s)."
 }
 
+cmd_doctor() {
+  local strict=0 show_substr=0
+  for arg in "$@"; do
+    case "$arg" in
+      --strict) strict=1 ;;
+      --substr) show_substr=1 ;;
+    esac
+  done
+
+  local tmp
+  tmp="$(mktemp)"
+
+  local skill_count
+  skill_count=$(skill_names | wc -l | tr -d ' ')
+  printf "Scanning %d skills for trigger collisions...\n\n" "$skill_count"
+
+  # Collect (trigger TAB skill) pairs into temp file
+  while IFS= read -r skill; do
+    local md="$SKILLS_SRC/$skill/SKILL.md"
+    [ -f "$md" ] || continue
+    awk -v skill="$skill" '
+      BEGIN { in_front=0; in_trig=0 }
+      /^---$/ { if(in_front==0){in_front=1}else{exit}; next }
+      in_front && /^triggers:/ { in_trig=1; next }
+      in_front && in_trig && /^[[:space:]]*-[[:space:]]/ {
+        line=$0; sub(/^[[:space:]]*-[[:space:]]+/,"",line); gsub(/"/,"",line)
+        print line "\t" skill; next
+      }
+      in_front && in_trig && /^[^[:space:]]/ { in_trig=0 }
+    ' "$md"
+  done < <(skill_names) > "$tmp"
+
+  local issues=0
+
+  # ── Exact collisions ─────────────────────────────────────────────────────────
+  local exact_out
+  exact_out=$(sort "$tmp" | awk -F'\t' '
+    {
+      key=$1; skill=$2
+      if (key != prev_key) {
+        if (cnt > 1) print prev_key "\t" list
+        prev_key=key; list=skill; cnt=1
+      } else { list=list ", " skill; cnt++ }
+    }
+    END { if (cnt > 1) print prev_key "\t" list }
+  ')
+
+  if [ -n "$exact_out" ]; then
+    local exact_count
+    exact_count=$(printf '%s\n' "$exact_out" | grep -c . || true)
+    printf "Exact trigger collisions (%d):\n" "$exact_count"
+    printf '%s\n' "$exact_out" | awk -F'\t' '{ printf "  %-34s → %s\n", "\"" $1 "\"", $2 }'
+    echo
+    issues=$((issues + exact_count))
+  fi
+
+  # ── Substring overlaps (opt-in via --substr) ──────────────────────────────────
+  if [ "$show_substr" -eq 1 ]; then
+    local substr_out
+    substr_out=$(cut -f1 "$tmp" | sort -u | awk '
+      { t[NR]=$0 }
+      END {
+        n=NR
+        for(i=1;i<=n;i++) for(j=1;j<=n;j++) {
+          if(i!=j && index(t[i],t[j])>0 && length(t[j])<length(t[i]))
+            printf "%s\t%s\n", t[j], t[i]
+        }
+      }
+    ' | sort -u)
+
+    if [ -n "$substr_out" ]; then
+      local substr_count
+      substr_count=$(printf '%s\n' "$substr_out" | grep -c . || true)
+      printf "Substring overlaps — shorter trigger subsumed by longer (%d):\n" "$substr_count"
+      printf '%s\n' "$substr_out" | awk -F'\t' '{ printf "  %-20s  ⊇  %s\n", "\"" $1 "\"", "\"" $2 "\"" }'
+      echo
+      issues=$((issues + substr_count))
+    fi
+  fi
+
+  rm -f "$tmp"
+
+  if [ "$issues" -eq 0 ]; then
+    echo "All triggers OK — no collisions found."
+  else
+    printf "%d collision(s) found.\n" "$issues"
+    if [ "$strict" -eq 1 ]; then
+      echo "Exiting 1 (--strict)."
+      exit 1
+    fi
+  fi
+}
+
 cmd_help() {
   cat <<HELP
 Usage: ./install.sh [--scope=user|project] [command]
@@ -289,11 +382,14 @@ Flags:
   --scope=project  Link to project-level dirs: ./.claude/skills/
 
 Commands:
-  install   Symlink all stubs to detected agents (default)
-  status    Show stub / upgraded / installed / BROKEN state per agent
-  update    Re-fetch upgraded skills from upstream; add links for new stubs
-  fix       Remove broken symlinks
-  help      Show this message
+  install          Symlink all stubs to detected agents (default)
+  status           Show stub / upgraded / installed / BROKEN state per agent
+  update           Re-fetch upgraded skills from upstream; add links for new stubs
+  fix              Remove broken symlinks
+  doctor           Scan for trigger collisions across installed stubs
+    --strict         Exit 1 if any collisions found (useful for CI)
+    --substr         Also report substring overlaps (broad triggers subsuming narrow ones)
+  help             Show this message
 
 User-scope agents:  claude  cursor  codex  opencode  droid
 Project-scope agents: claude  cursor  opencode
@@ -301,11 +397,14 @@ HELP
 }
 
 # ── Entry ─────────────────────────────────────────────────────────────────────
-case "${1:-install}" in
+CMD="${1:-install}"
+shift 2>/dev/null || true
+case "$CMD" in
   install) cmd_install ;;
   status)  cmd_status  ;;
   update)  cmd_update  ;;
   fix)     cmd_fix     ;;
+  doctor)  cmd_doctor "$@" ;;
   help|-h) cmd_help ;;
-  *) echo "Unknown command: $1"; cmd_help; exit 1 ;;
+  *) echo "Unknown command: $CMD"; cmd_help; exit 1 ;;
 esac
