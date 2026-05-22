@@ -541,10 +541,41 @@ cmd_doctor() {
 
   rm -f "$tmp"
 
+  # ── Symlink fragility scan ──────────────────────────────────────────────────
+  local orphaned=0 relocated=0
+  while IFS=: read -r _name _root skills_dir; do
+    [ -d "$skills_dir" ] || continue
+    while IFS= read -r link; do
+      [ -L "$link" ] || continue
+      local target
+      target="$(readlink "$link")"
+      if [ ! -e "$link" ]; then
+        orphaned=$((orphaned + 1))
+      elif [ "${target#"$SKILLS_SRC"}" = "$target" ]; then
+        relocated=$((relocated + 1))
+      fi
+    done < <(find "$skills_dir" -maxdepth 1 -type l 2>/dev/null)
+  done < <(detected_agents)
+
+  if [ "$orphaned" -gt 0 ]; then
+    printf "BROKEN     %d orphaned symlink(s) — target missing (repo moved?).\n" "$orphaned"
+    printf "           Run: ./install.sh fix && ./install.sh install\n\n"
+    issues=$((issues + orphaned))
+  fi
+  if [ "$relocated" -gt 0 ]; then
+    printf "RELOCATED  %d symlink(s) point outside current install dir.\n" "$relocated"
+    printf "           Likely caused by moving the repo. Run: ./install.sh fix && ./install.sh install\n\n"
+    issues=$((issues + relocated))
+  fi
+  if [ "$orphaned" -eq 0 ] && [ "$relocated" -eq 0 ]; then
+    echo "Symlinks OK — all links resolve inside current install dir."
+  fi
+
+  echo
   if [ "$issues" -eq 0 ]; then
-    echo "All triggers OK — no collisions found."
+    echo "All checks OK — no issues found."
   else
-    printf "%d collision(s) found.\n" "$issues"
+    printf "%d issue(s) found.\n" "$issues"
     if [ "$strict" -eq 1 ]; then
       echo "Exiting 1 (--strict)."
       exit 1
@@ -569,8 +600,8 @@ Commands:
     --frozen         Skip re-fetching; warn if content has drifted from lockfile
   lock             Generate design-agent-skills.lock from current upgraded skill state
   fix              Remove broken symlinks
-  doctor           Scan for trigger collisions across installed stubs
-    --strict         Exit 1 if any collisions found (useful for CI)
+  doctor           Scan for trigger collisions and orphaned/relocated symlinks
+    --strict         Exit 1 if any issues found (useful for CI)
     --substr         Also report substring overlaps (broad triggers subsuming narrow ones)
   help             Show this message
 
