@@ -6,7 +6,6 @@ description: |
   hierarchy, typography, color, consistency, and flags generic AI patterns.
 triggers:
   - "plan design review"
-  - "design score"
   - "rate my design"
   - "design critique"
   - "AI slop detection"

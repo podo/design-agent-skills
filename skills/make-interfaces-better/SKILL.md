@@ -12,7 +12,6 @@ triggers:
   - "interface feel"
   - "polished UI"
   - "UI refinement"
-  - "design engineering"
 das:
   category: interaction-polish
   upstream: "https://github.com/jakubkrehel/make-interfaces-feel-better"

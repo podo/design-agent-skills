@@ -9,7 +9,6 @@ triggers:
   - "design engineering"
   - "animation decision"
   - "easing curves"
-  - "motion design"
   - "emil-design-eng"
 das:
   category: design-engineering

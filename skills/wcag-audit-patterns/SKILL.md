@@ -8,7 +8,6 @@ triggers:
   - "WCAG audit"
   - "accessibility audit"
   - "WCAG 2.2"
-  - "accessibility remediation"
 das:
   category: accessibility-quality
   upstream: "https://github.com/wshobson/wcag-audit-patterns"

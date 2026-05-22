@@ -7,7 +7,6 @@ description: |
 triggers:
   - "algorithmic art"
   - "generative art"
-  - "p5.js"
   - "flow field"
   - "particle system"
   - "procedural art"

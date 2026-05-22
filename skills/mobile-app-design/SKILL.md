@@ -7,7 +7,6 @@ description: |
   documentation.
 triggers:
   - "mobile app design"
-  - "iOS design"
   - "Android design"
   - "touch targets"
   - "thumb zones"

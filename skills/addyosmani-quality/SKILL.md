@@ -10,7 +10,6 @@ triggers:
   - "core web vitals"
   - "web accessibility"
   - "Lighthouse audit"
-  - "web performance"
   - "SEO audit"
   - "web best practices"
 das:

@@ -6,7 +6,6 @@ triggers:
   - "design with claude"
   - "imsaif design"
   - "38 design commands"
-  - "dashboard design"
   - "b2b SaaS design"
 das:
   type: package

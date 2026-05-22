@@ -226,7 +226,7 @@ cmd_install() {
       local target="$skills_dir/$skill"
       local stype
       stype="$(stub_type "$SKILLS_SRC/$skill")"
-      if [ "$stype" = "skill" ]; then
+      if [ "$stype" = "skill" ] || [ "$stype" = "navigator" ]; then
         if ! is_allowed_tier "$SKILLS_SRC/$skill"; then
           skipped=$((skipped + 1))
         elif [ -L "$target" ] || [ -d "$target" ]; then
@@ -373,6 +373,7 @@ cmd_update() {
     fi
 
     # New stub not yet linked to all agents → add missing links (respects tier filter)
+    [ "$stype" = "skill" ] || [ "$stype" = "navigator" ] || continue
     is_allowed_tier "$src" || continue
     while IFS=: read -r name _root skills_dir; do
       local target="$skills_dir/$skill"

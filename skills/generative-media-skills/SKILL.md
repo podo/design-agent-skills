@@ -6,7 +6,6 @@ description: |
   and social media content. Requires a muapi account and muapi-cli.
 triggers:
   - "generative media"
-  - "Midjourney workflow"
   - "Flux Kontext"
   - "Kling 3.0"
   - "Veo3"

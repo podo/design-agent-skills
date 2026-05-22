@@ -42,6 +42,19 @@ Do **not** activate if the user already named a specific skill — route directl
 > For `type:package` and `type:platform` stubs: show the `npx skills add` or per-agent
 > install command from the stub. These must not be curl'd directly.
 
+## Domain fast-path
+
+When the user's intent is clearly within one domain, route directly to that domain catalogue
+instead of scrolling the full index below:
+
+| Domain | Route to | When |
+|--------|----------|------|
+| Motion, 3D, shaders, generative art | `motion-catalogue` | GSAP, Framer Motion, Three.js, Lottie, p5.js, shaders, video |
+| Figma, design-to-code, tokens, platform suites | `figma-catalogue` | Figma skills, Stitch, design tokens, Anthropic/Vercel/Expo suites |
+| Accessibility, WCAG, web performance | `accessibility-catalogue` | a11y audit, WCAG 2.2, Core Web Vitals, React quality |
+| UI craft, visual design, brand, mobile | `design-engineering-catalogue` | Taste, color, typography, iOS/Android, brand identity |
+| Slides, diagrams, data viz, PM, design review | `content-catalogue` | Presentations, wireframes, charts, UX strategy, product frameworks |
+
 ## Catalogue index
 
 ### Design Engineering (opinionated UI taste)

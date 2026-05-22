@@ -6,7 +6,6 @@ description: |
   targeted remediations to bring components up to accessibility standards.
 triggers:
   - "fixing accessibility"
-  - "accessibility audit"
   - "ARIA"
   - "keyboard navigation"
   - "focus management"
