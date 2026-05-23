@@ -114,6 +114,8 @@ Activate when the user:
 | [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 | [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
+| [`product-position`](../product-position/SKILL.md) | B2B SaaS positioning: messaging hierarchy, competitive framing, strategic narrative — Dunford + JTBD frameworks |
+| [`lenny-skills`](../lenny-skills/SKILL.md) | 86 PM skills: behavioral product design, surveys, user interviews, design reviews, onboarding, growth loops (945 ★) |
 
 ## Content Design & Copy
 

@@ -1,0 +1,5 @@
+type: skill
+tier: community
+upstream: https://github.com/firatcand/founder-skills
+upstream_path: product-position/SKILL.md
+version: latest

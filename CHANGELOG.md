@@ -5,6 +5,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.9.0] — 2026-05-23
+
+### Added
+
+- **`product-position`** — B2B SaaS positioning and messaging advisor: positioning docs, messaging hierarchy, competitive framing, strategic narratives — Dunford, JTBD, Raskin, Lochhead frameworks (`firatcand/founder-skills`)
+- **`lenny-skills`** — 86 PM and product design skills from Lenny Rachitsky's framework: behavioral product design, conducting interviews, designing surveys, running design reviews, user onboarding, growth loops, design systems (945 ★) (`RefoundAI/lenny-skills`)
+
+### Changed
+
+- **`design-catalogue` + `content-catalogue` routers** — Added product-position and lenny-skills to Product & PM section; 2 new routing guide entries
+
+Catalogue grows from 140 → 142 skills.
+
+---
+
 ## [1.8.0] — 2026-05-23
 
 ### Added

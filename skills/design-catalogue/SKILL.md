@@ -254,6 +254,8 @@ instead of scrolling the full index below:
 | [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 | [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
+| [`product-position`](../product-position/SKILL.md) | B2B SaaS positioning: messaging hierarchy, competitive framing, strategic narrative — Dunford + JTBD frameworks |
+| [`lenny-skills`](../lenny-skills/SKILL.md) | 86 PM skills: behavioral product design, surveys, user interviews, design reviews, onboarding, growth loops (945 ★) |
 
 ### Content Design & Copy
 
@@ -370,6 +372,8 @@ instead of scrolling the full index below:
 | "Storybook", "Storybook story", "CSF", "Chromatic visual regression" | `format-storybook` |
 | "user research", "user interview", "research synthesis", "usability study" | `user-research-cookiy` |
 | "feature design sprint", "design to issues", "decompose feature" | `design-sprint` |
+| "product positioning", "messaging hierarchy", "value proposition", "competitive framing" | `product-position` |
+| "behavioral product design", "designing surveys", "running design reviews", "growth loops" | `lenny-skills` |
 | "dark patterns", "deceptive design", "manipulative UI", "hidden fees code" | `dark-pattern-audit` |
 
 ## No match

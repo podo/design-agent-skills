@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-140 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+142 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -17,7 +17,7 @@ Or use the branded CLI for a guided scope prompt:
 npx design-agent-skills
 ```
 
-Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 140 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
+Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs 142 skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
 
 ## Commands
 
@@ -67,7 +67,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 134 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 136 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -161,7 +161,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (28), `community` (47), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (28), `community` (49), `experimental` (60) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -379,6 +379,8 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [pm-skills](skills/pm-skills/SKILL.md) | package | product-pm | [product-on-purpose/pm-skills](https://github.com/product-on-purpose/pm-skills) |
 | [claude-pm-skills](skills/claude-pm-skills/SKILL.md) | package | product-pm | [pratikshadake/claude-product-management-skills](https://github.com/pratikshadake/claude-product-management-skills) |
 | [design-sprint](skills/design-sprint/SKILL.md) | package | product-pm | [aoshimash/skills](https://github.com/aoshimash/skills) |
+| [product-position](skills/product-position/SKILL.md) | skill | product-pm | [firatcand/founder-skills](https://github.com/firatcand/founder-skills) |
+| [lenny-skills](skills/lenny-skills/SKILL.md) | package | product-pm | [RefoundAI/lenny-skills](https://github.com/RefoundAI/lenny-skills) |
 
 ### Content Design & Copy
 
