@@ -1,5 +1,6 @@
 type: package
 tier: community
+rank: 2
 upstream: https://github.com/framix-team/skill-email-html-mjml
 version: latest
 install_default: "npx skills add framix-team/skill-email-html-mjml"

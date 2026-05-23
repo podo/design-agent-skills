@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 2
 upstream: https://github.com/arvindrk/extract-design-system
 version: latest
 install_default: "npx skills add arvindrk/extract-design-system"

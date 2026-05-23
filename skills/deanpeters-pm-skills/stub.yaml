@@ -1,5 +1,6 @@
 type: package
 tier: community
+rank: 1
 upstream: https://github.com/deanpeters/Product-Manager-Skills
 version: latest
 install_default: "npx skills add deanpeters/Product-Manager-Skills"

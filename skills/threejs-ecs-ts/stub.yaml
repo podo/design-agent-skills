@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 3
 upstream: https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts
 version: latest
 install_default: "npx skills add Nice-Wolf-Studio/claude-skills-threejs-ecs-ts"

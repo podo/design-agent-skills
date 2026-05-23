@@ -1,5 +1,6 @@
 type: package
 tier: official
+rank: 3
 upstream: https://github.com/fal-ai-community/skills
 version: latest
 install_default: "npx skills add fal-ai-community/<skill>"

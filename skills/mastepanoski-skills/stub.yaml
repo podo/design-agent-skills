@@ -1,5 +1,6 @@
 type: package
 tier: community
+rank: 3
 upstream: https://github.com/mastepanoski/claude-skills
 version: latest
 install_default: "npx skills add mastepanoski/claude-skills"

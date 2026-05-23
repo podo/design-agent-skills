@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 2
 upstream: https://github.com/haider-nawaz/liquid-glass-skill
 version: latest
 install_default: "/plugin marketplace add haider-nawaz/liquid-glass-skill"

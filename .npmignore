@@ -1,0 +1,10 @@
+# Exclude development files from the published npm package.
+# Only skills/, bin/, package.json, README.md, VERSION need to ship.
+
+test/
+docs/
+.claude/
+CLAUDE.md
+CHANGELOG.md
+.gitignore
+*.mjs.map

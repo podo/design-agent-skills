@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 2
 upstream: https://github.com/freshtechbro/claudedesignskills
 version: latest
 install_default: "/plugin marketplace add freshtechbro/claudedesignskills"

@@ -1,5 +1,6 @@
 type: package
 tier: official
+rank: 2
 upstream: https://github.com/software-mansion-labs/skills
 version: latest
 install_default: "/plugin marketplace add software-mansion-labs/skills"

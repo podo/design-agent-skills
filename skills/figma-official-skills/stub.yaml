@@ -1,5 +1,6 @@
 type: package
 tier: official
+rank: 1
 upstream: https://github.com/figma/skills
 version: latest
 install_default: "npx skills add figma/<skill>"

@@ -1,5 +1,6 @@
 type: skill
 tier: official
+rank: 2
 upstream: https://github.com/nousresearch/hermes-agent
 upstream_path: skills/creative/p5js/SKILL.md
 version: latest

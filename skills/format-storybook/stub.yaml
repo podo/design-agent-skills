@@ -1,5 +1,6 @@
 type: skill
 tier: community
+rank: 2
 upstream: https://github.com/mikemai2awesome/agent-skills
 upstream_path: skills/format-storybook/SKILL.md
 version: latest

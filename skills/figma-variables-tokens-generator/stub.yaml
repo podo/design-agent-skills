@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 3
 upstream: https://github.com/Shanmus4/figma-variables-tokens-generator
 version: latest
 install_default: "npx skills add Shanmus4/figma-variables-tokens-generator"

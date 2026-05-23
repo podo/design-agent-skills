@@ -5,6 +5,29 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.0.0] — 2026-05-23
+
+### Added
+
+- **Install profiles** — `--picks` (18 skills), `--essentials` (~77 skills), `--all` (142, default). Interactive prompt when no flag is given.
+- **Category filter** — `--category <name>` installs all skills in a specific domain; composable with any profile (`--picks --category accessibility`)
+- **`rank` field in stub.yaml** — required on all non-router stubs: `1` = Picks, `2` = Essentials, `3` = Extended. Enforced by test suite.
+- **`★` markers in README** — 18 Picks-tier skills marked in the skills table.
+- **`.npmignore`** — excludes `test/`, `docs/`, `.claude/`, `CLAUDE.md`, `CHANGELOG.md` from the published package.
+
+### Changed
+
+- **`bin/cli.mjs`** — fully rewritten: profile selection prompt, `--picks` / `--essentials` / `--all` / `--category` flags, per-skill install loop for filtered installs, batch install preserved for `--all`.
+- **`test/stubs.test.js`** — added `rank` validation: non-router stubs must have `rank` of `1`, `2`, or `3` (1674 → 1958 tests).
+- **`.gitignore`** — added `docs/plans/` and `node_modules/`.
+- **`CLAUDE.md`** — documented `rank` field, rank assignment criteria, `--category` flag; updated checklist and common mistakes.
+
+### Breaking
+
+- All non-router `stub.yaml` files now require a `rank` field. Any fork that adds stubs without `rank` will fail `npm test`.
+
+---
+
 ## [1.9.0] — 2026-05-23
 
 ### Added

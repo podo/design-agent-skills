@@ -1,5 +1,6 @@
 type: package
 tier: community
+rank: 3
 upstream: https://github.com/rhuss/cc-slidev
 version: latest
 install_default: "/plugin marketplace add rhuss/cc-slidev"

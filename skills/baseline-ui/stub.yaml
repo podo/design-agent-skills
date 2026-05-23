@@ -1,5 +1,6 @@
 type: package
 tier: community
+rank: 2
 upstream: https://github.com/ibelick/baseline-ui
 version: latest
 install_default: "npx skills add ibelick/baseline-ui"

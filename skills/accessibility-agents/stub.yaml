@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 2
 upstream: https://github.com/Community-Access/accessibility-agents
 version: latest
 install_default: "npx skills add Community-Access/accessibility-agents"

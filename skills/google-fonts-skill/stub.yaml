@@ -1,4 +1,5 @@
 type: platform
 tier: experimental
+rank: 2
 upstream: https://github.com/sliday/google-fonts-skill
 version: latest

@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 3
 upstream: https://github.com/bencium/bencium-innovative-ux-designer
 version: latest
 install_default: "npx skills add bencium/bencium-innovative-ux-designer"

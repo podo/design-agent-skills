@@ -1,5 +1,6 @@
 type: skill
 tier: official
+rank: 2
 upstream: https://github.com/remotion-dev/skills
 upstream_path: skills/remotion/SKILL.md
 version: latest

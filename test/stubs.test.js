@@ -7,8 +7,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../../');
 const SKILLS_DIR = path.join(ROOT, 'skills');
 
-const VALID_TYPES = new Set(['router', 'skill', 'package', 'platform']);
-const VALID_TIERS = new Set(['official', 'community', 'experimental']);
+const VALID_TYPES  = new Set(['router', 'skill', 'package', 'platform']);
+const VALID_TIERS  = new Set(['official', 'community', 'experimental']);
+const VALID_RANKS  = new Set([1, 2, 3]);
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -101,6 +102,19 @@ describe('stub.yaml validity', () => {
       const type = yamlGet(stub, 'type');
       if (type !== 'skill') return;
       assert.ok(yamlHas(stub, 'upstream'), 'type:skill must have an upstream field');
+    });
+
+    it(`${name}: non-router has rank`, () => {
+      const type = yamlGet(stub, 'type');
+      if (type === 'router') return;
+      assert.ok(yamlHas(stub, 'rank'), 'non-router stubs must have a rank field');
+    });
+
+    it(`${name}: rank is valid`, () => {
+      const type = yamlGet(stub, 'type');
+      if (type === 'router') return;
+      const rank = Number(yamlGet(stub, 'rank'));
+      assert.ok(VALID_RANKS.has(rank), `invalid rank "${rank}" — must be 1, 2, or 3`);
     });
   }
 });

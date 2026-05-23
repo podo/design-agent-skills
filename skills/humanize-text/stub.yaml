@@ -1,4 +1,5 @@
 type: package
 tier: community
+rank: 2
 upstream: https://github.com/gregorymm/humanize-text
 version: latest

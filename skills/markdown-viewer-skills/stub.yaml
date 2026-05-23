@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+rank: 2
 upstream: https://github.com/markdown-viewer/skills
 version: latest
 install_default: "npx skills add markdown-viewer/skills"

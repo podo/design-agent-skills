@@ -1,5 +1,6 @@
 type: platform
 tier: community
+rank: 2
 upstream: https://github.com/pbakaus/impeccable
 version: latest
 install_default: "npx skills add impeccable"

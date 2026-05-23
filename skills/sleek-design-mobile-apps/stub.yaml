@@ -1,4 +1,5 @@
 type: platform
 tier: community
+rank: 3
 upstream: https://github.com/sleekdotdesign/agent-skills
 version: latest

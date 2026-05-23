@@ -1,5 +1,6 @@
 type: skill
 tier: official
+rank: 2
 upstream: https://github.com/cloudflare/skills
 upstream_path: skills/web-perf/SKILL.md
 version: latest

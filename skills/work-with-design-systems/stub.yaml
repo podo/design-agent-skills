@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+rank: 2
 upstream: https://github.com/natdexterra/work-with-design-systems
 upstream_path: SKILL.md
 version: latest

@@ -1,4 +1,5 @@
 type: package
 tier: community
+rank: 3
 upstream: https://github.com/bergside/awesome-design-skills
 version: latest

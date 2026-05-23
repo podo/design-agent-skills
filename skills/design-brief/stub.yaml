@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+rank: 3
 upstream: https://github.com/nexu-io/open-design
 upstream_path: skills/design-brief/SKILL.md
 version: latest

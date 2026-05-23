@@ -1,5 +1,6 @@
 type: skill
 tier: community
+rank: 1
 upstream: https://github.com/meodai/skill.color-expert
 upstream_path: SKILL.md
 version: latest

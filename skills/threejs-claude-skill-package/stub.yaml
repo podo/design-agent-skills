@@ -1,5 +1,6 @@
 type: package
 tier: official
+rank: 3
 upstream: https://github.com/OpenAEC-Foundation/Three.js-Claude-Skill-Package
 version: latest
 install_default: "npx skills add OpenAEC-Foundation/Three.js-Claude-Skill-Package"

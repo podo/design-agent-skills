@@ -46,7 +46,7 @@ README.md       — skills table, router table, supply chain section
 ## Adding a skill — checklist
 
 1. Evaluate the skill (see criteria below)
-2. Create `skills/<name>/stub.yaml`
+2. Create `skills/<name>/stub.yaml` — set `rank: 3` by default; promote if clearly rank-1 or rank-2
 3. Create `skills/<name>/SKILL.md`
 4. Update `skills/design-catalogue/SKILL.md` — add to the right section + routing guide
 5. Update the relevant domain catalogue SKILL.md
@@ -94,6 +94,21 @@ README.md       — skills table, router table, supply chain section
 | `community` | Published by an individual or third party; 1+ stars; actively maintained |
 | `experimental` | Very new, 0 stars, or unverified upstream — excluded from default installs |
 
+### Rank assignment
+
+`rank` controls which install profile includes this skill (`npx design-agent-skills --picks / --essentials / --all`).
+
+| Rank | Profile | Criteria |
+|------|---------|----------|
+| `1` | **Picks** | Best-in-class for its category — one winner per domain. High stars, official when available, no redundancy. |
+| `2` | **Essentials** | Adds real coverage without duplicating rank-1. Covers sub-niches, secondary tools, solid community picks. |
+| `3` | **Extended** | Niche, experimental, heavy overlap with rank-1/2, platform-specific, or low star count. |
+
+**Rules:**
+- Routers (`type: router`) are **exempt** from rank — always installed.
+- Every other stub **must** have a `rank` field (test enforces this).
+- When in doubt: new skills default to `rank: 3`. Promote to `rank: 2` once quality is confirmed; `rank: 1` only when it's the clear winner for its category.
+
 ---
 
 ## stub.yaml — format and rules
@@ -105,6 +120,7 @@ Every skill directory must have a `stub.yaml`. The test suite enforces all rules
 ```yaml
 type: skill           # REQUIRED — one of: router | skill | package | platform
 tier: community       # REQUIRED — one of: official | community | experimental
+rank: 2               # REQUIRED (non-routers) — one of: 1 | 2 | 3 (see Rank assignment below)
 upstream: https://github.com/owner/repo   # REQUIRED for type:skill; forbidden for type:router
 upstream_path: SKILL.md                   # optional — path within repo to the SKILL.md
 version: latest       # always "latest"
@@ -426,6 +442,7 @@ head -20 skills/<name>/SKILL.md
 | New router added (8th router) | `has exactly 6 router skills` | Routers are permanent and fixed — never add a new router |
 | `type:router` has `upstream` field | `router type has no upstream` | Remove the `upstream` field |
 | `type:skill` missing `upstream` in stub.yaml | `skill type has upstream` | Add `upstream: https://github.com/owner/repo` |
+| Non-router stub missing `rank` field | `non-router has rank` | Add `rank: 1`, `2`, or `3` to stub.yaml |
 | Forgot to update both routers | Manual review | Always update design-catalogue + domain catalogue |
 | Forgot to update README skill count | Manual review | Update count on lines 4, 20, and tier table |
 
@@ -454,6 +471,7 @@ mkdir skills/textual-tui-skill
 cat > skills/textual-tui-skill/stub.yaml << 'EOF'
 type: package
 tier: community
+rank: 2
 upstream: https://github.com/aperepel/textual-tui-skill
 version: latest
 EOF
