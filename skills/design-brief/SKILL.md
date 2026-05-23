@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add nexu-io/open-design --skill design-brief -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

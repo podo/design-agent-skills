@@ -49,6 +49,8 @@ das:
    ```bash
    npx skills add rohitg00/awesome-claude-code-toolkit --skill data-viz-agent -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

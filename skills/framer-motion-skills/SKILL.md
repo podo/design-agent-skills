@@ -30,7 +30,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add C-Jeril/framer-motion-skills`
+   - Claude Code → `npx skills add C-Jeril/framer-motion-skills` — or type `! npx skills add …` in the prompt
    - Cursor → `npx skills add C-Jeril/framer-motion-skills`
    - Other → `npx skills add C-Jeril/framer-motion-skills` or see [GitHub README](https://github.com/C-Jeril/framer-motion-skills)
 

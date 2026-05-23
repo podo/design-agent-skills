@@ -49,6 +49,8 @@ das:
    ```bash
    npx skills add jakubkrehel/make-interfaces-feel-better --skill make-interfaces-better -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

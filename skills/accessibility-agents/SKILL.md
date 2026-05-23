@@ -28,7 +28,7 @@ das:
    - No → go to step 2
 
 2. **Which agent?**
-   - Claude Code / Cursor → `npx skills add Community-Access/accessibility-agents`
+   - Claude Code / Cursor → `npx skills add Community-Access/accessibility-agents` — or type `! npx skills add …` in the prompt
    - Other → see [GitHub README](https://github.com/Community-Access/accessibility-agents)
 
 ## Install command

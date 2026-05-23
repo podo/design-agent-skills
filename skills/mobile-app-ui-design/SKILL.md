@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add ceorkm/mobile-app-ui-design --skill mobile-app-ui-design -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add Ilm-Alan/frontend-design --skill frontend-design -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

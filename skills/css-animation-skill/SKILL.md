@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add neonwatty/css-animation-skill --skill css-animation-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

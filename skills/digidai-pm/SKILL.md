@@ -49,6 +49,8 @@ das:
    ```bash
    npx skills add Digidai/product-manager-skills --skill digidai-pm -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

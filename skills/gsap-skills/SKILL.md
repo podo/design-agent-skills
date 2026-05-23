@@ -30,7 +30,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add https://github.com/greensock/gsap-skills`
+   - Claude Code → `npx skills add https://github.com/greensock/gsap-skills` — or type `! npx skills add …` in the prompt
    - Cursor → `npx skills add https://github.com/greensock/gsap-skills`
    - Other → `npx skills add https://github.com/greensock/gsap-skills` or see [GitHub README](https://github.com/greensock/gsap-skills)
 

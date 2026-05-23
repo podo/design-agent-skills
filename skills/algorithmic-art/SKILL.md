@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add anthropics/skills --skill algorithmic-art -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

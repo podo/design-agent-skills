@@ -45,6 +45,8 @@ das:
    ```bash
    npx skills add Agents365-ai/excalidraw-skill --skill excalidraw-agents365 -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

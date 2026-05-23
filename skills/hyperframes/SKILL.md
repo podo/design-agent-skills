@@ -33,7 +33,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add heygen-com/hyperframes`
+   - Claude Code → `npx skills add heygen-com/hyperframes` — or type `! npx skills add …` in the prompt
    - Cursor → `npx skills add heygen-com/hyperframes`
    - Other → `npx skills add heygen-com/hyperframes` or see [GitHub README](https://github.com/heygen-com/hyperframes)
 

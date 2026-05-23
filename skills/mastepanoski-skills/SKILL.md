@@ -28,7 +28,7 @@ das:
    - No → go to step 2
 
 2. **Which agent?**
-   - Claude Code / Cursor → `npx skills add mastepanoski/claude-skills`
+   - Claude Code / Cursor → `npx skills add mastepanoski/claude-skills` — or type `! npx skills add …` in the prompt
    - Other → see [GitHub README](https://github.com/mastepanoski/claude-skills)
 
 ## Install command

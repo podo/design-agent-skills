@@ -50,6 +50,8 @@ das:
    ```bash
    npx skills add Leonxlnx/taste-skill --skill taste-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

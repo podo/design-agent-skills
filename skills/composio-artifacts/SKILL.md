@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add ComposioHQ/awesome-claude-skills --skill composio-artifacts -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

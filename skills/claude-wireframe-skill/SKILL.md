@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add Magdoub/claude-wireframe-skill --skill claude-wireframe-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

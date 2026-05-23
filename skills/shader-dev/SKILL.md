@@ -49,6 +49,8 @@ das:
    ```bash
    npx skills add MiniMax-AI/skills --skill shader-dev -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

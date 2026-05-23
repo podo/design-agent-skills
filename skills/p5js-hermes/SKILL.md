@@ -51,6 +51,8 @@ das:
    ```bash
    npx skills add nousresearch/hermes-agent --skill p5js-hermes -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

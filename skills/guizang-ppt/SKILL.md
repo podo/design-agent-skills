@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add op7418/guizang-ppt-skill --skill guizang-ppt -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

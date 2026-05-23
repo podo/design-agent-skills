@@ -46,6 +46,8 @@ das:
    ```bash
    npx skills add Ashutos1997/claude-design-auditor-skill --skill design-auditor -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

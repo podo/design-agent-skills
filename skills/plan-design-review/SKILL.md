@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add garrytan/gstack --skill plan-design-review -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

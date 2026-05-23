@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

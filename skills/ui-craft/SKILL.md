@@ -33,7 +33,7 @@ Run this before premium UI design work:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add educlopez/ui-craft`
+   - Claude Code → `npx skills add educlopez/ui-craft` — or type `! npx skills add …` in the prompt
    - Cursor → `npx skills add educlopez/ui-craft`
    - Other → try `npx skills add educlopez/ui-craft` or follow the [GitHub README](https://github.com/educlopez/ui-craft)
 

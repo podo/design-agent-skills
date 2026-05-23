@@ -49,6 +49,8 @@ das:
    ```bash
    npx skills add smixs/creative-director-skill --skill creative-director -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

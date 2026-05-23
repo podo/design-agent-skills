@@ -46,6 +46,8 @@ das:
    ```bash
    npx skills add szilu/ux-designer-skill --skill ux-designer-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

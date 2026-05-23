@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add google-labs-code/stitch-skills --skill extract-design-md -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

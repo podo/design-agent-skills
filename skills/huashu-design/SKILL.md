@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add alchaincyf/huashu-design --skill huashu-design -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add nibzard/marp-slide-quality --skill marp-slide-quality -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

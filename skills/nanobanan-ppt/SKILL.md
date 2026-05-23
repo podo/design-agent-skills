@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add op7418/NanoBanana-PPT-Skills --skill nanobanan-ppt -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

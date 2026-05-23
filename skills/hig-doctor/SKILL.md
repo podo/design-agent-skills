@@ -32,7 +32,7 @@ Run this to diagnose and fix Apple HIG violations:
 
 2. **Do you have shell access?**
    - Yes → run the install command below, then invoke the skill
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+   - No → show the install command; in Claude Code prefix with `!` to run directly in the prompt
 
 ## Install command
 

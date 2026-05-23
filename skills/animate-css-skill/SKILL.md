@@ -30,7 +30,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add msrbuilds/animate-css-skill`
+   - Claude Code → `npx skills add msrbuilds/animate-css-skill` — or type `! npx skills add …` in the prompt
    - Cursor → `npx skills add msrbuilds/animate-css-skill`
    - Other → `npx skills add msrbuilds/animate-css-skill` or see [GitHub README](https://github.com/msrbuilds/animate-css-skill)
 

@@ -29,7 +29,7 @@ das:
    - No → go to step 2
 
 2. **Which agent?**
-   - Claude Code / Cursor → `npx skills add simota/agent-skills`
+   - Claude Code / Cursor → `npx skills add simota/agent-skills` — or type `! npx skills add …` in the prompt
    - Other → see [GitHub README](https://github.com/simota/agent-skills)
 
 ## Install command

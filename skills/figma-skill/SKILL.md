@@ -28,7 +28,7 @@ das:
    - Yes → invoke and proceed
    - No → go to step 2
 
-2. **Shell access?** Yes → install below. No → show user the command.
+2. **Shell access?** Yes → install below. No → show user the command (Claude Code: prefix with `!` to run in prompt).
 
 ## Install command
 

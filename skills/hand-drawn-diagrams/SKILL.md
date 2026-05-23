@@ -46,6 +46,8 @@ das:
    ```bash
    npx skills add muthuishere/hand-drawn-diagrams --skill hand-drawn-diagrams -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

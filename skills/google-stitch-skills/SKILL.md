@@ -33,7 +33,7 @@ Run this for any Google Stitch design workflow:
 
 2. **Do you have shell access?**
    - Yes → install the specific skill below, then invoke it
-   - No → show the user the install command, ask them to run it, then proceed once confirmed
+   - No → show the install command; in Claude Code prefix with `!` to run directly in the prompt
 
 ## Install command
 

@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add zarazhangrui/frontend-slides --skill frontend-slides -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

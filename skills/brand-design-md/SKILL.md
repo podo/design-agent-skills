@@ -48,6 +48,8 @@ das:
    ```bash
    npx skills add zephyrwang6/brand-design-md --skill brand-design-md -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

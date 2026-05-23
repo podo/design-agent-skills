@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3js-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 

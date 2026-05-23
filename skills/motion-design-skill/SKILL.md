@@ -30,7 +30,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add LottieFiles/motion-design-skill`
+   - Claude Code → `npx skills add LottieFiles/motion-design-skill` — or type `! npx skills add …` in the prompt
    - Cursor → `npx skills add LottieFiles/motion-design-skill`
    - Other → `npx skills add LottieFiles/motion-design-skill` or see [GitHub README](https://github.com/lottiefiles/motion-design-skill)
 

@@ -47,6 +47,8 @@ das:
    ```bash
    npx skills add talknerdytome-labs/wiggle-claude-skill --skill wiggle-claude-skill -y
    ```
+   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+
 
 ## Invoke after install
 
