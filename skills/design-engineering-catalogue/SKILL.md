@@ -52,6 +52,8 @@ Activate when the user:
 | [`superdesign-skill`](../superdesign-skill/SKILL.md) | Infinite-canvas ideation: brand extraction, design drafts, IDE-native |
 | [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
 | [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
+| [`interaction-design`](../interaction-design/SKILL.md) | IxD principles, component states, micro-interactions, affordances, task flows — Norman + Tognazzini |
+| [`format-storybook`](../format-storybook/SKILL.md) | Storybook file structure, template composition, controls, Chromatic visual regression, CSF patterns |
 
 ## Color, Typography & Components
 

@@ -53,7 +53,7 @@ instead of scrolling the full index below:
 | Figma, design-to-code, tokens, platform suites | `figma-catalogue` | Figma skills, Stitch, design tokens, Anthropic/Vercel/Expo suites |
 | Accessibility, WCAG, web performance | `accessibility-catalogue` | a11y audit, WCAG 2.2, Core Web Vitals, React quality |
 | UI craft, visual design, brand, mobile | `design-engineering-catalogue` | Taste, color, typography, iOS/Android, brand identity |
-| Slides, diagrams, data viz, PM, design review, copy | `content-catalogue` | Presentations, wireframes, charts, UX strategy, PM frameworks, UX writing, copywriting |
+| Slides, diagrams, data viz, PM, design review, copy | `content-catalogue` | Presentations, wireframes, charts, UX strategy, PM frameworks, UX writing, copywriting, user research |
 
 ## Catalogue index
 
@@ -75,6 +75,8 @@ instead of scrolling the full index below:
 | [`design-for-ai`](../design-for-ai/SKILL.md) | CHECKER (7-category audit) + APPLIER (6-phase creation) dual-mode plugin |
 | [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
 | [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
+| [`interaction-design`](../interaction-design/SKILL.md) | IxD principles, component states, micro-interactions, affordances, task flows — Norman + Tognazzini |
+| [`format-storybook`](../format-storybook/SKILL.md) | Storybook story structure, template composition, controls, Chromatic, CSF patterns |
 
 ### Motion & Animation
 
@@ -141,6 +143,7 @@ instead of scrolling the full index below:
 | [`mastepanoski-skills`](../mastepanoski-skills/SKILL.md) | 6 audits: ux-rethink, Nielsen, WCAG POUR, Don Norman, cognitive walkthrough |
 | [`wcag-ai-skill`](../wcag-ai-skill/SKILL.md) | WCAG 2.2 full workflow: design → frontend → QA → conformance docs |
 | [`accessibility-agents`](../accessibility-agents/SKILL.md) | 25 specialist a11y agents: web code, Office/PDF docs, markdown auditors |
+| [`dark-pattern-audit`](../dark-pattern-audit/SKILL.md) | Static audit of codebase + copy for deceptive dark patterns — confidence-graded, source-located |
 
 ### Design Review & Creative Direction
 
@@ -158,6 +161,12 @@ instead of scrolling the full index below:
 | [`design-with-claude`](../design-with-claude/SKILL.md) | 38 design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
 | [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | Synthesizes 19 authoritative UX sources (NNG, Laws of UX) — 2026 best practices |
 | [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
+
+### Design Research
+
+| Skill | Best for |
+|-------|----------|
+| [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports |
 
 ### Figma & Design-to-Code
 
@@ -244,6 +253,7 @@ instead of scrolling the full index below:
 | [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
 | [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
+| [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
 
 ### Content Design & Copy
 
@@ -356,6 +366,11 @@ instead of scrolling the full index below:
 | "brand skin", "design token engine", "styleseed" | `styleseed` |
 | "design aesthetic", "glassmorphism", "brutalism style", "claymorphism" | `awesome-design-skills` |
 | "Textual TUI", "Textual Python", "Textual widget", "TCSS" | `textual-tui-skill` |
+| "interaction design", "component states", "affordance", "micro-interaction timing" | `interaction-design` |
+| "Storybook", "Storybook story", "CSF", "Chromatic visual regression" | `format-storybook` |
+| "user research", "user interview", "research synthesis", "usability study" | `user-research-cookiy` |
+| "feature design sprint", "design to issues", "decompose feature" | `design-sprint` |
+| "dark patterns", "deceptive design", "manipulative UI", "hidden fees code" | `dark-pattern-audit` |
 
 ## No match
 

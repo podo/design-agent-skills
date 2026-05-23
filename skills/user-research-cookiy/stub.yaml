@@ -1,0 +1,5 @@
+type: skill
+tier: community
+upstream: https://github.com/cookiy-ai/user-research-skill
+upstream_path: SKILL.md
+version: latest

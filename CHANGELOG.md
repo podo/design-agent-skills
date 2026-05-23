@@ -5,6 +5,27 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.8.0] — 2026-05-23
+
+### Added
+
+- **`user-research-cookiy`** — End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports (141 ★) (`cookiy-ai/user-research-skill`)
+- **`interaction-design`** — IxD principles, component state design, micro-interaction timing, affordances, task flows — 6 Norman + 19 Tognazzini principles (`rastian/interaction-design-skills`)
+- **`format-storybook`** — Storybook story formatting: file structure, template composition, controls, Chromatic visual regression, CSF patterns (`mikemai2awesome/agent-skills`)
+- **`design-sprint`** — Coding-agent design sprint: research codebase → design feature → decompose into parent + sub-issues with dependencies (`aoshimash/skills`)
+- **`dark-pattern-audit`** — Static audit of codebase + copy for deceptive dark patterns — confidence-graded, source-located findings across pricing, consent, subscriptions, CTAs (`SidKH/skills`)
+
+### Changed
+
+- **`design-catalogue`** — Added user-research-cookiy (new Design Research section), design-sprint (Product & PM), dark-pattern-audit (Accessibility), interaction-design + format-storybook (Design Engineering); 5 new routing guide entries
+- **`content-catalogue`** — New "Design Research" section with user-research-cookiy; design-sprint added to PM section; new triggers: "user research skills", "design research skills", "design sprint skills"
+- **`design-engineering-catalogue`** — Added interaction-design and format-storybook to Design Engineering table
+- **`accessibility-catalogue`** — Added dark-pattern-audit to Accessibility & Quality table
+
+Catalogue grows from 135 → 140 skills.
+
+---
+
 ## [1.7.0] — 2026-05-22
 
 ### Added

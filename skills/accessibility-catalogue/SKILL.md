@@ -43,3 +43,4 @@ Activate when the user:
 | [`addyosmani-quality`](../addyosmani-quality/SKILL.md) | 6-skill suite: a11y, Lighthouse, CWV, perf, SEO, best practices |
 | [`cloudflare-web-perf`](../cloudflare-web-perf/SKILL.md) | Core Web Vitals: LCP, INP, CLS fixes |
 | [`react-doctor`](../react-doctor/SKILL.md) | React security, performance, correctness scoring |
+| [`dark-pattern-audit`](../dark-pattern-audit/SKILL.md) | Static audit of codebase + copy for deceptive dark patterns — confidence-graded, source-located |

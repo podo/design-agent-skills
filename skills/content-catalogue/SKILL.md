@@ -2,9 +2,9 @@
 name: content-catalogue
 description: |
   Domain navigator for presentations, diagrams, wireframes, data visualization,
-  design review, product strategy, copywriting, UX writing, and content design
-  skills. Routes to the right skill for slides, charts, UX strategy, PM
-  frameworks, email, microcopy, and product copy.
+  design review, product strategy, copywriting, UX writing, content design, and
+  design research skills. Routes to the right skill for slides, charts, UX strategy,
+  PM frameworks, email, microcopy, product copy, user research, and design sprints.
 triggers:
   - "presentation skills"
   - "slides skill"
@@ -20,6 +20,9 @@ triggers:
   - "copywriting skills"
   - "content design skills"
   - "microcopy skills"
+  - "user research skills"
+  - "design research skills"
+  - "design sprint skills"
 ---
 
 # content-catalogue
@@ -95,6 +98,12 @@ Activate when the user:
 | [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
 | [`digidai-pm`](../digidai-pm/SKILL.md) | Senior PM: 30+ frameworks, SaaS metrics |
 
+## Design Research
+
+| Skill | Best for |
+|-------|----------|
+| [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports (141 ★) |
+
 ## Product & PM
 
 | Skill | Best for |
@@ -104,6 +113,7 @@ Activate when the user:
 | [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
 | [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
+| [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
 
 ## Content Design & Copy
 
