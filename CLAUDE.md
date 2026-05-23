@@ -54,7 +54,7 @@ README.md       — skills table, router table, supply chain section
 7. Run `npm test` — must pass 100%
 8. Bump version (see versioning section)
 9. Commit and push to `main`
-10. Create a GitHub release (`gh release create`) with the CHANGELOG body
+10. Create a GitHub release (`gh release create`) with the CHANGELOG body — CI automatically attaches the skills zip and publishes to npm
 
 ---
 
@@ -379,6 +379,18 @@ EOF
 - Always pass `--latest` on the newest release so GitHub surfaces it correctly
 - Copy the body verbatim from `CHANGELOG.md` — no paraphrasing
 - Create the release **after** pushing to main (the tag must exist on the remote)
+
+### What GitHub Actions does automatically on release
+
+The `.github/workflows/publish.yml` workflow fires on every `gh release create` and:
+
+1. Runs `npm test` — must pass before anything publishes
+2. Attaches a **skills-only zip** (`design-agent-skills-vX.Y.Z.zip`) to the release — contains only `skills/`, no source code
+3. Publishes to **npm** via Trusted Publishing (OIDC — no token secret required)
+
+**You do not need to run `npm publish` manually.** Creating the GitHub release is the only trigger needed.
+
+**Never** `npm publish` by hand — it will conflict with the workflow if the version is already in flight, and it bypasses the test gate.
 
 ### CHANGELOG format
 
