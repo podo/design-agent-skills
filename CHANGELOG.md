@@ -5,6 +5,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.1.0] — 2026-05-23
+
+### Changed
+
+- **`bin/cli.mjs`** — replaced numbered text prompts with a clack-style arrow-key TUI. `◇`/`◆`/`●`/`○` symbols, `↑↓` navigation, `ENTER` to confirm, `Q`/`Ctrl-C` to quit. Category sub-prompt shows per-category skill counts. Install output uses `✓`/`✗` per skill with elapsed time. Zero new dependencies — pure Node.js raw mode + ANSI escape codes.
+
+---
+
 ## [2.0.0] — 2026-05-23
 
 ### Added

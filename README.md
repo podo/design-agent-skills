@@ -11,10 +11,36 @@ npx skills add podo/design-agent-skills -g     # user scope — all projects
 npx skills add podo/design-agent-skills        # project scope — this project only
 ```
 
-Or use the branded CLI for a guided install (profile + scope prompt):
+Or use the interactive CLI — arrow-key navigation, no flags needed:
 
 ```bash
 npx design-agent-skills
+```
+
+```
+◇  Where should skills install?
+│  ● User scope    ~/.agents/skills/   all projects
+│  ○ Project scope .agents/skills/     this project
+└
+
+◆  User scope
+│
+◇  Which profile?
+│  ● Picks        18 skills  ★ best in class
+│  ○ Essentials   77 skills    full coverage
+│  ○ All         142 skills    everything
+│  ○ Category →  pick a domain
+└
+
+◆  Picks — 18 skills
+│
+◆  Installing 18 skills…
+│  ✓ taste-skill
+│  ✓ ui-craft
+│  ✓ gsap-skills
+│  …
+│
+◆  Done — 18 skills in 4.2s
 ```
 
 Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
