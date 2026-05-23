@@ -33,7 +33,7 @@ Run this before premium UI design work:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add educlopez/ui-craft` — or send `! npx skills add … -g` as a chat message to install without leaving the conversation
+   - Claude Code → `npx skills add educlopez/ui-craft` — or send `! npx skills add …` as a chat message (add `-g` for global, omit for project-only)
    - Cursor → `npx skills add educlopez/ui-craft`
    - Other → try `npx skills add educlopez/ui-craft` or follow the [GitHub README](https://github.com/educlopez/ui-craft)
 

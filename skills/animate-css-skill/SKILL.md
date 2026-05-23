@@ -30,7 +30,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add msrbuilds/animate-css-skill` — or send `! npx skills add … -g` as a chat message to install without leaving the conversation
+   - Claude Code → `npx skills add msrbuilds/animate-css-skill` — or send `! npx skills add …` as a chat message (add `-g` for global, omit for project-only)
    - Cursor → `npx skills add msrbuilds/animate-css-skill`
    - Other → `npx skills add msrbuilds/animate-css-skill` or see [GitHub README](https://github.com/msrbuilds/animate-css-skill)
 
