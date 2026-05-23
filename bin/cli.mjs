@@ -13,6 +13,7 @@ Usage: npx design-agent-skills [command] [options]
 
 Commands:
   install (default)   Interactive skill installer
+  add <skill>         Install a single skill by name
   list                Show categories and skill counts
   doctor              Check catalogue integrity and installed skill health
 
@@ -29,6 +30,7 @@ Options:
 
 Examples:
   npx design-agent-skills                         # interactive TUI
+  npx design-agent-skills add remotion -g         # install one skill, global
   npx design-agent-skills --picks -g              # top skills, global
   npx design-agent-skills --essentials            # full coverage, project
   npx design-agent-skills --category figma-code   # Figma skills only
@@ -46,6 +48,28 @@ const VALID_CATEGORIES = new Set([
   'content-design', 'email-design', 'tui-terminal', 'meta',
   'motion-animation', 'design-engineering', 'design-research',
 ]);
+
+const CATEGORY_DESCRIPTIONS = {
+  'design-systems':        'UI taste, brand, design engineering',
+  'creative-3d':           'Motion, 3D, shaders, generative art',
+  'interaction-polish':    'UX polish, journeys, interaction patterns',
+  'visual-components':     'Color, typography, components, mobile',
+  'accessibility-quality': 'a11y, WCAG, performance, quality',
+  'design-review':         'Review, critique, creative direction',
+  'figma-code':            'Figma, design-to-code, tokens',
+  'official-suites':       'Official org skill packages',
+  'diagrams':              'Wireframes, flowcharts, architecture',
+  'data-visualization':    'Charts, D3, data analysis',
+  'presentations':         'Slides, Reveal.js, Slidev, MARP',
+  'product-pm':            'PM frameworks, PRD, product strategy',
+  'content-design':        'UX writing, microcopy, AI text quality',
+  'email-design':          'HTML email, MJML, email templates',
+  'tui-terminal':          'Terminal UI, Textual, Ratatui, Ink',
+  'meta':                  'Catalogue routers and meta-skills',
+  'motion-animation':      'Motion design, animation, timing',
+  'design-engineering':    'Design-engineering crossover',
+  'design-research':       'User research, usability testing',
+};
 
 // ── stub reader ───────────────────────────────────────────────────────────────
 
@@ -209,6 +233,8 @@ const flagList    = args.includes('--list') || cmd === 'list';
 const flagDryRun  = args.includes('--dry-run');
 const flagJson    = args.includes('--json');
 const isDoctor    = cmd === 'doctor';
+const isAdd       = cmd === 'add';
+const addName     = isAdd ? args.slice(1).find(a => !a.startsWith('-')) ?? null : null;
 const isInstall   = cmd === '' || cmd === 'install' || cmd.startsWith('-');
 const profileSet  = flagPicks || flagEss || flagAll || Boolean(flagCat);
 
@@ -225,13 +251,15 @@ if (flagList) {
     const data = cats.map(c => ({
       category: c,
       count: stubs.filter(s => s.type !== 'router' && s.category === c).length,
+      description: CATEGORY_DESCRIPTIONS[c] ?? '',
     }));
     process.stdout.write(JSON.stringify(data, null, 2) + '\n');
   } else {
     process.stdout.write(`\ndesign-agent-skills — ${total} skills across ${cats.length} categories\n\n`);
     for (const c of cats) {
-      const n = stubs.filter(s => s.type !== 'router' && s.category === c).length;
-      process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills\n`);
+      const n    = stubs.filter(s => s.type !== 'router' && s.category === c).length;
+      const desc = CATEGORY_DESCRIPTIONS[c] ?? '';
+      process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills   ${desc}\n`);
     }
     process.stdout.write('\n');
   }
@@ -299,6 +327,14 @@ if (isDoctor) {
 
   process.stdout.write('\n');
   process.exit(issues > 0 ? 1 : 0);
+}
+
+if (isAdd) {
+  if (!addName) {
+    console.error('Usage: npx design-agent-skills add <skill-name> [-g]');
+    process.exit(1);
+  }
+  installSkills([addName], flagGlobal ? 'global' : 'project');
 }
 
 if (!isInstall) {
