@@ -10,12 +10,15 @@ LOCKFILE="$REPO_DIR/design-agent-skills.lock"
 # ── Parse global flags ────────────────────────────────────────────────────────
 SCOPE="user"
 INCLUDE_EXPERIMENTAL=0
+PROFILE=""
 ARGS=()
 for arg in "$@"; do
   case "$arg" in
     --scope=user)             SCOPE="user"             ;;
     --scope=project)          SCOPE="project"          ;;
     --include-experimental)   INCLUDE_EXPERIMENTAL=1   ;;
+    --picks)                  PROFILE="picks"          ;;
+    --essentials)             PROFILE="essentials"     ;;
     *) ARGS+=("$arg") ;;
   esac
 done
@@ -85,6 +88,15 @@ is_allowed_tier() {
   local tier
   tier="$(stub_tier "$src")"
   [ "$tier" != "experimental" ]
+}
+
+is_within_rank() {
+  # $1=skill_src_dir  $2=max_rank (empty = no limit)
+  [ -z "$2" ] && return 0
+  local rank
+  rank="$(stub_yaml_value rank "$1/stub.yaml" 2>/dev/null)"
+  rank="${rank:-3}"
+  [ "$rank" -le "$2" ] 2>/dev/null
 }
 
 stub_type() {
@@ -219,6 +231,12 @@ cmd_install() {
   agent_list="$(detected_agents)"
   [ -z "$agent_list" ] && { echo "No supported agents found."; exit 0; }
 
+  local max_rank=""
+  case "$PROFILE" in
+    picks)      max_rank=1 ;;
+    essentials) max_rank=2 ;;
+  esac
+
   while IFS=: read -r name _root skills_dir; do
     mkdir -p "$skills_dir"
     local linked=0 skipped=0
@@ -228,6 +246,8 @@ cmd_install() {
       stype="$(stub_type "$SKILLS_SRC/$skill")"
       if [ "$stype" = "skill" ] || [ "$stype" = "navigator" ]; then
         if ! is_allowed_tier "$SKILLS_SRC/$skill"; then
+          skipped=$((skipped + 1))
+        elif ! is_within_rank "$SKILLS_SRC/$skill" "$max_rank"; then
           skipped=$((skipped + 1))
         elif [ -L "$target" ] || [ -d "$target" ]; then
           skipped=$((skipped + 1))
@@ -644,6 +664,15 @@ cmd_remove() {
 }
 
 cmd_help() {
+  local cnt_official=0 cnt_community=0 cnt_experimental=0
+  while IFS= read -r skill; do
+    case "$(stub_tier "$SKILLS_SRC/$skill")" in
+      official)     cnt_official=$((cnt_official + 1))     ;;
+      community)    cnt_community=$((cnt_community + 1))   ;;
+      experimental) cnt_experimental=$((cnt_experimental + 1)) ;;
+    esac
+  done < <(skill_names)
+
   cat <<HELP
 Usage: ./install.sh [flags] [command]
 
@@ -651,6 +680,8 @@ Global flags:
   --scope=user              Link to agent user-level dirs (default): ~/.claude/skills/
   --scope=project           Link to project-level dirs: ./.claude/skills/
   --include-experimental    Also install experimental-tier skills (default: official+community only)
+  --picks                   Link only rank-1 (best-in-class) skills
+  --essentials              Link only rank-1 and rank-2 skills
 
 Commands:
   install          Symlink all stubs to detected agents (default)
@@ -667,7 +698,7 @@ Commands:
     --substr         Also report substring overlaps (broad triggers subsuming narrow ones)
   help             Show this message
 
-Skill tiers:  official (28)  community (35)  experimental (60)
+Skill tiers:  official ($cnt_official)  community ($cnt_community)  experimental ($cnt_experimental)
 User-scope agents:  claude  cursor  codex  opencode  droid
 Project-scope agents: claude  cursor  opencode
 HELP
