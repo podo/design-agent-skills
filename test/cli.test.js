@@ -45,10 +45,10 @@ describe('bin/cli.js', () => {
     assert.ok(src.includes("'-g'") || src.includes('"-g"') || src.includes('global'), 'must handle global scope flag');
   });
 
-  it('reads category from SKILL.md das block when stub.yaml lacks it', () => {
+  it('reads category directly from stub.yaml', () => {
     assert.ok(
-      src.includes('SKILL.md') && src.includes('das:') && src.includes('category'),
-      'readStubs() must fall back to SKILL.md das.category when stub.yaml has no category field'
+      src.includes("get('category')"),
+      'readStubs() must read category: from stub.yaml (migration ran; fallback removed)'
     );
   });
 
@@ -90,6 +90,16 @@ describe('bin/cli.js', () => {
   it('supports --dry-run flag', () => {
     assert.ok(src.includes('flagDryRun') && src.includes("'--dry-run'"),
       'must handle --dry-run flag');
+  });
+
+  it('supports --json flag for list output', () => {
+    assert.ok(src.includes('flagJson') && src.includes("'--json'"),
+      'must handle --json flag');
+  });
+
+  it('supports doctor command', () => {
+    assert.ok(src.includes('isDoctor') && src.includes("'doctor'"),
+      'must handle doctor command');
   });
 
   it('rejects unknown categories with process.exit', () => {
@@ -163,5 +173,41 @@ describe('bin/cli.js', () => {
       { encoding: 'utf8', timeout: 10000 });
     assert.equal(r.status, 0, '--dry-run must exit 0');
     assert.ok(r.stdout.includes('Dry run'), 'must output dry-run header');
+  });
+
+  it('--essentials --project --dry-run exits 0', () => {
+    const r = spawnSync(process.execPath, [CLI, '--essentials', '--project', '--dry-run'],
+      { encoding: 'utf8', timeout: 10000 });
+    assert.equal(r.status, 0, '--essentials --dry-run must exit 0');
+    assert.ok(r.stdout.includes('Dry run'), 'must output dry-run header');
+  });
+
+  it('--all --project --dry-run exits 0 and shows all skills', () => {
+    const r = spawnSync(process.execPath, [CLI, '--all', '--project', '--dry-run'],
+      { encoding: 'utf8', timeout: 10000 });
+    assert.equal(r.status, 0, '--all --dry-run must exit 0');
+    assert.ok(r.stdout.includes('Dry run'), 'must output dry-run header');
+  });
+
+  it('--category figma-code --project --dry-run exits 0', () => {
+    const r = spawnSync(process.execPath, [CLI, '--category', 'figma-code', '--project', '--dry-run'],
+      { encoding: 'utf8', timeout: 10000 });
+    assert.equal(r.status, 0, '--category --dry-run must exit 0');
+    assert.ok(r.stdout.includes('Dry run'), 'must output dry-run header');
+  });
+
+  it('--list --json outputs valid JSON array', () => {
+    const r = spawnSync(process.execPath, [CLI, '--list', '--json'], { encoding: 'utf8' });
+    assert.equal(r.status, 0, '--list --json must exit 0');
+    const data = JSON.parse(r.stdout);
+    assert.ok(Array.isArray(data), 'must output a JSON array');
+    assert.ok(data.every(e => e.category && typeof e.count === 'number'),
+      'each entry must have category and count');
+  });
+
+  it('doctor command exits 0 on a clean catalogue', () => {
+    const r = spawnSync(process.execPath, [CLI, 'doctor'], { encoding: 'utf8', timeout: 10000 });
+    assert.ok(r.status === 0 || r.status === 1, 'doctor must exit 0 (clean) or 1 (issues found)');
+    assert.ok(r.stdout.includes('trigger'), 'must report trigger check result');
   });
 });

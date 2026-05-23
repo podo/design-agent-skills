@@ -139,6 +139,12 @@ rank: 2               # REQUIRED (non-routers) — one of: 1 | 2 | 3 (see Rank a
 upstream: https://github.com/owner/repo   # REQUIRED for type:skill; forbidden for type:router
 upstream_path: SKILL.md                   # optional — path within repo to the SKILL.md
 version: latest       # always "latest"
+category: tui-terminal                    # REQUIRED — must match a VALID_CATEGORIES entry
+install_default: "npx skills add owner/repo"  # optional — override when install differs from upstream
+install_claude: "claude plugin install owner/repo"  # optional — Claude-specific install command
+install_npm: "npm install -g package"     # optional — npm global install for tools that ship as npm packages
+installed_as: <skill-name>                # optional — canonical install name when it differs from directory
+note: "..."                               # optional — maintainer annotation; never shown to agents
 ```
 
 ### Type selection
@@ -434,7 +440,7 @@ Catalogue grows from N → M skills.
 npm test
 ```
 
-2252 tests across 2 suites. All must pass before committing.
+2401 tests across 2 suites. All must pass before committing.
 
 ### What the tests check
 
@@ -501,6 +507,7 @@ mkdir skills/textual-tui-skill
 cat > skills/textual-tui-skill/stub.yaml << 'EOF'
 type: package
 tier: community
+category: tui-terminal
 rank: 2
 upstream: https://github.com/aperepel/textual-tui-skill
 version: latest

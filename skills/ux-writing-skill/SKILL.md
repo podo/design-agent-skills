@@ -17,7 +17,7 @@ triggers:
   - "ux-writing-skill"
 das:
   type: skill
-  category: visual-components
+  category: content-design
   upstream: "https://github.com/content-designer/ux-writing-skill"
   upstream_path: "SKILL.md"
   version: latest

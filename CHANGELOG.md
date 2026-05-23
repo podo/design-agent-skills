@@ -5,6 +5,34 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.3.0] — 2026-05-23
+
+### Added
+
+- **CLI: `doctor` command** — checks trigger phrase collisions across the full catalogue, reports broken symlinks in installed skills, and flags categories with no rank-1 entry. Exits 1 if issues found.
+- **CLI: `--json` flag on `--list`** — outputs categories + counts as a JSON array for scripting. `npx design-agent-skills --list --json`.
+- **CLI: experimental-tier warning** — when a filtered install set includes experimental-tier skills, a `⚠` warning is shown before installing.
+- **CI: `test.yml` — Validate README skills table step** — `generate-readme-table.mjs --check` runs on every PR; fails if the README Skills section drifts from stub data.
+- **CI: `upstream-check.yml` — rank-1 gap report** — weekly run now also reports categories with no rank-1 skill (warning only, does not fail).
+- **Branch protection** — `main` now requires the `validate` CI check to pass before merging.
+- **`npm version` hooks** — `preversion` runs `npm test`; `version` atomically writes `VERSION` and stages it. Running `npm version <X>` now handles both files safely.
+
+### Fixed
+
+- **`doctor` command** — was documented in README but not implemented; now works.
+- **`content-design` category — 0 skills** — `ux-writing-skill` was miscategorized as `visual-components`; fixed to `content-design`. `product-position` (B2B messaging/positioning) also moved from `product-pm` to `content-design`. Category now has 2 skills.
+- **6 categories with no rank-1 skill** — promoted one best-in-class skill per category: `remotion` (creative-3d), `emilkowalski-skill` (design-engineering), `email-html-mjml` (email-design), `interaction-design` (interaction-polish), `anthropics-skills` (official-suites), `textual-tui-skill` (tui-terminal).
+- **CLAUDE.md worked example** — `stub.yaml` in the worked example now includes `category: tui-terminal`.
+- **Undocumented stub.yaml fields** — `install_default`, `installed_as`, `note`, `install_claude`, `install_npm` are now documented in CLAUDE.md and allowed-listed in `stub.yaml field validation` test.
+
+### Changed
+
+- **`readStubs()`** — removed SKILL.md fallback for category (dead code after Q2 migration); now reads category directly from stub.yaml. Added `tier` field to returned stub objects.
+- **`test/stubs.test.js`** — added `stub.yaml field validation` suite (142 tests); unknown fields now fail CI immediately.
+- **`test/cli.test.js`** — 28 → 40 tests; added source-pattern coverage for `--json` and `doctor`, and integration tests for `--essentials`, `--all`, `--category` + `--dry-run`, `--list --json`, and `doctor`.
+- **README Skills section** — regenerated from `scripts/generate-readme-table.mjs`; now stays in sync via CI check.
+- **CLAUDE.md** — test count updated to 2401; stub.yaml fields section complete.
+
 ## [2.2.0] — 2026-05-23
 
 ### Added

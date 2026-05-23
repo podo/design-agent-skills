@@ -19,6 +19,9 @@ jobs:
       - name: Run test suite
         run: npm test
 
+      - name: Validate README skills table
+        run: node scripts/generate-readme-table.mjs --check
+
       - name: Validate README skill count
         run: |
           node --input-type=module << 'EOF'

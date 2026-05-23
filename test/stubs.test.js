@@ -220,6 +220,28 @@ describe('CLI data integrity', () => {
   });
 });
 
+describe('stub.yaml field validation', () => {
+  // Keep in sync with documented fields in CLAUDE.md stub.yaml section
+  // Keep in sync with documented fields in CLAUDE.md stub.yaml → Fields section
+  const KNOWN_FIELDS = new Set([
+    'type', 'tier', 'rank', 'category', 'upstream', 'upstream_path', 'version',
+    'install_default', 'installed_as', 'note', 'install_claude', 'install_npm',
+  ]);
+
+  for (const { name, stub } of skills) {
+    if (!stub) continue;
+    it(`${name}: no unknown stub.yaml fields`, () => {
+      const unknowns = stub
+        .split('\n')
+        .filter(l => /^[a-z_]+:/.test(l))
+        .map(l => l.match(/^([a-z_]+):/)[1])
+        .filter(k => !KNOWN_FIELDS.has(k));
+      assert.equal(unknowns.length, 0,
+        `unknown stub.yaml field(s): ${unknowns.join(', ')} — add to CLAUDE.md or KNOWN_FIELDS`);
+    });
+  }
+});
+
 describe('catalogue-level invariants', () => {
   it('has exactly 6 router skills', () => {
     const routers = skills.filter(s => s.stub && yamlGet(s.stub, 'type') === 'router');

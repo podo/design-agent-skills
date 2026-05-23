@@ -11,6 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Report rank-1 gaps (warning only)
+        run: |
+          node scripts/rank-audit.mjs | grep "← no rank-1" && echo "" && echo "Note: categories with no rank-1 skill listed above" || echo "OK — every category has a rank-1 skill"
+
       - name: Check upstream URLs are reachable
         run: |
           node --input-type=module << 'EOF'

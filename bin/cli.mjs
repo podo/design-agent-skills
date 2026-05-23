@@ -14,6 +14,7 @@ Usage: npx design-agent-skills [command] [options]
 Commands:
   install (default)   Interactive skill installer
   list                Show categories and skill counts
+  doctor              Check catalogue integrity and installed skill health
 
 Options:
   --picks             Rank-1 skills — best in class per category
@@ -23,6 +24,7 @@ Options:
   -g, --global        Install to user scope   (~/.agents/skills/)
   -p, --project       Install to project scope (.agents/skills/)
   --dry-run           Preview what would be installed, no changes made
+  --json              Output --list results as JSON (for scripting)
   -h, --help          Show this help
 
 Examples:
@@ -31,7 +33,9 @@ Examples:
   npx design-agent-skills --essentials            # full coverage, project
   npx design-agent-skills --category figma-code   # Figma skills only
   npx design-agent-skills --list                  # show all categories
+  npx design-agent-skills --list --json           # categories as JSON
   npx design-agent-skills --picks --dry-run       # preview without installing
+  npx design-agent-skills doctor                  # check catalogue health
 `;
 
 // Keep in sync with VALID_CATEGORIES in test/stubs.test.js
@@ -53,17 +57,7 @@ function readStubs() {
       if (!fs.existsSync(p)) return null;
       const raw = fs.readFileSync(p, 'utf8');
       const get = key => { const m = raw.match(new RegExp(`^${key}:\\s*(.+)$`, 'm')); return m ? m[1].trim() : null; };
-      // category lives in SKILL.md das: block, not stub.yaml — read it from there
-      let category = get('category');
-      if (!category) {
-        const md = path.join(SKILLS_DIR, name, 'SKILL.md');
-        if (fs.existsSync(md)) {
-          const mdRaw = fs.readFileSync(md, 'utf8');
-          const m = mdRaw.match(/^das:[\s\S]*?^\s+category:\s*(.+)$/m);
-          if (m) category = m[1].trim();
-        }
-      }
-      return { name, type: get('type'), rank: Number(get('rank')), category };
+      return { name, type: get('type'), tier: get('tier'), rank: Number(get('rank')), category: get('category') };
     })
     .filter(Boolean);
 }
@@ -213,6 +207,8 @@ const flagCat     = catArgIdx !== -1 ? args[catArgIdx + 1] : null;
 const flagHelp    = args.includes('--help') || args.includes('-h');
 const flagList    = args.includes('--list') || cmd === 'list';
 const flagDryRun  = args.includes('--dry-run');
+const flagJson    = args.includes('--json');
+const isDoctor    = cmd === 'doctor';
 const isInstall   = cmd === '' || cmd === 'install' || cmd.startsWith('-');
 const profileSet  = flagPicks || flagEss || flagAll || Boolean(flagCat);
 
@@ -225,13 +221,84 @@ if (flagList) {
   const stubs = readStubs();
   const cats  = [...VALID_CATEGORIES].filter(c => c !== 'meta').sort();
   const total = stubs.filter(s => s.type !== 'router').length;
-  process.stdout.write(`\ndesign-agent-skills — ${total} skills across ${cats.length} categories\n\n`);
-  for (const c of cats) {
-    const n = stubs.filter(s => s.type !== 'router' && s.category === c).length;
-    process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills\n`);
+  if (flagJson) {
+    const data = cats.map(c => ({
+      category: c,
+      count: stubs.filter(s => s.type !== 'router' && s.category === c).length,
+    }));
+    process.stdout.write(JSON.stringify(data, null, 2) + '\n');
+  } else {
+    process.stdout.write(`\ndesign-agent-skills — ${total} skills across ${cats.length} categories\n\n`);
+    for (const c of cats) {
+      const n = stubs.filter(s => s.type !== 'router' && s.category === c).length;
+      process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills\n`);
+    }
+    process.stdout.write('\n');
   }
-  process.stdout.write('\n');
   process.exit(0);
+}
+
+if (isDoctor) {
+  const stubs = readStubs();
+  let issues = 0;
+
+  // 1. Trigger collision detection
+  const seen = new Map();
+  const dupes = [];
+  for (const name of fs.readdirSync(SKILLS_DIR)) {
+    const md = path.join(SKILLS_DIR, name, 'SKILL.md');
+    if (!fs.existsSync(md)) continue;
+    const content = fs.readFileSync(md, 'utf8');
+    const fm = (content.match(/^---\n([\s\S]*?)\n---/) || [])[1] || '';
+    const block = fm.match(/^triggers:\n((?:  - .+\n?)+)/m);
+    if (!block) continue;
+    for (const line of block[1].trim().split('\n')) {
+      const t = line.replace(/^\s*-\s*/, '').replace(/^["']|["']$/g, '').trim();
+      if (seen.has(t)) dupes.push(`  dup trigger "${t}": ${seen.get(t)} ↔ ${name}`);
+      else seen.set(t, name);
+    }
+  }
+  if (dupes.length) {
+    process.stdout.write(`\n✗ ${dupes.length} duplicate trigger phrase(s):\n${dupes.join('\n')}\n`);
+    issues += dupes.length;
+  } else {
+    process.stdout.write(`\n✓ No duplicate triggers (${seen.size} phrases across ${stubs.length} skills)\n`);
+  }
+
+  // 2. Installed skill health (global + project)
+  const checkDir = dir => {
+    if (!fs.existsSync(dir)) return;
+    for (const name of fs.readdirSync(dir)) {
+      const skillPath = path.join(dir, name);
+      const stat = fs.lstatSync(skillPath);
+      if (stat.isSymbolicLink()) {
+        const target = fs.readlinkSync(skillPath);
+        if (!fs.existsSync(skillPath)) {
+          process.stdout.write(`  ✗ broken symlink: ${skillPath} → ${target}\n`);
+          issues++;
+        }
+      }
+    }
+  };
+  const home = process.env.HOME || process.env.USERPROFILE || '';
+  process.stdout.write('\nInstalled skills:\n');
+  checkDir(path.join(home, '.agents', 'skills'));
+  checkDir(path.join('.agents', 'skills'));
+  if (issues === 0) process.stdout.write('  ✓ no broken symlinks found\n');
+
+  // 3. Category gaps
+  const noR1 = [...VALID_CATEGORIES].filter(c => c !== 'meta').filter(c => {
+    return !stubs.some(s => s.type !== 'router' && s.category === c && s.rank === 1);
+  });
+  if (noR1.length) {
+    process.stdout.write(`\nWarning: ${noR1.length} category(ies) with no rank-1 skill:\n`);
+    for (const c of noR1) process.stdout.write(`  - ${c}\n`);
+  } else {
+    process.stdout.write('\n✓ Every category has a rank-1 skill\n');
+  }
+
+  process.stdout.write('\n');
+  process.exit(issues > 0 ? 1 : 0);
 }
 
 if (!isInstall) {
@@ -342,6 +409,11 @@ async function main() {
     for (const s of filtered) process.stdout.write(`  ${s.name}\n`);
     process.stdout.write('\n');
     process.exit(0);
+  }
+
+  const expCount = filtered.filter(s => s.tier === 'experimental').length;
+  if (expCount > 0) {
+    w(`${S.bar}  ${A.yellow}⚠${A.reset}  ${A.dim}${expCount} experimental skill(s) included — verify before use${A.reset}\n${S.bar}\n`);
   }
 
   installSkills(filtered.map(s => s.name), scope);

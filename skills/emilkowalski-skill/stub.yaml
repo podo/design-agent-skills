@@ -1,7 +1,7 @@
 type: package
 tier: community
 category: design-engineering
-rank: 2
+rank: 1
 upstream: https://github.com/emilkowalski/skill
 version: latest
 install_default: "npx skills add emilkowalski/skill"

@@ -1,7 +1,7 @@
 type: skill
 tier: official
 category: creative-3d
-rank: 2
+rank: 1
 upstream: https://github.com/remotion-dev/skills
 upstream_path: skills/remotion/SKILL.md
 version: latest

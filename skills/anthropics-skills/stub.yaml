@@ -1,7 +1,7 @@
 type: package
 tier: official
 category: official-suites
-rank: 2
+rank: 1
 upstream: https://github.com/anthropics/skills
 version: latest
 install_default: "npx skills add anthropics/<skill>"

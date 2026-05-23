@@ -1,6 +1,6 @@
 {
   "name": "design-agent-skills",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and Droid",
   "bin": {
     "design-agent-skills": "bin/cli.mjs"
@@ -9,7 +9,9 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node --test --experimental-test-coverage test/*.test.js"
+    "test": "node --test --experimental-test-coverage test/*.test.js",
+    "preversion": "npm test",
+    "version": "echo $npm_new_version > VERSION && git add VERSION"
   },
   "type": "module",
   "keywords": [

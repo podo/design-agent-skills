@@ -15,7 +15,7 @@ triggers:
   - "strategic narrative"
 das:
   type: skill
-  category: product-pm
+  category: content-design
   upstream: "https://github.com/firatcand/founder-skills"
   version: latest
 ---

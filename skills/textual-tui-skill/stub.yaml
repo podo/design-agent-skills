@@ -1,6 +1,6 @@
 type: package
 tier: community
 category: tui-terminal
-rank: 2
+rank: 1
 upstream: https://github.com/aperepel/textual-tui-skill
 version: latest

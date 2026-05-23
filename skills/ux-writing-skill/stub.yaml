@@ -1,6 +1,6 @@
 type: skill
 tier: community
-category: visual-components
+category: content-design
 rank: 1
 upstream: https://github.com/content-designer/ux-writing-skill
 upstream_path: SKILL.md
