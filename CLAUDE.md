@@ -54,7 +54,7 @@ README.md       — skills table, router table, supply chain section
 7. Run `npm test` — must pass 100%
 8. Bump version (see versioning section)
 9. Commit and push to `main`
-10. Create a GitHub release (`gh release create`) with the CHANGELOG body — CI automatically attaches the skills zip and publishes to npm
+10. Push the version tag (`git tag v<version> && git push origin v<version>`) — CI creates the release with the skills zip and publishes to npm automatically
 
 ---
 
@@ -378,41 +378,30 @@ npm version 1.7.0 --no-git-tag-version
 
 ### Creating a GitHub release
 
-After pushing the version bump, create a GitHub release. Use the CHANGELOG entry as the release body.
+After pushing to main, **push the version tag**. CI does everything else — it runs tests, builds the skills-only zip, creates the GitHub release with the zip attached, and publishes to npm.
 
 ```bash
-gh release create v<version> \
-  --title "v<version> — Short description of what's new" \
-  --latest \
-  --notes "$(cat <<'EOF'
-## Added
-
-- **`skill-name`** — One-line description. (`owner/repo`, N ★)
-
-## Changed
-
-- **`router-name` router** — What changed.
-
-Catalogue grows from N → M skills.
-EOF
-)"
+git tag v<version>
+git push origin v<version>
 ```
+
+That's it. Do **not** run `gh release create` manually — it creates a release before the zip is ready, and GitHub marks that release immutable (no further asset uploads allowed).
 
 **Rules:**
 - Tag must match the `VERSION` file exactly (e.g. `v1.7.0`)
-- Always pass `--latest` on the newest release so GitHub surfaces it correctly
-- Copy the body verbatim from `CHANGELOG.md` — no paraphrasing
-- Create the release **after** pushing to main (the tag must exist on the remote)
+- Push the tag **after** the version bump commit is on `main`
+- The CHANGELOG entry for the tagged version is extracted automatically for the release body
 
-### What GitHub Actions does automatically on release
+### What GitHub Actions does automatically on tag push
 
-The `.github/workflows/publish.yml` workflow fires on every `gh release create` and:
+The `.github/workflows/publish.yml` workflow fires on every `git push origin v*` and:
 
 1. Runs `npm test` — must pass before anything publishes
-2. Attaches a **skills-only zip** (`design-agent-skills-vX.Y.Z.zip`) to the release — contains only `skills/`, no source code
-3. Publishes to **npm** via Trusted Publishing (OIDC — no token secret required)
+2. Builds a **skills-only zip** (`design-agent-skills-vX.Y.Z.zip`) — contains only `skills/`, no source code
+3. Creates the GitHub release with the zip attached and notes from `CHANGELOG.md`
+4. Publishes to **npm** via Trusted Publishing (OIDC — no token secret required)
 
-**You do not need to run `npm publish` manually.** Creating the GitHub release is the only trigger needed.
+**You do not need to run `npm publish` or `gh release create` manually.** Pushing the tag is the only trigger needed.
 
 **Never** `npm publish` by hand — it will conflict with the workflow if the version is already in flight, and it bypasses the test gate.
 
