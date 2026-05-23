@@ -5,6 +5,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.1.2] — 2026-05-23
+
+### Fixed
+
+- **Category TUI** — all categories showed 0 skills and installs returned "No skills match". Root cause: `readStubs()` read `category` from `stub.yaml`, but all 142 stubs store category in `SKILL.md` frontmatter under `das.category`. CLI now falls back to SKILL.md when `stub.yaml` has no `category` field.
+- **CI** — npm OIDC Trusted Publishing failed with misleading E404 because Node 20 ships npm v10, which doesn't implement the OIDC handshake. Switched to Node 24 (npm v11).
+
+---
+
 ## [2.1.1] — 2026-05-23
 
 ### Fixed
