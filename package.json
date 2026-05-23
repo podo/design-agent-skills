@@ -9,7 +9,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node --test --experimental-test-coverage test/*.test.js",
+    "test": "node --test --experimental-test-coverage test/stubs.test.js test/cli.test.js test/install.test.js",
     "preversion": "npm test",
     "version": "echo $npm_new_version > VERSION && git add VERSION"
   },

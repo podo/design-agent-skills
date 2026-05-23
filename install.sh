@@ -53,9 +53,9 @@ detected_agents() {
   agent_list_for_scope | grep -v '^$' | while IFS=: read -r name root _skills; do
     if [ "$SCOPE" = "project" ]; then
       # Project scope: include if the config dir exists OR we're creating it
-      [ -d "$(dirname "$root")" ] && echo "$name:$root:$_skills"
+      [ -d "$(dirname "$root")" ] && echo "$name:$root:$_skills" || true
     else
-      [ -d "$root" ] && echo "$name:$root:$_skills"
+      [ -d "$root" ] && echo "$name:$root:$_skills" || true
     fi
   done
 }
