@@ -8,11 +8,13 @@ const PACKAGE    = 'podo/design-agent-skills';
 const ROOT       = path.resolve(fileURLToPath(import.meta.url), '../../');
 const SKILLS_DIR = path.join(ROOT, 'skills');
 
+// Keep in sync with VALID_CATEGORIES in test/stubs.test.js
 const VALID_CATEGORIES = new Set([
   'design-systems', 'creative-3d', 'interaction-polish', 'visual-components',
   'accessibility-quality', 'design-review', 'figma-code', 'official-suites',
   'diagrams', 'data-visualization', 'presentations', 'product-pm',
   'content-design', 'email-design', 'tui-terminal', 'meta',
+  'motion-animation', 'design-engineering', 'design-research',
 ]);
 
 // ── stub reader ───────────────────────────────────────────────────────────────

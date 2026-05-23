@@ -178,7 +178,7 @@ describe('type:skill upgrade commands', () => {
 });
 
 describe('CLI data integrity', () => {
-  // Keep in sync with VALID_CATEGORIES in bin/cli.mjs
+  // Keep in sync with VALID_CATEGORIES in bin/cli.mjs — update both together
   const VALID_CATEGORIES = new Set([
     'design-systems', 'creative-3d', 'interaction-polish', 'visual-components',
     'accessibility-quality', 'design-review', 'figma-code', 'official-suites',

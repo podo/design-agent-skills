@@ -1,0 +1,49 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Run test suite
+        run: npm test
+
+      - name: Check for duplicate trigger phrases
+        run: |
+          node --input-type=module << 'EOF'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { fileURLToPath } from 'node:url';
+          const SKILLS_DIR = path.resolve('.', 'skills');
+          const seen = new Map();
+          const dupes = [];
+          for (const name of fs.readdirSync(SKILLS_DIR)) {
+            const md = path.join(SKILLS_DIR, name, 'SKILL.md');
+            if (!fs.existsSync(md)) continue;
+            const content = fs.readFileSync(md, 'utf8');
+            const fm = (content.match(/^---\n([\s\S]*?)\n---/) || [])[1] || '';
+            const block = fm.match(/^triggers:\n((?:  - .+\n?)+)/m);
+            if (!block) continue;
+            for (const line of block[1].trim().split('\n')) {
+              const t = line.replace(/^\s*-\s*/, '').replace(/^["']|["']$/g, '').trim();
+              if (seen.has(t)) dupes.push(`"${t}" on ${seen.get(t)} and ${name}`);
+              else seen.set(t, name);
+            }
+          }
+          if (dupes.length) {
+            console.error('Duplicate triggers found:\n  ' + dupes.join('\n  '));
+            process.exit(1);
+          }
+          console.log(`OK — no duplicate triggers across ${seen.size} trigger phrases`);
+          EOF
