@@ -5,6 +5,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.4.0] — 2026-05-23
+
+### Added
+
+- **CLI: `add <skill>` command** — `npx design-agent-skills add <skill-name> [-g]` installs a single skill by name without opening the TUI.
+- **CLI: `CATEGORY_DESCRIPTIONS`** — `--list` now shows a short description alongside each category's skill count. `--list --json` includes a `description` field per entry.
+- **`install.sh --picks`** — new global flag; only links rank-1 (best-in-class) skills when running `install`.
+- **`install.sh --essentials`** — new global flag; only links rank-1 and rank-2 skills.
+- **`install.sh help` computed tier counts** — official/community/experimental counts are now computed at runtime instead of hardcoded, staying accurate as skills are added.
+- **`scripts/add-skill.mjs`** — interactive wizard for adding new skill stubs. Accepts all fields via CLI flags (`--name`, `--upstream`, `--category`, `--tier`, `--rank`, `--type`, `--yes`, `--dry-run`) for scripted use; prompts for any missing fields interactively.
+- **`test/install.test.js`** — first test coverage for `install.sh`: 19 tests covering help output, install command with HOME isolation, `--picks`/`--essentials` rank profiles, and doctor command.
+
+### Fixed
+
+- **`install.sh` detected_agents bug** — `[ -d "$root" ] && echo` in the while loop body exits 1 when an agent's root dir doesn't exist; with `set -euo pipefail` this killed the script on systems where the last agent in `USER_AGENTS` is not installed. Fixed by adding `|| true` to each `&&` chain in `detected_agents()`.
+
 ## [2.3.0] — 2026-05-23
 
 ### Added
