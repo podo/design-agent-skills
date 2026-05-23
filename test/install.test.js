@@ -183,3 +183,120 @@ describe('install.sh — doctor command', () => {
     assert.ok(r.stdout.includes('trigger'), 'doctor must report trigger check');
   });
 });
+
+describe('install.sh — status command', () => {
+  it('status exits 0 with no agents (prints no-agents message)', () => {
+    // Empty HOME has no agent dirs → "No supported agents found." + exit 0
+    const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'das-empty-'));
+    try {
+      const r = run(['status'], { home: empty });
+      assert.equal(r.status, 0, `status must exit 0, stderr: ${r.stderr}`);
+    } finally {
+      fs.rmSync(empty, { recursive: true, force: true });
+    }
+  });
+
+  it('status exits 0 with claude agent dir present', () => {
+    const tmp = makeTempHome();
+    try {
+      const r = run(['status'], { home: tmp });
+      assert.equal(r.status, 0, `status must exit 0, stderr: ${r.stderr}`);
+    } finally {
+      cleanup(tmp);
+    }
+  });
+
+  it('status output contains skill column header', () => {
+    const tmp = makeTempHome();
+    try {
+      const r = run(['status'], { home: tmp });
+      assert.ok(r.stdout.includes('skill'), 'status must print "skill" column header');
+    } finally {
+      cleanup(tmp);
+    }
+  });
+
+  it('status output contains tier column header', () => {
+    const tmp = makeTempHome();
+    try {
+      const r = run(['status'], { home: tmp });
+      assert.ok(r.stdout.includes('tier'), 'status must print "tier" column header');
+    } finally {
+      cleanup(tmp);
+    }
+  });
+});
+
+describe('install.sh — remove command', () => {
+  it('remove without args exits 1 and prints usage', () => {
+    const r = run(['remove']);
+    assert.equal(r.status, 1, 'remove without args must exit 1');
+    assert.ok(r.stdout.includes('Usage'), 'remove without args must print usage');
+  });
+
+  it('remove unknown skill exits 1', () => {
+    const tmp = makeTempHome();
+    try {
+      const r = run(['remove', 'not-a-real-skill-xyz'], { home: tmp });
+      assert.equal(r.status, 1, 'remove unknown skill must exit 1');
+      assert.ok(r.stdout.includes('Unknown skill'), 'must print "Unknown skill" message');
+    } finally {
+      cleanup(tmp);
+    }
+  });
+
+  it('remove <skill> after install removes the symlink', () => {
+    const tmp = makeTempHome();
+    try {
+      // Install first
+      run(['install'], { home: tmp });
+      const skillsDir = path.join(tmp, '.claude', 'skills');
+      const links = fs.readdirSync(skillsDir);
+      assert.ok(links.length > 0, 'need at least one skill installed to test remove');
+
+      const skillName = links[0];
+      const linkPath  = path.join(skillsDir, skillName);
+      assert.ok(fs.lstatSync(linkPath).isSymbolicLink(), `${skillName} must be a symlink`);
+
+      const r = run(['remove', skillName], { home: tmp });
+      assert.equal(r.status, 0, `remove ${skillName} must exit 0, stderr: ${r.stderr}`);
+      assert.ok(!fs.existsSync(linkPath), `symlink for ${skillName} must be gone after remove`);
+    } finally {
+      cleanup(tmp);
+    }
+  });
+
+  it('remove --all after install removes all symlinks', () => {
+    const tmp = makeTempHome();
+    try {
+      run(['install'], { home: tmp });
+      const skillsDir = path.join(tmp, '.claude', 'skills');
+      const before = fs.readdirSync(skillsDir).length;
+      assert.ok(before > 0, 'need skills installed before testing remove --all');
+
+      const r = run(['remove', '--all'], { home: tmp });
+      assert.equal(r.status, 0, `remove --all must exit 0, stderr: ${r.stderr}`);
+
+      const after = fs.readdirSync(skillsDir).filter(n =>
+        fs.lstatSync(path.join(skillsDir, n)).isSymbolicLink()
+      ).length;
+      assert.equal(after, 0, 'remove --all must remove all symlinks');
+    } finally {
+      cleanup(tmp);
+    }
+  });
+
+  it('remove reports count of links removed', () => {
+    const tmp = makeTempHome();
+    try {
+      run(['install'], { home: tmp });
+      const skillsDir = path.join(tmp, '.claude', 'skills');
+      const skillName = fs.readdirSync(skillsDir)[0];
+
+      const r = run(['remove', skillName], { home: tmp });
+      assert.ok(r.stdout.includes('removed'), 'remove must report removed count or path');
+    } finally {
+      cleanup(tmp);
+    }
+  });
+});
