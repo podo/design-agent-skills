@@ -1,8 +1,9 @@
 name: Publish to npm
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   publish:
@@ -30,11 +31,30 @@ jobs:
 
       - name: Build skills-only zip
         run: |
-          TAG=${{ github.event.release.tag_name }}
+          TAG=${{ github.ref_name }}
           git archive --format=zip HEAD skills/ > design-agent-skills-${TAG}.zip
 
-      - name: Attach skills zip to release
-        run: gh release upload ${{ github.event.release.tag_name }} design-agent-skills-${{ github.event.release.tag_name }}.zip
+      - name: Extract release notes from CHANGELOG
+        id: notes
+        run: |
+          TAG=${{ github.ref_name }}
+          VERSION="${TAG#v}"
+          # Extract the section for this version from CHANGELOG.md
+          awk "/^## \[${VERSION}\]/{found=1; next} found && /^## \[/{exit} found{print}" CHANGELOG.md > release-notes.md
+          # If no section found, use a minimal default
+          if [ ! -s release-notes.md ]; then
+            echo "Release ${TAG}" > release-notes.md
+          fi
+          echo "notes_file=release-notes.md" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release with skills zip
+        run: |
+          TAG=${{ github.ref_name }}
+          gh release create "${TAG}" \
+            "design-agent-skills-${TAG}.zip" \
+            --title "${TAG}" \
+            --notes-file release-notes.md \
+            --latest
         env:
           GH_TOKEN: ${{ github.token }}
 
