@@ -26,21 +26,21 @@ npx design-agent-skills
 ◆  User scope
 │
 ◇  Which profile?
-│  ● Picks        18 skills  ★ best in class
+│  ● Picks        24 skills  ★ best in class
 │  ○ Essentials   77 skills    full coverage
 │  ○ All         136 skills    everything
 │  ○ Category →  pick a domain
 └
 
-◆  Picks — 18 skills
+◆  Picks — 24 skills
 │
-◆  Installing 18 skills…
+◆  Installing 24 skills…
 │  ✓ taste-skill
 │  ✓ ui-craft
 │  ✓ gsap-skills
 │  …
 │
-◆  Done — 18 skills in 4.2s
+◆  Done — 24 skills in 4.2s
 ```
 
 Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
@@ -49,12 +49,12 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
-| **Picks** ★ | `--picks` | 18 | One best-in-class per category. Start here. |
+| **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
 | **Essentials** | `--essentials` | ~77 | Full coverage, no redundancy. |
 | **All** | `--all` | 136 | Everything including niche and experimental. |
 
 ```bash
-npx design-agent-skills --picks -g          # 18 best-in-class skills, global
+npx design-agent-skills --picks -g          # 24 best-in-class skills, global
 npx design-agent-skills --essentials -g     # ~77 skills covering all categories
 npx design-agent-skills --all -g            # all 136 (default when no flag)
 ```
