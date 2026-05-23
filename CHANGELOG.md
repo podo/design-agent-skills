@@ -5,6 +5,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.5.1] — 2026-05-23
+
+### Fixed
+
+- Re-tag from v2.5.0 → v2.5.1 after v2.5.0 was tombstoned by GitHub when a partial release was deleted. No code changes.
+
+---
+
 ## [2.5.0] — 2026-05-23
 
 ### Added
