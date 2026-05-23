@@ -25,7 +25,17 @@ function readStubs() {
       if (!fs.existsSync(p)) return null;
       const raw = fs.readFileSync(p, 'utf8');
       const get = key => { const m = raw.match(new RegExp(`^${key}:\\s*(.+)$`, 'm')); return m ? m[1].trim() : null; };
-      return { name, type: get('type'), rank: Number(get('rank')), category: get('category') };
+      // category lives in SKILL.md das: block, not stub.yaml — read it from there
+      let category = get('category');
+      if (!category) {
+        const md = path.join(SKILLS_DIR, name, 'SKILL.md');
+        if (fs.existsSync(md)) {
+          const mdRaw = fs.readFileSync(md, 'utf8');
+          const m = mdRaw.match(/^das:[\s\S]*?^\s+category:\s*(.+)$/m);
+          if (m) category = m[1].trim();
+        }
+      }
+      return { name, type: get('type'), rank: Number(get('rank')), category };
     })
     .filter(Boolean);
 }
