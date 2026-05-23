@@ -102,6 +102,25 @@ describe('bin/cli.js', () => {
       'must handle doctor command');
   });
 
+  it('supports add command', () => {
+    assert.ok(src.includes('isAdd') && src.includes("'add'") && src.includes('addName'),
+      'must handle add command with skill name argument');
+  });
+
+  it('has CATEGORY_DESCRIPTIONS for all 19 categories', () => {
+    assert.ok(src.includes('CATEGORY_DESCRIPTIONS'),
+      'must define CATEGORY_DESCRIPTIONS constant');
+    const expected = [
+      'design-systems', 'creative-3d', 'interaction-polish', 'visual-components',
+      'accessibility-quality', 'design-review', 'figma-code', 'official-suites',
+      'diagrams', 'data-visualization', 'presentations', 'product-pm',
+      'content-design', 'email-design', 'tui-terminal', 'meta',
+      'motion-animation', 'design-engineering', 'design-research',
+    ];
+    const missing = expected.filter(c => !src.includes(`'${c}'`));
+    assert.equal(missing.length, 0, `CATEGORY_DESCRIPTIONS missing entries: ${missing.join(', ')}`);
+  });
+
   it('rejects unknown categories with process.exit', () => {
     assert.ok(src.includes('VALID_CATEGORIES') && src.includes('process.exit'),
       'must validate category flag against VALID_CATEGORIES and exit on unknown');
@@ -203,6 +222,14 @@ describe('bin/cli.js', () => {
     assert.ok(Array.isArray(data), 'must output a JSON array');
     assert.ok(data.every(e => e.category && typeof e.count === 'number'),
       'each entry must have category and count');
+    assert.ok(data.every(e => typeof e.description === 'string'),
+      'each entry must have a description string');
+  });
+
+  it('add without skill name exits 1 with usage hint', () => {
+    const r = spawnSync(process.execPath, [CLI, 'add'], { encoding: 'utf8' });
+    assert.equal(r.status, 1, 'add with no skill name must exit 1');
+    assert.ok(r.stderr.includes('add <skill-name>'), 'must print usage hint');
   });
 
   it('doctor command exits 0 on a clean catalogue', () => {
