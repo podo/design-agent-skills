@@ -58,6 +58,21 @@ README.md       — skills table, router table, supply chain section
 
 ---
 
+## Fixing bugs — checklist
+
+1. Reproduce the bug and identify the root cause
+2. Fix it
+3. **Add a regression test** that would have caught the bug before the fix:
+   - Data bugs (missing fields, wrong values in stub.yaml / SKILL.md) → `test/stubs.test.js`
+   - CLI behaviour bugs (wrong counts, wrong filtering, wrong commands) → `test/cli.test.js`
+4. Run `npm test` — must pass 100%
+5. Bump the patch version (see versioning section)
+6. Commit the fix and the test together
+
+Do not close a bug fix without a test. The test is proof the bug is fixed and stays fixed.
+
+---
+
 ## Evaluation criteria — what makes a good skill
 
 ### Accept if all of these are true

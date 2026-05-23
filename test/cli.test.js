@@ -31,4 +31,14 @@ describe('bin/cli.js', () => {
     const src = fs.readFileSync(CLI, 'utf8');
     assert.ok(src.includes("'-g'") || src.includes('"-g"') || src.includes('global'), 'must handle global scope flag');
   });
+
+  it('reads category from SKILL.md das block when stub.yaml lacks it', () => {
+    const src = fs.readFileSync(CLI, 'utf8');
+    // Regression: all stub.yaml files have no category field — readStubs() must
+    // fall back to the das.category in SKILL.md or every category shows 0 skills
+    assert.ok(
+      src.includes('SKILL.md') && src.includes('das:') && src.includes('category'),
+      'readStubs() must fall back to SKILL.md das.category when stub.yaml has no category field'
+    );
+  });
 });

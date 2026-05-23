@@ -177,6 +177,49 @@ describe('type:skill upgrade commands', () => {
   }
 });
 
+describe('CLI data integrity', () => {
+  // Keep in sync with VALID_CATEGORIES in bin/cli.mjs
+  const VALID_CATEGORIES = new Set([
+    'design-systems', 'creative-3d', 'interaction-polish', 'visual-components',
+    'accessibility-quality', 'design-review', 'figma-code', 'official-suites',
+    'diagrams', 'data-visualization', 'presentations', 'product-pm',
+    'content-design', 'email-design', 'tui-terminal', 'meta',
+    'motion-animation', 'design-engineering', 'design-research',
+  ]);
+
+  for (const { name, stub, fm } of skills) {
+    if (!stub || !fm) continue;
+    const type = yamlGet(stub, 'type');
+    if (type === 'router') continue;
+
+    it(`${name}: SKILL.md has das.category`, () => {
+      const m = fm.match(/^das:[\s\S]*?^\s+category:\s*(.+)$/m);
+      assert.ok(m, 'SKILL.md must have das.category so the CLI category filter works');
+      assert.ok(m[1].trim().length > 0, 'das.category must not be empty');
+    });
+
+    it(`${name}: das.category is a known category`, () => {
+      const m = fm.match(/^das:[\s\S]*?^\s+category:\s*(.+)$/m);
+      if (!m) return; // caught by previous test
+      assert.ok(
+        VALID_CATEGORIES.has(m[1].trim()),
+        `das.category "${m[1].trim()}" is not in VALID_CATEGORIES — add it to both SKILL.md and bin/cli.mjs`
+      );
+    });
+  }
+
+  it('every non-router skill has a resolvable category', () => {
+    const missing = skills.filter(({ stub, fm }) => {
+      if (!stub || !fm) return false;
+      if (yamlGet(stub, 'type') === 'router') return false;
+      const m = fm.match(/^das:[\s\S]*?^\s+category:\s*(.+)$/m);
+      return !m || !m[1].trim();
+    }).map(s => s.name);
+    assert.equal(missing.length, 0,
+      `skills with no resolvable category (CLI filter returns 0): ${missing.join(', ')}`);
+  });
+});
+
 describe('catalogue-level invariants', () => {
   it('has exactly 6 router skills', () => {
     const routers = skills.filter(s => s.stub && yamlGet(s.stub, 'type') === 'router');
