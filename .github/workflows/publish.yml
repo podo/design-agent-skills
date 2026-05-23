@@ -8,7 +8,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -19,5 +19,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - run: npm test
+
+      - name: Build skills-only zip
+        run: |
+          TAG=${{ github.event.release.tag_name }}
+          git archive --format=zip HEAD skills/ > design-agent-skills-${TAG}.zip
+
+      - name: Attach skills zip to release
+        run: gh release upload ${{ github.event.release.tag_name }} design-agent-skills-${{ github.event.release.tag_name }}.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - run: npm publish --access public --provenance
