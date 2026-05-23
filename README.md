@@ -88,8 +88,12 @@ npx skills list -g                            # global skills only
 npx skills remove <skill>                     # remove a specific skill
 npx skills remove --all                       # remove everything
 
-# Health checks (catalogue-specific)
+# Catalogue-specific commands
+npx design-agent-skills search <query>        # find skills by name or category
+npx design-agent-skills add <skill> -g        # install one skill by name, globally
+npx design-agent-skills --list                # show categories and skill counts
 npx design-agent-skills doctor                # trigger collisions + symlink health
+npx design-agent-skills --version             # print catalogue version
 ```
 
 ### How skills install on demand
@@ -98,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (122 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (136 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
