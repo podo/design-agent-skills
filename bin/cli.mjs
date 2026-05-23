@@ -14,8 +14,10 @@ Usage: npx design-agent-skills [command] [options]
 Commands:
   install (default)   Interactive skill installer
   add <skill>         Install a single skill by name
+  search <query>      Search skills by name or category
   list                Show categories and skill counts
   doctor              Check catalogue integrity and installed skill health
+  version             Print catalogue version
 
 Options:
   --picks             Rank-1 skills — best in class per category
@@ -26,11 +28,13 @@ Options:
   -p, --project       Install to project scope (.agents/skills/)
   --dry-run           Preview what would be installed, no changes made
   --json              Output --list results as JSON (for scripting)
+  --version           Print catalogue version
   -h, --help          Show this help
 
 Examples:
   npx design-agent-skills                         # interactive TUI
   npx design-agent-skills add remotion -g         # install one skill, global
+  npx design-agent-skills search figma            # find Figma-related skills
   npx design-agent-skills --picks -g              # top skills, global
   npx design-agent-skills --essentials            # full coverage, project
   npx design-agent-skills --category figma-code   # Figma skills only
@@ -38,6 +42,7 @@ Examples:
   npx design-agent-skills --list --json           # categories as JSON
   npx design-agent-skills --picks --dry-run       # preview without installing
   npx design-agent-skills doctor                  # check catalogue health
+  npx design-agent-skills version                 # print version
 `;
 
 // Keep in sync with VALID_CATEGORIES in test/stubs.test.js
@@ -229,14 +234,23 @@ const flagProject = args.some(a => a === '-p' || a === '--project');
 const catArgIdx   = args.indexOf('--category');
 const flagCat     = catArgIdx !== -1 ? args[catArgIdx + 1] : null;
 const flagHelp    = args.includes('--help') || args.includes('-h');
+const flagVersion = args.includes('--version') || cmd === 'version';
 const flagList    = args.includes('--list') || cmd === 'list';
 const flagDryRun  = args.includes('--dry-run');
 const flagJson    = args.includes('--json');
 const isDoctor    = cmd === 'doctor';
 const isAdd       = cmd === 'add';
 const addName     = isAdd ? args.slice(1).find(a => !a.startsWith('-')) ?? null : null;
+const isSearch    = cmd === 'search';
+const searchQuery = isSearch ? args.slice(1).find(a => !a.startsWith('-')) ?? null : null;
 const isInstall   = cmd === '' || cmd === 'install' || cmd.startsWith('-');
 const profileSet  = flagPicks || flagEss || flagAll || Boolean(flagCat);
+
+if (flagVersion) {
+  const version = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf8').trim();
+  process.stdout.write(`design-agent-skills ${version}\n`);
+  process.exit(0);
+}
 
 if (flagHelp) {
   process.stdout.write(HELP);
@@ -260,6 +274,32 @@ if (flagList) {
       const n    = stubs.filter(s => s.type !== 'router' && s.category === c).length;
       const desc = CATEGORY_DESCRIPTIONS[c] ?? '';
       process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills   ${desc}\n`);
+    }
+    process.stdout.write('\n');
+  }
+  process.exit(0);
+}
+
+if (isSearch) {
+  if (!searchQuery) {
+    console.error('Usage: npx design-agent-skills search <query>');
+    process.exit(1);
+  }
+  const q = searchQuery.toLowerCase();
+  const stubs = readStubs();
+  const matches = stubs.filter(s =>
+    s.type !== 'router' &&
+    (s.name.toLowerCase().includes(q) || (s.category || '').toLowerCase().includes(q))
+  );
+  if (flagJson) {
+    process.stdout.write(JSON.stringify(matches, null, 2) + '\n');
+  } else if (matches.length === 0) {
+    process.stdout.write(`No skills found matching "${searchQuery}"\n`);
+  } else {
+    process.stdout.write(`\n${matches.length} skill(s) matching "${searchQuery}":\n\n`);
+    for (const s of matches) {
+      const rankStr = s.rank ? `rank-${s.rank}` : '';
+      process.stdout.write(`  ${s.name.padEnd(30)} ${s.category.padEnd(22)} ${rankStr}\n`);
     }
     process.stdout.write('\n');
   }

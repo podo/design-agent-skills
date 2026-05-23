@@ -107,6 +107,17 @@ describe('bin/cli.js', () => {
       'must handle add command with skill name argument');
   });
 
+  it('supports --version flag and version command', () => {
+    assert.ok(src.includes('flagVersion') && src.includes("'--version'"),
+      'must handle --version flag');
+    assert.ok(src.includes("'version'"), 'must handle version command');
+  });
+
+  it('supports search command', () => {
+    assert.ok(src.includes('isSearch') && src.includes("'search'") && src.includes('searchQuery'),
+      'must handle search command with query argument');
+  });
+
   it('has CATEGORY_DESCRIPTIONS for all 19 categories', () => {
     assert.ok(src.includes('CATEGORY_DESCRIPTIONS'),
       'must define CATEGORY_DESCRIPTIONS constant');
@@ -236,5 +247,44 @@ describe('bin/cli.js', () => {
     const r = spawnSync(process.execPath, [CLI, 'doctor'], { encoding: 'utf8', timeout: 10000 });
     assert.ok(r.status === 0 || r.status === 1, 'doctor must exit 0 (clean) or 1 (issues found)');
     assert.ok(r.stdout.includes('trigger'), 'must report trigger check result');
+  });
+
+  it('--version exits 0 and prints version number', () => {
+    const r = spawnSync(process.execPath, [CLI, '--version'], { encoding: 'utf8' });
+    assert.equal(r.status, 0, '--version must exit 0');
+    const version = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf8').trim();
+    assert.ok(r.stdout.includes(version), `--version must print version "${version}"`);
+  });
+
+  it('version command exits 0 and prints version number', () => {
+    const r = spawnSync(process.execPath, [CLI, 'version'], { encoding: 'utf8' });
+    assert.equal(r.status, 0, 'version command must exit 0');
+    const version = fs.readFileSync(path.join(ROOT, 'VERSION'), 'utf8').trim();
+    assert.ok(r.stdout.includes(version), `version command must print version "${version}"`);
+  });
+
+  it('search exits 0 and returns results for known term', () => {
+    const r = spawnSync(process.execPath, [CLI, 'search', 'figma'], { encoding: 'utf8' });
+    assert.equal(r.status, 0, 'search must exit 0');
+    assert.ok(r.stdout.includes('figma'), 'search "figma" must return figma-related results');
+  });
+
+  it('search with no results exits 0 and prints no-match message', () => {
+    const r = spawnSync(process.execPath, [CLI, 'search', 'xyzzy-no-match-8472'], { encoding: 'utf8' });
+    assert.equal(r.status, 0, 'search with no results must exit 0');
+    assert.ok(r.stdout.includes('No skills found'), 'must print no-match message');
+  });
+
+  it('search without query exits 1', () => {
+    const r = spawnSync(process.execPath, [CLI, 'search'], { encoding: 'utf8' });
+    assert.equal(r.status, 1, 'search without query must exit 1');
+  });
+
+  it('search --json outputs valid JSON array', () => {
+    const r = spawnSync(process.execPath, [CLI, 'search', 'figma', '--json'], { encoding: 'utf8' });
+    assert.equal(r.status, 0, 'search --json must exit 0');
+    const data = JSON.parse(r.stdout);
+    assert.ok(Array.isArray(data), 'search --json must output a JSON array');
+    assert.ok(data.length > 0, 'search "figma" --json must return results');
   });
 });

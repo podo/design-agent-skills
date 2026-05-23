@@ -5,6 +5,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.5.0] — 2026-05-23
+
+### Added
+
+- **CLI: `--version` / `version`** — `npx design-agent-skills --version` or `version` prints the catalogue version and exits cleanly.
+- **CLI: `search <query>`** — find skills by name or category substring. `--json` flag outputs structured results. Returns exit 0 with "No skills found" message when nothing matches.
+- **`scripts/recategorize.mjs`** — maintenance tool for moving a skill to a new category. Updates both `stub.yaml` and the `das:` block in `SKILL.md` atomically. `--dry-run` previews changes without writing.
+- **Dependabot npm monitoring** — `.github/dependabot.yml` now also watches the npm ecosystem for dependency updates.
+- **`test/add-skill.test.js`** — 15 tests covering `scripts/add-skill.mjs`: source-pattern checks, dry-run with all flags exits 0, no files written on dry-run, correct stub.yaml and SKILL.md output, `npx skills add --skill` command format, and package-type SKILL.md shape.
+- **`install.sh status` tests** — 4 new tests: exits 0 with no agents, exits 0 with claude agent dir, prints `skill` and `tier` column headers.
+- **`install.sh remove` tests** — 5 new tests: exits 1 without args, exits 1 for unknown skill, removes single symlink, `--all` removes all symlinks, reports removed count.
+
+Catalogue at 136 skills (unchanged). Test suite grows from 2423 → 2462 tests.
+
+---
+
 ## [2.4.0] — 2026-05-23
 
 ### Added
