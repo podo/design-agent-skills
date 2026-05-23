@@ -1,5 +1,6 @@
 type: package
 tier: official
+category: official-suites
 rank: 2
 upstream: https://github.com/vercel-labs/skills
 version: latest

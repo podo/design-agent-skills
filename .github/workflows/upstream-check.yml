@@ -1,0 +1,55 @@
+name: Upstream URL check
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'   # weekly, Monday 09:00 UTC
+  workflow_dispatch:        # manual trigger
+
+jobs:
+  check-upstreams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check upstream URLs are reachable
+        run: |
+          node --input-type=module << 'EOF'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const SKILLS_DIR = path.resolve('.', 'skills');
+          const dead = [];
+          const dirs = fs.readdirSync(SKILLS_DIR).filter(n =>
+            fs.statSync(path.join(SKILLS_DIR, n)).isDirectory()
+          );
+          const checks = dirs.map(async name => {
+            const stub = path.join(SKILLS_DIR, name, 'stub.yaml');
+            if (!fs.existsSync(stub)) return;
+            const raw = fs.readFileSync(stub, 'utf8');
+            const typeM = raw.match(/^type:\s*(.+)$/m);
+            if (!typeM || typeM[1].trim() === 'router') return;
+            const upM = raw.match(/^upstream:\s*(.+)$/m);
+            if (!upM) return;
+            const url = upM[1].trim();
+            // Convert GitHub repo URL to API endpoint for reliable HEAD check
+            const apiUrl = url.replace(
+              /^https?:\/\/github\.com\/([^/]+\/[^/]+?)(\.git)?\/?$/,
+              'https://api.github.com/repos/$1'
+            );
+            try {
+              const r = await fetch(apiUrl, {
+                headers: { 'User-Agent': 'design-agent-skills-ci' },
+                signal: AbortSignal.timeout(8000),
+              });
+              if (r.status === 404) dead.push(`${name}: ${url} → 404`);
+              else if (r.status === 451) dead.push(`${name}: ${url} → 451 (DMCA)`);
+            } catch (e) {
+              dead.push(`${name}: ${url} → ${e.message}`);
+            }
+          });
+          await Promise.all(checks);
+          if (dead.length) {
+            console.error(`\n${dead.length} dead upstream(s):\n  ${dead.join('\n  ')}`);
+            process.exit(1);
+          }
+          console.log(`OK — all upstream URLs reachable (${dirs.length} checked)`);
+          EOF

@@ -1,5 +1,6 @@
 type: skill
 tier: community
+category: design-research
 rank: 1
 upstream: https://github.com/cookiy-ai/user-research-skill
 upstream_path: SKILL.md

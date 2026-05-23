@@ -1,5 +1,6 @@
 type: package
 tier: community
+category: visual-components
 rank: 1
 upstream: https://github.com/raintree-technology/apple-hig-skills
 version: latest

@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: visual-components
 rank: 2
 upstream: https://github.com/ehmo/platform-design-skills
 version: latest

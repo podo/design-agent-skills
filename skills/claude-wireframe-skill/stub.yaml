@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: diagrams
 rank: 3
 upstream: https://github.com/Magdoub/claude-wireframe-skill
 upstream_path: SKILL.md

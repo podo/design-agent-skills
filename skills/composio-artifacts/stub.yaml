@@ -1,5 +1,6 @@
 type: skill
 tier: official
+category: official-suites
 rank: 3
 upstream: https://github.com/ComposioHQ/awesome-claude-skills
 upstream_path: artifacts-builder/SKILL.md

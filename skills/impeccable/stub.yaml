@@ -1,5 +1,6 @@
 type: platform
 tier: community
+category: design-systems
 rank: 2
 upstream: https://github.com/pbakaus/impeccable
 version: latest

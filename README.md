@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-142 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+136 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -28,7 +28,7 @@ npx design-agent-skills
 ◇  Which profile?
 │  ● Picks        18 skills  ★ best in class
 │  ○ Essentials   77 skills    full coverage
-│  ○ All         142 skills    everything
+│  ○ All         136 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -51,12 +51,12 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 18 | One best-in-class per category. Start here. |
 | **Essentials** | `--essentials` | ~77 | Full coverage, no redundancy. |
-| **All** | `--all` | 142 | Everything including niche and experimental. |
+| **All** | `--all` | 136 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 18 best-in-class skills, global
 npx design-agent-skills --essentials -g     # ~77 skills covering all categories
-npx design-agent-skills --all -g            # all 142 (default when no flag)
+npx design-agent-skills --all -g            # all 136 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -67,7 +67,7 @@ npx design-agent-skills --picks --category accessibility
 npx design-agent-skills --essentials --category figma-code
 ```
 
-Valid categories: `design-systems` · `creative-3d` · `interaction-polish` · `visual-components` · `accessibility-quality` · `design-review` · `figma-code` · `official-suites` · `diagrams` · `data-visualization` · `presentations` · `product-pm` · `content-design` · `email-design` · `tui-terminal`
+Valid categories: `design-systems` · `creative-3d` · `interaction-polish` · `visual-components` · `accessibility-quality` · `design-review` · `figma-code` · `official-suites` · `diagrams` · `data-visualization` · `presentations` · `product-pm` · `content-design` · `email-design` · `tui-terminal` · `motion-animation` · `design-engineering` · `design-research`
 
 ## Commands
 

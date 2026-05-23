@@ -1,5 +1,6 @@
 type: package
 tier: official
+category: data-visualization
 rank: 1
 upstream: https://github.com/antvis/chart-visualization-skills
 version: latest

@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: figma-code
 rank: 2
 upstream: https://github.com/senlindesign/claude2figma
 version: latest

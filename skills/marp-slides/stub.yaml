@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: presentations
 rank: 2
 upstream: https://github.com/robonuggets/marp-slides
 upstream_path: SKILL.md

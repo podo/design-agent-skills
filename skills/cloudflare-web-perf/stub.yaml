@@ -1,5 +1,6 @@
 type: skill
 tier: official
+category: accessibility-quality
 rank: 2
 upstream: https://github.com/cloudflare/skills
 upstream_path: skills/web-perf/SKILL.md

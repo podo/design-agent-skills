@@ -1,5 +1,6 @@
 type: platform
 tier: experimental
+category: visual-components
 rank: 2
 upstream: https://github.com/sliday/google-fonts-skill
 version: latest

@@ -1,5 +1,6 @@
 type: package
 tier: community
+category: visual-components
 rank: 1
 upstream: https://github.com/hamen/material-3-skill
 version: latest

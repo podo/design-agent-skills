@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: accessibility-quality
 rank: 1
 upstream: https://github.com/Raze-Systems/wcag-ai-skill
 version: latest

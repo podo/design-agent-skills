@@ -8,6 +8,32 @@ const PACKAGE    = 'podo/design-agent-skills';
 const ROOT       = path.resolve(fileURLToPath(import.meta.url), '../../');
 const SKILLS_DIR = path.join(ROOT, 'skills');
 
+const HELP = `
+Usage: npx design-agent-skills [command] [options]
+
+Commands:
+  install (default)   Interactive skill installer
+  list                Show categories and skill counts
+
+Options:
+  --picks             Rank-1 skills — best in class per category
+  --essentials        Rank-1 + rank-2 skills — full coverage
+  --all               All skills (default for non-TTY)
+  --category <name>   Filter by category (combine with any profile)
+  -g, --global        Install to user scope   (~/.agents/skills/)
+  -p, --project       Install to project scope (.agents/skills/)
+  --dry-run           Preview what would be installed, no changes made
+  -h, --help          Show this help
+
+Examples:
+  npx design-agent-skills                         # interactive TUI
+  npx design-agent-skills --picks -g              # top skills, global
+  npx design-agent-skills --essentials            # full coverage, project
+  npx design-agent-skills --category figma-code   # Figma skills only
+  npx design-agent-skills --list                  # show all categories
+  npx design-agent-skills --picks --dry-run       # preview without installing
+`;
+
 // Keep in sync with VALID_CATEGORIES in test/stubs.test.js
 const VALID_CATEGORIES = new Set([
   'design-systems', 'creative-3d', 'interaction-polish', 'visual-components',
@@ -184,8 +210,29 @@ const flagGlobal  = args.some(a => a === '-g' || a === '--global');
 const flagProject = args.some(a => a === '-p' || a === '--project');
 const catArgIdx   = args.indexOf('--category');
 const flagCat     = catArgIdx !== -1 ? args[catArgIdx + 1] : null;
-const isInstall   = cmd === '' || cmd === 'install';
+const flagHelp    = args.includes('--help') || args.includes('-h');
+const flagList    = args.includes('--list') || cmd === 'list';
+const flagDryRun  = args.includes('--dry-run');
+const isInstall   = cmd === '' || cmd === 'install' || cmd.startsWith('-');
 const profileSet  = flagPicks || flagEss || flagAll || Boolean(flagCat);
+
+if (flagHelp) {
+  process.stdout.write(HELP);
+  process.exit(0);
+}
+
+if (flagList) {
+  const stubs = readStubs();
+  const cats  = [...VALID_CATEGORIES].filter(c => c !== 'meta').sort();
+  const total = stubs.filter(s => s.type !== 'router').length;
+  process.stdout.write(`\ndesign-agent-skills — ${total} skills across ${cats.length} categories\n\n`);
+  for (const c of cats) {
+    const n = stubs.filter(s => s.type !== 'router' && s.category === c).length;
+    process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills\n`);
+  }
+  process.stdout.write('\n');
+  process.exit(0);
+}
 
 if (!isInstall) {
   const r = spawnSync('npx', ['skills', cmd, ...args.slice(1)], { stdio: 'inherit', shell: false });
@@ -272,6 +319,13 @@ async function main() {
 
   // ── all skills: fast batch path ────────────────────────────────────────────
   if (maxRank === null && !category) {
+    if (flagDryRun) {
+      const all = filterStubs(stubs, {});
+      process.stdout.write(`\nDry run — would install all ${all.length} skills\n\n`);
+      for (const s of all) process.stdout.write(`  ${s.name}\n`);
+      process.stdout.write('\n');
+      process.exit(0);
+    }
     runDirect('add', [PACKAGE, ...scopeFlag]);
     return;
   }
@@ -281,6 +335,13 @@ async function main() {
   if (filtered.length === 0) {
     console.error('No skills match the selected profile/category.');
     process.exit(1);
+  }
+
+  if (flagDryRun) {
+    process.stdout.write(`\nDry run — would install ${filtered.length} skills:\n\n`);
+    for (const s of filtered) process.stdout.write(`  ${s.name}\n`);
+    process.stdout.write('\n');
+    process.exit(0);
   }
 
   installSkills(filtered.map(s => s.name), scope);

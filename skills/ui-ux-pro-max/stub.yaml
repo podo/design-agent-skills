@@ -1,5 +1,6 @@
 type: platform
 tier: community
+category: visual-components
 rank: 3
 upstream: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
 version: latest

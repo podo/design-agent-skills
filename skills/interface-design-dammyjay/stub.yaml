@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: interaction-polish
 rank: 3
 upstream: https://github.com/Dammyjay93/interface-design
 version: latest

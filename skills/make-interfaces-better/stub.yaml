@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: interaction-polish
 rank: 2
 upstream: https://github.com/jakubkrehel/make-interfaces-feel-better
 upstream_path: SKILL.md

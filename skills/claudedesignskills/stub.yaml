@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: motion-animation
 rank: 2
 upstream: https://github.com/freshtechbro/claudedesignskills
 version: latest

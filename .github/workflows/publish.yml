@@ -17,6 +17,15 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Verify VERSION matches package.json
+        run: |
+          VER=$(cat VERSION)
+          PKG=$(jq -r '.version' package.json)
+          if [ "$VER" != "$PKG" ]; then
+            echo "VERSION ($VER) does not match package.json ($PKG) — update both atomically"
+            exit 1
+          fi
+
       - run: npm test
 
       - name: Build skills-only zip

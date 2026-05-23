@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: data-visualization
 rank: 2
 upstream: https://github.com/dtran320/claud3
 version: latest

@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: design-review
 rank: 2
 upstream: https://github.com/szilu/ux-designer-skill
 upstream_path: SKILL.md

@@ -5,6 +5,35 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.2.0] — 2026-05-23
+
+### Added
+
+- **CLI: `--help` / `-h` flag** — prints usage, all flags, examples, and valid categories. Running `npx design-agent-skills --help` now works correctly.
+- **CLI: `--list` command** — shows all categories with per-category skill counts. `npx design-agent-skills --list` or `npx design-agent-skills list`.
+- **CLI: `--dry-run` flag** — previews what would be installed (any profile/category) without making changes. Composable: `--picks --dry-run`, `--category figma-code --dry-run`.
+- **CI: `test.yml` workflow** — PR gate on every push/PR to main. Runs the full test suite and validates that the README skill count matches the actual catalogue.
+- **CI: `upstream-check.yml` workflow** — weekly scheduled check (Monday 09:00 UTC) that fetches all `type:skill` upstream URLs via GitHub API and fails on 404/451. Runnable manually via `workflow_dispatch`.
+- **Dependabot** — weekly GitHub Actions version updates (`.github/dependabot.yml`).
+- **PR template** — `.github/PULL_REQUEST_TEMPLATE.md` with add-a-skill and bug-fix checklists.
+- **`scripts/sync-categories.mjs`** — one-time migration: writes `category:` from SKILL.md `das:` block into each `stub.yaml`. Run with `--dry-run` to preview.
+- **`scripts/rank-audit.mjs`** — shows rank distribution (R1/R2/R3) by category; flags categories with no rank-1 entry.
+- **`scripts/generate-readme-table.mjs`** — generates the `## Skills` section of README from stub data. Run with `--check` to diff against current README.
+- **19 VALID_CATEGORIES** — added `motion-animation`, `design-engineering`, `design-research` to both `bin/cli.mjs` and `test/stubs.test.js`.
+
+### Fixed
+
+- **README skill count** — corrected from 142 to 136 (routers are not user-facing skills and were incorrectly included).
+- **`isInstall` detection** — flags passed as first arg (`--picks`, `--category`) no longer fall through to `npx skills` delegation; correctly treated as install commands.
+- **Publish gate: VERSION sync check** — `publish.yml` now verifies `VERSION` matches `package.json` before `npm publish`.
+- **CLAUDE.md** — updated test count (1580 → 2252), category table (16 → 19 entries), and removed hardcoded count from test file description.
+- **Stub category migration** — all 136 non-router `stub.yaml` files now carry an explicit `category:` field (was read-only from SKILL.md).
+
+### Changed
+
+- **`test.yml`** — replaced the inline duplicate-trigger script (covered by `npm test`) with a README count validation step.
+- **`test/cli.test.js`** — expanded from 17 to 28 tests: source-pattern coverage for all new flags + 6 integration tests that spawn the real CLI binary.
+
 ## [2.1.2] — 2026-05-23
 
 ### Fixed

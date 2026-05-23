@@ -1,5 +1,6 @@
 type: platform
 tier: experimental
+category: creative-3d
 rank: 2
 upstream: https://github.com/SamurAIGPT/Generative-Media-Skills
 version: latest

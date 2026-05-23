@@ -31,7 +31,7 @@ skills/<name>/
   SKILL.md      — human/agent-readable pointer with frontmatter + install instructions
 
 test/
-  stubs.test.js — 1580 tests; run with: npm test
+  stubs.test.js — run with: npm test
   cli.test.js   — bin entry tests
 
 bin/cli.mjs     — thin wrapper around `npx skills add`
@@ -339,6 +339,9 @@ Use these exact strings in `stub.yaml` and `das:` blocks:
 | `email-design` | HTML email, MJML, email templates |
 | `tui-terminal` | Terminal UI, TUI frameworks (Textual, Ratatui, Bubble Tea, Ink) |
 | `meta` | Catalogue routers and meta-skills |
+| `motion-animation` | Motion design, animation principles, timing, easing |
+| `design-engineering` | Design-engineering crossover: bridging design and code |
+| `design-research` | User research, usability testing, discovery methods |
 
 ---
 
@@ -431,7 +434,7 @@ Catalogue grows from N → M skills.
 npm test
 ```
 
-1580 tests across 2 suites. All must pass before committing.
+2252 tests across 2 suites. All must pass before committing.
 
 ### What the tests check
 

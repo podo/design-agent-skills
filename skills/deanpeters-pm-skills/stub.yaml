@@ -1,5 +1,6 @@
 type: package
 tier: community
+category: product-pm
 rank: 1
 upstream: https://github.com/deanpeters/Product-Manager-Skills
 version: latest

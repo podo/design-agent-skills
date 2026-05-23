@@ -1,5 +1,6 @@
 type: skill
 tier: official
+category: creative-3d
 rank: 3
 upstream: https://github.com/MiniMax-AI/skills
 upstream_path: skills/shader-dev/SKILL.md

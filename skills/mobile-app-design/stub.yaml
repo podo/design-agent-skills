@@ -1,5 +1,6 @@
 type: skill
 tier: official
+category: visual-components
 rank: 2
 upstream: https://github.com/awesome-skills/mobile-app-design
 upstream_path: SKILL.md

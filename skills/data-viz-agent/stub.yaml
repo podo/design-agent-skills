@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: data-visualization
 rank: 3
 upstream: https://github.com/rohitg00/awesome-claude-code-toolkit
 upstream_path: agents/data-ai/data-visualization.md

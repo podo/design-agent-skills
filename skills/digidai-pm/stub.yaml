@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: product-pm
 rank: 2
 upstream: https://github.com/Digidai/product-manager-skills
 upstream_path: SKILL.md

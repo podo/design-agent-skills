@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: data-visualization
 rank: 2
 upstream: https://github.com/chrisvoncsefalvay/claude-d3js-skill
 upstream_path: SKILL.md

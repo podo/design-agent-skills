@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: design-systems
 rank: 3
 upstream: https://github.com/alchaincyf/huashu-design
 upstream_path: SKILL.md

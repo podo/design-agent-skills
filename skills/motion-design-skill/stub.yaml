@@ -1,5 +1,6 @@
 type: package
 tier: official
+category: motion-animation
 rank: 2
 upstream: https://github.com/lottiefiles/motion-design-skill
 version: latest

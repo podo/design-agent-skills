@@ -1,5 +1,6 @@
 type: skill
 tier: experimental
+category: diagrams
 rank: 3
 upstream: https://github.com/muthuishere/hand-drawn-diagrams
 upstream_path: SKILL.md

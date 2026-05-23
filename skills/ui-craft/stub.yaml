@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: design-systems
 rank: 1
 upstream: https://github.com/educlopez/ui-craft
 version: latest

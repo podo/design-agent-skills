@@ -1,5 +1,6 @@
 type: package
 tier: official
+category: figma-code
 rank: 2
 upstream: https://github.com/google-labs-code/stitch-skills
 version: latest

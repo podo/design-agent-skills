@@ -1,5 +1,6 @@
 type: package
 tier: community
+category: motion-animation
 rank: 3
 upstream: https://github.com/ibelick/fixing-motion-performance
 version: latest

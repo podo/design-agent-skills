@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: diagrams
 rank: 3
 upstream: https://nimbalyst.com/skills
 version: latest

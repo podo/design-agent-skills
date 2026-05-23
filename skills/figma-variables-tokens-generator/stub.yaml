@@ -1,5 +1,6 @@
 type: package
 tier: experimental
+category: figma-code
 rank: 3
 upstream: https://github.com/Shanmus4/figma-variables-tokens-generator
 version: latest
