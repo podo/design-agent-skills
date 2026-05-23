@@ -50,7 +50,7 @@ das:
    ```bash
    npx skills add awesome-skills/mobile-app-design --skill mobile-app-design -y
    ```
-   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install

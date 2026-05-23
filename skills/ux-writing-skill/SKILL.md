@@ -51,6 +51,7 @@ das:
    ```bash
    npx skills add content-designer/ux-writing-skill --skill ux-writing-skill -y
    ```
+   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 ## Invoke after install
 

@@ -47,7 +47,7 @@ das:
    ```bash
    npx skills add coleam00/excalidraw-diagram-skill --skill excalidraw-diagram -y
    ```
-   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install

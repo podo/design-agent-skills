@@ -50,7 +50,7 @@ das:
    ```bash
    npx skills add natdexterra/work-with-design-systems --skill work-with-design-systems -y
    ```
-   > **Claude Code:** prefix either command with `!` to run directly in the prompt.
+   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install

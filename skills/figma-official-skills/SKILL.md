@@ -34,7 +34,7 @@ Run this before any Figma ↔ code workflow:
 
 2. **Do you have shell access?**
    - Yes → install the specific skill below, then invoke it
-   - No → show the install command; in Claude Code prefix with `!` to run directly in the prompt
+   - No → show the install command; in Claude Code, send it as a chat message starting with `!` (add `-g` to install globally across all projects)
 
 ## Install command
 

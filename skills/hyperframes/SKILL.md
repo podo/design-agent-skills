@@ -33,7 +33,7 @@ das:
    - No → go to step 2
 
 2. **Which agent are you on?**
-   - Claude Code → `npx skills add heygen-com/hyperframes` — or type `! npx skills add …` in the prompt
+   - Claude Code → `npx skills add heygen-com/hyperframes` — or send `! npx skills add … -g` as a chat message to install without leaving the conversation
    - Cursor → `npx skills add heygen-com/hyperframes`
    - Other → `npx skills add heygen-com/hyperframes` or see [GitHub README](https://github.com/heygen-com/hyperframes)
 

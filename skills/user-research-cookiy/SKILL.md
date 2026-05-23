@@ -48,6 +48,7 @@ das:
    ```bash
    npx skills add cookiy-ai/user-research-skill --skill user-research-cookiy -y
    ```
+   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 ## Invoke after install
 

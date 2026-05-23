@@ -35,7 +35,7 @@ Run this before any Apple platform UI design:
 
 2. **Do you have shell access?**
    - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code prefix with `!` to run directly in the prompt
+   - No → show the install command; in Claude Code, send it as a chat message starting with `!` (add `-g` to install globally across all projects)
 
 ## Install command
 

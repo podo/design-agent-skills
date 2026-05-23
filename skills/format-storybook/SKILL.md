@@ -48,6 +48,7 @@ das:
    ```bash
    npx skills add mikemai2awesome/agent-skills --skill format-storybook -y
    ```
+   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 ## What it does
 

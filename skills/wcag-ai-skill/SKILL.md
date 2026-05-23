@@ -28,7 +28,7 @@ das:
    - No → go to step 2
 
 2. **Which agent?**
-   - Claude Code / Cursor → `npx skills add Raze-Systems/wcag-ai-skill` — or type `! npx skills add …` in the prompt
+   - Claude Code / Cursor → `npx skills add Raze-Systems/wcag-ai-skill` — or send `! npx skills add … -g` as a chat message to install without leaving the conversation
    - Other → see [GitHub README](https://github.com/Raze-Systems/wcag-ai-skill)
 
 ## Install command
