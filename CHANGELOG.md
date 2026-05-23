@@ -5,6 +5,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.1.1] — 2026-05-23
+
+### Fixed
+
+- **All stubs** — stub decision trees now tell the agent to surface `! npx skills add …` as a chat message when auto-install is blocked (Claude Code auto-mode). Includes scope guidance: add `-g` for global install or omit for project-only. Pattern A stubs (scope-detection format) already handled scope correctly; this fixes B/C/D patterns.
+
+---
+
 ## [2.1.0] — 2026-05-23
 
 ### Changed
