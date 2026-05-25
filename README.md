@@ -406,15 +406,15 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [deanpeters-pm-skills](skills/deanpeters-pm-skills/SKILL.md) ★ | package | product-pm | [deanpeters/Product-Manager-Skills](https://github.com/deanpeters/Product-Manager-Skills) |
+| [assimovt-productskills](skills/assimovt-productskills/SKILL.md) | package | product-pm | [assimovt/productskills](https://github.com/assimovt/productskills) |
 | [design-sprint](skills/design-sprint/SKILL.md) | package | product-pm | [aoshimash/skills](https://github.com/aoshimash/skills) |
 | [digidai-pm](skills/digidai-pm/SKILL.md) | skill | product-pm | [Digidai/product-manager-skills](https://github.com/Digidai/product-manager-skills) |
 | [lenny-skills](skills/lenny-skills/SKILL.md) | package | product-pm | [RefoundAI/lenny-skills](https://github.com/RefoundAI/lenny-skills) |
+| [phuryn-pm-skills](skills/phuryn-pm-skills/SKILL.md) | package | product-pm | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) |
 | [pm-skills](skills/pm-skills/SKILL.md) | package | product-pm | [product-on-purpose/pm-skills](https://github.com/product-on-purpose/pm-skills) |
+| [chadboyda-gtm](skills/chadboyda-gtm/SKILL.md) | package | product-pm | [chadboyda/agent-gtm-skills](https://github.com/chadboyda/agent-gtm-skills) |
 | [claude-pm-skills](skills/claude-pm-skills/SKILL.md) | package | product-pm | [pratikshadake/claude-product-management-skills](https://github.com/pratikshadake/claude-product-management-skills) |
 | [coreyhaines-marketing](skills/coreyhaines-marketing/SKILL.md) | package | product-pm | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) |
-| [phuryn-pm-skills](skills/phuryn-pm-skills/SKILL.md) | package | product-pm | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) |
-| [assimovt-productskills](skills/assimovt-productskills/SKILL.md) | package | product-pm | [assimovt/productskills](https://github.com/assimovt/productskills) |
-| [chadboyda-gtm](skills/chadboyda-gtm/SKILL.md) | package | product-pm | [chadboyda/agent-gtm-skills](https://github.com/chadboyda/agent-gtm-skills) |
 
 ### Content Design
 
