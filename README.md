@@ -27,7 +27,7 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   78 skills    full coverage
+│  ○ Essentials   79 skills    full coverage
 │  ○ All         138 skills    everything
 │  ○ Category →  pick a domain
 └
@@ -50,12 +50,12 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~78 | Full coverage, no redundancy. |
+| **Essentials** | `--essentials` | ~79 | Full coverage, no redundancy. |
 | **All** | `--all` | 138 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~78 skills covering all categories
+npx design-agent-skills --essentials -g     # ~79 skills covering all categories
 npx design-agent-skills --all -g            # all 138 (default when no flag)
 ```
 
