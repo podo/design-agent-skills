@@ -109,13 +109,15 @@ Activate when the user:
 | Skill | Best for |
 |-------|----------|
 | [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | 9 skills: journey maps, OST, story mapping, PRD |
-| [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | 6 skills: JTBD personas, interview scripts, PRD |
+| [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | 65 skills / 8 plugins: discovery, strategy, execution, market research, data analytics, GTM, growth |
 | [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
-| [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
+| [`pm-skills`](../pm-skills/SKILL.md) | 55 skills: Triple Diamond, 26 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 | [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
 | [`product-position`](../product-position/SKILL.md) | B2B SaaS positioning: messaging hierarchy, competitive framing, strategic narrative — Dunford + JTBD frameworks |
 | [`lenny-skills`](../lenny-skills/SKILL.md) | 86 PM skills: behavioral product design, surveys, user interviews, design reviews, onboarding, growth loops (945 ★) |
+| [`assimovt-productskills`](../assimovt-productskills/SKILL.md) | 16 skills: roadmaps, North Star metrics, A/B experiments, competitor analysis, strategy docs, Shape Up scoping (40 ★) |
+| [`chadboyda-gtm`](../chadboyda-gtm/SKILL.md) | 18 go-to-market skills: positioning/ICP, pricing, sales motion, outbound, launches, retention, GTM metrics (42 ★) |
 
 ## Content Design & Copy
 

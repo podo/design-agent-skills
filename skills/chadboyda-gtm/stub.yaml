@@ -1,0 +1,7 @@
+type: package
+tier: community
+category: product-pm
+rank: 3
+upstream: https://github.com/chadboyda/agent-gtm-skills
+version: latest
+install_default: "npx skills add chadboyda/agent-gtm-skills"

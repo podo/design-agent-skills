@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-136 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+138 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -27,8 +27,8 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   77 skills    full coverage
-│  ○ All         136 skills    everything
+│  ○ Essentials   78 skills    full coverage
+│  ○ All         138 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -50,13 +50,13 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~77 | Full coverage, no redundancy. |
-| **All** | `--all` | 136 | Everything including niche and experimental. |
+| **Essentials** | `--essentials` | ~78 | Full coverage, no redundancy. |
+| **All** | `--all` | 138 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~77 skills covering all categories
-npx design-agent-skills --all -g            # all 136 (default when no flag)
+npx design-agent-skills --essentials -g     # ~78 skills covering all categories
+npx design-agent-skills --all -g            # all 138 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -215,7 +215,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (28), `community` (49), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (33), `community` (51), `experimental` (60) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -413,6 +413,8 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [claude-pm-skills](skills/claude-pm-skills/SKILL.md) | package | product-pm | [pratikshadake/claude-product-management-skills](https://github.com/pratikshadake/claude-product-management-skills) |
 | [coreyhaines-marketing](skills/coreyhaines-marketing/SKILL.md) | package | product-pm | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) |
 | [phuryn-pm-skills](skills/phuryn-pm-skills/SKILL.md) | package | product-pm | [phuryn/pm-skills](https://github.com/phuryn/pm-skills) |
+| [assimovt-productskills](skills/assimovt-productskills/SKILL.md) | package | product-pm | [assimovt/productskills](https://github.com/assimovt/productskills) |
+| [chadboyda-gtm](skills/chadboyda-gtm/SKILL.md) | package | product-pm | [chadboyda/agent-gtm-skills](https://github.com/chadboyda/agent-gtm-skills) |
 
 ### Content Design
 

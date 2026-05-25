@@ -1,8 +1,7 @@
 type: package
 tier: community
 category: product-pm
-rank: 3
+rank: 2
 upstream: https://github.com/phuryn/pm-skills
 version: latest
-install_default: "npx skills add phuryn/pm-skills"
-installed_as: create-prd
+install_default: "claude plugin marketplace add phuryn/pm-skills"

@@ -1,0 +1,7 @@
+type: package
+tier: community
+category: product-pm
+rank: 2
+upstream: https://github.com/assimovt/productskills
+version: latest
+install_default: "npx skills add assimovt/productskills"

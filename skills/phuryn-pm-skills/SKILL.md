@@ -1,56 +1,74 @@
 ---
 name: phuryn-pm-skills
 description: |
-  6 product management skills covering market research and product discovery:
-  customer journey maps with touchpoints and emotions, 3-persona JTBD analysis,
-  Teresa Torres opportunity-solution trees, customer interview scripts, 8-section
-  PRDs, and feature prioritization by theme, impact, effort, and risk.
+  PM Skills Marketplace — 65 product-management skills and 36 chained workflows
+  across 8 plugins: product discovery, product strategy, execution (PRDs, OKRs,
+  roadmaps, sprints, retros, release notes), market research, data analytics
+  (SQL, cohort analysis, A/B testing), go-to-market, marketing & growth, and a
+  PM toolkit. Encodes proven frameworks for discovery → strategy → execution →
+  launch → growth.
 triggers:
   - "phuryn"
+  - "PM skills marketplace"
   - "JTBD personas"
   - "interview script"
   - "feature prioritization"
   - "analyze feature requests"
   - "create PRD"
 das:
+  type: package
   category: product-pm
   upstream: "https://github.com/phuryn/pm-skills"
   version: latest
-  install: false
 ---
 
 # phuryn-pm-skills
 
 > Catalogue stub — full package: [phuryn/pm-skills](https://github.com/phuryn/pm-skills)
 
-## Decision tree
+## Install the full skill
 
-Run this before product discovery or market research work:
-
-1. **Is a Phuryn skill already installed?**
-   Check: `~/.design-agent-skills/skills/create-prd/SKILL.md` exists.
-   - Yes → invoke the specific skill by name and proceed
-   - No → go to step 2
-
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
-
-## Install command
+This package ships as a Claude plugin marketplace (8 plugins), not as a single
+`npx skills add` bundle. Add the marketplace, then install the plugins you need:
 
 ```bash
-npx skills add phuryn/pm-skills
+claude plugin marketplace add phuryn/pm-skills
 ```
 
-## Invoke after install
+Then install individual plugins:
 
-- `customer-journey-map` — "customer journey with emotions", "touchpoint map"
-- `user-personas` — "3 personas", "JTBD personas", "pains and gains"
-- `opportunity-solution-tree` — "opportunity solution tree", "Teresa Torres"
-- `interview-script` — "customer interview", "JTBD interview"
-- `create-prd` — "create PRD", "8-section PRD"
-- `analyze-feature-requests` — "feature requests", "prioritize features"
+```bash
+claude plugin install pm-product-discovery@pm-skills
+claude plugin install pm-product-strategy@pm-skills
+claude plugin install pm-execution@pm-skills
+claude plugin install pm-market-research@pm-skills
+claude plugin install pm-data-analytics@pm-skills
+claude plugin install pm-go-to-market@pm-skills
+claude plugin install pm-marketing-growth@pm-skills
+claude plugin install pm-toolkit@pm-skills
+```
+
+In Claude Cowork: **Customize → Browse plugins → Personal → + → Add marketplace
+from GitHub → `phuryn/pm-skills`**.
 
 ## What it does
 
-6 PM skills focused on discovery and research: customer journey maps with emotion layers and opportunity identification, 3-persona JTBD analysis with pains/gains, Teresa Torres' opportunity-solution trees, customer interview scripts with JTBD probing questions, 8-section PRDs from problem to release plan, and feature request analysis prioritized by theme, impact, effort, and risk.
+65 PM skills + 36 chained workflows across 8 plugins:
+
+| Plugin | Covers |
+|--------|--------|
+| `pm-product-discovery` | Ideation, assumptions, experiments, customer interviews |
+| `pm-product-strategy` | Vision, business models, pricing, competitive analysis |
+| `pm-execution` | PRDs, OKRs, roadmaps, sprints, retrospectives, release notes |
+| `pm-market-research` | Personas, segmentation, journey maps, market sizing |
+| `pm-data-analytics` | SQL queries, cohort analysis, A/B test analysis |
+| `pm-go-to-market` | GTM strategy, beachhead segments, battlecards |
+| `pm-marketing-growth` | Marketing ideas, positioning, North Star metrics |
+| `pm-toolkit` | Resume review, legal templates, proofreading |
+
+## When NOT to use
+
+- Lightweight discovery + roadmaps/metrics in one bundle → use `assimovt-productskills`
+- Customer journey maps / story mapping → use `deanpeters-pm-skills`
+- Triple Diamond / Design Sprint facilitation → use `pm-skills`
+- Behavioral product design, growth loops → use `lenny-skills`

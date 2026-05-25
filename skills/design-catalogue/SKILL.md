@@ -249,13 +249,15 @@ instead of scrolling the full index below:
 | Skill | Best for |
 |-------|----------|
 | [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | 9 skills: journey maps, OST, story mapping, PRD |
-| [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | 6 skills: JTBD personas, interview scripts, PRD |
+| [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | 65 skills / 8 plugins: discovery, strategy, execution, market research, data analytics, GTM, growth |
 | [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
-| [`pm-skills`](../pm-skills/SKILL.md) | 63 skills: Triple Diamond, 30 phases, Design Sprint, Foundation Sprint |
+| [`pm-skills`](../pm-skills/SKILL.md) | 55 skills: Triple Diamond, 26 phases, Design Sprint, Foundation Sprint |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 | [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
 | [`product-position`](../product-position/SKILL.md) | B2B SaaS positioning: messaging hierarchy, competitive framing, strategic narrative — Dunford + JTBD frameworks |
 | [`lenny-skills`](../lenny-skills/SKILL.md) | 86 PM skills: behavioral product design, surveys, user interviews, design reviews, onboarding, growth loops (945 ★) |
+| [`assimovt-productskills`](../assimovt-productskills/SKILL.md) | 16 skills: roadmaps, North Star metrics, A/B experiments, competitor analysis, strategy docs, Shape Up scoping |
+| [`chadboyda-gtm`](../chadboyda-gtm/SKILL.md) | 18 go-to-market skills: positioning/ICP, pricing, sales motion, outbound, launches, GTM metrics |
 
 ### Content Design & Copy
 
@@ -354,7 +356,7 @@ instead of scrolling the full index below:
 | "Midjourney workflow", "Kling", "Veo3", "Flux Kontext" | `generative-media-skills` |
 | "infinite canvas design", "SuperDesign" | `superdesign-skill` |
 | "open-design platform", "31 design skills local" | `open-design` |
-| "Triple Diamond PM", "63 PM skills", "Design Sprint method" | `pm-skills` |
+| "Triple Diamond PM", "55 PM skills", "Design Sprint method" | `pm-skills` |
 | "MJML", "HTML email", "Outlook-safe email" | `email-html-mjml` |
 | "terminal UI", "TUI", "Bubble Tea", "Ratatui", "Textual" | `tui-design-skill` |
 | "brand tokens Stripe", "62 brands" | `brand-design-md` |
@@ -374,6 +376,8 @@ instead of scrolling the full index below:
 | "feature design sprint", "design to issues", "decompose feature" | `design-sprint` |
 | "product positioning", "messaging hierarchy", "value proposition", "competitive framing" | `product-position` |
 | "behavioral product design", "designing surveys", "running design reviews", "growth loops" | `lenny-skills` |
+| "roadmap planning", "North Star metric", "experiment design", "competitor analysis", "Shape Up" | `assimovt-productskills` |
+| "go-to-market skills", "GTM operator", "sales motion", "AI SDR", "pricing strategy" | `chadboyda-gtm` |
 | "dark patterns", "deceptive design", "manipulative UI", "hidden fees code" | `dark-pattern-audit` |
 
 ## No match
