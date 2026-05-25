@@ -269,3 +269,28 @@ describe('catalogue-level invariants', () => {
     assert.equal(missing.length, 0, `skills missing files: ${missing.join(', ')}`);
   });
 });
+
+describe('metadata regression guards', () => {
+  // Regression: product-on-purpose/pm-skills shrank from 63 → 55 skills upstream.
+  // The stale "63" count must not reappear in the pointer.
+  it('pm-skills: no stale "63" skill count', () => {
+    const s = skills.find(x => x.name === 'pm-skills');
+    assert.ok(s && s.skill, 'pm-skills SKILL.md missing');
+    assert.ok(!/\b63\b/.test(s.skill),
+      'pm-skills must not reference the stale 63-skill count (upstream is 55)');
+  });
+
+  // Regression: phuryn/pm-skills moved from a single `npx skills add` bundle to a
+  // Claude plugin marketplace (8 plugins). The old install path no longer works,
+  // so neither the stub nor the pointer may advertise it.
+  it('phuryn-pm-skills: uses plugin marketplace install, not stale npx skills add', () => {
+    const s = skills.find(x => x.name === 'phuryn-pm-skills');
+    assert.ok(s && s.skill && s.stub, 'phuryn-pm-skills files missing');
+    assert.ok(!/npx skills add phuryn\/pm-skills/.test(s.skill),
+      'phuryn-pm-skills SKILL.md must not use the stale "npx skills add phuryn/pm-skills" path');
+    assert.ok(!/npx skills add phuryn\/pm-skills/.test(s.stub),
+      'phuryn-pm-skills stub.yaml install_default must not use the stale npx path');
+    assert.ok(/plugin marketplace add phuryn\/pm-skills/.test(s.skill),
+      'phuryn-pm-skills must document the "plugin marketplace add" install');
+  });
+});

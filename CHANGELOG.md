@@ -5,6 +5,28 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.6.0] — 2026-05-25
+
+### Added
+
+- **`assimovt-productskills`** — 16-skill PM package filling the catalogue's biggest PM gaps: Now/Next/Later roadmaps, North Star metrics frameworks, A/B experiment design, competitor analysis, Playing-to-Win strategy docs, launch plans, and Shape Up scope-cutting / bet-sizing. rank 2 (`assimovt/productskills`, 40 ★)
+- **`chadboyda-gtm`** — 18 go-to-market skills: positioning/ICP, AI pricing, sales-motion design, outbound, multi-platform launches, retention, and GTM metrics/attribution. rank 3 (`chadboyda/agent-gtm-skills`, 42 ★)
+
+### Changed
+
+- **`phuryn-pm-skills`** — Refreshed stale metadata: upstream grew from 6 skills to 65 skills / 36 workflows across 8 plugins and moved to a Claude plugin marketplace. Updated description and install command (`claude plugin marketplace add phuryn/pm-skills`); promoted rank 3 → 2.
+- **`pm-skills`** — Corrected upstream drift: 63 → 55 skills (26 phase, 8 foundation, 6 utility, 15 sprint).
+- **`design-catalogue` + `content-catalogue` routers** — Added Product & PM rows and routing-guide entries for the two new skills; synced PM skill counts.
+- **README** — Skill counts (136 → 138), Essentials (~77 → ~78), supply-chain tier counts, and Product & PM table.
+
+### Tests
+
+- **`test/stubs.test.js`** — Added metadata regression guards locking the corrected `pm-skills` count and the `phuryn-pm-skills` plugin-marketplace install path.
+
+Catalogue grows from 136 → 138 skills. Test suite grows from 2462 → 2496 tests.
+
+---
+
 ## [2.5.1] — 2026-05-23
 
 ### Fixed

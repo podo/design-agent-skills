@@ -1,15 +1,15 @@
 ---
 name: pm-skills
 description: |
-  63 production-ready PM skills organized around the Triple Diamond methodology: 30 phase
+  55 production-ready PM skills organized around the Triple Diamond methodology: 26 phase
   skills (Discover through Iterate), 8 foundation skills (personas, OKRs, lean canvas),
-  10 utility meta-skills, and 15 Design Sprint and Foundation Sprint methodology skills.
-  95+ sample outputs included.
+  6 utility meta-skills, and 15 Design Sprint and Foundation Sprint methodology skills.
+  Templates, workflows, and sample outputs included.
 triggers:
   - "Triple Diamond"
   - "pm-skills"
   - "product-on-purpose"
-  - "63 PM skills"
+  - "55 PM skills"
   - "Design Sprint methodology"
 das:
   category: product-pm
@@ -42,11 +42,11 @@ das:
 ## Invoke after install
 
 - Skill name: `pm-skills`
-- Trigger phrases: "Triple Diamond", "pm-skills", "product-on-purpose", "63 PM skills", "Design Sprint"
+- Trigger phrases: "Triple Diamond", "pm-skills", "product-on-purpose", "55 PM skills", "Design Sprint"
 
 ## What it does
 
-Provides 63 structured PM skills organized by the Triple Diamond product development framework. The 30 phase skills cover each stage from Discovery through Iteration (problem framing, research synthesis, ideation, prototyping, validation, launch). The 8 foundation skills cover recurring artifacts like personas, OKR trees, and lean canvas. The 10 meta-skills handle cross-cutting concerns. The 15 sprint skills cover Design Sprint and Foundation Sprint facilitation. Over 95 sample outputs are bundled for reference.
+Provides 55 structured PM skills organized by the Triple Diamond product development framework. The 26 phase skills cover each stage from Discovery through Iteration (problem framing, research synthesis, ideation, prototyping, validation, launch). The 8 foundation skills cover recurring artifacts like personas, OKR trees, and lean canvas. The 6 utility meta-skills handle cross-cutting concerns and skill lifecycle. The 15 sprint skills cover Design Sprint and Foundation Sprint facilitation. Worked sample outputs are bundled for reference.
 
 ## When NOT to use
 
