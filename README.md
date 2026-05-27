@@ -256,6 +256,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
+| [design-motion-principles](skills/design-motion-principles/SKILL.md) | package | motion | [kylezantos/design-motion-principles](https://github.com/kylezantos/design-motion-principles) |
 | [remotion](skills/remotion/SKILL.md) ★ | skill | creative-3d | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [generative-media-skills](skills/generative-media-skills/SKILL.md) | platform | creative-3d | [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills) |
 | [open-design](skills/open-design/SKILL.md) | platform | creative-3d | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
