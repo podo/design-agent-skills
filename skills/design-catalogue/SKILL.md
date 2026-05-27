@@ -82,6 +82,7 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
+| [`design-motion-principles`](../design-motion-principles/SKILL.md) | UI motion design: build components with purposeful motion or audit for AI-slop patterns — Emil Kowalski, Jakub Krehel, Jhey Tompkins lenses |
 | [`algorithmic-art`](../algorithmic-art/SKILL.md) | Generative art with p5.js, flow fields, particle systems |
 | [`shader-dev`](../shader-dev/SKILL.md) | GLSL shaders: ray marching, fluid simulation, WebGL effects |
 | [`p5js-hermes`](../p5js-hermes/SKILL.md) | p5.js creative coding: noise, particles, GLSL, audio-reactive |
@@ -317,6 +318,7 @@ instead of scrolling the full index below:
 | "platform design", "cross-platform rules" | `platform-design-skills` |
 | "creative strategy", "campaign concept", "SCAMPER" | `creative-director` |
 | "design brief", "requirements spec" | `design-brief` |
+| "motion principles", "purposeful motion", "motion audit", "AI slop motion", "hover state design", "micro-interaction design", "Emil Kowalski motion", "Jhey Tompkins" | `design-motion-principles` |
 | "GSAP", "ScrollTrigger", "GreenSock" | `gsap-skills` |
 | "Framer Motion", "framer animation", "layout animation" | `framer-motion-skills` |
 | "Lottie", "motion principles", "Disney principles" | `motion-design-skill` |

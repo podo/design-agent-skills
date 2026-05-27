@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-138 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+139 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -27,8 +27,8 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   79 skills    full coverage
-│  ○ All         138 skills    everything
+│  ○ Essentials   80 skills    full coverage
+│  ○ All         139 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -50,13 +50,13 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~79 | Full coverage, no redundancy. |
-| **All** | `--all` | 138 | Everything including niche and experimental. |
+| **Essentials** | `--essentials` | ~80 | Full coverage, no redundancy. |
+| **All** | `--all` | 139 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~79 skills covering all categories
-npx design-agent-skills --all -g            # all 138 (default when no flag)
+npx design-agent-skills --essentials -g     # ~80 skills covering all categories
+npx design-agent-skills --all -g            # all 139 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (136 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (139 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -121,7 +121,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 136 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 139 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -444,6 +444,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [gsap-skills](skills/gsap-skills/SKILL.md) ★ | package | motion-animation | [greensock/gsap-skills](https://github.com/greensock/gsap-skills) |
 | [animate-skill](skills/animate-skill/SKILL.md) | skill | motion-animation | [delphi-ai/animate-skill](https://github.com/delphi-ai/animate-skill) |
 | [claudedesignskills](skills/claudedesignskills/SKILL.md) | package | motion-animation | [freshtechbro/claudedesignskills](https://github.com/freshtechbro/claudedesignskills) |
+| [design-motion-principles](skills/design-motion-principles/SKILL.md) | package | motion-animation | [kylezantos/design-motion-principles](https://github.com/kylezantos/design-motion-principles) |
 | [motion-design-skill](skills/motion-design-skill/SKILL.md) | package | motion-animation | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) |
 | [animate-css-skill](skills/animate-css-skill/SKILL.md) | package | motion-animation | [msrbuilds/animate-css-skill](https://github.com/msrbuilds/animate-css-skill) |
 | [css-animation-skill](skills/css-animation-skill/SKILL.md) | skill | motion-animation | [neonwatty/css-animation-skill](https://github.com/neonwatty/css-animation-skill) |
