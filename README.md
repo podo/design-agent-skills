@@ -256,7 +256,6 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [design-motion-principles](skills/design-motion-principles/SKILL.md) | package | motion-animation | [kylezantos/design-motion-principles](https://github.com/kylezantos/design-motion-principles) |
 | [remotion](skills/remotion/SKILL.md) ★ | skill | creative-3d | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [generative-media-skills](skills/generative-media-skills/SKILL.md) | platform | creative-3d | [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills) |
 | [open-design](skills/open-design/SKILL.md) | platform | creative-3d | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
@@ -445,6 +444,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [gsap-skills](skills/gsap-skills/SKILL.md) ★ | package | motion-animation | [greensock/gsap-skills](https://github.com/greensock/gsap-skills) |
 | [animate-skill](skills/animate-skill/SKILL.md) | skill | motion-animation | [delphi-ai/animate-skill](https://github.com/delphi-ai/animate-skill) |
 | [claudedesignskills](skills/claudedesignskills/SKILL.md) | package | motion-animation | [freshtechbro/claudedesignskills](https://github.com/freshtechbro/claudedesignskills) |
+| [design-motion-principles](skills/design-motion-principles/SKILL.md) | package | motion-animation | [kylezantos/design-motion-principles](https://github.com/kylezantos/design-motion-principles) |
 | [motion-design-skill](skills/motion-design-skill/SKILL.md) | package | motion-animation | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) |
 | [animate-css-skill](skills/animate-css-skill/SKILL.md) | package | motion-animation | [msrbuilds/animate-css-skill](https://github.com/msrbuilds/animate-css-skill) |
 | [css-animation-skill](skills/css-animation-skill/SKILL.md) | skill | motion-animation | [neonwatty/css-animation-skill](https://github.com/neonwatty/css-animation-skill) |
