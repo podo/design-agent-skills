@@ -20,7 +20,7 @@ triggers:
   - "AI slop motion"
   - "motion audit"
 das:
-  category: motion
+  category: motion-animation
   type: package
   upstream: "https://github.com/kylezantos/design-motion-principles"
   version: latest
