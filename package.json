@@ -1,6 +1,6 @@
 {
   "name": "design-agent-skills",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and Droid",
   "bin": {
     "design-agent-skills": "bin/cli.mjs"

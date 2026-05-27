@@ -5,6 +5,21 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.7.0] — 2026-05-27
+
+### Added
+
+- **`design-motion-principles`** — Motion and interaction design skill with two modes: **Create** (build React / Framer Motion / CSS components with purposeful motion) and **Audit** (motion-gap analysis + anti-AI-slop checklist → branded HTML report with auto-looping CSS demos). Applies three lenses — Emil Kowalski (restraint), Jakub Krehel (production polish), Jhey Tompkins (creative experimentation) — weighted to project context. rank 2, `type: package` (`kylezantos/design-motion-principles`, 555 ★)
+
+### Changed
+
+- **README** — Skill counts updated: All 138 → 139, Essentials ~79 → ~80, tier-2 implementation pointer count 136 → 139.
+- **`design-catalogue`** — Added `design-motion-principles` to Motion & Animation catalogue index and routing guide.
+
+Catalogue grows from 138 → 139 skills.
+
+---
+
 ## [2.6.0] — 2026-05-25
 
 ### Added
