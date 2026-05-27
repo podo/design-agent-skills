@@ -8,17 +8,15 @@ description: |
   Jhey Tompkins (creative experimentation) — lenses weighted to project context.
   Works with React, Framer Motion, CSS, and HTML.
 triggers:
-  - "animate"
-  - "motion design"
   - "add animation"
   - "audit animation"
   - "hover state"
-  - "micro-interaction"
   - "enter exit animation"
   - "motion review"
-  - "framer motion"
   - "AI slop motion"
   - "motion audit"
+  - "purposeful motion"
+  - "motion principles"
 das:
   category: motion-animation
   type: package
