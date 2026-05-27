@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-138 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+139 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
