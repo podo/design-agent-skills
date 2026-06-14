@@ -15,7 +15,7 @@ triggers:
 das:
   category: design-review
   upstream: "https://github.com/smixs/creative-director-skill"
-  upstream_path: "SKILL.md"
+  upstream_path: "creative-director/SKILL.md"
   version: latest
   install: true
 ---

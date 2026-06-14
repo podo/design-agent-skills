@@ -11,7 +11,7 @@ triggers:
 das:
   category: diagrams
   upstream: "https://github.com/Agents365-ai/excalidraw-skill"
-  upstream_path: "SKILL.md"
+  upstream_path: "skills/excalidraw-skill/SKILL.md"
   version: latest
   install: true
 ---

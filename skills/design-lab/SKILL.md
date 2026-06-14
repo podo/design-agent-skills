@@ -11,15 +11,15 @@ triggers:
   - "iterative design"
 das:
   category: interaction-polish
-  upstream: "https://github.com/0xdesign/design-lab"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/0xdesign/design-plugin"
+  upstream_path: "design-and-refine/skills/design-lab/SKILL.md"
   version: latest
   install: true
 ---
 
 # design-lab
 
-> Catalogue stub — full skill: [0xdesign/design-lab](https://github.com/0xdesign/design-lab)
+> Catalogue stub — full skill: [0xdesign/design-plugin](https://github.com/0xdesign/design-plugin)
 
 ## Decision tree
 
@@ -37,12 +37,12 @@ Run this before any exploratory design session:
 ## Install command
 
 ```bash
-npx skills add 0xdesign/design-lab
+npx skills add 0xdesign/design-plugin --skill design-lab
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add 0xdesign/design-lab`
-- Cursor/OpenCode: `npx skills add 0xdesign/design-lab`
+- Claude Code: `claude skills add 0xdesign/design-plugin`
+- Cursor/OpenCode: `npx skills add 0xdesign/design-plugin --skill design-lab`
 
 ## Invoke after install
 

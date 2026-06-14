@@ -2,6 +2,7 @@ type: package
 tier: community
 category: accessibility-quality
 rank: 1
-upstream: https://github.com/ibelick/fixing-accessibility
+upstream: https://github.com/ibelick/ui-skills
+upstream_path: skills/fixing-accessibility/SKILL.md
 version: latest
-install_default: "npx skills add ibelick/fixing-accessibility"
+install_default: "npx skills add ibelick/ui-skills --skill fixing-accessibility"

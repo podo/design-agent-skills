@@ -11,15 +11,15 @@ triggers:
   - "SwiftUI screen"
 das:
   category: visual-components
-  upstream: "https://github.com/dimillian/swiftui-ui-patterns"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/dimillian/Skills"
+  upstream_path: "swiftui-ui-patterns/SKILL.md"
   version: latest
   install: true
 ---
 
 # swiftui-patterns
 
-> Catalogue stub — full skill: [dimillian/swiftui-ui-patterns](https://github.com/dimillian/swiftui-ui-patterns)
+> Catalogue stub — full skill: [dimillian/Skills](https://github.com/dimillian/Skills)
 
 ## Decision tree
 
@@ -37,12 +37,12 @@ Run this before any SwiftUI view or component work:
 ## Install command
 
 ```bash
-npx skills add dimillian/swiftui-ui-patterns
+npx skills add dimillian/Skills --skill swiftui-ui-patterns
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add dimillian/swiftui-ui-patterns`
-- Cursor/OpenCode: `npx skills add dimillian/swiftui-ui-patterns`
+- Claude Code: `claude skills add dimillian/Skills`
+- Cursor/OpenCode: `npx skills add dimillian/Skills --skill swiftui-ui-patterns`
 
 ## Invoke after install
 

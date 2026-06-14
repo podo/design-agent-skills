@@ -15,7 +15,7 @@ triggers:
 das:
   category: interaction-polish
   upstream: "https://github.com/jakubkrehel/make-interfaces-feel-better"
-  upstream_path: "SKILL.md"
+  upstream_path: "skills/make-interfaces-feel-better/SKILL.md"
   version: latest
   install: true
 ---

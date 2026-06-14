@@ -11,15 +11,15 @@ triggers:
   - "Tailwind anti-patterns"
 das:
   category: accessibility-quality
-  upstream: "https://github.com/ibelick/baseline-ui"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/ibelick/ui-skills"
+  upstream_path: "skills/baseline-ui/SKILL.md"
   version: latest
   install: true
 ---
 
 # baseline-ui
 
-> Catalogue stub — full skill: [ibelick/baseline-ui](https://github.com/ibelick/baseline-ui)
+> Catalogue stub — full skill: [ibelick/ui-skills](https://github.com/ibelick/ui-skills)
 
 ## Decision tree
 
@@ -37,12 +37,12 @@ Run this before any baseline UI validation work:
 ## Install command
 
 ```bash
-npx skills add ibelick/baseline-ui
+npx skills add ibelick/ui-skills --skill baseline-ui
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add ibelick/baseline-ui`
-- Cursor/OpenCode: `npx skills add ibelick/baseline-ui`
+- Claude Code: `claude skills add ibelick/ui-skills`
+- Cursor/OpenCode: `npx skills add ibelick/ui-skills --skill baseline-ui`
 
 ## Invoke after install
 

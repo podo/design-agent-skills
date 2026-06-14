@@ -10,15 +10,15 @@ triggers:
   - "WCAG 2.2"
 das:
   category: accessibility-quality
-  upstream: "https://github.com/wshobson/wcag-audit-patterns"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/wshobson/agents"
+  upstream_path: "plugins/accessibility-compliance/skills/wcag-audit-patterns/SKILL.md"
   version: latest
   install: true
 ---
 
 # wcag-audit-patterns
 
-> Catalogue stub — full skill: [wshobson/wcag-audit-patterns](https://github.com/wshobson/wcag-audit-patterns)
+> Catalogue stub — full skill: [wshobson/agents](https://github.com/wshobson/agents)
 
 ## Decision tree
 
@@ -36,12 +36,12 @@ Run this before any WCAG compliance audit:
 ## Install command
 
 ```bash
-npx skills add wshobson/wcag-audit-patterns
+npx skills add wshobson/agents --skill wcag-audit-patterns
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add wshobson/wcag-audit-patterns`
-- Cursor/OpenCode: `npx skills add wshobson/wcag-audit-patterns`
+- Claude Code: `claude skills add wshobson/agents`
+- Cursor/OpenCode: `npx skills add wshobson/agents --skill wcag-audit-patterns`
 
 ## Invoke after install
 

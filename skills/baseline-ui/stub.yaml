@@ -2,6 +2,7 @@ type: package
 tier: community
 category: accessibility-quality
 rank: 2
-upstream: https://github.com/ibelick/baseline-ui
+upstream: https://github.com/ibelick/ui-skills
+upstream_path: skills/baseline-ui/SKILL.md
 version: latest
-install_default: "npx skills add ibelick/baseline-ui"
+install_default: "npx skills add ibelick/ui-skills --skill baseline-ui"
