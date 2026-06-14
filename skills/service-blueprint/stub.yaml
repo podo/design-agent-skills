@@ -1,0 +1,7 @@
+type: package
+tier: community
+category: design-review
+rank: 2
+upstream: https://github.com/j-clegg/service-blueprint-skill
+version: latest
+install_default: "npx skills add j-clegg/service-blueprint-skill"

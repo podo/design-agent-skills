@@ -54,6 +54,8 @@ Activate when the user:
 | [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
 | [`interaction-design`](../interaction-design/SKILL.md) | IxD principles, component states, micro-interactions, affordances, task flows — Norman + Tognazzini |
 | [`format-storybook`](../format-storybook/SKILL.md) | Storybook file structure, template composition, controls, Chromatic visual regression, CSF patterns |
+| [`localization-design`](../localization-design/SKILL.md) | RTL mirroring, per-language text expansion, non-Latin type, cultural color/icon traps |
+| [`design-system-governance`](../design-system-governance/SKILL.md) | Ownership models, contribution lifecycle, semver contract, deprecation policy |
 
 ## Color, Typography & Components
 
@@ -95,3 +97,6 @@ Activate when the user:
 | [`simota-agent-skills`](../simota-agent-skills/SKILL.md) | 15 design sub-skills: Vision, Frame (Figma bridge), Pixel, Clay, Ink, Sketch |
 | [`design-auditor`](../design-auditor/SKILL.md) | 19-category audit: typography, dark mode, RTL, dark patterns; 0-100 score |
 | [`composio-artifacts`](../composio-artifacts/SKILL.md) | Artifacts connected to GitHub/Slack/Linear via Composio |
+| [`search-ux`](../search-ux/SKILL.md) | Search input, autocomplete, ranking, faceted filters, zero-results, search analytics |
+| [`interfaces-that-feel`](../interfaces-that-feel/SKILL.md) | Emotional design: felt-state → physical analogue → motion/copy/spacing changes |
+| [`information-architecture-and-navigation`](../information-architecture-and-navigation/SKILL.md) | Polar-bear IA: organization/labeling/nav/search, taxonomy, wayfinding, findability |

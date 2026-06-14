@@ -77,6 +77,8 @@ instead of scrolling the full index below:
 | [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
 | [`interaction-design`](../interaction-design/SKILL.md) | IxD principles, component states, micro-interactions, affordances, task flows — Norman + Tognazzini |
 | [`format-storybook`](../format-storybook/SKILL.md) | Storybook story structure, template composition, controls, Chromatic, CSF patterns |
+| [`localization-design`](../localization-design/SKILL.md) | RTL mirroring, per-language text expansion, non-Latin type, cultural color/icon traps |
+| [`design-system-governance`](../design-system-governance/SKILL.md) | Ownership models, contribution lifecycle, semver contract, deprecation policy |
 
 ### Motion & Animation
 
@@ -108,6 +110,9 @@ instead of scrolling the full index below:
 | [`neo-user-journey`](../neo-user-journey/SKILL.md) | UX journey mapping + Playwright testing + 50+ patterns + Nielsen scoring |
 | [`simota-agent-skills`](../simota-agent-skills/SKILL.md) | 15 design sub-skills: Vision, Frame (Figma bridge), Pixel, Clay, Ink, Sketch |
 | [`design-auditor`](../design-auditor/SKILL.md) | 19-category audit: typography, dark mode, RTL, dark patterns; 0-100 score |
+| [`search-ux`](../search-ux/SKILL.md) | Search input, autocomplete, ranking, faceted filters, zero-results, search analytics |
+| [`interfaces-that-feel`](../interfaces-that-feel/SKILL.md) | Emotional design: felt-state → physical analogue → motion/copy/spacing changes |
+| [`information-architecture-and-navigation`](../information-architecture-and-navigation/SKILL.md) | Polar-bear IA: organization/labeling/nav/search, taxonomy, wayfinding, findability |
 
 ### Visual, Components & Color
 
@@ -162,12 +167,17 @@ instead of scrolling the full index below:
 | [`design-with-claude`](../design-with-claude/SKILL.md) | 38 design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
 | [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | Synthesizes 19 authoritative UX sources (NNG, Laws of UX) — 2026 best practices |
 | [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
+| [`design-impact-reporting`](../design-impact-reporting/SKILL.md) | Design ROI: user→product→business metrics, scorecard / before-after / A-B / portfolio |
+| [`design-debt-audit`](../design-debt-audit/SKILL.md) | Design-debt taxonomy + audit process + Severity×Frequency/Effort scoring + register |
+| [`design-negotiation`](../design-negotiation/SKILL.md) | Advocacy scripts: timeline / scope / stakeholder override / headcount, evidence-based |
+| [`service-blueprint`](../service-blueprint/SKILL.md) | NN/g service blueprints: 5 swim lanes, lines of visibility, JSON schema + render pipeline |
 
 ### Design Research
 
 | Skill | Best for |
 |-------|----------|
 | [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports |
+| [`software-ux-research`](../software-ux-research/SKILL.md) | Research ops: survey design, repository management, usability testing (ISO 9241), JTBD |
 
 ### Figma & Design-to-Code
 
@@ -267,6 +277,7 @@ instead of scrolling the full index below:
 | [`ux-writing-skill`](../ux-writing-skill/SKILL.md) | Microcopy, button labels, error messages, empty states, form copy, a11y writing |
 | [`copywriting-skill`](../copywriting-skill/SKILL.md) | Landing pages, product copy, email sequences, headlines, tone-of-voice (5 sub-skills) |
 | [`humanize-text`](../humanize-text/SKILL.md) | Score + rewrite text across 7 AI-pattern dimensions; works on raw text, Figma URLs, screenshots |
+| [`content-strategy`](../content-strategy/SKILL.md) | Content audit, content model, voice/tone, governance, content hierarchy |
 
 ### Email Design
 

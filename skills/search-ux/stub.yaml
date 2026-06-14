@@ -1,0 +1,7 @@
+type: skill
+tier: community
+category: interaction-polish
+rank: 2
+upstream: https://github.com/Owl-Listener/designer-skills
+upstream_path: interaction-design/skills/search-ux/SKILL.md
+version: latest
