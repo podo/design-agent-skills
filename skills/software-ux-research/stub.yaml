@@ -1,0 +1,7 @@
+type: skill
+tier: community
+category: design-research
+rank: 2
+upstream: https://github.com/vasilyu1983/AI-Agents-public
+upstream_path: frameworks/shared-skills/skills/software-ux-research/SKILL.md
+version: latest

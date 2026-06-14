@@ -97,12 +97,17 @@ Activate when the user:
 | [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | Synthesizes 19 authoritative UX sources (NNG, Laws of UX) — 2026 best practices |
 | [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
 | [`digidai-pm`](../digidai-pm/SKILL.md) | Senior PM: 30+ frameworks, SaaS metrics |
+| [`design-impact-reporting`](../design-impact-reporting/SKILL.md) | Design ROI: user→product→business metrics, scorecard / before-after / A-B / portfolio |
+| [`design-debt-audit`](../design-debt-audit/SKILL.md) | Design-debt taxonomy + audit process + Severity×Frequency/Effort scoring + register |
+| [`design-negotiation`](../design-negotiation/SKILL.md) | Advocacy scripts: timeline / scope / stakeholder override / headcount, evidence-based |
+| [`service-blueprint`](../service-blueprint/SKILL.md) | NN/g service blueprints: 5 swim lanes, lines of visibility, JSON schema + render pipeline |
 
 ## Design Research
 
 | Skill | Best for |
 |-------|----------|
 | [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports (141 ★) |
+| [`software-ux-research`](../software-ux-research/SKILL.md) | Research ops: survey design, repository management, usability testing (ISO 9241), JTBD |
 
 ## Product & PM
 
@@ -126,6 +131,7 @@ Activate when the user:
 | [`ux-writing-skill`](../ux-writing-skill/SKILL.md) | Microcopy, button labels, error messages, empty states, form copy, a11y writing |
 | [`copywriting-skill`](../copywriting-skill/SKILL.md) | Landing pages, product copy, email sequences, headlines, tone-of-voice (5 sub-skills) |
 | [`humanize-text`](../humanize-text/SKILL.md) | Score + rewrite text to remove AI patterns across 7 dimensions; works on Figma URLs + screenshots |
+| [`content-strategy`](../content-strategy/SKILL.md) | Content audit, content model, voice/tone, governance, content hierarchy |
 
 ## Email & Terminal
 

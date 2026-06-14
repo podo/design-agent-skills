@@ -5,6 +5,38 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.8.0] — 2026-06-14
+
+### Added
+
+UX strategy, research, and design-ops depth — eight best-in-class skills from `Owl-Listener/designer-skills` plus three deeper external skills, chosen after auditing every Owl skill and web-researching more extensive public alternatives. Skills where the catalogue already indexed a superior upstream (Laws of UX → `ux-ui-mastery`, critique → `design-auditor`, tokens → `design-tokens-skill`, etc.) were deliberately not duplicated.
+
+- **`localization-design`** — RTL mirroring, per-language text-expansion budgets, non-Latin typography, cultural color/icon traps. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`content-strategy`** — Content audit, typed content model, voice/tone, governance, hierarchy. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`search-ux`** — Search input, autocomplete, ranking, faceted filters, zero-results state, search analytics. No dedicated public search-UX skill existed. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`interfaces-that-feel`** — Emotional-design method: felt-state → physical analogue → motion/copy/spacing. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`design-impact-reporting`** — Design ROI: user→product→business metrics, scorecard / before-after / A-B / portfolio formats. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`design-debt-audit`** — Design-debt taxonomy, audit process, Severity×Frequency/Effort scoring, debt register. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`design-negotiation`** — Evidence-based advocacy scripts: timeline / scope / stakeholder override / headcount. No public rival found. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`design-system-governance`** — Ownership models, contribution lifecycle, semver-as-contract, deprecation policy, quality gates. rank 2, `type: skill` (`Owl-Listener/designer-skills`)
+- **`software-ux-research`** — Research-ops powerhouse: survey design, repository management, usability testing (ISO 9241), JTBD. rank 2, `type: skill` (`vasilyu1983/AI-Agents-public`)
+- **`information-architecture-and-navigation`** — Polar-bear IA: organization/labeling/navigation/search systems, taxonomy, wayfinding, findability. rank 2, `type: skill` (`jpoindexter/design-and-ai-skills`)
+- **`service-blueprint`** — NN/g service blueprints: five swim lanes, lines of visibility, JSON schema + HTML/Mermaid render pipeline. rank 2, `type: package` (`j-clegg/service-blueprint-skill`)
+
+### Changed
+
+- **`design-catalogue`, `design-engineering-catalogue`, `content-catalogue` routers** — added the eleven new skills to their domain sections.
+- **CI** — new `scripts/check-upstreams.mjs` upstream-freshness check: PR CI gates the skills a PR changes (`--only`); the weekly `Upstream URL check` workflow now runs it over the whole catalogue (`--paths`), authenticated for a 5000 req/hr limit. Dead (404/451) upstreams fail; archived/moved are warnings.
+- **CI** — the README count guard now also validates the **Picks** and **Essentials** profile numbers against live `rank == 1` / `rank <= 2` stub counts, not just the total.
+
+### Fixed
+
+- **CHANGELOG `[2.6.0]`** — corrected the Essentials count from `~77 → ~78` to `~77 → ~79` (`phuryn-pm-skills`’ rank-3→2 promotion was missed in the original note). Closes #10.
+
+Catalogue grows from 139 → 150 skills.
+
+---
+
 ## [2.7.0] — 2026-05-27
 
 ### Added
@@ -32,7 +64,7 @@ Catalogue grows from 138 → 139 skills.
 - **`phuryn-pm-skills`** — Refreshed stale metadata: upstream grew from 6 skills to 65 skills / 36 workflows across 8 plugins and moved to a Claude plugin marketplace. Updated description and install command (`claude plugin marketplace add phuryn/pm-skills`); promoted rank 3 → 2.
 - **`pm-skills`** — Corrected upstream drift: 63 → 55 skills (26 phase, 8 foundation, 6 utility, 15 sprint).
 - **`design-catalogue` + `content-catalogue` routers** — Added Product & PM rows and routing-guide entries for the two new skills; synced PM skill counts.
-- **README** — Skill counts (136 → 138), Essentials (~77 → ~78), supply-chain tier counts, and Product & PM table.
+- **README** — Skill counts (136 → 138), Essentials (~77 → ~79), supply-chain tier counts, and Product & PM table.
 
 ### Tests
 

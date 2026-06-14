@@ -1,0 +1,7 @@
+type: skill
+tier: community
+category: interaction-polish
+rank: 2
+upstream: https://github.com/jpoindexter/design-and-ai-skills
+upstream_path: design-system-skills/information-architecture-and-navigation/SKILL.md
+version: latest

@@ -1,0 +1,7 @@
+type: skill
+tier: community
+category: design-systems
+rank: 2
+upstream: https://github.com/Owl-Listener/designer-skills
+upstream_path: design-systems/skills/localization-design/SKILL.md
+version: latest

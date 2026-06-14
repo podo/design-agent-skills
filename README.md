@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-139 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+150 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -27,8 +27,8 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   80 skills    full coverage
-│  ○ All         139 skills    everything
+│  ○ Essentials   91 skills    full coverage
+│  ○ All         150 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -50,13 +50,13 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~80 | Full coverage, no redundancy. |
-| **All** | `--all` | 139 | Everything including niche and experimental. |
+| **Essentials** | `--essentials` | ~91 | Full coverage, no redundancy. |
+| **All** | `--all` | 150 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~80 skills covering all categories
-npx design-agent-skills --all -g            # all 139 (default when no flag)
+npx design-agent-skills --essentials -g     # ~91 skills covering all categories
+npx design-agent-skills --all -g            # all 150 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (139 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (150 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -121,7 +121,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 139 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 150 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -243,8 +243,10 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [taste-skill](skills/taste-skill/SKILL.md) ★ | skill | design-systems | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) |
 | [ui-craft](skills/ui-craft/SKILL.md) ★ | package | design-systems | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
 | [brand-design-md](skills/brand-design-md/SKILL.md) | skill | design-systems | [zephyrwang6/brand-design-md](https://github.com/zephyrwang6/brand-design-md) |
+| [design-system-governance](skills/design-system-governance/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [frontend-design](skills/frontend-design/SKILL.md) | skill | design-systems | [Ilm-Alan/frontend-design](https://github.com/Ilm-Alan/frontend-design) |
 | [impeccable](skills/impeccable/SKILL.md) | platform | design-systems | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
+| [localization-design](skills/localization-design/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [ai-graphic-design-skill](skills/ai-graphic-design-skill/SKILL.md) | skill | design-systems | [designrique/ai-graphic-design-skill](https://github.com/designrique/ai-graphic-design-skill) |
 | [design-for-ai](skills/design-for-ai/SKILL.md) | package | design-systems | [ryanthedev/design-for-ai](https://github.com/ryanthedev/design-for-ai) |
 | [distinctive-frontend](skills/distinctive-frontend/SKILL.md) | package | design-systems | [Koomook/claude-frontend-skills](https://github.com/Koomook/claude-frontend-skills) |
@@ -275,8 +277,11 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 |-------|------|----------|----------|
 | [interaction-design](skills/interaction-design/SKILL.md) ★ | package | interaction-polish | [rastian/interaction-design-skills](https://github.com/rastian/interaction-design-skills) |
 | [design-auditor](skills/design-auditor/SKILL.md) | skill | interaction-polish | [Ashutos1997/claude-design-auditor-skill](https://github.com/Ashutos1997/claude-design-auditor-skill) |
+| [information-architecture-and-navigation](skills/information-architecture-and-navigation/SKILL.md) | skill | interaction-polish | [jpoindexter/design-and-ai-skills](https://github.com/jpoindexter/design-and-ai-skills) |
+| [interfaces-that-feel](skills/interfaces-that-feel/SKILL.md) | skill | interaction-polish | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [make-interfaces-better](skills/make-interfaces-better/SKILL.md) | skill | interaction-polish | [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) |
 | [neo-user-journey](skills/neo-user-journey/SKILL.md) | skill | interaction-polish | [Cornjebus/neo-user-journey](https://github.com/Cornjebus/neo-user-journey) |
+| [search-ux](skills/search-ux/SKILL.md) | skill | interaction-polish | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [bencium-ux-designer](skills/bencium-ux-designer/SKILL.md) | package | interaction-polish | [bencium/bencium-innovative-ux-designer](https://github.com/bencium/bencium-innovative-ux-designer) |
 | [design-lab](skills/design-lab/SKILL.md) | package | interaction-polish | [0xdesign/design-lab](https://github.com/0xdesign/design-lab) |
 | [interface-design-dammyjay](skills/interface-design-dammyjay/SKILL.md) | package | interaction-polish | [Dammyjay93/interface-design](https://github.com/Dammyjay93/interface-design) |
@@ -328,8 +333,12 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 |-------|------|----------|----------|
 | [plan-design-review](skills/plan-design-review/SKILL.md) ★ | skill | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
 | [creative-director](skills/creative-director/SKILL.md) | skill | design-review | [smixs/creative-director-skill](https://github.com/smixs/creative-director-skill) |
+| [design-debt-audit](skills/design-debt-audit/SKILL.md) | skill | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
+| [design-impact-reporting](skills/design-impact-reporting/SKILL.md) | skill | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
+| [design-negotiation](skills/design-negotiation/SKILL.md) | skill | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [design-review-garrytan](skills/design-review-garrytan/SKILL.md) | skill | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
 | [designer-skills](skills/designer-skills/SKILL.md) | package | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
+| [service-blueprint](skills/service-blueprint/SKILL.md) | package | design-review | [j-clegg/service-blueprint-skill](https://github.com/j-clegg/service-blueprint-skill) |
 | [ux-designer-skill](skills/ux-designer-skill/SKILL.md) | skill | design-review | [szilu/ux-designer-skill](https://github.com/szilu/ux-designer-skill) |
 | [design-brief](skills/design-brief/SKILL.md) | skill | design-review | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
 | [design-consultation](skills/design-consultation/SKILL.md) | skill | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
@@ -421,6 +430,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [ux-writing-skill](skills/ux-writing-skill/SKILL.md) ★ | skill | content-design | [content-designer/ux-writing-skill](https://github.com/content-designer/ux-writing-skill) |
+| [content-strategy](skills/content-strategy/SKILL.md) | skill | content-design | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [product-position](skills/product-position/SKILL.md) | skill | content-design | [firatcand/founder-skills](https://github.com/firatcand/founder-skills) |
 
 ### Email Design
@@ -464,3 +474,4 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [user-research-cookiy](skills/user-research-cookiy/SKILL.md) ★ | skill | design-research | [cookiy-ai/user-research-skill](https://github.com/cookiy-ai/user-research-skill) |
+| [software-ux-research](skills/software-ux-research/SKILL.md) | skill | design-research | [vasilyu1983/AI-Agents-public](https://github.com/vasilyu1983/AI-Agents-public) |

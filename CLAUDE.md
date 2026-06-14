@@ -456,6 +456,30 @@ head -20 skills/<name>/SKILL.md
 
 ---
 
+## Upstream freshness check
+
+`scripts/check-upstreams.mjs` verifies that every non-router stub still points at a live, non-stale upstream repo:
+
+- **Deleted / blocked** upstream (HTTP 404 / 451) → hard failure. The pointer's upgrade target is gone; fix the URL or remove the skill.
+- **Archived** upstream → stale warning (fails only with `--strict`).
+- **Missing `upstream_path`** file → warning (only checked with `--paths`).
+
+Where it runs:
+
+| Trigger | Scope | Blocking |
+|---------|-------|----------|
+| Pull request (`Test` workflow) | only skills changed in the PR (`--only`) | yes — a PR can't add a dead pointer |
+| Weekly cron + manual (`Upstream URL check`) | whole catalogue (`--paths`) | yes — alerts on rot anywhere |
+
+Set `GITHUB_TOKEN`/`GH_TOKEN` when running locally so the GitHub API allows 5000 req/hr instead of 60:
+
+```bash
+GH_TOKEN=$(gh auth token) node scripts/check-upstreams.mjs            # whole catalogue
+GH_TOKEN=$(gh auth token) node scripts/check-upstreams.mjs --only my-skill,other-skill
+```
+
+PR CI is intentionally **scoped to changed skills** so a PR is gated only on what it touches — pre-existing rot elsewhere is caught by the weekly full-catalogue run, not by every unrelated PR.
+
 ## Common mistakes
 
 | Mistake | Test that catches it | Fix |
