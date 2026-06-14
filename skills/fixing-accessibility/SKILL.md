@@ -11,15 +11,15 @@ triggers:
   - "focus management"
 das:
   category: accessibility-quality
-  upstream: "https://github.com/ibelick/fixing-accessibility"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/ibelick/ui-skills"
+  upstream_path: "skills/fixing-accessibility/SKILL.md"
   version: latest
   install: true
 ---
 
 # fixing-accessibility
 
-> Catalogue stub — full skill: [ibelick/fixing-accessibility](https://github.com/ibelick/fixing-accessibility)
+> Catalogue stub — full skill: [ibelick/ui-skills](https://github.com/ibelick/ui-skills)
 
 ## Decision tree
 
@@ -37,12 +37,12 @@ Run this before any accessibility audit or fix:
 ## Install command
 
 ```bash
-npx skills add ibelick/fixing-accessibility
+npx skills add ibelick/ui-skills --skill fixing-accessibility
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add ibelick/fixing-accessibility`
-- Cursor/OpenCode: `npx skills add ibelick/fixing-accessibility`
+- Claude Code: `claude skills add ibelick/ui-skills`
+- Cursor/OpenCode: `npx skills add ibelick/ui-skills --skill fixing-accessibility`
 
 ## Invoke after install
 

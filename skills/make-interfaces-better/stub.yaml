@@ -3,5 +3,5 @@ tier: experimental
 category: interaction-polish
 rank: 2
 upstream: https://github.com/jakubkrehel/make-interfaces-feel-better
-upstream_path: SKILL.md
+upstream_path: skills/make-interfaces-feel-better/SKILL.md
 version: latest

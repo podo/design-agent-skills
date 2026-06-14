@@ -14,14 +14,14 @@ triggers:
   - "Figma Plugin API"
 das:
   category: figma-code
-  upstream: "https://github.com/figma/skills"
+  upstream: "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server"
   version: latest
   install: false
 ---
 
 # figma-official-skills
 
-> Catalogue stub — full package: [figma/skills](https://github.com/figma/skills)
+> Catalogue stub — full package: [figma/skills](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server)
 
 ## Decision tree
 

@@ -2,6 +2,7 @@ type: package
 tier: community
 category: visual-components
 rank: 3
-upstream: https://github.com/dimillian/swiftui-ui-patterns
+upstream: https://github.com/dimillian/Skills
+upstream_path: swiftui-ui-patterns/SKILL.md
 version: latest
-install_default: "npx skills add dimillian/swiftui-ui-patterns"
+install_default: "npx skills add dimillian/Skills --skill swiftui-ui-patterns"

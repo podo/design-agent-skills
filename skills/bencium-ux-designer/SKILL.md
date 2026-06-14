@@ -11,15 +11,15 @@ triggers:
   - "production frontend"
 das:
   category: interaction-polish
-  upstream: "https://github.com/bencium/bencium-innovative-ux-designer"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/bencium/bencium-marketplace"
+  upstream_path: "bencium-innovative-ux-designer/skills/bencium-innovative-ux-designer/SKILL.md"
   version: latest
   install: true
 ---
 
 # bencium-ux-designer
 
-> Catalogue stub — full skill: [bencium/bencium-innovative-ux-designer](https://github.com/bencium/bencium-innovative-ux-designer)
+> Catalogue stub — full skill: [bencium/bencium-marketplace](https://github.com/bencium/bencium-marketplace)
 
 ## Decision tree
 
@@ -37,12 +37,12 @@ Run this before any frontend interface work requiring distinctive design quality
 ## Install command
 
 ```bash
-npx skills add bencium/bencium-innovative-ux-designer
+npx skills add bencium/bencium-marketplace --skill bencium-innovative-ux-designer
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add bencium/bencium-innovative-ux-designer`
-- Cursor/OpenCode: `npx skills add bencium/bencium-innovative-ux-designer`
+- Claude Code: `claude skills add bencium/bencium-marketplace`
+- Cursor/OpenCode: `npx skills add bencium/bencium-marketplace --skill bencium-innovative-ux-designer`
 
 ## Invoke after install
 

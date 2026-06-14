@@ -14,14 +14,14 @@ triggers:
   - "web best practices"
 das:
   category: accessibility-quality
-  upstream: "https://github.com/addyosmani/skills"
+  upstream: "https://github.com/addyosmani/web-quality-skills"
   version: latest
   install: false
 ---
 
 # addyosmani-quality
 
-> Catalogue stub — full package: [addyosmani/skills](https://github.com/addyosmani/skills)
+> Catalogue stub — full package: [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills)
 
 ## Decision tree
 
@@ -40,22 +40,22 @@ Run this before any web quality, performance, or accessibility audit:
 
 ```bash
 # WCAG compliance, screen reader, keyboard navigation
-npx skills add addyosmani/accessibility
+npx skills add addyosmani/web-quality-skills --skill accessibility
 
 # Lighthouse-style: performance, a11y, SEO, best practices
-npx skills add addyosmani/web-quality-audit
+npx skills add addyosmani/web-quality-skills --skill web-quality-audit
 
 # LCP, INP, CLS-specific optimizations
-npx skills add addyosmani/core-web-vitals
+npx skills add addyosmani/web-quality-skills --skill core-web-vitals
 
 # Loading speed, runtime efficiency, resource optimization
-npx skills add addyosmani/performance
+npx skills add addyosmani/web-quality-skills --skill performance
 
 # Search engine optimization, structured data
-npx skills add addyosmani/seo
+npx skills add addyosmani/web-quality-skills --skill seo
 
 # Security, modern web APIs, code quality
-npx skills add addyosmani/best-practices
+npx skills add addyosmani/web-quality-skills --skill best-practices
 ```
 
 ## Invoke after install

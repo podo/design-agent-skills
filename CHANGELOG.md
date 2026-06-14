@@ -5,6 +5,33 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.8.1] — 2026-06-14
+
+### Fixed
+
+Repaired 12 stale/dead upstream pointers surfaced by the new `Upstream URL check` (full-catalogue run). All now resolve — `check-upstreams.mjs --paths` reports 0 dead, 0 stale.
+
+Upstreams that moved into a monorepo (URL + `upstream_path` updated, install now selects the skill with `--skill`):
+
+- **`baseline-ui`**, **`fixing-accessibility`**, **`fixing-motion-performance`** → consolidated into `ibelick/ui-skills`
+- **`design-lab`** → `0xdesign/design-plugin` (`design-and-refine/skills/design-lab`)
+- **`swiftui-patterns`** → `dimillian/Skills` (`swiftui-ui-patterns`)
+- **`bencium-ux-designer`** → `bencium/bencium-marketplace`
+- **`wcag-audit-patterns`** → `wshobson/agents` (`plugins/accessibility-compliance/skills/wcag-audit-patterns`)
+- **`addyosmani-quality`** → `addyosmani/web-quality-skills` (per-skill repos consolidated; install list updated to `--skill`)
+
+`upstream_path` corrected (repo unchanged, `SKILL.md` had moved out of the repo root):
+
+- **`excalidraw-agents365`** → `skills/excalidraw-skill/SKILL.md`
+- **`creative-director`** → `creative-director/SKILL.md`
+- **`make-interfaces-better`** → `skills/make-interfaces-feel-better/SKILL.md`
+
+Re-typed (GitHub repo gone, capability moved):
+
+- **`figma-official-skills`** — `github.com/figma/skills` was deleted; Figma's official skills are now served via the Figma Dev Mode MCP, not an installable repo. Re-typed `package` → `platform` and pointed at the Figma MCP docs. No GitHub fetch, so the freshness check no longer flags it; all cross-references and its rank-1 slot are preserved.
+
+---
+
 ## [2.8.0] — 2026-06-14
 
 ### Added

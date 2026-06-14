@@ -11,15 +11,15 @@ triggers:
   - "compositor properties"
 das:
   category: motion-animation
-  upstream: "https://github.com/ibelick/fixing-motion-performance"
-  upstream_path: "SKILL.md"
+  upstream: "https://github.com/ibelick/ui-skills"
+  upstream_path: "skills/fixing-motion-performance/SKILL.md"
   version: latest
   install: true
 ---
 
 # fixing-motion-performance
 
-> Catalogue stub — full skill: [ibelick/fixing-motion-performance](https://github.com/ibelick/fixing-motion-performance)
+> Catalogue stub — full skill: [ibelick/ui-skills](https://github.com/ibelick/ui-skills)
 
 ## Decision tree
 
@@ -37,12 +37,12 @@ Run this before any motion performance audit:
 ## Install command
 
 ```bash
-npx skills add ibelick/fixing-motion-performance
+npx skills add ibelick/ui-skills --skill fixing-motion-performance
 ```
 
 Or per-agent:
-- Claude Code: `claude skills add ibelick/fixing-motion-performance`
-- Cursor/OpenCode: `npx skills add ibelick/fixing-motion-performance`
+- Claude Code: `claude skills add ibelick/ui-skills`
+- Cursor/OpenCode: `npx skills add ibelick/ui-skills --skill fixing-motion-performance`
 
 ## Invoke after install
 

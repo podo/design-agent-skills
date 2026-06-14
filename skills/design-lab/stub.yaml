@@ -2,6 +2,7 @@ type: package
 tier: experimental
 category: interaction-polish
 rank: 3
-upstream: https://github.com/0xdesign/design-lab
+upstream: https://github.com/0xdesign/design-plugin
+upstream_path: design-and-refine/skills/design-lab/SKILL.md
 version: latest
-install_default: "npx skills add 0xdesign/design-lab"
+install_default: "npx skills add 0xdesign/design-plugin --skill design-lab"

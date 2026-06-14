@@ -282,8 +282,8 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [make-interfaces-better](skills/make-interfaces-better/SKILL.md) | skill | interaction-polish | [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) |
 | [neo-user-journey](skills/neo-user-journey/SKILL.md) | skill | interaction-polish | [Cornjebus/neo-user-journey](https://github.com/Cornjebus/neo-user-journey) |
 | [search-ux](skills/search-ux/SKILL.md) | skill | interaction-polish | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
-| [bencium-ux-designer](skills/bencium-ux-designer/SKILL.md) | package | interaction-polish | [bencium/bencium-innovative-ux-designer](https://github.com/bencium/bencium-innovative-ux-designer) |
-| [design-lab](skills/design-lab/SKILL.md) | package | interaction-polish | [0xdesign/design-lab](https://github.com/0xdesign/design-lab) |
+| [bencium-ux-designer](skills/bencium-ux-designer/SKILL.md) | package | interaction-polish | [bencium/bencium-marketplace](https://github.com/bencium/bencium-marketplace) |
+| [design-lab](skills/design-lab/SKILL.md) | package | interaction-polish | [0xdesign/design-plugin](https://github.com/0xdesign/design-plugin) |
 | [interface-design-dammyjay](skills/interface-design-dammyjay/SKILL.md) | package | interaction-polish | [Dammyjay93/interface-design](https://github.com/Dammyjay93/interface-design) |
 | [simota-agent-skills](skills/simota-agent-skills/SKILL.md) | package | interaction-polish | [simota/agent-skills](https://github.com/simota/agent-skills) |
 | [taste-design-stitch](skills/taste-design-stitch/SKILL.md) | skill | interaction-polish | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
@@ -309,23 +309,23 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [ink-google](skills/ink-google/SKILL.md) | skill | visual-components | [google-labs-code/design.md](https://github.com/google-labs-code/design.md) |
 | [mobile-app-ui-design](skills/mobile-app-ui-design/SKILL.md) | skill | visual-components | [ceorkm/mobile-app-ui-design](https://github.com/ceorkm/mobile-app-ui-design) |
 | [sleek-design-mobile-apps](skills/sleek-design-mobile-apps/SKILL.md) | platform | visual-components | [sleekdotdesign/agent-skills](https://github.com/sleekdotdesign/agent-skills) |
-| [swiftui-patterns](skills/swiftui-patterns/SKILL.md) | package | visual-components | [dimillian/swiftui-ui-patterns](https://github.com/dimillian/swiftui-ui-patterns) |
+| [swiftui-patterns](skills/swiftui-patterns/SKILL.md) | package | visual-components | [dimillian/Skills](https://github.com/dimillian/Skills) |
 | [ui-ux-pro-max](skills/ui-ux-pro-max/SKILL.md) | platform | visual-components | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
 
 ### Accessibility & Quality
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [fixing-accessibility](skills/fixing-accessibility/SKILL.md) ★ | package | accessibility-quality | [ibelick/fixing-accessibility](https://github.com/ibelick/fixing-accessibility) |
+| [fixing-accessibility](skills/fixing-accessibility/SKILL.md) ★ | package | accessibility-quality | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
 | [wcag-ai-skill](skills/wcag-ai-skill/SKILL.md) ★ | package | accessibility-quality | [Raze-Systems/wcag-ai-skill](https://github.com/Raze-Systems/wcag-ai-skill) |
 | [accessibility-agents](skills/accessibility-agents/SKILL.md) | package | accessibility-quality | [Community-Access/accessibility-agents](https://github.com/Community-Access/accessibility-agents) |
-| [addyosmani-quality](skills/addyosmani-quality/SKILL.md) | package | accessibility-quality | [addyosmani/skills](https://github.com/addyosmani/skills) |
-| [baseline-ui](skills/baseline-ui/SKILL.md) | package | accessibility-quality | [ibelick/baseline-ui](https://github.com/ibelick/baseline-ui) |
+| [addyosmani-quality](skills/addyosmani-quality/SKILL.md) | package | accessibility-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) |
+| [baseline-ui](skills/baseline-ui/SKILL.md) | package | accessibility-quality | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
 | [cloudflare-web-perf](skills/cloudflare-web-perf/SKILL.md) | skill | accessibility-quality | [cloudflare/skills](https://github.com/cloudflare/skills) |
 | [dark-pattern-audit](skills/dark-pattern-audit/SKILL.md) | package | accessibility-quality | [SidKH/skills](https://github.com/SidKH/skills) |
 | [react-doctor](skills/react-doctor/SKILL.md) | package | accessibility-quality | [millionco/react-doctor](https://github.com/millionco/react-doctor) |
 | [mastepanoski-skills](skills/mastepanoski-skills/SKILL.md) | package | accessibility-quality | [mastepanoski/claude-skills](https://github.com/mastepanoski/claude-skills) |
-| [wcag-audit-patterns](skills/wcag-audit-patterns/SKILL.md) | package | accessibility-quality | [wshobson/wcag-audit-patterns](https://github.com/wshobson/wcag-audit-patterns) |
+| [wcag-audit-patterns](skills/wcag-audit-patterns/SKILL.md) | package | accessibility-quality | [wshobson/agents](https://github.com/wshobson/agents) |
 
 ### Design Review
 
@@ -350,7 +350,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [figma-official-skills](skills/figma-official-skills/SKILL.md) ★ | package | figma-code | [figma/skills](https://github.com/figma/skills) |
+| [figma-official-skills](skills/figma-official-skills/SKILL.md) ★ | platform | figma-code | [https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server) |
 | [claude2figma](skills/claude2figma/SKILL.md) | package | figma-code | [senlindesign/claude2figma](https://github.com/senlindesign/claude2figma) |
 | [extract-design-system](skills/extract-design-system/SKILL.md) | package | figma-code | [arvindrk/extract-design-system](https://github.com/arvindrk/extract-design-system) |
 | [google-stitch-skills](skills/google-stitch-skills/SKILL.md) | package | figma-code | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
@@ -458,7 +458,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [motion-design-skill](skills/motion-design-skill/SKILL.md) | package | motion-animation | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) |
 | [animate-css-skill](skills/animate-css-skill/SKILL.md) | package | motion-animation | [msrbuilds/animate-css-skill](https://github.com/msrbuilds/animate-css-skill) |
 | [css-animation-skill](skills/css-animation-skill/SKILL.md) | skill | motion-animation | [neonwatty/css-animation-skill](https://github.com/neonwatty/css-animation-skill) |
-| [fixing-motion-performance](skills/fixing-motion-performance/SKILL.md) | package | motion-animation | [ibelick/fixing-motion-performance](https://github.com/ibelick/fixing-motion-performance) |
+| [fixing-motion-performance](skills/fixing-motion-performance/SKILL.md) | package | motion-animation | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
 | [hyperframes](skills/hyperframes/SKILL.md) | package | motion-animation | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) |
 | [wiggle-claude-skill](skills/wiggle-claude-skill/SKILL.md) | skill | motion-animation | [talknerdytome-labs/wiggle-claude-skill](https://github.com/talknerdytome-labs/wiggle-claude-skill) |
 
