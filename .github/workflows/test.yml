@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0   # need history to diff changed skills against the base branch
 
       - uses: actions/setup-node@v6
         with:
@@ -48,3 +50,18 @@ jobs:
           }
           console.log(`OK — README count (${nonRouter}) matches actual catalogue`);
           EOF
+
+      - name: Check upstreams of changed skills are alive (PR only)
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}   # authenticated → 5000 req/hr, no rate-limit false-negatives
+        run: |
+          git fetch --no-tags origin "${{ github.base_ref }}"
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- 'skills/*/stub.yaml' 'skills/*/SKILL.md' \
+            | sed -E 's#^skills/([^/]+)/.*#\1#' | sort -u | paste -sd, -)
+          if [ -z "$CHANGED" ]; then
+            echo "No skill stubs changed in this PR — skipping upstream freshness check."
+            exit 0
+          fi
+          echo "Changed skills: $CHANGED"
+          node scripts/check-upstreams.mjs --only "$CHANGED"
