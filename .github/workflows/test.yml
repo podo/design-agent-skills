@@ -24,7 +24,7 @@ jobs:
       - name: Validate README skills table
         run: node scripts/generate-readme-table.mjs --check
 
-      - name: Validate README skill count
+      - name: Validate README skill + profile counts
         run: |
           node --input-type=module << 'EOF'
           import fs from 'node:fs';
@@ -33,22 +33,39 @@ jobs:
           const dirs = fs.readdirSync(SKILLS_DIR).filter(n =>
             fs.statSync(path.join(SKILLS_DIR, n)).isDirectory()
           );
-          let nonRouter = 0;
+          // Live counts: All = non-router stubs; Picks = rank 1; Essentials = rank 1 + rank 2.
+          let nonRouter = 0, picks = 0, essentials = 0;
           for (const name of dirs) {
             const stub = path.join(SKILLS_DIR, name, 'stub.yaml');
             if (!fs.existsSync(stub)) continue;
             const raw = fs.readFileSync(stub, 'utf8');
-            if (!/^type:\s*router/m.test(raw)) nonRouter++;
+            if (/^type:\s*router/m.test(raw)) continue;
+            nonRouter++;
+            const rank = Number((raw.match(/^rank:\s*(\d+)/m) || [])[1]);
+            if (rank === 1) { picks++; essentials++; }
+            else if (rank === 2) { essentials++; }
           }
           const readme = fs.readFileSync('README.md', 'utf8');
-          const m = readme.match(/^(\d+) skills covering/m);
-          if (!m) { console.error('Cannot find "N skills covering" in README.md line 4'); process.exit(1); }
-          const readmeCount = Number(m[1]);
-          if (readmeCount !== nonRouter) {
-            console.error(`README says ${readmeCount} skills but found ${nonRouter} non-router stubs in skills/`);
+          const fails = [];
+          // Total — README.md line 4 "N skills covering"
+          const totalM = readme.match(/^(\d+) skills covering/m);
+          if (!totalM) fails.push('Cannot find "N skills covering" in README.md');
+          else if (Number(totalM[1]) !== nonRouter)
+            fails.push(`Total: README says ${totalM[1]}, actual non-router stubs = ${nonRouter}`);
+          // Profile table — "| **Picks** … | `--picks` | N |" and the same for --essentials
+          const profile = (flag, expected, label) => {
+            const m = readme.match(new RegExp('`--' + flag + '`\\s*\\|\\s*~?(\\d+)'));
+            if (!m) fails.push(`Cannot find the ${label} profile row (\`--${flag}\`) in README.md`);
+            else if (Number(m[1]) !== expected)
+              fails.push(`${label}: README says ${m[1]}, actual rank-based count = ${expected}`);
+          };
+          profile('picks', picks, 'Picks');
+          profile('essentials', essentials, 'Essentials');
+          if (fails.length) {
+            console.error('README count drift:\n  ' + fails.join('\n  '));
             process.exit(1);
           }
-          console.log(`OK — README count (${nonRouter}) matches actual catalogue`);
+          console.log(`OK — README counts match: All=${nonRouter}, Picks=${picks}, Essentials=${essentials}`);
           EOF
 
       - name: Check upstreams of changed skills are alive (PR only)
