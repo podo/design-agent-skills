@@ -1,0 +1,6 @@
+type: skill
+tier: community
+rank: 2
+category: visual-components
+upstream: https://github.com/wholiver/swiftui-design-skill
+version: latest

@@ -134,6 +134,7 @@ instead of scrolling the full index below:
 | [`sleek-design-mobile-apps`](../sleek-design-mobile-apps/SKILL.md) | Sleek platform: design screens, projects, assets via natural language (account req.) |
 | [`liquid-glass-skill`](../liquid-glass-skill/SKILL.md) | iOS 26 Liquid Glass: .glassEffect(), GlassEffectContainer, migration patterns |
 | [`swiftui-claude-skills`](../swiftui-claude-skills/SKILL.md) | WWDC 2025 verified SwiftUI, iOS 26.4 RC, Xcode 26 |
+| [`swiftui-design-skill`](../swiftui-design-skill/SKILL.md) | SwiftUI visual design craft — anti-AI-slop, typography, color, brand |
 | [`material-3-skill`](../material-3-skill/SKILL.md) | Material Design 3 / Material You: dynamic color, tonal surfaces, 30+ components (Compose + Flutter) |
 
 ### Accessibility & Quality
@@ -346,6 +347,7 @@ instead of scrolling the full index below:
 | "mobile app design", "touch targets", "thumb zones" | `mobile-app-design` |
 | "iOS 26", "Liquid Glass", "glassEffect" | `liquid-glass-skill` |
 | "SwiftUI iOS 26", "WWDC 2025 SwiftUI" | `swiftui-claude-skills` |
+| "SwiftUI design", "SwiftUI visual design", "iOS visual design" | `swiftui-design-skill` |
 | "WCAG 2.2 guidance", "conformance docs" | `wcag-ai-skill` |
 | "25 a11y agents", "PDF accessibility", "document a11y" | `accessibility-agents` |
 | "Don Norman audit", "cognitive walkthrough", "ux-rethink" | `mastepanoski-skills` |
