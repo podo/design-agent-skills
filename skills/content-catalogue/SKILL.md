@@ -93,7 +93,7 @@ Activate when the user:
 | [`design-html`](../design-html/SKILL.md) | Implement designs as production HTML/CSS |
 | [`ux-ui-mastery`](../ux-ui-mastery/SKILL.md) | 19 skills: cognitive psych, spatial UX, ambient UI, iOS 26, WCAG 3.0 |
 | [`designer-skills`](../designer-skills/SKILL.md) | 91 skills, 28 commands: design research, systems, ux-strategy, critique |
-| [`design-with-claude`](../design-with-claude/SKILL.md) | 38 design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
+| [`design-with-claude`](../design-with-claude/SKILL.md) | Deterministic WCAG/token audit + 47 design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
 | [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | Synthesizes 19 authoritative UX sources (NNG, Laws of UX) — 2026 best practices |
 | [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
 | [`digidai-pm`](../digidai-pm/SKILL.md) | Senior PM: 30+ frameworks, SaaS metrics |
