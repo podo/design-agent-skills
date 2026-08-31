@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-150 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+151 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -27,8 +27,8 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   91 skills    full coverage
-│  ○ All         150 skills    everything
+│  ○ Essentials   92 skills    full coverage
+│  ○ All         151 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -50,13 +50,13 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~91 | Full coverage, no redundancy. |
-| **All** | `--all` | 150 | Everything including niche and experimental. |
+| **Essentials** | `--essentials` | ~92 | Full coverage, no redundancy. |
+| **All** | `--all` | 151 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~91 skills covering all categories
-npx design-agent-skills --all -g            # all 150 (default when no flag)
+npx design-agent-skills --essentials -g     # ~92 skills covering all categories
+npx design-agent-skills --all -g            # all 151 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (150 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (151 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -121,7 +121,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 150 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 151 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -215,7 +215,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (33), `community` (51), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (33), `community` (64), `experimental` (60) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -258,7 +258,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [remotion](skills/remotion/SKILL.md) ★ | skill | creative-3d | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
+| [remotion](skills/remotion/SKILL.md) ★ | package | creative-3d | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [generative-media-skills](skills/generative-media-skills/SKILL.md) | platform | creative-3d | [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills) |
 | [open-design](skills/open-design/SKILL.md) | platform | creative-3d | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
 | [p5js-hermes](skills/p5js-hermes/SKILL.md) | skill | creative-3d | [nousresearch/hermes-agent](https://github.com/nousresearch/hermes-agent) |
@@ -305,6 +305,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [mobile-app-design](skills/mobile-app-design/SKILL.md) | skill | visual-components | [awesome-skills/mobile-app-design](https://github.com/awesome-skills/mobile-app-design) |
 | [platform-design-skills](skills/platform-design-skills/SKILL.md) | package | visual-components | [ehmo/platform-design-skills](https://github.com/ehmo/platform-design-skills) |
 | [swiftui-claude-skills](skills/swiftui-claude-skills/SKILL.md) | package | visual-components | [199-biotechnologies/swiftui-claude-skills](https://github.com/199-biotechnologies/swiftui-claude-skills) |
+| [swiftui-design-skill](skills/swiftui-design-skill/SKILL.md) | skill | visual-components | [wholiver/swiftui-design-skill](https://github.com/wholiver/swiftui-design-skill) |
 | [awesome-design-skills](skills/awesome-design-skills/SKILL.md) | package | visual-components | [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) |
 | [ink-google](skills/ink-google/SKILL.md) | skill | visual-components | [google-labs-code/design.md](https://github.com/google-labs-code/design.md) |
 | [mobile-app-ui-design](skills/mobile-app-ui-design/SKILL.md) | skill | visual-components | [ceorkm/mobile-app-ui-design](https://github.com/ceorkm/mobile-app-ui-design) |

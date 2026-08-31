@@ -5,6 +5,22 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.9.0] — 2026-07-20
+
+### Added
+
+- **`swiftui-design-skill`** — SwiftUI *visual design* craft: distinctive iOS/macOS interfaces that avoid generic AI-slop, covering design direction, typography, color, spacing, brand integration, and design review. Complements the code-focused `swiftui-patterns` / `swiftui-claude-skills`. v1.0.0 (`wholiver/swiftui-design-skill`, 146 ★). Sourced from a gap analysis of `nexu-io/open-design`.
+
+### Fixed
+
+- **`remotion`** — upstream `remotion-dev/skills` restructured: the single `skills/remotion/SKILL.md` was split into 10 sub-skills (`remotion-best-practices`, `remotion-create`, `remotion-render`, `remotion-captions`, `remotion-docs`, `remotion-interactivity`, `remotion-markup`, `remotion-saas`, `remotion-upgrade`) + `mediabunny`. The old `--skill remotion` install and `upstream_path` were dead. Re-typed `skill` → `package` pointing at the whole repo so all sub-skills install; `check-upstreams.mjs --paths` now reports it clean.
+
+### Changed
+
+- **README** — regenerated the Skills table; corrected stale counts (All 150 → 151, Essentials 91 → 92, community tier 51 → 64).
+
+Full-catalogue freshness check: `check-upstreams.mjs --paths` reports 0 dead across all 148 non-router upstreams. Catalogue grows from 150 → 151 skills.
+
 ## [2.8.1] — 2026-06-14
 
 ### Fixed

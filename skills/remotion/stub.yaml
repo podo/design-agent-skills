@@ -1,7 +1,7 @@
-type: skill
+type: package
 tier: official
 category: creative-3d
 rank: 1
 upstream: https://github.com/remotion-dev/skills
-upstream_path: skills/remotion/SKILL.md
 version: latest
+note: "Upstream restructured 2026: single skills/remotion/SKILL.md split into 10 sub-skills (remotion-best-practices, remotion-create, remotion-render, remotion-captions, remotion-docs, remotion-interactivity, remotion-markup, remotion-saas, remotion-upgrade) + mediabunny. Installed as a package so all sub-skills are fetched."

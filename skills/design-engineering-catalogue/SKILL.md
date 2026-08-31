@@ -81,6 +81,7 @@ Activate when the user:
 | [`hig-doctor`](../hig-doctor/SKILL.md) | Diagnose and fix Apple HIG violations |
 | [`swiftui-patterns`](../swiftui-patterns/SKILL.md) | SwiftUI view and component best practices |
 | [`swiftui-claude-skills`](../swiftui-claude-skills/SKILL.md) | WWDC 2025 verified SwiftUI, iOS 26.4 RC, Xcode 26 |
+| [`swiftui-design-skill`](../swiftui-design-skill/SKILL.md) | SwiftUI visual design craft — anti-AI-slop, typography, color, brand |
 | [`liquid-glass-skill`](../liquid-glass-skill/SKILL.md) | iOS 26 Liquid Glass: .glassEffect(), GlassEffectContainer, migration patterns |
 | [`platform-design-skills`](../platform-design-skills/SKILL.md) | 300+ HIG/MD3/WCAG rules for cross-platform |
 | [`sleek-design-mobile-apps`](../sleek-design-mobile-apps/SKILL.md) | Sleek platform: design screens, projects, assets (account req.) |
