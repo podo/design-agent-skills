@@ -5,6 +5,35 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.9.1] — 2026-08-31
+
+### Changed
+
+- **`design-with-claude`** — Now installable via the skills CLI. Upstream added a
+  `SKILL.md`, so the pointer moves from `install: false` to `install: true`:
+  `install_default` becomes `npx skills add imsaif/design-with-claude`, the plugin
+  command is preserved as `install_claude`, and `upstream_path` is set. The description
+  now covers `npx dwic-audit`, a deterministic WCAG/token scan across 8 categories.
+  Contributed by the upstream author (#17).
+- **`design-catalogue` / `content-catalogue` routers** — `design-with-claude` rows and
+  the trigger table updated to match.
+
+### Fixed
+
+- **Stale specialist counts** — Dropped the `"38 design commands"` trigger and removed
+  the hardcoded specialist count from the `design-with-claude` pointer and both
+  catalogue rows. A count in a pointer goes stale on every upstream release.
+
+### CI
+
+- `actions/checkout` 6 → 7 (#14), `actions/setup-node` 6 → 7 (#15).
+
+### Tests
+
+- Regression guard: `design-with-claude` may not hardcode a specialist or command count.
+
+---
+
 ## [2.9.0] — 2026-07-20
 
 ### Added
