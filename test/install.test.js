@@ -12,7 +12,10 @@ const INSTALL = path.join(ROOT, 'install.sh');
 // Run install.sh with a temp HOME so no real agent dirs are touched.
 function run(args = [], { home = null } = {}) {
   const env = { ...process.env, HOME: home ?? os.tmpdir() };
-  return spawnSync('bash', [INSTALL, ...args], { encoding: 'utf8', env, timeout: 15000 });
+  // 60s, not 15s: install.sh spawns one subprocess per skill in several loops
+  // (doctor alone forks ~130 awks). That is ~8s standalone on macOS and longer
+  // when node:test runs these concurrently — 15s produced spurious timeouts.
+  return spawnSync('bash', [INSTALL, ...args], { encoding: 'utf8', env, timeout: 60000 });
 }
 
 // Create a minimal temp HOME with claude config dir present.

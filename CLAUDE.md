@@ -378,19 +378,39 @@ npm version 1.7.0 --no-git-tag-version
 
 ### Creating a GitHub release
 
-After pushing to main, **push the version tag**. CI does everything else — it runs tests, builds the skills-only zip, creates the GitHub release with the zip attached, and publishes to npm.
+`main` is a **protected branch** — `git push origin main` is rejected by the branch
+protection hook. The version bump goes through a PR like any other change, and only
+then does the tag get pushed.
 
 ```bash
+# 1. Bump VERSION + package.json + CHANGELOG on a branch
+git checkout -b release-<version>
+git commit -am "chore: release <version>"
+git push origin release-<version>
+
+# 2. PR it, wait for `validate`, merge
+gh pr create --base main --title "chore: release <version>"
+gh pr merge <n> --squash --delete-branch
+
+# 3. Tag main — this is what triggers the release + npm publish
+git checkout main && git pull --ff-only
 git tag v<version>
 git push origin v<version>
 ```
 
-That's it. Do **not** run `gh release create` manually — it creates a release before the zip is ready, and GitHub marks that release immutable (no further asset uploads allowed).
+CI does the rest — it runs tests, builds the skills-only zip, creates the GitHub
+release with the zip attached, and publishes to npm.
+
+Do **not** run `gh release create` manually — it creates a release before the zip is
+ready, and GitHub marks that release immutable (no further asset uploads allowed).
 
 **Rules:**
 - Tag must match the `VERSION` file exactly (e.g. `v1.7.0`)
-- Push the tag **after** the version bump commit is on `main`
+- Push the tag **after** the version bump commit is merged to `main`
 - The CHANGELOG entry for the tagged version is extracted automatically for the release body
+- Auto-merge is disabled on this repo, so `gh pr merge --auto` fails; and branches must
+  be up to date before merging, so two PRs touching the same file serialize (the second
+  needs `gh pr update-branch` and a fresh CI run)
 
 ### What GitHub Actions does automatically on tag push
 
@@ -426,10 +446,18 @@ Catalogue grows from N → M skills.
 ## Running tests
 
 ```bash
-npm test
+npm run test:fast   # stubs + cli — hermetic, ~1s. Use this while iterating.
+npm test            # the above plus install.sh / add-skill shell integration tests
 ```
 
-2401 tests across 2 suites. All must pass before committing.
+`test:fast` covers `stubs.test.js` + `cli.test.js` — 2675 assertions, no subprocesses,
+under a second. It enforces every rule in this file, so it is the gate that matters when
+adding or editing a skill. It is also what `preversion` runs.
+
+The full `npm test` additionally drives `install.sh` end to end. Those tests fork one
+subprocess per skill in several loops (`doctor` alone forks ~130 `awk`s), so they take
+tens of seconds on macOS and are the slow half of the suite. All must pass before
+committing.
 
 ### What the tests check
 

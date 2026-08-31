@@ -5,6 +5,32 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.9.2] — 2026-08-31
+
+### Fixed
+
+- **Flaky `install.test.js`** — `doctor exits 0 or 1` and `status exits 0 with claude
+  agent dir present` failed locally as 15s timeouts. Not a network issue: `install.sh`
+  forks one subprocess per skill in several loops (`doctor` alone forks ~130 `awk`s),
+  which costs ~8s standalone on macOS and longer when `node:test` runs these
+  concurrently. Raised the `spawnSync` budget to 60s. 28/28 pass locally now.
+
+### Added
+
+- **`npm run test:fast`** — `stubs.test.js` + `cli.test.js` only: 2675 assertions, no
+  subprocesses, ~1s. Enforces every catalogue rule, so it is the gate that matters when
+  adding a skill. `preversion` now runs this instead of the full suite, which used to
+  hang `npm version` on the slow shell-integration tests.
+
+### Changed
+
+- **CLAUDE.md** — Release section rewritten: `main` is protected, so the version bump
+  needs its own PR before the tag is pushed. Documents that auto-merge is disabled and
+  that same-file PRs serialize behind `gh pr update-branch`. Testing section documents
+  the fast/full split.
+
+---
+
 ## [2.9.1] — 2026-08-31
 
 ### Changed
