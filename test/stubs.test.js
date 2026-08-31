@@ -280,6 +280,16 @@ describe('metadata regression guards', () => {
       'pm-skills must not reference the stale 63-skill count (upstream is 55)');
   });
 
+  // Regression: design-with-claude advertised "38 design commands", then "47".
+  // Upstream ships 48. Any hardcoded specialist count in a pointer goes stale on
+  // the next upstream release, so the pointer must not carry a count at all.
+  it('design-with-claude: no hardcoded specialist count', () => {
+    const s = skills.find(x => x.name === 'design-with-claude');
+    assert.ok(s && s.skill, 'design-with-claude SKILL.md missing');
+    assert.ok(!/\b\d+\s+(design\s+)?(specialists?|slash commands?|design commands?)/i.test(s.skill),
+      'design-with-claude must not hardcode a specialist/command count (it goes stale upstream)');
+  });
+
   // Regression: phuryn/pm-skills moved from a single `npx skills add` bundle to a
   // Claude plugin marketplace (8 plugins). The old install path no longer works,
   // so neither the stub nor the pointer may advertise it.

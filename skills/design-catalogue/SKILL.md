@@ -165,7 +165,7 @@ instead of scrolling the full index below:
 | [`digidai-pm`](../digidai-pm/SKILL.md) | Senior PM: 30+ frameworks, SaaS metrics |
 | [`ux-ui-mastery`](../ux-ui-mastery/SKILL.md) | 19 skills: cognitive psych, spatial UX, ambient UI, iOS 26, WCAG 3.0 |
 | [`designer-skills`](../designer-skills/SKILL.md) | 91 skills, 28 commands: design research, systems, ux-strategy, critique |
-| [`design-with-claude`](../design-with-claude/SKILL.md) | 38 design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
+| [`design-with-claude`](../design-with-claude/SKILL.md) | Deterministic WCAG/token audit + design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
 | [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | Synthesizes 19 authoritative UX sources (NNG, Laws of UX) — 2026 best practices |
 | [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
 | [`design-impact-reporting`](../design-impact-reporting/SKILL.md) | Design ROI: user→product→business metrics, scorecard / before-after / A-B / portfolio |
@@ -352,7 +352,7 @@ instead of scrolling the full index below:
 | "25 a11y agents", "PDF accessibility", "document a11y" | `accessibility-agents` |
 | "Don Norman audit", "cognitive walkthrough", "ux-rethink" | `mastepanoski-skills` |
 | "91 design skills", "design ops", "visual critique" | `designer-skills` |
-| "38 design commands", "healthcare UX", "b2b SaaS UX" | `design-with-claude` |
+| "audit my design system", "healthcare UX", "b2b SaaS UX" | `design-with-claude` |
 | "UX principles", "Laws of UX", "usability guidelines" | `ux-designer-skill` |
 | "Refactoring UI", "Design Sprint book", "Lean UX" | `wondelai-skills` |
 | "user journey", "journey mapping", "Playwright UX" | `neo-user-journey` |
