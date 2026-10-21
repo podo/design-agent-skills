@@ -4,7 +4,8 @@ category: official-suites
 rank: 1
 upstream: https://github.com/anthropics/skills
 version: latest
-install_default: "npx skills add anthropics/<skill>"
+install_default: "npx skills add anthropics/skills"
+note: "Repo holds more skills than the design-relevant six listed here; pick one with --skill <name>"
 installed_as:
   - frontend-design
   - web-artifacts-builder

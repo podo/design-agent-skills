@@ -15,44 +15,35 @@ das:
   upstream: "https://github.com/garrytan/gstack"
   upstream_path: "design-review/SKILL.md"
   version: latest
-  install: true
+  install: false
 ---
 
 # design-review-garrytan
 
-> Catalogue stub — full skill: [garrytan/gstack](https://github.com/garrytan/gstack/blob/main/design-review/SKILL.md)
+> Catalogue stub — part of [garrytan/gstack](https://github.com/garrytan/gstack) (`design-review`)
 
 ## Decision tree
 
-1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/design-review-garrytan/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/design-review-garrytan/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+1. **Is gstack already installed?**
+   Check: `~/.claude/skills/gstack/design-review/SKILL.md` exists.
+   - Yes → invoke `design-review` and proceed
+   - No → go to step 2
 
-2. **Detect scope, then install:**
+2. **Do you have shell access?**
+   - Yes → run the install command below, then invoke the skill
+   - No → show the install command; in Claude Code, send it as a chat message starting with `!`
 
-   To detect scope:
-   ```bash
-   [ -e ~/.agents/skills/design-review-garrytan ] && echo "global" || echo "project"
-   ```
+## Install the full skill
 
-   **Global** (installed with `-g`):
-   ```bash
-   npx skills add garrytan/gstack --skill design-review-garrytan -g -y
-   ```
+This skill is part of gstack and calls gstack's shared tooling (`~/.claude/skills/gstack/bin/…`), so install gstack itself rather than the single skill: `npx skills add` would copy the instructions without the tooling they depend on. Requires Claude Code, Git, and [Bun](https://bun.sh/).
 
-   **Project** (installed without `-g`):
-   ```bash
-   npx skills add garrytan/gstack --skill design-review-garrytan -y
-   ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
-
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup
+```
 
 ## Invoke after install
 
-- Skill name: `design-review-garrytan`
+- Skill name: `design-review`
 - Trigger phrases: "design review", "visual audit", "UI audit", "fix design issues"
 
 ## What it does

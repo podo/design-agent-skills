@@ -28,11 +28,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/taste-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/taste-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `design-taste-frontend`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/design-taste-frontend/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/design-taste-frontend/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `design-taste-frontend`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -43,19 +43,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add Leonxlnx/taste-skill --skill taste-skill -g -y
+   npx skills add Leonxlnx/taste-skill --skill design-taste-frontend -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add Leonxlnx/taste-skill --skill taste-skill -y
+   npx skills add Leonxlnx/taste-skill --skill design-taste-frontend -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `taste-skill` or `design-taste-frontend`  
+- Skill name: `design-taste-frontend`
 - Trigger phrases: "design taste", "good taste", "anti slop", "visual density", "premium UI"
 
 ## What it does

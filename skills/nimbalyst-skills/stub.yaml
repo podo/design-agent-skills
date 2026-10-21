@@ -1,9 +1,8 @@
-type: package
+type: platform
 tier: experimental
 category: diagrams
 rank: 3
 upstream: https://nimbalyst.com/skills
 version: latest
-install_default: "npx skills add nimbalyst/<skill>"
-note: "Custom registry at nimbalyst.com/skills"
-installed_as: excalidraw
+install_default: "Built into the Nimbalyst app (github.com/nimbalyst/nimbalyst); no standalone skill install"
+note: "Verified 2026-10-21: nimbalyst/skills on GitHub has no excalidraw/mockup/datamodel; they are app built-ins"

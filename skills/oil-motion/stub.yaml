@@ -1,0 +1,8 @@
+type: skill
+tier: community
+rank: 3
+category: motion-animation
+upstream: https://github.com/oil-oil/oil-motion
+upstream_path: SKILL.md
+version: latest
+note: "AI keyframe/video generation defaults to ZenMux and needs an API key; analysis and local processing of existing video or sprite sequences needs no key"

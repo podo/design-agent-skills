@@ -16,49 +16,47 @@ das:
   upstream: "https://github.com/op7418/NanoBanana-PPT-Skills"
   upstream_path: "SKILL.md"
   version: latest
-  install: true
+  install: false
 ---
 
 # nanobanan-ppt
 
-> Catalogue stub — full skill: [op7418/NanoBanana-PPT-Skills](https://github.com/op7418/NanoBanana-PPT-Skills)
+> Catalogue stub — full package: [op7418/NanoBanana-PPT-Skills](https://github.com/op7418/NanoBanana-PPT-Skills)
 
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/nanobanan-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/nanobanan-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Check: `~/.claude/skills/ppt-generator/SKILL.md` exists.
+   - Yes → invoke it and proceed
+   - No → go to step 2
 
-2. **Detect scope, then install:**
+2. **Do you have shell access?**
+   - Yes → run the install steps below, then invoke the skill
+   - No → show the install steps; in Claude Code, send each as a chat message starting with `!`
 
-   To detect scope:
-   ```bash
-   [ -e ~/.agents/skills/nanobanan-ppt ] && echo "global" || echo "project"
-   ```
+## Install the full skill
 
-   **Global** (installed with `-g`):
-   ```bash
-   npx skills add op7418/NanoBanana-PPT-Skills --skill nanobanan-ppt -g -y
-   ```
+Upstream's `SKILL.md` has no YAML frontmatter, so `npx skills add` cannot discover it. Upstream's documented install is a clone into the Claude Code skills directory:
 
-   **Project** (installed without `-g`):
-   ```bash
-   npx skills add op7418/NanoBanana-PPT-Skills --skill nanobanan-ppt -y
-   ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+```bash
+git clone https://github.com/op7418/NanoBanana-PPT-Skills.git ~/.claude/skills/ppt-generator
+cd ~/.claude/skills/ppt-generator
+python3 -m venv venv && source venv/bin/activate
+pip install google-genai pillow python-dotenv
+cp .env.example .env    # then add your GEMINI_API_KEY (video transitions also need Kling keys)
+python3 generate_ppt.py --help
+```
 
+Image generation uses Google's Gemini image model; keep the key in `.env`.
 
 ## Invoke after install
 
-- Skill name: `nanobanan-ppt`
+- Skill name: `ppt-generator`
 - Trigger phrases: "NanoBanana", "AI PowerPoint", "styled PPT", "document to slides"
 
 ## What it does
 
-AI-powered PowerPoint generation that goes beyond text structure: analyzes input documents for content and tone, structures content into coherent slide decks, and generates styled images matched to the presentation theme. Output is a fully assembled .pptx with both content and visuals. Image generation requires external API credentials.
+AI-powered PowerPoint generation that goes beyond text structure: analyzes input documents for content and tone, structures content into coherent slide decks, and generates styled images matched to the presentation theme. Output is a fully assembled deck with both content and visuals. Image generation requires external API credentials.
 
 ## When NOT to use
 

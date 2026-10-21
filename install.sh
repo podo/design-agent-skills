@@ -205,6 +205,20 @@ skill_state() {
     fi
     return
   fi
+  # type:skill whose upstream skill name differs from this pointer's directory:
+  # the full skill installs *beside* the pointer (under the sanitised upstream
+  # name), so the pointer never gets replaced — look for it via installed_as.
+  local ia
+  ia="$(stub_yaml_value installed_as "$src/stub.yaml" 2>/dev/null || true)"
+  if [ -n "$ia" ]; then
+    local ia_dir ia_target
+    ia_dir="$(printf '%s' "$ia" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._]\{1,\}/-/g; s/^[.-]*//; s/[.-]*$//')"
+    ia_target="$(dirname "$target")/$ia_dir"
+    if [ -d "$ia_target" ] && ! grep -q "^das:" "$ia_target/SKILL.md" 2>/dev/null; then
+      echo "upgraded"
+      return
+    fi
+  fi
   if [ -L "$target" ] && [ ! -e "$target" ]; then
     echo "BROKEN"
   elif [ -L "$target" ] && is_stub "$src"; then

@@ -23,21 +23,24 @@ Full package: [imsaif/design-with-claude](https://github.com/imsaif/design-with-
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check your agent's skills directory for `design-with-claude`.
+   Check: `~/.agents/skills/design-with-claude/SKILL.md` (global) or `.agents/skills/design-with-claude/SKILL.md` (project) exists, or the Claude Code plugin is listed in `/plugin`.
    - Yes → invoke and proceed
    - No → go to step 2
 
 2. **Which agent?**
-   - Any agent (Claude Code, Cursor, Cline, Gemini CLI, Antigravity, …) → `npx skills add imsaif/design-with-claude`
-   - Claude Code plugin instead → `/plugin marketplace add imsaif/design-with-claude`
+   - Claude Code → install the plugin (below)
+   - Any other agent (Cursor, Cline, Gemini CLI, Antigravity, …) → the skills CLI cannot currently discover the upstream skill, so use the no-install audit below or follow the [upstream README](https://github.com/imsaif/design-with-claude#readme).
 
 3. **Just want the audit, no install?**
    `npx dwic-audit` needs no install and no token.
 
 ## Install command
 
-```bash
-npx skills add imsaif/design-with-claude
+Claude Code plugin:
+
+```
+/plugin marketplace add imsaif/design-with-claude
+/plugin install design-with-claude@design-with-claude
 ```
 
 ## Invoke after install

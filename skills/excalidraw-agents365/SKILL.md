@@ -10,24 +10,24 @@ triggers:
   - "system diagram"
 das:
   category: diagrams
-  upstream: "https://github.com/Agents365-ai/excalidraw-skill"
-  upstream_path: "skills/excalidraw-skill/SKILL.md"
+  upstream: "https://github.com/Agents365-ai/365-skills"
+  upstream_path: "plugins/excalidraw/skills/excalidraw-skill/SKILL.md"
   version: latest
   install: true
 ---
 
 # excalidraw-agents365
 
-> Catalogue stub — full skill: [Agents365-ai/excalidraw-skill](https://github.com/Agents365-ai/excalidraw-skill)
+> Catalogue stub — full skill: [Agents365-ai/365-skills](https://github.com/Agents365-ai/365-skills) (`plugins/excalidraw`)
 
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/excalidraw-agents365/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/excalidraw-agents365/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `excalidraw`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/excalidraw/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/excalidraw/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `excalidraw`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -38,21 +38,21 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add Agents365-ai/excalidraw-skill --skill excalidraw-agents365 -g -y
+   npx skills add Agents365-ai/365-skills --skill excalidraw -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add Agents365-ai/excalidraw-skill --skill excalidraw-agents365 -y
+   npx skills add Agents365-ai/365-skills --skill excalidraw -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `excalidraw-agents365`
+- Skill name: `excalidraw`
 - Trigger phrases: "architecture diagram excalidraw", "system diagram"
 
 ## What it does
 
-Generates Excalidraw diagrams tuned for coding agent workflows — system architecture, flow charts, and technical documentation. Optimized for clean, structured output rather than freeform sketching.
+Generates Excalidraw diagrams tuned for coding agent workflows — system architecture, flow charts, and technical documentation. Optimized for clean, structured output rather than freeform sketching. Moved from the standalone `excalidraw-skill` repo into the `365-skills` collection.

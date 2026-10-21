@@ -168,10 +168,13 @@ describe('type:skill upgrade commands', () => {
       );
     });
 
+    // `--skill` matches the upstream SKILL.md `name`, not our directory name. When the
+    // two differ the stub declares the upstream name in `installed_as`.
     it(`${name}: upgrade command includes skill name`, () => {
+      const target = yamlGet(stub, 'installed_as') || name;
       assert.ok(
-        skill.includes(`--skill ${name}`),
-        `upgrade command must include "--skill ${name}"`
+        skill.includes(`--skill ${target}`) || skill.includes(`--skill "${target}"`),
+        `upgrade command must include "--skill ${target}"`
       );
     });
   }
@@ -303,4 +306,92 @@ describe('metadata regression guards', () => {
     assert.ok(/plugin marketplace add phuryn\/pm-skills/.test(s.skill),
       'phuryn-pm-skills must document the "plugin marketplace add" install');
   });
+});
+
+describe('install command validity (regression)', () => {
+  // Regression: `npx skills add owner/repo --skill X` resolves X against the upstream
+  // SKILL.md frontmatter `name`, NOT our directory name. ~25 stubs used their directory
+  // name and every upgrade failed with "No matching skills found". Each entry below was
+  // proven by a real `npx skills add` install (2026-10-21). Keep in sync with upstream.
+  const UPSTREAM_SKILL_NAMES = {
+    'ai-graphic-design-skill': 'ai-graphic-design',
+    'animate-skill': 'animate',
+    'claude-wireframe-skill': 'wireframe',
+    'cloudflare-web-perf': 'web-perf',
+    'composio-artifacts': 'artifacts-builder',
+    'copywriting-skill': 'copywriting',
+    'css-animation-skill': 'css-animation',
+    'd3js-skill': 'd3-viz',
+    'data-analysis-skill': 'data-analysis-pro',
+    'design-tokens-skill': 'design-tokens',
+    'digidai-pm': 'product-manager-skills',
+    'extract-design-md': 'stitch::extract-design-md',
+    'guizang-ppt': 'guizang-ppt-skill',
+    'make-interfaces-better': 'make-interfaces-feel-better',
+    'mobile-app-design': 'Mobile App Design Standards',
+    'neo-user-journey': 'ux-journey-architect',
+    'p5js-hermes': 'p5js',
+    'taste-design-stitch': 'taste-design',
+    'taste-skill': 'design-taste-frontend',
+    'ux-designer-skill': 'ux-designer',
+    'ux-writing-skill': 'ux-writing',
+    'wiggle-claude-skill': 'wiggle',
+    'wireframe-skill': 'wireframe',
+  };
+
+  for (const [dir, real] of Object.entries(UPSTREAM_SKILL_NAMES)) {
+    it(`${dir}: installs upstream skill "${real}", not the directory name`, () => {
+      const s = skills.find(x => x.name === dir);
+      assert.ok(s && s.stub && s.skill, `${dir} files missing`);
+      assert.equal(yamlGet(s.stub, 'installed_as'), real,
+        `stub.yaml installed_as must be the upstream skill name "${real}"`);
+      assert.ok(s.skill.includes(`--skill ${real}`) || s.skill.includes(`--skill "${real}"`),
+        `SKILL.md must install with --skill ${real}`);
+      assert.ok(!s.skill.includes(`--skill ${dir} `),
+        `SKILL.md must not use the directory name as --skill (${dir} is not an upstream skill)`);
+    });
+  }
+
+  // Regression: 54 package stubs still told agents to look for an installed skill under
+  // ~/.design-agent-skills/skills/. The install layout is ~/.agents/skills (global) or
+  // .agents/skills (project), so "already installed?" was always false. The test above only
+  // covered type:skill; this covers every pointer.
+  for (const { name, skill } of skills) {
+    if (!skill) continue;
+    it(`${name}: no legacy ~/.design-agent-skills/ path`, () => {
+      assert.ok(!skill.includes('.design-agent-skills'),
+        'use ~/.agents/skills/<name> or .agents/skills/<name>, not the legacy ~/.design-agent-skills/ path');
+    });
+  }
+
+  // Regression: package stubs documented per-skill shorthand like
+  // `npx skills add anthropics/frontend-design` or `vercel-labs/<skill>`. The CLI reads
+  // that as a repo named "frontend-design" and fails ("Authentication failed"). 54
+  // targets across 14 stubs were dead. Every command must target the stub's own upstream
+  // repo (then pick the skill with --skill) and carry no <placeholders>.
+  const repoOf = ref => {
+    const m = String(ref).match(/^(?:https?:\/\/github\.com\/)?([\w.-]+)\/([\w.-]+)/i);
+    return m ? `${m[1]}/${m[2]}`.toLowerCase().replace(/\.git$/, '') : null;
+  };
+
+  for (const { name, stub, skill } of skills) {
+    if (!stub || !skill) continue;
+    if (yamlGet(stub, 'type') === 'router') continue;
+    const upstream = repoOf(yamlGet(stub, 'upstream') || '');
+    if (!upstream || !/github\.com/.test(yamlGet(stub, 'upstream'))) continue;
+
+    it(`${name}: npx skills add targets only the upstream repo, no placeholders`, () => {
+      const bad = [];
+      for (const text of [stub, skill]) {
+        // match the whole command line so `--skill <name>` placeholders are caught too
+        for (const m of text.matchAll(/npx skills add\s+(\S+)([^\n`]*)/g)) {
+          const target = m[1].replace(/^["'`]+|["'`]+$/g, '');
+          if (/<[\w-]+>/.test(m[1] + m[2])) { bad.push(`${target}${m[2].trim() ? ' ' + m[2].trim() : ''} (placeholder)`); continue; }
+          const repo = repoOf(target);
+          if (repo && repo !== upstream) bad.push(`${target} (upstream is ${upstream})`);
+        }
+      }
+      assert.equal(bad.length, 0, `dead or foreign install target(s): ${[...new Set(bad)].join(', ')}`);
+    });
+  }
 });

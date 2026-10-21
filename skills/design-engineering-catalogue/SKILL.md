@@ -40,6 +40,7 @@ Activate when the user:
 |-------|----------|
 | [`taste-skill`](../taste-skill/SKILL.md) | Premium, non-generic UI — variance, motion, density dials |
 | [`impeccable`](../impeccable/SKILL.md) | 23 commands, Chrome extension, Live Mode browser iteration |
+| [`hallmark`](../hallmark/SKILL.md) | Anti-AI-slop: design, audit, redesign, and extract design DNA from screenshots/URLs; structural variety |
 | [`make-interfaces-better`](../make-interfaces-better/SKILL.md) | Polish: micro-interactions, typography details, visual refinement |
 | [`ui-craft`](../ui-craft/SKILL.md) | 18 slash commands, anti-slop CLI, 3 style variants — deepest design engineering skill |
 | [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Brutalist, Nordic, Cyberpunk…) with locked CSS tokens per theme |
@@ -47,7 +48,6 @@ Activate when the user:
 | [`brand-design-md`](../brand-design-md/SKILL.md) | Fetches exact tokens for 62 world-class brands (Stripe, Linear, Apple…) at runtime |
 | [`ai-graphic-design-skill`](../ai-graphic-design-skill/SKILL.md) | Maps 15 AI tools to design scenarios + 2025-26 Creative Director roadmap |
 | [`logo-designer-skill`](../logo-designer-skill/SKILL.md) | Brand interview → 3-5 SVG concepts → PNG export 16px–2048px |
-| [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | 4 themed design systems (Cyberpunk, Brutalist, Vaporwave, Nordic) with staggered animations |
 | [`design-for-ai`](../design-for-ai/SKILL.md) | CHECKER (7-category audit) + APPLIER (6-phase creation) dual-mode |
 | [`superdesign-skill`](../superdesign-skill/SKILL.md) | Infinite-canvas ideation: brand extraction, design drafts, IDE-native |
 | [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
@@ -64,10 +64,11 @@ Activate when the user:
 | [`color-expert`](../color-expert/SKILL.md) | OKLCH/OKLAB color science, palette generation, contrast |
 | [`baseline-ui`](../baseline-ui/SKILL.md) | Animation durations, typography scale, Tailwind anti-patterns |
 | [`shadcn-ui`](../shadcn-ui/SKILL.md) | shadcn/ui component workflow |
+| [`building-components`](../building-components/SKILL.md) | Vercel: accessible, composable, themeable UI component authoring |
+| [`wpds`](../wpds/SKILL.md) | Official WordPress Design System: components, tokens, patterns (needs WPDS MCP) |
 | [`ui-ux-pro-max`](../ui-ux-pro-max/SKILL.md) | 50+ styles, 97 palettes, 9 tech stacks |
 | [`google-fonts-skill`](../google-fonts-skill/SKILL.md) | 1,923 Google Fonts with mood tags + 73 pairings + CSS vars + Tailwind config |
 | [`design-tokens-skill`](../design-tokens-skill/SKILL.md) | W3C DTCG token spec: OKLCH, references/aliasing, Terrazzo, Figma exports |
-| [`ink-google`](../ink-google/SKILL.md) | Ink-style editorial design for artifacts |
 | [`open-design`](../open-design/SKILL.md) | 31 skills + 71 brand design systems — local-first Claude Design alternative |
 | [`material-3-skill`](../material-3-skill/SKILL.md) | Material Design 3 / Material You: dynamic color, tonal surfaces, 30+ components (Compose + Flutter) |
 

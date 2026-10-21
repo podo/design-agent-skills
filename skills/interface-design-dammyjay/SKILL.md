@@ -27,7 +27,7 @@ das:
 Run this before designing dashboards or admin interfaces:
 
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/interface-design-dammyjay/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.agents/skills/interface-design-dammyjay/SKILL.md` or `.agents/skills/interface-design-dammyjay/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `interface-design-dammyjay` and proceed
    - No → go to step 2
 

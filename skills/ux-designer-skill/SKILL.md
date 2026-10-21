@@ -24,11 +24,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/ux-designer-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/ux-designer-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `ux-designer`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/ux-designer/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/ux-designer/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `ux-designer`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -39,19 +39,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add szilu/ux-designer-skill --skill ux-designer-skill -g -y
+   npx skills add szilu/ux-designer-skill --skill ux-designer -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add szilu/ux-designer-skill --skill ux-designer-skill -y
+   npx skills add szilu/ux-designer-skill --skill ux-designer -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `ux-designer-skill`
+- Skill name: `ux-designer`
 - Trigger phrases: "UX designer", "UX principles", "Laws of UX", "ux-designer-skill", "usability guidelines"
 
 ## What it does

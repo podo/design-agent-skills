@@ -29,11 +29,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/p5js-hermes/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/p5js-hermes/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `p5js`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/p5js/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/p5js/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `p5js`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -44,19 +44,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add nousresearch/hermes-agent --skill p5js-hermes -g -y
+   npx skills add nousresearch/hermes-agent --skill p5js -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add nousresearch/hermes-agent --skill p5js-hermes -y
+   npx skills add nousresearch/hermes-agent --skill p5js -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `p5js-hermes`
+- Skill name: `p5js`
 - Trigger phrases: "p5.js", "p5js", "generative art p5", "flow field", "audio reactive"
 
 ## What it does

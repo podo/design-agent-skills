@@ -1,0 +1,7 @@
+type: skill
+tier: community
+rank: 2
+category: design-systems
+upstream: https://github.com/Nutlope/hallmark
+upstream_path: skills/hallmark/SKILL.md
+version: latest

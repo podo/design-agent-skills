@@ -1,0 +1,7 @@
+type: skill
+tier: community
+rank: 3
+category: motion-animation
+upstream: https://github.com/alchaincyf/huashu-art-motion
+upstream_path: SKILL.md
+version: latest

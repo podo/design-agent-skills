@@ -1,8 +1,9 @@
-type: platform
+type: package
 tier: official
 category: figma-code
 rank: 1
-upstream: https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server
+upstream: https://github.com/figma/mcp-server-guide
 version: latest
-install_default: "Figma Dev Mode MCP — enable in Figma desktop, no npx install"
+install_default: "npx skills add figma/mcp-server-guide"
+install_claude: "claude plugin install figma@claude-plugins-official"
 installed_as: figma-use

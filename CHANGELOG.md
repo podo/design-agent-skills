@@ -5,6 +5,103 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.10.0] — 2026-10-21
+
+Gap analysis against `nexu-io/open-design` plus a full audit of every install command in
+the catalogue. Catalogue: 151 → 154 skills.
+
+### Added
+
+- **`hallmark`** — Anti-AI-slop design skill: design, `audit`, `redesign`, and `study`
+  (extract design DNA from a screenshot or URL). rank 2 (`Nutlope/hallmark`, 30k ★)
+- **`kami`** — Paper-style typesetting for resumes, one-pagers, white papers, letters, and
+  decks (PDF/PNG/PPTX). rank 2 (`tw93/Kami`, 12k ★)
+- **`html-ppt`** — HTML PPT Studio: themes, layouts, full-deck templates, presenter mode.
+  rank 3 (`lewislulu/html-ppt-skill`, 8.8k ★)
+- **`humanize-ppt`** — Outline director and post-render checkup for agent-made decks; a
+  planner, not a renderer. rank 3 (`LearnPrompt/humanize-ppt`)
+- **`huashu-art-motion`** — Art-style and explainer video animation by code. rank 3
+  (`alchaincyf/huashu-art-motion`, 4.7k ★)
+- **`oil-motion`** — Scroll/pointer-driven web animation from AI video or sprite sequences.
+  rank 3 (`oil-oil/oil-motion`, 2.6k ★)
+- **`wpds`** — Official WordPress Design System skill. rank 3, official
+  (`WordPress/agent-skills --skill wpds`)
+- **`building-components`** — Vercel's guide to accessible, composable UI components. rank 2,
+  official (`vercel/components.build`). Previously advertised inside `vercel-skills` under an
+  install command that did not exist.
+- **`scripts/check-installs.mjs`** — Verifies every documented `npx skills add` command with
+  the CLI's own `--list`. Runs on PRs (changed skills only) and weekly (whole catalogue).
+  `check-upstreams.mjs` only proves a repo is alive, which is why none of the breakage below
+  was caught.
+
+### Fixed
+
+- **~25 stubs installed nothing.** `--skill` matches the upstream `SKILL.md` frontmatter
+  `name`, not our directory name, and the old test enforced the directory name. Every upgrade
+  for `taste-skill`, `ux-writing-skill`, `guizang-ppt`, `d3js-skill`, `wireframe-skill`,
+  `cloudflare-web-perf`, `mobile-app-design`, … failed with "No matching skills found". These
+  now declare the upstream name in `installed_as` and install with it. Because the full skill
+  installs next to the pointer instead of replacing it, the pointer checks for that copy, and
+  `install.sh status` follows `installed_as` (it kept reporting `stub` forever).
+- **54 dead install targets in 11 package stubs** — per-skill shorthand such as
+  `npx skills add anthropics/frontend-design` or `vercel-labs/<skill>` is read as a repo name
+  and fails. Rewritten as `owner/repo --skill name`: `anthropics-skills`, `coreyhaines-marketing`,
+  `deanpeters-pm-skills`, `fal-ai-skills`, `figma-official-skills`, `google-stitch-skills`,
+  `microsoft-skills`, `openai-skills`, `shadcn-ui`, `vercel-skills`.
+- **Upstream content drift** found while rewriting those:
+  - `coreyhaines-marketing`: `onboarding-cro`/`page-cro`/`signup-flow-cro` are now
+    `onboarding`/`cro`/`signup`.
+  - `fal-ai-skills`: `fal-generate`/`fal-3d` no longer exist; the repo is now a genmedia suite.
+  - `openai-skills`: `frontend-skill` and `slides` were removed upstream.
+  - `figma-official-skills`: was a help-article link ("no npx install"); now the real
+    `figma/mcp-server-guide` package plus the Claude plugin.
+  - `shadcn-ui`: the skill is named `shadcn` in `shadcn-ui/ui`.
+  - `vercel-skills`: pointed at the CLI repo `vercel-labs/skills`; the skills live in
+    `vercel-labs/agent-skills`.
+  - `emilkowalski-skill`: repo renamed `skill` → `skills`; now documents all 15 skills.
+  - `excalidraw-agents365`: moved into `Agents365-ai/365-skills`.
+  - `google-stitch-skills`: repo reorganised; some skills are now `stitch::`-namespaced.
+- **`gstack` skills** (`design-consultation`, `design-html`, `design-review-garrytan`,
+  `plan-design-review`) are now `package` stubs with gstack's real install. They call shared
+  `gstack/bin` tooling, so installing a single skill gave instructions without their tooling.
+- **`nanobanan-ppt`, `threejs-ecs-ts`** — upstreams have no discoverable `SKILL.md`, so the
+  advertised `npx skills add` could never work; both now document the manual install from
+  their READMEs. **`design-with-claude`** — upstream `SKILL.md` frontmatter does not parse as
+  YAML, so the CLI route finds nothing; the pointer no longer advertises that command and
+  documents the Claude Code plugin and `npx dwic-audit` instead (restore the `npx` route once
+  `--list` shows the skill).
+- **`generative-media-skills`, `addyosmani-quality`** documented `--skill <name>` /
+  `--skill <skill>` placeholders, which are not installable commands; now concrete skill names.
+- **`nimbalyst-skills`** is now a `platform` stub: `/mockup`, `/excalidraw`, `/datamodel` are
+  built into the Nimbalyst app, not installable skills.
+- **54 pointers** looked for installed skills under the legacy `~/.design-agent-skills/`
+  path, so "already installed?" was always false. Now `~/.agents/skills` / `.agents/skills`.
+- README skills table regenerated; counts corrected (All 154, Essentials ~93; official 34,
+  community 68, experimental 58).
+
+### Removed
+
+Each removal is a pointer that cannot work; all are restorable from git history.
+
+- **`software-ux-research`** — `vasilyu1983/AI-Agents-public` no longer exists on GitHub.
+- **`ink-google`** — upstream `ink` is the `@json-render/ink` terminal renderer, not the
+  editorial design skill the pointer described.
+- **`data-viz-agent`** — upstream is a subagent definition, not a `SKILL.md`.
+- **`distinctive-frontend`** — advertised `@bong/claude-frontend-skills` was never published to
+  npm; repo is one loose `.md`, idle 11 months.
+- **`service-blueprint`** — upstream `SKILL.md` has no frontmatter and no install path; 1 ★,
+  idle 9 months.
+
+### Changed
+
+- **CLAUDE.md** — the type:skill rule said `--skill` must equal the directory name. Corrected,
+  with the verification step (`npx skills add owner/repo --list`) and subpath/package guidance.
+- **Tests** — new `install command validity` guards: upstream-name table, install targets must
+  be the stub's own upstream repo with no placeholders, no legacy detection path; plus an
+  `install.sh status` test for `installed_as`.
+
+---
+
 ## [2.9.2] — 2026-08-31
 
 ### Fixed

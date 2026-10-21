@@ -1,0 +1,7 @@
+type: skill
+tier: official
+rank: 2
+category: visual-components
+upstream: https://github.com/vercel/components.build
+upstream_path: skills/building-components/SKILL.md
+version: latest

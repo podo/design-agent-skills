@@ -31,10 +31,10 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/ux-writing-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/ux-writing-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `[ -f ~/.agents/skills/ux-writing/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/ux-writing/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `ux-writing`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -44,18 +44,18 @@ das:
 
    **Global:**
    ```bash
-   npx skills add content-designer/ux-writing-skill --skill ux-writing-skill -g -y
+   npx skills add content-designer/ux-writing-skill --skill ux-writing -g -y
    ```
 
    **Project:**
    ```bash
-   npx skills add content-designer/ux-writing-skill --skill ux-writing-skill -y
+   npx skills add content-designer/ux-writing-skill --skill ux-writing -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 ## Invoke after install
 
-- Skill name: `ux-writing-skill`
+- Skill name: `ux-writing`
 - Triggers: "UX writing", "microcopy", "error message copy", "empty state copy", "button label", "UI copy"
 
 ## What it does

@@ -27,11 +27,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/digidai-pm/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/digidai-pm/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `product-manager-skills`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/product-manager-skills/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/product-manager-skills/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `product-manager-skills`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,19 +42,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add Digidai/product-manager-skills --skill digidai-pm -g -y
+   npx skills add Digidai/product-manager-skills --skill product-manager-skills -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add Digidai/product-manager-skills --skill digidai-pm -y
+   npx skills add Digidai/product-manager-skills --skill product-manager-skills -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `digidai-pm`
+- Skill name: `product-manager-skills`
 - Trigger phrases: "product manager", "PM frameworks", "product roadmap", "SaaS metrics"
 
 ## What it does

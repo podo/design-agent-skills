@@ -29,8 +29,8 @@ das:
 
 | Method | Command |
 |--------|---------|
-| Install all 41 skills | `npx skills add SamurAIGPT/Generative-Media-Skills --all` |
-| Install individual skill | `npx skills add SamurAIGPT/Generative-Media-Skills --skill <name>` |
+| Install all skills | `npx skills add SamurAIGPT/Generative-Media-Skills --all` |
+| Install one skill (e.g. the cinema director; list names with `--list`) | `npx skills add SamurAIGPT/Generative-Media-Skills --skill muapi-cinema-director` |
 | Authenticate muapi | `npx muapi-cli auth login` |
 
 ## Decision tree
@@ -41,7 +41,7 @@ das:
 2. **Is muapi-cli authenticated?** Run `npx muapi-cli auth status`.
    - No → run `npx muapi-cli auth login`
    - Yes → go to step 3.
-3. **Are the skills installed?** Check `~/.design-agent-skills/skills/` for generative-media skill directories.
+3. **Are the skills installed?** Check `~/.agents/skills/` (or `.agents/skills/` for a project install) for generative-media skill directories.
    - No → run the install command above.
    - Yes → invoke the relevant skill by name.
 

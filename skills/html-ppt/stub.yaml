@@ -1,0 +1,7 @@
+type: skill
+tier: community
+rank: 3
+category: presentations
+upstream: https://github.com/lewislulu/html-ppt-skill
+upstream_path: SKILL.md
+version: latest

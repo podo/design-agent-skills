@@ -12,22 +12,22 @@ triggers:
 das:
   category: visual-components
   upstream: "https://github.com/shadcn-ui/ui"
-  upstream_path: "SKILL.md"
+  upstream_path: "skills/shadcn/SKILL.md"
   version: latest
   install: true
 ---
 
 # shadcn-ui
 
-> Catalogue stub — full skill: [shadcn-ui/ui](https://github.com/shadcn-ui/ui)
+> Catalogue stub — full skill: [shadcn-ui/ui](https://github.com/shadcn-ui/ui) (`skills/shadcn`)
 
 ## Decision tree
 
 Run this before any shadcn/ui component work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/shadcn-ui/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `shadcn-ui` and proceed
+   The upstream skill is named `shadcn` and installs next to this pointer. Check: `~/.agents/skills/shadcn/SKILL.md` (global) or `.agents/skills/shadcn/SKILL.md` (project) exists.
+   - Yes → invoke `shadcn` and proceed
    - No → go to step 2
 
 2. **Do you have shell access?**
@@ -37,16 +37,18 @@ Run this before any shadcn/ui component work:
 ## Install command
 
 ```bash
-npx skills add shadcn-ui/skills
+npx skills add shadcn-ui/ui --skill shadcn -y    # add -g for global install
 ```
 
-Or per-agent:
-- Claude Code: `claude skills add shadcn-ui/skills`
-- Cursor/OpenCode: `npx skills add shadcn-ui/skills`
+The same repo also ships `migrate-radix-to-base` for moving components from Radix to Base UI:
+
+```bash
+npx skills add shadcn-ui/ui --skill migrate-radix-to-base -y
+```
 
 ## Invoke after install
 
-- Skill name: `shadcn-ui`
+- Skill name: `shadcn`
 - Trigger phrases: "shadcn", "shadcn/ui", "shadcn component", "ui component"
 
 ## What it does

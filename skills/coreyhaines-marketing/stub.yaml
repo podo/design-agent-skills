@@ -5,4 +5,7 @@ rank: 3
 upstream: https://github.com/coreyhaines31/marketingskills
 version: latest
 install_default: "npx skills add coreyhaines31/marketingskills"
-installed_as: onboarding-cro
+installed_as:
+  - onboarding
+  - cro
+  - signup

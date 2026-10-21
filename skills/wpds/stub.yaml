@@ -1,0 +1,8 @@
+type: skill
+tier: official
+rank: 3
+category: design-systems
+upstream: https://github.com/WordPress/agent-skills
+upstream_path: skills/wpds/SKILL.md
+version: latest
+note: "Works best with the WPDS MCP server configured; targets WordPress 7.0+. The repo holds many other WordPress development skills; this pointer installs only wpds"

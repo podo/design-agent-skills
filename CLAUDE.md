@@ -13,7 +13,7 @@ A two-tier catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, 
 Tier 1 — Routing layer (6 routers, permanent)
   design-catalogue → domain catalogues → implementation skills
 
-Tier 2 — Implementation pointers (128 stubs)
+Tier 2 — Implementation pointers (154 stubs)
   Lightweight stubs that tell an agent what a skill does and how to fetch the real one.
   On first use the agent upgrades the pointer to the full skill in-place.
 ```
@@ -143,7 +143,7 @@ category: tui-terminal                    # REQUIRED — must match a VALID_CATE
 install_default: "npx skills add owner/repo"  # optional — override when install differs from upstream
 install_claude: "claude plugin install owner/repo"  # optional — Claude-specific install command
 install_npm: "npm install -g package"     # optional — npm global install for tools that ship as npm packages
-installed_as: <skill-name>                # optional — canonical install name when it differs from directory
+installed_as: <skill-name>                # upstream skill's frontmatter `name` (what --skill matches); REQUIRED on type:skill when it differs from the directory. On packages: the representative skill (or a block list) used to detect "installed"
 note: "..."                               # optional — maintainer annotation; never shown to agents
 ```
 
@@ -262,8 +262,27 @@ npx skills add owner/repo --skill <skillname> -g -y
 npx skills add owner/repo --skill <skillname> -y
 ```
 
-The `--skill <skillname>` flag must exactly match the directory name.
+`--skill` matches the **upstream SKILL.md frontmatter `name`**, not our directory name. When
+the two differ (e.g. directory `guizang-ppt`, upstream skill `guizang-ppt-skill`), set
+`installed_as: <upstream name>` in `stub.yaml` and use that name in `--skill`; the full skill
+then installs *next to* the pointer instead of replacing it, so the decision tree checks for
+`<sanitised installed_as>/SKILL.md` instead of a `das:` block (see `skills/guizang-ppt`). The
+installed directory name is the upstream name lowercased with runs of characters outside
+`[a-z0-9._]` collapsed to `-` (`stitch::extract-design-md` → `stitch-extract-design-md`).
 Do NOT use `curl` — the test will fail.
+
+**Always verify the command before committing** — a wrong name fails silently for users:
+
+```bash
+npx skills add owner/repo --list                 # names listed here are what --skill accepts
+npx skills add owner/repo --skill <name> -y      # in an empty scratch dir, confirm it installs
+```
+
+Skills the CLI cannot list (nested under a plugin path, or the repo has a root `SKILL.md`) can
+be installed by subpath: `npx skills add owner/repo/path/to/skill`. Skills that call shared
+tooling elsewhere in their repo (e.g. gstack) must be installed as a whole — use `type: package`
+with the upstream's real install command. Upstream `SKILL.md` files with no or unparseable
+YAML frontmatter are invisible to the CLI; document the upstream's manual install instead.
 
 ### Decision tree pattern for type:skill
 
@@ -508,6 +527,21 @@ GH_TOKEN=$(gh auth token) node scripts/check-upstreams.mjs --only my-skill,other
 
 PR CI is intentionally **scoped to changed skills** so a PR is gated only on what it touches — pre-existing rot elsewhere is caught by the weekly full-catalogue run, not by every unrelated PR.
 
+## Install command check
+
+A live upstream does not prove the documented install works. `scripts/check-installs.mjs` runs the
+skills CLI's own discovery (`npx skills add <target> --list`) for every `npx skills add` command in
+every stub and fails when the target does not resolve, lists no skills, or a `--skill <name>` is not
+one of the listed names. It needs network and `npx`, so it is not part of `npm test`:
+
+```bash
+node scripts/check-installs.mjs                       # whole catalogue
+node scripts/check-installs.mjs --only my-skill,other-skill
+```
+
+It runs in the same two places as the upstream check (PR-scoped to changed skills; weekly, whole
+catalogue). Stubs that document a manual install (no `npx skills add`) are not checked.
+
 ## Common mistakes
 
 | Mistake | Test that catches it | Fix |
@@ -522,6 +556,9 @@ PR CI is intentionally **scoped to changed skills** so a PR is gated only on wha
 | Non-router stub missing `rank` field | `non-router has rank` | Add `rank: 1`, `2`, or `3` to stub.yaml |
 | Forgot to update both routers | Manual review | Always update design-catalogue + domain catalogue |
 | Forgot to update README skill count | Manual review | Update count on lines 4, 20, and tier table |
+| `--skill <directory-name>` when the upstream skill is named differently | `install command validity → installs upstream skill` (table of known names) | Add `installed_as: <upstream name>`, use it in `--skill`; confirm with `npx skills add owner/repo --list` |
+| Per-skill shorthand like `npx skills add owner/<skill>` or `owner/skill-name` | `install command validity → targets only the upstream repo` | Use `npx skills add <upstream owner/repo> --skill <name>` |
+| Legacy `~/.design-agent-skills/skills/...` detection path | `install command validity → no legacy path` | Use `~/.agents/skills/<name>` (global) or `.agents/skills/<name>` (project) |
 
 ---
 

@@ -26,7 +26,7 @@ das:
 Run this before any motion performance audit:
 
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/fixing-motion-performance/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.agents/skills/fixing-motion-performance/SKILL.md` or `.agents/skills/fixing-motion-performance/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `fixing-motion-performance` and proceed
    - No → go to step 2
 

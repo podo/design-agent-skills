@@ -2,8 +2,8 @@ type: package
 tier: community
 category: design-engineering
 rank: 1
-upstream: https://github.com/emilkowalski/skill
+upstream: https://github.com/emilkowalski/skills
 version: latest
-install_default: "npx skills add emilkowalski/skill"
-note: "Use --skill emil-design-eng to install just the design engineering skill"
+install_default: "npx skills add emilkowalski/skills"
+note: "Repo was renamed from emilkowalski/skill; use --skill emil-design-eng to install just the core skill"
 installed_as: emil-design-eng

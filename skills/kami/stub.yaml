@@ -1,0 +1,7 @@
+type: skill
+tier: community
+rank: 2
+category: presentations
+upstream: https://github.com/tw93/Kami
+upstream_path: skills/kami/SKILL.md
+version: latest

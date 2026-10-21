@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/wiggle-claude-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/wiggle-claude-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `wiggle`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/wiggle/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/wiggle/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `wiggle`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add talknerdytome-labs/wiggle-claude-skill --skill wiggle-claude-skill -g -y
+   npx skills add talknerdytome-labs/wiggle-claude-skill --skill wiggle -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add talknerdytome-labs/wiggle-claude-skill --skill wiggle-claude-skill -y
+   npx skills add talknerdytome-labs/wiggle-claude-skill --skill wiggle -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `wiggle-claude-skill`
+- Skill name: `wiggle`
 - Trigger phrases: "logo animation", "wiggle", "SVG to Lottie", "animated GIF", "wiggle-claude-skill"
 
 ## What it does

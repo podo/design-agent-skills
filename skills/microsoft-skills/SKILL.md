@@ -23,7 +23,7 @@ das:
 ## Decision tree
 
 1. **Is a Microsoft skill already installed?**
-   Check: `~/.design-agent-skills/skills/frontend-design-review/SKILL.md` exists.
+   Check: `~/.agents/skills/frontend-design-review/SKILL.md` (global) or `.agents/skills/frontend-design-review/SKILL.md` (project) exists.
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -33,12 +33,14 @@ das:
 
 ## Install command
 
+`microsoft/skills` is a large repo, so install just these two (add `-g` for global install):
+
 ```bash
 # Review and create distinctive interfaces
-npx skills add microsoft/frontend-design-review
+npx skills add microsoft/skills --skill frontend-design-review -y
 
-# Dark-themed React with Tailwind and animations
-npx skills add microsoft/frontend-ui-dark-ts
+# Dark-themed React with Tailwind and animations (nested under a plugin path, so use the full path)
+npx skills add microsoft/skills/.github/plugins/azure-sdk-typescript/skills/frontend-ui-dark-ts -y
 ```
 
 ## Invoke after install

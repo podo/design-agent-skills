@@ -24,11 +24,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/neo-user-journey/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/neo-user-journey/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `ux-journey-architect`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/ux-journey-architect/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/ux-journey-architect/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `ux-journey-architect`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -39,19 +39,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add Cornjebus/neo-user-journey --skill neo-user-journey -g -y
+   npx skills add Cornjebus/neo-user-journey --skill ux-journey-architect -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add Cornjebus/neo-user-journey --skill neo-user-journey -y
+   npx skills add Cornjebus/neo-user-journey --skill ux-journey-architect -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `neo-user-journey`
+- Skill name: `ux-journey-architect`
 - Trigger phrases: "user journey", "UX journey", "journey mapping", "Playwright UX", "neo-user-journey"
 
 ## What it does

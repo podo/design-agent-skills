@@ -1,7 +1,10 @@
-type: skill
+type: package
 tier: community
 category: presentations
 rank: 3
 upstream: https://github.com/op7418/NanoBanana-PPT-Skills
 upstream_path: SKILL.md
 version: latest
+install_default: "git clone https://github.com/op7418/NanoBanana-PPT-Skills.git ~/.claude/skills/ppt-generator"
+installed_as: ppt-generator
+note: "Upstream SKILL.md has no YAML frontmatter, so npx skills add finds nothing (verified 2026-10-21); install is the clone documented in its README"

@@ -23,7 +23,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.design-agent-skills/skills/revealjs-skill/SKILL.md` exists.
+   Check: `~/.agents/skills/revealjs-skill/SKILL.md` or `.agents/skills/revealjs-skill/SKILL.md` exists.
    - Yes → invoke `revealjs-skill` and proceed
    - No → go to step 2
 

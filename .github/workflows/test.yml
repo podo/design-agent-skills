@@ -68,7 +68,7 @@ jobs:
           console.log(`OK — README counts match: All=${nonRouter}, Picks=${picks}, Essentials=${essentials}`);
           EOF
 
-      - name: Check upstreams of changed skills are alive (PR only)
+      - name: Check upstreams and install commands of changed skills (PR only)
         if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}   # authenticated → 5000 req/hr, no rate-limit false-negatives
@@ -77,8 +77,10 @@ jobs:
           CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- 'skills/*/stub.yaml' 'skills/*/SKILL.md' \
             | sed -E 's#^skills/([^/]+)/.*#\1#' | sort -u | paste -sd, -)
           if [ -z "$CHANGED" ]; then
-            echo "No skill stubs changed in this PR — skipping upstream freshness check."
+            echo "No skill stubs changed in this PR — skipping upstream and install checks."
             exit 0
           fi
           echo "Changed skills: $CHANGED"
           node scripts/check-upstreams.mjs --only "$CHANGED"
+          # --skill matches the upstream SKILL.md name, not our directory name; prove each command works
+          node scripts/check-installs.mjs --only "$CHANGED"

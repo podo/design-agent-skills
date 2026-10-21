@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/guizang-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/guizang-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `guizang-ppt-skill`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/guizang-ppt-skill/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/guizang-ppt-skill/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `guizang-ppt-skill`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add op7418/guizang-ppt-skill --skill guizang-ppt -g -y
+   npx skills add op7418/guizang-ppt-skill --skill guizang-ppt-skill -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add op7418/guizang-ppt-skill --skill guizang-ppt -y
+   npx skills add op7418/guizang-ppt-skill --skill guizang-ppt-skill -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `guizang-ppt`
+- Skill name: `guizang-ppt-skill`
 - Trigger phrases: "generate PowerPoint", "create presentation", "make slides", "PPTX from outline"
 
 ## What it does

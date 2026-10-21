@@ -228,6 +228,28 @@ describe('install.sh — status command', () => {
       cleanup(tmp);
     }
   });
+
+  // Regression: guizang-ppt's upstream skill is named guizang-ppt-skill, so installing the
+  // full skill puts it NEXT TO the pointer (the pointer is never replaced). status kept
+  // reporting the pointer as "stub" forever; it must follow `installed_as`.
+  it('status reports a pointer as upgraded once the full skill exists under installed_as', () => {
+    const tmp = makeTempHome();
+    const row = out => out.split('\n').find(l => /\bguizang-ppt\b/.test(l)) ?? '';
+    try {
+      assert.equal(run(['install'], { home: tmp }).status, 0, 'install must succeed');
+      assert.match(row(run(['status'], { home: tmp }).stdout), /\bstub\b/,
+        'before the full skill is installed the pointer is a stub');
+
+      const full = path.join(tmp, '.claude', 'skills', 'guizang-ppt-skill');
+      fs.mkdirSync(full, { recursive: true });
+      fs.writeFileSync(path.join(full, 'SKILL.md'), '---\nname: guizang-ppt-skill\ndescription: full\n---\n');
+
+      assert.match(row(run(['status'], { home: tmp }).stdout), /\bupgraded\b/,
+        'full skill installed under installed_as must read as upgraded');
+    } finally {
+      cleanup(tmp);
+    }
+  });
 });
 
 describe('install.sh — remove command', () => {

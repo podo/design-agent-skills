@@ -3,5 +3,7 @@ tier: official
 category: visual-components
 rank: 1
 upstream: https://github.com/shadcn-ui/ui
+upstream_path: skills/shadcn/SKILL.md
 version: latest
-install_default: "npx skills add shadcn-ui/skills"
+install_default: "npx skills add shadcn-ui/ui --skill shadcn"
+installed_as: shadcn

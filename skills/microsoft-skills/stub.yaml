@@ -4,5 +4,8 @@ category: official-suites
 rank: 3
 upstream: https://github.com/microsoft/skills
 version: latest
-install_default: "npx skills add microsoft/<skill>"
-installed_as: frontend-design-review
+install_default: "npx skills add microsoft/skills --skill frontend-design-review"
+note: "Huge repo of Azure SDK skills; only the two frontend skills are catalogued. frontend-ui-dark-ts is not discoverable by --skill name, install it by subpath"
+installed_as:
+  - frontend-design-review
+  - frontend-ui-dark-ts

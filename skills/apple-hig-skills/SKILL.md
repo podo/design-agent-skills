@@ -29,7 +29,7 @@ das:
 Run this before any Apple platform UI design:
 
 1. **Is an HIG skill already installed?**
-   Check: `~/.design-agent-skills/skills/hig-foundations/SKILL.md` exists.
+   Check: `~/.agents/skills/hig-foundations/SKILL.md` or `.agents/skills/hig-foundations/SKILL.md` exists.
    - Yes → invoke the specific platform skill and proceed
    - No → go to step 2
 

@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.design-agent-skills/skills/swiftui-claude-skills/SKILL.md` exists.
+   Check: `~/.agents/skills/swiftui-claude-skills/SKILL.md` or `.agents/skills/swiftui-claude-skills/SKILL.md` exists.
    - Yes → invoke `swiftui-claude-skills` and proceed
    - No → go to step 2
 

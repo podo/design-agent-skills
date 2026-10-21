@@ -31,10 +31,10 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/copywriting-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/copywriting-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `[ -f ~/.agents/skills/copywriting/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/copywriting/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `copywriting`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -44,12 +44,12 @@ das:
 
    **Global:**
    ```bash
-   npx skills add judicael-s/copywriting-skill --skill copywriting-skill -g -y
+   npx skills add judicael-s/copywriting-skill --skill copywriting -g -y
    ```
 
    **Project:**
    ```bash
-   npx skills add judicael-s/copywriting-skill --skill copywriting-skill -y
+   npx skills add judicael-s/copywriting-skill --skill copywriting -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
@@ -59,7 +59,7 @@ das:
 
 | Skill | Triggers |
 |---|---|
-| `copywriting-skill` | "copywriting", "landing page copy", "web copy", "headline copy" |
+| `copywriting` | "copywriting", "landing page copy", "web copy", "headline copy" |
 | `seo-copywriting` | "SEO copy", "search-optimized content" |
 | `social-copywriting` | "LinkedIn post", "X post", "social copy" |
 | `french-copywriting` | "French copy", "French landing page" |

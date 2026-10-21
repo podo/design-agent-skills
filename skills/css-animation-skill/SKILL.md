@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/css-animation-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/css-animation-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `css-animation`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/css-animation/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/css-animation/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `css-animation`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add neonwatty/css-animation-skill --skill css-animation-skill -g -y
+   npx skills add neonwatty/css-animation-skill --skill css-animation -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add neonwatty/css-animation-skill --skill css-animation-skill -y
+   npx skills add neonwatty/css-animation-skill --skill css-animation -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `css-animation-skill`
+- Skill name: `css-animation`
 - Trigger phrases: "CSS animation", "custom animation", "animation from live app", "css-animation-skill"
 
 ## What it does

@@ -1,9 +1,9 @@
 ---
 name: coreyhaines-marketing
 description: |
-  3 CRO (conversion rate optimization) skills by Corey Haines: optimize post-signup
+  CRO (conversion rate optimization) skills by Corey Haines: optimize post-signup
   onboarding and activation, improve conversion rates on marketing pages, and
-  optimize signup and trial activation flows.
+  optimize signup and trial activation flows. Part of a larger marketing skills library.
 triggers:
   - "CRO"
   - "conversion optimization"
@@ -27,7 +27,7 @@ das:
 Run this before any conversion rate optimization work:
 
 1. **Is a Corey Haines skill already installed?**
-   Check: `~/.design-agent-skills/skills/onboarding-cro/SKILL.md` exists.
+   Check: `~/.agents/skills/cro/SKILL.md` (global) or `.agents/skills/cro/SKILL.md` (project) exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -37,23 +37,26 @@ Run this before any conversion rate optimization work:
 
 ## Install command
 
+Pick the skills you need (add `-g` for global install):
+
 ```bash
-npx skills add coreyhaines31/marketingskills
+npx skills add coreyhaines31/marketingskills --skill cro -y
+npx skills add coreyhaines31/marketingskills --skill onboarding -y
+npx skills add coreyhaines31/marketingskills --skill signup -y
 ```
 
-Or install individually:
+Or install the whole marketing library:
+
 ```bash
-npx skills add coreyhaines31/onboarding-cro
-npx skills add coreyhaines31/page-cro
-npx skills add coreyhaines31/signup-flow-cro
+npx skills add coreyhaines31/marketingskills -y
 ```
 
 ## Invoke after install
 
-- `onboarding-cro` — "onboarding optimization", "activation rate", "post-signup"
-- `page-cro` — "marketing page conversion", "landing page CRO"
-- `signup-flow-cro` — "signup flow", "trial activation", "signup conversion"
+- `onboarding` — "onboarding optimization", "activation rate", "post-signup"
+- `cro` — "marketing page conversion", "landing page CRO"
+- `signup` — "signup flow", "trial activation", "signup conversion"
 
 ## What it does
 
-3 CRO skills targeting the core SaaS conversion funnel: improving post-signup onboarding activation, optimizing marketing page conversion rates, and tightening signup/trial flows. By Corey Haines, founder of Swipefiles.
+CRO skills targeting the core SaaS conversion funnel: improving post-signup onboarding activation (`onboarding`), optimizing conversion on marketing pages and forms (`cro`), and tightening signup and trial flows (`signup`). The same repo also ships skills for pricing, paywalls, popups, copywriting, SEO, and more. By Corey Haines, founder of Swipefiles.

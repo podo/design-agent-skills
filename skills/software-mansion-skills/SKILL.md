@@ -27,7 +27,7 @@ das:
 
 ## Decision tree
 
-1. **Is the skill already installed?** Check `~/.design-agent-skills/skills/` for Software Mansion skill directories.
+1. **Is the skill already installed?** Check `~/.agents/skills/` (or `.agents/skills/` for a project install) for Software Mansion skill directories.
    - Yes → invoke and proceed
    - No → go to step 2
 
@@ -49,7 +49,7 @@ npx skills add software-mansion-labs/skills
 
 ## Invoke after install
 
-- Skill names: check `ls ~/.design-agent-skills/skills/` for installed skill names after install
+- Skill names: check `ls ~/.agents/skills/ .agents/skills/ 2>/dev/null` for installed skill names after install
 - Triggers: "Software Mansion", "Reanimated", "Gesture Handler", "React Native animations", "React Native SVG"
 
 ## What it does

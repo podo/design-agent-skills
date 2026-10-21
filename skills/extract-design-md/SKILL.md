@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/extract-design-md/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/extract-design-md/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `stitch::extract-design-md`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/stitch-extract-design-md/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/stitch-extract-design-md/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `stitch-extract-design-md`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add google-labs-code/stitch-skills --skill extract-design-md -g -y
+   npx skills add google-labs-code/stitch-skills --skill stitch::extract-design-md -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add google-labs-code/stitch-skills --skill extract-design-md -y
+   npx skills add google-labs-code/stitch-skills --skill stitch::extract-design-md -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `extract-design-md`
+- Skill name: `stitch-extract-design-md`
 - Trigger phrases: "extract design md", "stitch to DESIGN.md", "DESIGN.md"
 
 ## What it does

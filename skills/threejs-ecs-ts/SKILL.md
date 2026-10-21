@@ -24,23 +24,28 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.design-agent-skills/skills/threejs-ecs-ts/SKILL.md` exists.
-   - Yes → invoke `threejs-ecs-ts` and proceed
+   Check: `~/.claude/plugins/threejs-ecs-skills` exists.
+   - Yes → invoke it by describing the task and proceed
    - No → go to step 2
 
 2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+   - Yes → run the install steps below, then invoke the skill
+   - No → show the install steps; in Claude Code, send each as a chat message starting with `!`
 
-## Install command
+## Install the full skill
+
+Upstream ships plain markdown skill files with a Claude Code plugin manifest and no `SKILL.md`, so `npx skills add` cannot install it. Upstream's documented install is a clone linked into the Claude Code plugins directory:
 
 ```bash
-npx skills add Nice-Wolf-Studio/claude-skills-threejs-ecs-ts
+git clone https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts.git
+ln -s "$(pwd)/claude-skills-threejs-ecs-ts" ~/.claude/plugins/threejs-ecs-skills
 ```
+
+For other agents, read the markdown files under `skills/` in the cloned repo as reference material.
 
 ## Invoke after install
 
-- Skill name: `threejs-ecs-ts`
+- Describe the task ("set up a mobile-optimized Three.js game with ECS architecture") or name one of the package's skills
 - Trigger phrases: "Three.js ECS", "entity component", "3D game architecture"
 
 ## What it does

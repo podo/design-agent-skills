@@ -28,7 +28,7 @@ das:
 Run this before using Anthropic official skills:
 
 1. **Is an Anthropic skill already installed?**
-   Check: `~/.design-agent-skills/skills/frontend-design/SKILL.md` exists (representative skill).
+   Check: `~/.agents/skills/frontend-design/SKILL.md` (global) or `.agents/skills/frontend-design/SKILL.md` (project) exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -38,24 +38,26 @@ Run this before using Anthropic official skills:
 
 ## Install command
 
+All skills live in the single `anthropics/skills` repo; pick one with `--skill` (add `-g` for global install):
+
 ```bash
 # Frontend design and UI/UX development
-npx skills add anthropics/frontend-design
+npx skills add anthropics/skills --skill frontend-design -y
 
 # Build complex HTML artifacts with React/Tailwind/shadcn
-npx skills add anthropics/web-artifacts-builder
+npx skills add anthropics/skills --skill web-artifacts-builder -y
 
 # Design visual art in PNG/PDF
-npx skills add anthropics/canvas-design
+npx skills add anthropics/skills --skill canvas-design -y
 
 # Style artifacts with professional themes
-npx skills add anthropics/theme-factory
+npx skills add anthropics/skills --skill theme-factory -y
 
 # Apply brand colors and typography
-npx skills add anthropics/brand-guidelines
+npx skills add anthropics/skills --skill brand-guidelines -y
 
 # Create, edit, and analyze PowerPoint presentations
-npx skills add anthropics/pptx
+npx skills add anthropics/skills --skill pptx -y
 ```
 
 ## Invoke after install

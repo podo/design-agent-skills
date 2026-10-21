@@ -47,6 +47,8 @@ Activate when the user:
 | [`emilkowalski-skill`](../emilkowalski-skill/SKILL.md) | Animation decision framework, easing curves, interaction principles |
 | [`claudedesignskills`](../claudedesignskills/SKILL.md) | 22-skill bundle: Three.js, GSAP, R3F, Framer, Babylon, A-Frame, PixiJS, Rive, Lottie |
 | [`hyperframes`](../hyperframes/SKILL.md) | "Write HTML → render video": GSAP/CSS/Lottie/Three.js + TTS (HeyGen) |
+| [`huashu-art-motion`](../huashu-art-motion/SKILL.md) | Art-style and explainer video animation by code: storyboard → render → QA → deliver (Chinese docs) |
+| [`oil-motion`](../oil-motion/SKILL.md) | Scroll/pointer-driven web animation from AI video or sprite sequences (Chinese docs) |
 
 ## Generative Art & Creative Coding
 

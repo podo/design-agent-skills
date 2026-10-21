@@ -34,9 +34,9 @@ Activate when the user:
 
 | Skill | Best for |
 |-------|----------|
-| [`figma-official-skills`](../figma-official-skills/SKILL.md) | 7 official Figma skills: implement, generate, library, code-connect |
-| [`openai-skills`](../openai-skills/SKILL.md) | OpenAI's 9 skills: Figma + frontend + slides + imagegen |
-| [`google-stitch-skills`](../google-stitch-skills/SKILL.md) | 6 Stitch skills: design-md, react-components, shadcn, loop |
+| [`figma-official-skills`](../figma-official-skills/SKILL.md) | Official Figma skills: design-to-code, generate, library, Code Connect, FigJam, Slides, motion |
+| [`openai-skills`](../openai-skills/SKILL.md) | Official OpenAI skills: Figma, imagegen, screenshot |
+| [`google-stitch-skills`](../google-stitch-skills/SKILL.md) | Google Stitch skills: design-md, prompt enhancement, React components, shadcn, loop |
 | [`extract-design-md`](../extract-design-md/SKILL.md) | Extract Stitch output into DESIGN.md format |
 | [`claude2figma`](../claude2figma/SKILL.md) | 4 skills enforcing token compliance: colors/fonts/spacing → Figma variables |
 | [`work-with-design-systems`](../work-with-design-systems/SKILL.md) | Inspect (WCAG audit) + Build (6-phase with variable bindings) dual-mode |
@@ -50,7 +50,7 @@ Activate when the user:
 | Skill | Best for |
 |-------|----------|
 | [`anthropics-skills`](../anthropics-skills/SKILL.md) | 6 Anthropic skills: frontend-design, artifacts, canvas, theme, brand, pptx |
-| [`vercel-skills`](../vercel-skills/SKILL.md) | 4 Vercel skills: web-design-guidelines, components, React best practices |
+| [`vercel-skills`](../vercel-skills/SKILL.md) | Vercel skills: web-design-guidelines, writing guidelines, React best practices, composition, view transitions |
 | [`microsoft-skills`](../microsoft-skills/SKILL.md) | 2 Microsoft skills: design review, dark-theme React |
 | [`software-mansion-skills`](../software-mansion-skills/SKILL.md) | Official Software Mansion: RN animations, gestures, SVG, on-device AI |
 | [`callstack-agent-skills`](../callstack-agent-skills/SKILL.md) | Official Callstack: RN best practices, profiling, Turbo Modules, upgrade |

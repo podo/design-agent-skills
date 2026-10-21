@@ -26,11 +26,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/animate-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/animate-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `animate`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/animate/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/animate/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `animate`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -41,19 +41,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add delphi-ai/animate-skill --skill animate-skill -g -y
+   npx skills add delphi-ai/animate-skill --skill animate -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add delphi-ai/animate-skill --skill animate-skill -y
+   npx skills add delphi-ai/animate-skill --skill animate -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `animate-skill`
+- Skill name: `animate`
 - Trigger phrases: "animate", "hover animation", "toast animation", "text reveal", "animate-skill"
 
 ## What it does

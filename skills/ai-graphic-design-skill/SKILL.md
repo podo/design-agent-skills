@@ -26,11 +26,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/ai-graphic-design-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/ai-graphic-design-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `ai-graphic-design`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/ai-graphic-design/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/ai-graphic-design/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `ai-graphic-design`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -41,19 +41,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design-skill -g -y
+   npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design-skill -y
+   npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `ai-graphic-design-skill`
+- Skill name: `ai-graphic-design`
 - Trigger phrases: "AI graphic design", "AI design tools", "Midjourney workflow", "Stable Diffusion design", "AI Creative Director"
 
 ## What it does

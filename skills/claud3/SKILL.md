@@ -24,7 +24,7 @@ das:
 ## Decision tree
 
 1. **Is the package already installed?**
-   Check: `~/.design-agent-skills/skills/claud3/SKILL.md` exists.
+   Check: `~/.agents/skills/claud3/SKILL.md` or `.agents/skills/claud3/SKILL.md` exists.
    - Yes → invoke `claud3` and proceed
    - No → go to step 2
 
@@ -49,6 +49,6 @@ Applies Edward Tufte's data visualization principles to D3.js chart generation. 
 
 ## When NOT to use
 
-- Multi-library visualization agents — use data-viz-agent instead
+- Multi-library visualization work (D3, Chart.js, Plotly) — use `d3js-skill` or `antvis-chart-skills` instead
 - AntV/G2 charts — use antvis-chart-skills instead
 - Quick single charts without Tufte constraints — use d3js-skill instead

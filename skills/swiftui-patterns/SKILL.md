@@ -26,7 +26,7 @@ das:
 Run this before any SwiftUI view or component work:
 
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/swiftui-patterns/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.agents/skills/swiftui-patterns/SKILL.md` or `.agents/skills/swiftui-patterns/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `swiftui-patterns` and proceed
    - No → go to step 2
 

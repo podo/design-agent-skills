@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/wireframe-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/wireframe-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `wireframe`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/wireframe/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/wireframe/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `wireframe`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add yhassy/wireframe-skill --skill wireframe-skill -g -y
+   npx skills add yhassy/wireframe-skill --skill wireframe -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add yhassy/wireframe-skill --skill wireframe-skill -y
+   npx skills add yhassy/wireframe-skill --skill wireframe -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-Skill name: `wireframe-skill`, triggers: "wireframe-skill", "yhassy wireframe", "JSON wireframe", "interactive wireframe HTML"
+Skill name: `wireframe`, triggers: "wireframe-skill", "yhassy wireframe", "JSON wireframe", "interactive wireframe HTML"
 
 ## What it does
 

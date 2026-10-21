@@ -30,7 +30,7 @@ das:
 Run this before any product management, discovery, or documentation work:
 
 1. **Is a Dean Peters skill already installed?**
-   Check: `~/.design-agent-skills/skills/customer-journey-map/SKILL.md` exists.
+   Check: `~/.agents/skills/customer-journey-map/SKILL.md` (global) or `.agents/skills/customer-journey-map/SKILL.md` (project) exists.
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -44,17 +44,17 @@ Run this before any product management, discovery, or documentation work:
 npx skills add deanpeters/Product-Manager-Skills
 ```
 
-Or install individual skills:
+Or install individual skills with `--skill` (the repo holds many more PM skills than the nine below):
 ```bash
-npx skills add deanpeters/customer-journey-map
-npx skills add deanpeters/lean-ux-canvas
-npx skills add deanpeters/opportunity-solution-tree
-npx skills add deanpeters/proto-persona
-npx skills add deanpeters/storyboard
-npx skills add deanpeters/user-story
-npx skills add deanpeters/user-story-mapping
-npx skills add deanpeters/discovery-process
-npx skills add deanpeters/prd-development
+npx skills add deanpeters/Product-Manager-Skills --skill customer-journey-map
+npx skills add deanpeters/Product-Manager-Skills --skill lean-ux-canvas
+npx skills add deanpeters/Product-Manager-Skills --skill opportunity-solution-tree
+npx skills add deanpeters/Product-Manager-Skills --skill proto-persona
+npx skills add deanpeters/Product-Manager-Skills --skill storyboard
+npx skills add deanpeters/Product-Manager-Skills --skill user-story
+npx skills add deanpeters/Product-Manager-Skills --skill user-story-mapping
+npx skills add deanpeters/Product-Manager-Skills --skill discovery-process
+npx skills add deanpeters/Product-Manager-Skills --skill prd-development
 ```
 
 ## Invoke after install

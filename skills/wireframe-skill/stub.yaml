@@ -5,3 +5,4 @@ rank: 2
 upstream: https://github.com/yhassy/wireframe-skill
 upstream_path: SKILL.md
 version: latest
+installed_as: wireframe

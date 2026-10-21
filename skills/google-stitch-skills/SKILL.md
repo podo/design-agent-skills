@@ -27,7 +27,7 @@ das:
 Run this for any Google Stitch design workflow:
 
 1. **Is a Stitch skill already installed?**
-   Check: `~/.design-agent-skills/skills/stitch-loop/SKILL.md` exists (representative skill).
+   Check: `~/.agents/skills/stitch-loop/SKILL.md` (global) or `.agents/skills/stitch-loop/SKILL.md` (project) exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -37,34 +37,43 @@ Run this for any Google Stitch design workflow:
 
 ## Install command
 
+All skills live in the single `google-labs-code/stitch-skills` repo; pick one with `--skill` (add `-g` for global install):
+
 ```bash
 # Create and manage DESIGN.md files
-npx skills add google-labs-code/design-md
+npx skills add google-labs-code/stitch-skills --skill design-md -y
 
 # Improve prompts with UI/UX vocabulary
-npx skills add google-labs-code/enhance-prompt
+npx skills add google-labs-code/stitch-skills --skill enhance-prompt -y
 
 # Extract Stitch design specs into DESIGN.md format
-npx skills add google-labs-code/extract-design-md
+npx skills add google-labs-code/stitch-skills --skill stitch::extract-design-md -y
 
 # Convert Stitch to React components
-npx skills add google-labs-code/react-components
+npx skills add google-labs-code/stitch-skills --skill stitch::react-components -y
 
 # Build components with shadcn/ui
-npx skills add google-labs-code/shadcn-ui
+npx skills add google-labs-code/stitch-skills --skill shadcn-ui -y
 
 # Iterative design-to-code feedback loop
-npx skills add google-labs-code/stitch-loop
+npx skills add google-labs-code/stitch-skills --skill stitch-loop -y
+
+# Or everything in the package
+npx skills add google-labs-code/stitch-skills -y
 ```
 
 ## Invoke after install
 
+Skills prefixed `stitch::` install into a `stitch-…` directory.
+
 - `design-md` — "DESIGN.md", "create design spec"
 - `enhance-prompt` — "enhance my prompt", "improve UI prompt"
-- `extract-design-md` — "extract design md", "Stitch to DESIGN.md"
-- `react-components` — "Stitch to React", "convert to React"
+- `stitch::extract-design-md` (installed as `stitch-extract-design-md`) — "extract design md", "Stitch to DESIGN.md"
+- `stitch::react-components` (installed as `stitch-react-components`) — "Stitch to React", "convert to React"
 - `shadcn-ui` — "Stitch to shadcn", "build with shadcn"
 - `stitch-loop` — "stitch loop", "iterate design"
+
+The package also ships `stitch::generate-design`, `stitch::code-to-design`, `stitch::manage-design-system`, `stitch::upload-to-stitch`, `taste-design`, `site-md`, `react-native`, `react-vite-dashboard`, and `remotion`.
 
 ## What it does
 

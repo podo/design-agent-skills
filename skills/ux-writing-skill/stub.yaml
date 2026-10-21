@@ -5,3 +5,4 @@ rank: 1
 upstream: https://github.com/content-designer/ux-writing-skill
 upstream_path: SKILL.md
 version: latest
+installed_as: ux-writing

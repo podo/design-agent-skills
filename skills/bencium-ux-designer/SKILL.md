@@ -26,7 +26,7 @@ das:
 Run this before any frontend interface work requiring distinctive design quality:
 
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/bencium-ux-designer/SKILL.md` exists AND does NOT contain a `das:` block.
+   Check: `~/.agents/skills/bencium-ux-designer/SKILL.md` or `.agents/skills/bencium-ux-designer/SKILL.md` exists AND does NOT contain a `das:` block.
    - Yes → invoke `bencium-ux-designer` and proceed
    - No → go to step 2
 

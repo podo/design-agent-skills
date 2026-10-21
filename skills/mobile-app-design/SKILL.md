@@ -28,11 +28,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/mobile-app-design/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/mobile-app-design/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `Mobile App Design Standards`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/mobile-app-design-standards/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/mobile-app-design-standards/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `mobile-app-design-standards`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -43,19 +43,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add awesome-skills/mobile-app-design --skill mobile-app-design -g -y
+   npx skills add awesome-skills/mobile-app-design --skill "Mobile App Design Standards" -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add awesome-skills/mobile-app-design --skill mobile-app-design -y
+   npx skills add awesome-skills/mobile-app-design --skill "Mobile App Design Standards" -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `mobile-app-design`
+- Skill name: `mobile-app-design-standards`
 - Triggers: "mobile app design", "iOS design", "Android design", "touch targets", "thumb zones"
 
 ## What it does

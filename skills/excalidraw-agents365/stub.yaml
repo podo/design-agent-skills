@@ -2,6 +2,7 @@ type: skill
 tier: experimental
 category: diagrams
 rank: 3
-upstream: https://github.com/Agents365-ai/excalidraw-skill
-upstream_path: skills/excalidraw-skill/SKILL.md
+upstream: https://github.com/Agents365-ai/365-skills
+upstream_path: plugins/excalidraw/skills/excalidraw-skill/SKILL.md
 version: latest
+installed_as: excalidraw

@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/composio-artifacts/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/composio-artifacts/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `artifacts-builder`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/artifacts-builder/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/artifacts-builder/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `artifacts-builder`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add ComposioHQ/awesome-claude-skills --skill composio-artifacts -g -y
+   npx skills add ComposioHQ/awesome-claude-skills --skill artifacts-builder -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add ComposioHQ/awesome-claude-skills --skill composio-artifacts -y
+   npx skills add ComposioHQ/awesome-claude-skills --skill artifacts-builder -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `composio-artifacts`
+- Skill name: `artifacts-builder`
 - Trigger phrases: "composio artifacts", "interactive artifact", "artifact with GitHub"
 
 ## What it does

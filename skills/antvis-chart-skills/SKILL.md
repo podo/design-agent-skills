@@ -28,7 +28,7 @@ das:
 Run this before any professional chart or data visualization work:
 
 1. **Is the package already installed?**
-   Check: `~/.design-agent-skills/skills/chart-visualization/SKILL.md` exists (representative skill).
+   Check: `~/.agents/skills/chart-visualization/SKILL.md` or `.agents/skills/chart-visualization/SKILL.md` exists (representative skill).
    - Yes → invoke the relevant skill by name and proceed
    - No → go to step 2
 

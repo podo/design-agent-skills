@@ -5,5 +5,5 @@ rank: 2
 upstream: https://github.com/addyosmani/web-quality-skills
 upstream_path: skills/web-quality-audit/SKILL.md
 version: latest
-install_default: "npx skills add addyosmani/web-quality-skills --skill <skill>"
+install_default: "npx skills add addyosmani/web-quality-skills --skill web-quality-audit"
 installed_as: web-quality-audit

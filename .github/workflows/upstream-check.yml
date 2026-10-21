@@ -23,3 +23,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}   # authenticated → 5000 req/hr (avoids 60/hr rate-limit false-negatives)
         run: node scripts/check-upstreams.mjs --paths
+
+      - name: Check every documented install command resolves
+        # an alive repo does not prove `npx skills add owner/repo --skill name` works (names, renames, frontmatter)
+        run: node scripts/check-installs.mjs

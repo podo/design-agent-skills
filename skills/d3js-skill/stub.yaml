@@ -5,3 +5,4 @@ rank: 2
 upstream: https://github.com/chrisvoncsefalvay/claude-d3js-skill
 upstream_path: SKILL.md
 version: latest
+installed_as: d3-viz

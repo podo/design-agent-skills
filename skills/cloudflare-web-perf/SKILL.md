@@ -27,11 +27,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/cloudflare-web-perf/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/cloudflare-web-perf/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `web-perf`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/web-perf/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/web-perf/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `web-perf`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,19 +42,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add cloudflare/skills --skill cloudflare-web-perf -g -y
+   npx skills add cloudflare/skills --skill web-perf -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add cloudflare/skills --skill cloudflare-web-perf -y
+   npx skills add cloudflare/skills --skill web-perf -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `cloudflare-web-perf`
+- Skill name: `web-perf`
 - Trigger phrases: "web performance", "Core Web Vitals", "LCP", "CLS", "render blocking"
 
 ## What it does

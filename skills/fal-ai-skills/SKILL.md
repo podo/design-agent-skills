@@ -1,8 +1,10 @@
 ---
 name: fal-ai-skills
 description: |
-  2 official fal.ai skills: image/video generation using fal.ai AI models,
-  and 3D model generation from text or images. Requires a fal.ai API key.
+  Official fal.ai agent skills for AI image, video, and 3D generation. A genmedia CLI
+  core plus model routing, prompting, and recipe skills, production skills (character
+  design, cinematography, commercial, marketing, storytelling, UGC), and verticals such
+  as website redesign and 2D game assets. Requires a fal.ai API key.
 triggers:
   - "fal.ai"
   - "fal generate"
@@ -26,7 +28,7 @@ das:
 Run this before using fal.ai generation features:
 
 1. **Is a fal.ai skill already installed?**
-   Check: `~/.design-agent-skills/skills/fal-generate/SKILL.md` exists.
+   Check: `~/.agents/skills/genmedia/SKILL.md` (global) or `.agents/skills/genmedia/SKILL.md` (project) exists.
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -37,20 +39,25 @@ Run this before using fal.ai generation features:
 ## Install command
 
 ```bash
-# Generate images and videos using fal.ai models
-npx skills add fal-ai-community/fal-generate
+# Everything in the package
+npx skills add fal-ai-community/skills -y
 
-# Generate 3D models from text or images
-npx skills add fal-ai-community/fal-3d
+# Or pick skills with --skill (add -g for global install)
+npx skills add fal-ai-community/skills --skill genmedia -y        # the CLI core every other skill calls
+npx skills add fal-ai-community/skills --skill fal-recipes -y     # use-case pipelines
+npx skills add fal-ai-community/skills --skill fal-redesign -y    # website redesign from screenshots
 ```
 
-Requires: `FAL_KEY` environment variable set to your fal.ai API key.
+Requires a fal.ai account and API key for generation.
 
 ## Invoke after install
 
-- `fal-generate` — "generate image", "generate video", "fal generate"
-- `fal-3d` — "generate 3D model", "3D from image", "fal 3D"
+- `genmedia` — "fal generate", "generate image fal", "generate video fal"
+- `fal-models-catalog` / `model-routing` — choosing the right endpoint per modality
+- `fal-prompting` / `fal-recipes` — family-specific prompt craft and use-case pipelines
+- `fal-regenerate-3d` — "fal 3D", "3D model from image"
+- `fal-redesign`, `fal-gamedev`, `character-design`, `cinematography`, `commercial`, `marketing`, `storytelling`, `ugc` — production and vertical skills
 
 ## What it does
 
-Official fal.ai community skills for AI media generation. `fal-generate` creates images and videos using fal.ai's model zoo (FLUX, Stable Diffusion, video models). `fal-3d` generates 3D models from text descriptions or reference images. Both require a fal.ai API key.
+Official fal.ai community skills for AI media generation. The default execution path is the `genmedia` CLI (discover an endpoint, inspect its schema, run it, poll, download); most other skills are knowledge layers telling the agent which endpoint to use, how to prompt it, and how to chain calls. Covers text/image/video/audio/3D modalities and design-adjacent work such as website redesign from screenshots and 2D game assets.

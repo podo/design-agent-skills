@@ -26,11 +26,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/data-analysis-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/data-analysis-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `data-analysis-pro`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/data-analysis-pro/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/data-analysis-pro/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `data-analysis-pro`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -41,19 +41,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add dongzhang84/data-analysis-skill --skill data-analysis-skill -g -y
+   npx skills add dongzhang84/data-analysis-skill --skill data-analysis-pro -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add dongzhang84/data-analysis-skill --skill data-analysis-skill -y
+   npx skills add dongzhang84/data-analysis-skill --skill data-analysis-pro -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-Skill name: `data-analysis-skill`, triggers: "data analysis skill", "parallel data analysis", "dongzhang84", "data HTML report", "data to PowerPoint"
+Skill name: `data-analysis-pro`, triggers: "data analysis skill", "parallel data analysis", "dongzhang84", "data HTML report", "data to PowerPoint"
 
 ## What it does
 

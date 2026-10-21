@@ -1,33 +1,33 @@
 ---
 name: vercel-skills
 description: |
-  4 official Vercel skills for web design guidelines, component building, React
-  performance, and composition patterns. Enforces 100+ Web Interface Guidelines
-  and accessible, composable component APIs.
+  Official Vercel agent skills for UI review and React work: Web Interface Guidelines
+  compliance review, writing guidelines review, React/Next.js performance, component
+  composition patterns, and React View Transitions. Lives in the vercel-labs/agent-skills collection.
 triggers:
   - "Vercel skill"
   - "web design guidelines"
-  - "building components"
   - "React best practices"
   - "composition patterns"
   - "Web Interface Guidelines"
+  - "React view transitions"
 das:
   category: official-suites
-  upstream: "https://github.com/vercel-labs/skills"
+  upstream: "https://github.com/vercel-labs/agent-skills"
   version: latest
   install: false
 ---
 
 # vercel-skills
 
-> Catalogue stub — full package: [vercel-labs/skills](https://github.com/vercel-labs/skills)
+> Catalogue stub — full package: [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
 
 ## Decision tree
 
 Run this before using Vercel skill workflows:
 
 1. **Is a Vercel skill already installed?**
-   Check: `~/.design-agent-skills/skills/building-components/SKILL.md` exists (representative skill).
+   Check: `~/.agents/skills/web-design-guidelines/SKILL.md` (global) or `.agents/skills/web-design-guidelines/SKILL.md` (project) exists (representative skill).
    - Yes → invoke the specific skill by name and proceed
    - No → go to step 2
 
@@ -37,29 +37,35 @@ Run this before using Vercel skill workflows:
 
 ## Install command
 
-```bash
-# Review UI code against 100+ Web Interface Guidelines
-npx skills add vercel-labs/web-design-guidelines
+All skills live in the single `vercel-labs/agent-skills` repo; pick one with `--skill` (add `-g` for global install):
 
-# Build accessible, composable, themeable UI components
-npx skills add vercel-labs/building-components
+```bash
+# Review UI code against the Web Interface Guidelines
+npx skills add vercel-labs/agent-skills --skill web-design-guidelines -y
+
+# Review docs and prose against the Writing Guidelines
+npx skills add vercel-labs/agent-skills --skill writing-guidelines -y
 
 # React/Next.js performance optimization
-npx skills add vercel-labs/react-best-practices
+npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices -y
 
 # React component composition and reusable patterns
-npx skills add vercel-labs/composition-patterns
+npx skills add vercel-labs/agent-skills --skill vercel-composition-patterns -y
+
+# Native-feeling animations with React's View Transition API
+npx skills add vercel-labs/agent-skills --skill vercel-react-view-transitions -y
 ```
 
-> Note: `web-design-guidelines` may be a stale listing — verify install before use.
+For accessible, composable component authoring, see `building-components` (a separate Vercel repo).
 
 ## Invoke after install
 
 - `web-design-guidelines` — "web design guidelines", "UI review"
-- `building-components` — "build component", "accessible component", "composable API"
-- `react-best-practices` — "React performance", "Next.js optimization"
-- `composition-patterns` — "composition patterns", "reusable React patterns"
+- `writing-guidelines` — "review my docs", "writing style audit"
+- `vercel-react-best-practices` — "React performance", "Next.js optimization"
+- `vercel-composition-patterns` — "composition patterns", "reusable React patterns"
+- `vercel-react-view-transitions` — "React view transitions", "page transition animation"
 
 ## What it does
 
-Vercel's official skill collection: enforces 100+ Web Interface Guidelines in UI code review, guides accessible and composable component architecture, optimizes React/Next.js performance, and establishes reusable component composition patterns.
+Vercel's official skill collection: reviews UI code against the Web Interface Guidelines, reviews prose against the Writing Guidelines, optimizes React/Next.js performance, establishes reusable component composition patterns, and guides smooth native-feeling transitions with the React View Transition API. The repo also holds Vercel deployment and CLI skills that are not catalogued here.

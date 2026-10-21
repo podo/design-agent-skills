@@ -25,11 +25,11 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/d3js-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/d3js-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `d3-viz`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
+   - Global: `[ -f ~/.agents/skills/d3-viz/SKILL.md ] && echo "installed" || echo "pointer"`
+   - Project: `[ -f .agents/skills/d3-viz/SKILL.md ] && echo "installed" || echo "pointer"`
+   - `installed` → the full skill is installed as `d3-viz`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -40,19 +40,19 @@ das:
 
    **Global** (installed with `-g`):
    ```bash
-   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3js-skill -g -y
+   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3-viz -g -y
    ```
 
    **Project** (installed without `-g`):
    ```bash
-   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3js-skill -y
+   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3-viz -y
    ```
    > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
 
 ## Invoke after install
 
-- Skill name: `d3js-skill`
+- Skill name: `d3-viz`
 - Trigger phrases: "D3.js", "D3 chart", "D3 visualization", "data visualization D3"
 
 ## What it does

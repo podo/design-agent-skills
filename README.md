@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-151 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+154 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -27,8 +27,8 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   92 skills    full coverage
-│  ○ All         151 skills    everything
+│  ○ Essentials   93 skills    full coverage
+│  ○ All         154 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -50,13 +50,13 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~92 | Full coverage, no redundancy. |
-| **All** | `--all` | 151 | Everything including niche and experimental. |
+| **Essentials** | `--essentials` | ~93 | Full coverage, no redundancy. |
+| **All** | `--all` | 154 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~92 skills covering all categories
-npx design-agent-skills --all -g            # all 151 (default when no flag)
+npx design-agent-skills --essentials -g     # ~93 skills covering all categories
+npx design-agent-skills --all -g            # all 154 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (151 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (154 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -121,7 +121,7 @@ Each skill is a `SKILL.md` file in `skills/<name>/`. The catalogue is structured
 | Tier | Type | Count | Owned by | Updates |
 |------|------|-------|----------|---------|
 | **Routing** | `router` | 6 | This repo — always | `skills update` always reaches these |
-| **Implementation** | `skill` / `package` / `platform` | 151 | Upstream on first use | `skills update` reaches un-upgraded pointers |
+| **Implementation** | `skill` / `package` / `platform` | 154 | Upstream on first use | `skills update` reaches un-upgraded pointers |
 
 ### Pointer anatomy
 
@@ -149,6 +149,8 @@ das:
 | `skill` | Single `SKILL.md` from upstream | `skills add owner/repo --skill <name>` | taste-skill |
 | `package` | Multi-skill GitHub package | `skills add owner/repo` | ui-craft |
 | `platform` | Platform with template vars — never fetch directly | Manual per platform docs | impeccable |
+
+`--skill` takes the upstream `SKILL.md` frontmatter `name`, not the pointer's directory name. When they differ (e.g. `guizang-ppt` → `guizang-ppt-skill`) the stub records the upstream name in `installed_as`, and the full skill installs next to the pointer.
 
 ### Body sections
 
@@ -215,7 +217,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (33), `community` (64), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (34), `community` (68), `experimental` (58) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -245,14 +247,15 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [brand-design-md](skills/brand-design-md/SKILL.md) | skill | design-systems | [zephyrwang6/brand-design-md](https://github.com/zephyrwang6/brand-design-md) |
 | [design-system-governance](skills/design-system-governance/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [frontend-design](skills/frontend-design/SKILL.md) | skill | design-systems | [Ilm-Alan/frontend-design](https://github.com/Ilm-Alan/frontend-design) |
+| [hallmark](skills/hallmark/SKILL.md) | skill | design-systems | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) |
 | [impeccable](skills/impeccable/SKILL.md) | platform | design-systems | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [localization-design](skills/localization-design/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [ai-graphic-design-skill](skills/ai-graphic-design-skill/SKILL.md) | skill | design-systems | [designrique/ai-graphic-design-skill](https://github.com/designrique/ai-graphic-design-skill) |
 | [design-for-ai](skills/design-for-ai/SKILL.md) | package | design-systems | [ryanthedev/design-for-ai](https://github.com/ryanthedev/design-for-ai) |
-| [distinctive-frontend](skills/distinctive-frontend/SKILL.md) | package | design-systems | [Koomook/claude-frontend-skills](https://github.com/Koomook/claude-frontend-skills) |
 | [huashu-design](skills/huashu-design/SKILL.md) | skill | design-systems | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) |
 | [logo-designer-skill](skills/logo-designer-skill/SKILL.md) | package | design-systems | [neonwatty/logo-designer-skill](https://github.com/neonwatty/logo-designer-skill) |
 | [styleseed](skills/styleseed/SKILL.md) | package | design-systems | [bitjaru/styleseed](https://github.com/bitjaru/styleseed) |
+| [wpds](skills/wpds/SKILL.md) | skill | design-systems | [WordPress/agent-skills](https://github.com/WordPress/agent-skills) |
 
 ### Motion & Animation
 
@@ -296,6 +299,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [color-expert](skills/color-expert/SKILL.md) ★ | skill | visual-components | [meodai/skill.color-expert](https://github.com/meodai/skill.color-expert) |
 | [material-3-skill](skills/material-3-skill/SKILL.md) ★ | package | visual-components | [hamen/material-3-skill](https://github.com/hamen/material-3-skill) |
 | [shadcn-ui](skills/shadcn-ui/SKILL.md) ★ | package | visual-components | [shadcn-ui/ui](https://github.com/shadcn-ui/ui) |
+| [building-components](skills/building-components/SKILL.md) | skill | visual-components | [vercel/components.build](https://github.com/vercel/components.build) |
 | [copywriting-skill](skills/copywriting-skill/SKILL.md) | skill | visual-components | [judicael-s/Copywriting-skill](https://github.com/judicael-s/Copywriting-skill) |
 | [design-tokens-skill](skills/design-tokens-skill/SKILL.md) | skill | visual-components | [ilikescience/design-tokens-skill](https://github.com/ilikescience/design-tokens-skill) |
 | [google-fonts-skill](skills/google-fonts-skill/SKILL.md) | platform | visual-components | [sliday/google-fonts-skill](https://github.com/sliday/google-fonts-skill) |
@@ -307,7 +311,6 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [swiftui-claude-skills](skills/swiftui-claude-skills/SKILL.md) | package | visual-components | [199-biotechnologies/swiftui-claude-skills](https://github.com/199-biotechnologies/swiftui-claude-skills) |
 | [swiftui-design-skill](skills/swiftui-design-skill/SKILL.md) | skill | visual-components | [wholiver/swiftui-design-skill](https://github.com/wholiver/swiftui-design-skill) |
 | [awesome-design-skills](skills/awesome-design-skills/SKILL.md) | package | visual-components | [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) |
-| [ink-google](skills/ink-google/SKILL.md) | skill | visual-components | [google-labs-code/design.md](https://github.com/google-labs-code/design.md) |
 | [mobile-app-ui-design](skills/mobile-app-ui-design/SKILL.md) | skill | visual-components | [ceorkm/mobile-app-ui-design](https://github.com/ceorkm/mobile-app-ui-design) |
 | [sleek-design-mobile-apps](skills/sleek-design-mobile-apps/SKILL.md) | platform | visual-components | [sleekdotdesign/agent-skills](https://github.com/sleekdotdesign/agent-skills) |
 | [swiftui-patterns](skills/swiftui-patterns/SKILL.md) | package | visual-components | [dimillian/Skills](https://github.com/dimillian/Skills) |
@@ -332,17 +335,16 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [plan-design-review](skills/plan-design-review/SKILL.md) ★ | skill | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
+| [plan-design-review](skills/plan-design-review/SKILL.md) ★ | package | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
 | [creative-director](skills/creative-director/SKILL.md) | skill | design-review | [smixs/creative-director-skill](https://github.com/smixs/creative-director-skill) |
 | [design-debt-audit](skills/design-debt-audit/SKILL.md) | skill | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [design-impact-reporting](skills/design-impact-reporting/SKILL.md) | skill | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [design-negotiation](skills/design-negotiation/SKILL.md) | skill | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
-| [design-review-garrytan](skills/design-review-garrytan/SKILL.md) | skill | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
+| [design-review-garrytan](skills/design-review-garrytan/SKILL.md) | package | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
 | [designer-skills](skills/designer-skills/SKILL.md) | package | design-review | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
-| [service-blueprint](skills/service-blueprint/SKILL.md) | package | design-review | [j-clegg/service-blueprint-skill](https://github.com/j-clegg/service-blueprint-skill) |
 | [ux-designer-skill](skills/ux-designer-skill/SKILL.md) | skill | design-review | [szilu/ux-designer-skill](https://github.com/szilu/ux-designer-skill) |
 | [design-brief](skills/design-brief/SKILL.md) | skill | design-review | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
-| [design-consultation](skills/design-consultation/SKILL.md) | skill | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
+| [design-consultation](skills/design-consultation/SKILL.md) | package | design-review | [garrytan/gstack](https://github.com/garrytan/gstack) |
 | [design-with-claude](skills/design-with-claude/SKILL.md) | package | design-review | [imsaif/design-with-claude](https://github.com/imsaif/design-with-claude) |
 | [ux-ui-mastery](skills/ux-ui-mastery/SKILL.md) | package | design-review | [phazurlabs/ux-ui-mastery](https://github.com/phazurlabs/ux-ui-mastery) |
 | [wondelai-skills](skills/wondelai-skills/SKILL.md) | package | design-review | [wondelai/skills](https://github.com/wondelai/skills) |
@@ -351,12 +353,12 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [figma-official-skills](skills/figma-official-skills/SKILL.md) ★ | platform | figma-code | [https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server) |
+| [figma-official-skills](skills/figma-official-skills/SKILL.md) ★ | package | figma-code | [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide) |
 | [claude2figma](skills/claude2figma/SKILL.md) | package | figma-code | [senlindesign/claude2figma](https://github.com/senlindesign/claude2figma) |
 | [extract-design-system](skills/extract-design-system/SKILL.md) | package | figma-code | [arvindrk/extract-design-system](https://github.com/arvindrk/extract-design-system) |
 | [google-stitch-skills](skills/google-stitch-skills/SKILL.md) | package | figma-code | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
 | [work-with-design-systems](skills/work-with-design-systems/SKILL.md) | skill | figma-code | [natdexterra/work-with-design-systems](https://github.com/natdexterra/work-with-design-systems) |
-| [design-html](skills/design-html/SKILL.md) | skill | figma-code | [garrytan/gstack](https://github.com/garrytan/gstack) |
+| [design-html](skills/design-html/SKILL.md) | package | figma-code | [garrytan/gstack](https://github.com/garrytan/gstack) |
 | [extract-design-md](skills/extract-design-md/SKILL.md) | skill | figma-code | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
 | [figma-skill](skills/figma-skill/SKILL.md) | package | figma-code | [nafiurrahmanniloy/figma-skill](https://github.com/nafiurrahmanniloy/figma-skill) |
 | [figma-variables-tokens-generator](skills/figma-variables-tokens-generator/SKILL.md) | package | figma-code | [Shanmus4/figma-variables-tokens-generator](https://github.com/Shanmus4/figma-variables-tokens-generator) |
@@ -368,7 +370,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [anthropics-skills](skills/anthropics-skills/SKILL.md) ★ | package | official-suites | [anthropics/skills](https://github.com/anthropics/skills) |
 | [expo-skills](skills/expo-skills/SKILL.md) | package | official-suites | [expo/skills](https://github.com/expo/skills) |
 | [software-mansion-skills](skills/software-mansion-skills/SKILL.md) | package | official-suites | [software-mansion-labs/skills](https://github.com/software-mansion-labs/skills) |
-| [vercel-skills](skills/vercel-skills/SKILL.md) | package | official-suites | [vercel-labs/skills](https://github.com/vercel-labs/skills) |
+| [vercel-skills](skills/vercel-skills/SKILL.md) | package | official-suites | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
 | [callstack-agent-skills](skills/callstack-agent-skills/SKILL.md) | package | official-suites | [callstackincubator/agent-skills](https://github.com/callstackincubator/agent-skills) |
 | [composio-artifacts](skills/composio-artifacts/SKILL.md) | skill | official-suites | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) |
 | [microsoft-skills](skills/microsoft-skills/SKILL.md) | package | official-suites | [microsoft/skills](https://github.com/microsoft/skills) |
@@ -383,9 +385,9 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [wireframe-skill](skills/wireframe-skill/SKILL.md) | skill | diagrams | [yhassy/wireframe-skill](https://github.com/yhassy/wireframe-skill) |
 | [wireframer](skills/wireframer/SKILL.md) | skill | diagrams | [agilek/wireframer-skill](https://github.com/agilek/wireframer-skill) |
 | [claude-wireframe-skill](skills/claude-wireframe-skill/SKILL.md) | skill | diagrams | [Magdoub/claude-wireframe-skill](https://github.com/Magdoub/claude-wireframe-skill) |
-| [excalidraw-agents365](skills/excalidraw-agents365/SKILL.md) | skill | diagrams | [Agents365-ai/excalidraw-skill](https://github.com/Agents365-ai/excalidraw-skill) |
+| [excalidraw-agents365](skills/excalidraw-agents365/SKILL.md) | skill | diagrams | [Agents365-ai/365-skills](https://github.com/Agents365-ai/365-skills) |
 | [hand-drawn-diagrams](skills/hand-drawn-diagrams/SKILL.md) | skill | diagrams | [muthuishere/hand-drawn-diagrams](https://github.com/muthuishere/hand-drawn-diagrams) |
-| [nimbalyst-skills](skills/nimbalyst-skills/SKILL.md) | package | diagrams | [https://nimbalyst.com/skills](https://nimbalyst.com/skills) |
+| [nimbalyst-skills](skills/nimbalyst-skills/SKILL.md) | platform | diagrams | [https://nimbalyst.com/skills](https://nimbalyst.com/skills) |
 
 ### Data Visualization
 
@@ -396,20 +398,22 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [d3js-skill](skills/d3js-skill/SKILL.md) | skill | data-visualization | [chrisvoncsefalvay/claude-d3js-skill](https://github.com/chrisvoncsefalvay/claude-d3js-skill) |
 | [markdown-viewer-skills](skills/markdown-viewer-skills/SKILL.md) | package | data-visualization | [markdown-viewer/skills](https://github.com/markdown-viewer/skills) |
 | [data-analysis-skill](skills/data-analysis-skill/SKILL.md) | skill | data-visualization | [dongzhang84/data-analysis-skill](https://github.com/dongzhang84/data-analysis-skill) |
-| [data-viz-agent](skills/data-viz-agent/SKILL.md) | skill | data-visualization | [rohitg00/awesome-claude-code-toolkit](https://github.com/rohitg00/awesome-claude-code-toolkit) |
 
 ### Presentations
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [slidev-skill](skills/slidev-skill/SKILL.md) ★ | package | presentations | [slidevjs/slidev](https://github.com/slidevjs/slidev) |
+| [kami](skills/kami/SKILL.md) | skill | presentations | [tw93/Kami](https://github.com/tw93/Kami) |
 | [marp-slides](skills/marp-slides/SKILL.md) | skill | presentations | [robonuggets/marp-slides](https://github.com/robonuggets/marp-slides) |
 | [revealjs-skill](skills/revealjs-skill/SKILL.md) | package | presentations | [ryanbbrown/revealjs-skill](https://github.com/ryanbbrown/revealjs-skill) |
 | [cc-slidev](skills/cc-slidev/SKILL.md) | package | presentations | [rhuss/cc-slidev](https://github.com/rhuss/cc-slidev) |
 | [frontend-slides](skills/frontend-slides/SKILL.md) | skill | presentations | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
 | [guizang-ppt](skills/guizang-ppt/SKILL.md) | skill | presentations | [op7418/guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill) |
+| [html-ppt](skills/html-ppt/SKILL.md) | skill | presentations | [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill) |
+| [humanize-ppt](skills/humanize-ppt/SKILL.md) | skill | presentations | [LearnPrompt/humanize-ppt](https://github.com/LearnPrompt/humanize-ppt) |
 | [marp-slide-quality](skills/marp-slide-quality/SKILL.md) | skill | presentations | [nibzard/marp-slide-quality](https://github.com/nibzard/marp-slide-quality) |
-| [nanobanan-ppt](skills/nanobanan-ppt/SKILL.md) | skill | presentations | [op7418/NanoBanana-PPT-Skills](https://github.com/op7418/NanoBanana-PPT-Skills) |
+| [nanobanan-ppt](skills/nanobanan-ppt/SKILL.md) | package | presentations | [op7418/NanoBanana-PPT-Skills](https://github.com/op7418/NanoBanana-PPT-Skills) |
 
 ### Product & PM
 
@@ -460,14 +464,16 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [animate-css-skill](skills/animate-css-skill/SKILL.md) | package | motion-animation | [msrbuilds/animate-css-skill](https://github.com/msrbuilds/animate-css-skill) |
 | [css-animation-skill](skills/css-animation-skill/SKILL.md) | skill | motion-animation | [neonwatty/css-animation-skill](https://github.com/neonwatty/css-animation-skill) |
 | [fixing-motion-performance](skills/fixing-motion-performance/SKILL.md) | package | motion-animation | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
+| [huashu-art-motion](skills/huashu-art-motion/SKILL.md) | skill | motion-animation | [alchaincyf/huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion) |
 | [hyperframes](skills/hyperframes/SKILL.md) | package | motion-animation | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) |
+| [oil-motion](skills/oil-motion/SKILL.md) | skill | motion-animation | [oil-oil/oil-motion](https://github.com/oil-oil/oil-motion) |
 | [wiggle-claude-skill](skills/wiggle-claude-skill/SKILL.md) | skill | motion-animation | [talknerdytome-labs/wiggle-claude-skill](https://github.com/talknerdytome-labs/wiggle-claude-skill) |
 
 ### Design Engineering (Extended)
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [emilkowalski-skill](skills/emilkowalski-skill/SKILL.md) ★ | package | design-engineering | [emilkowalski/skill](https://github.com/emilkowalski/skill) |
+| [emilkowalski-skill](skills/emilkowalski-skill/SKILL.md) ★ | package | design-engineering | [emilkowalski/skills](https://github.com/emilkowalski/skills) |
 | [format-storybook](skills/format-storybook/SKILL.md) | skill | design-engineering | [mikemai2awesome/agent-skills](https://github.com/mikemai2awesome/agent-skills) |
 
 ### Design Research
@@ -475,4 +481,3 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [user-research-cookiy](skills/user-research-cookiy/SKILL.md) ★ | skill | design-research | [cookiy-ai/user-research-skill](https://github.com/cookiy-ai/user-research-skill) |
-| [software-ux-research](skills/software-ux-research/SKILL.md) | skill | design-research | [vasilyu1983/AI-Agents-public](https://github.com/vasilyu1983/AI-Agents-public) |

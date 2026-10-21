@@ -5,3 +5,4 @@ rank: 2
 upstream: https://github.com/jakubkrehel/make-interfaces-feel-better
 upstream_path: skills/make-interfaces-feel-better/SKILL.md
 version: latest
+installed_as: make-interfaces-feel-better

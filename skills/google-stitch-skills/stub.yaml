@@ -4,5 +4,5 @@ category: figma-code
 rank: 2
 upstream: https://github.com/google-labs-code/stitch-skills
 version: latest
-install_default: "npx skills add google-labs-code/<skill>"
+install_default: "npx skills add google-labs-code/stitch-skills"
 installed_as: stitch-loop

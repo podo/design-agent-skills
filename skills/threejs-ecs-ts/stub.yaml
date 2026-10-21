@@ -4,4 +4,6 @@ category: creative-3d
 rank: 3
 upstream: https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts
 version: latest
-install_default: "npx skills add Nice-Wolf-Studio/claude-skills-threejs-ecs-ts"
+install_default: "git clone https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts.git && ln -s \"$(pwd)/claude-skills-threejs-ecs-ts\" ~/.claude/plugins/threejs-ecs-skills"
+installed_as: threejs-ecs-skills
+note: "Upstream has no SKILL.md (plain markdown + plugin manifest), so npx skills add finds nothing (verified 2026-10-21); install is the clone + symlink from its README"

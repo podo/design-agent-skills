@@ -2,7 +2,12 @@ type: package
 tier: official
 category: official-suites
 rank: 2
-upstream: https://github.com/vercel-labs/skills
+upstream: https://github.com/vercel-labs/agent-skills
 version: latest
-install_default: "npx skills add vercel-labs/<skill>"
-installed_as: building-components
+install_default: "npx skills add vercel-labs/agent-skills --skill web-design-guidelines"
+installed_as:
+  - web-design-guidelines
+  - writing-guidelines
+  - vercel-react-best-practices
+  - vercel-composition-patterns
+  - vercel-react-view-transitions

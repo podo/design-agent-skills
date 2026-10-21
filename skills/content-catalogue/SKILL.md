@@ -51,6 +51,9 @@ Activate when the user:
 | [`nanobanan-ppt`](../nanobanan-ppt/SKILL.md) | AI-powered PPT with document analysis and image generation |
 | [`guizang-ppt`](../guizang-ppt/SKILL.md) | Structured PowerPoint from outline (no API deps) |
 | [`frontend-slides`](../frontend-slides/SKILL.md) | Animation-rich HTML presentations |
+| [`html-ppt`](../html-ppt/SKILL.md) | HTML PPT Studio: themes, layouts, full-deck templates, presenter mode with speaker script |
+| [`kami`](../kami/SKILL.md) | Paper-style typesetting: resumes, one-pagers, white papers, letters, decks (PDF/PNG/PPTX) |
+| [`humanize-ppt`](../humanize-ppt/SKILL.md) | Outline director + post-render checkup for agent-made decks (planner only, no rendering) |
 | [`revealjs-skill`](../revealjs-skill/SKILL.md) | Reveal.js: themes, Chart.js, speaker notes, PDF export |
 | [`marp-slides`](../marp-slides/SKILL.md) | MARP + 22 example decks, SVG charts, dashboard components |
 | [`slidev-skill`](../slidev-skill/SKILL.md) | Official Slidev: developer presentations in Markdown with Vue + animations |
@@ -66,7 +69,7 @@ Activate when the user:
 | [`excalidraw-agents365`](../excalidraw-agents365/SKILL.md) | Excalidraw tuned for coding agent workflows |
 | [`wireframer`](../wireframer/SKILL.md) | Low-fidelity wireframes, structure-first |
 | [`softaworks-agent-toolkit`](../softaworks-agent-toolkit/SKILL.md) | 40+ skills: mermaid, excalidraw, draw-io, C4, marp |
-| [`nimbalyst-skills`](../nimbalyst-skills/SKILL.md) | Excalidraw with MCP tools, mockups, data models |
+| [`nimbalyst-skills`](../nimbalyst-skills/SKILL.md) | Nimbalyst app built-ins: Excalidraw with MCP tools, mockups, data models |
 | [`wireframe-skill`](../wireframe-skill/SKILL.md) | NL → wireframe JSON + interactive HTML with drag/drop, undo/redo |
 | [`claude-wireframe-skill`](../claude-wireframe-skill/SKILL.md) | 5 UX approaches as interactive prototypes — B&W first then color variants |
 
@@ -77,7 +80,6 @@ Activate when the user:
 | [`antvis-chart-skills`](../antvis-chart-skills/SKILL.md) | 7 AntV skills: 26+ chart types, 98.2% accuracy |
 | [`markdown-viewer-skills`](../markdown-viewer-skills/SKILL.md) | 14 skills: Vega, PlantUML, JSON Canvas, infographics |
 | [`d3js-skill`](../d3js-skill/SKILL.md) | D3.js: data binding, scales, transitions, interactive charts |
-| [`data-viz-agent`](../data-viz-agent/SKILL.md) | Multi-library agent: D3/Chart.js/Plotly/Matplotlib |
 | [`claud3`](../claud3/SKILL.md) | D3 v7 + Tufte principles: 80+ chart types, dark theme, annotations |
 | [`data-analysis-skill`](../data-analysis-skill/SKILL.md) | Multi-expert parallel analysis → HTML reports + PowerPoint export |
 
@@ -100,14 +102,12 @@ Activate when the user:
 | [`design-impact-reporting`](../design-impact-reporting/SKILL.md) | Design ROI: user→product→business metrics, scorecard / before-after / A-B / portfolio |
 | [`design-debt-audit`](../design-debt-audit/SKILL.md) | Design-debt taxonomy + audit process + Severity×Frequency/Effort scoring + register |
 | [`design-negotiation`](../design-negotiation/SKILL.md) | Advocacy scripts: timeline / scope / stakeholder override / headcount, evidence-based |
-| [`service-blueprint`](../service-blueprint/SKILL.md) | NN/g service blueprints: 5 swim lanes, lines of visibility, JSON schema + render pipeline |
 
 ## Design Research
 
 | Skill | Best for |
 |-------|----------|
 | [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports (141 ★) |
-| [`software-ux-research`](../software-ux-research/SKILL.md) | Research ops: survey design, repository management, usability testing (ISO 9241), JTBD |
 
 ## Product & PM
 
