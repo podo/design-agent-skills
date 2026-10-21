@@ -72,7 +72,9 @@ for (const name of fs.readdirSync(SKILLS_DIR)) {
   const dir = path.join(SKILLS_DIR, name);
   const stubPath = path.join(dir, 'stub.yaml');
   if (!fs.existsSync(stubPath) || /^type:\s*router/m.test(fs.readFileSync(stubPath, 'utf8'))) continue;
-  const texts = [stubPath, path.join(dir, 'SKILL.md')].filter(fs.existsSync).map(f => fs.readFileSync(f, 'utf8'));
+  // stub.yaml: only install_* fields are commands (a `note:` may mention "npx skills add" in prose)
+  const stubCmds = fs.readFileSync(stubPath, 'utf8').split('\n').filter(l => l.startsWith('install_')).join('\n');
+  const texts = [stubCmds, ...[path.join(dir, 'SKILL.md')].filter(fs.existsSync).map(f => fs.readFileSync(f, 'utf8'))];
   for (const { target, skills } of texts.flatMap(commandsIn)) {
     const t = targets.get(target) ?? { users: new Set(), wanted: new Set() };
     t.users.add(name);
