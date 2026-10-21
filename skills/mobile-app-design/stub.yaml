@@ -1,8 +1,11 @@
 type: skill
-tier: official
+tier: community
 category: visual-components
 rank: 2
 upstream: https://github.com/awesome-skills/mobile-app-design
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add awesome-skills/mobile-app-design --skill "Mobile App Design Standards"
 installed_as: Mobile App Design Standards
+license: no LICENSE file
+note: "verified 2026-10-21; tier official -> community (awesome-skills is a generic GitHub org, not the publisher of Apple HIG or Material). Upstream frontmatter name has spaces, so the CLI writes the directory mobile-app-design-standards. Ships reference docs, examples and three helper scripts (accessibility-audit.sh, check-contrast.py, validate-touch-targets.sh) that are only run on request."

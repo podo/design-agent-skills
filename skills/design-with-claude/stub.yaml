@@ -5,6 +5,19 @@ rank: 3
 upstream: https://github.com/imsaif/design-with-claude
 upstream_path: skills/design-with-claude/SKILL.md
 version: latest
-install_default: "/plugin marketplace add imsaif/design-with-claude"
-install_claude: "/plugin marketplace add imsaif/design-with-claude"
-note: "Verified 2026-10-21: npx skills add finds no skills because upstream SKILL.md frontmatter fails YAML parsing (unquoted ': ' in description), so no npx command is documented. Re-add npx skills add imsaif/design-with-claude once it works (check with --list)"
+install_mode: manual
+manual_reason: The skills CLI skips this repo because upstream's SKILL.md frontmatter does not parse as YAML, so the supported route is the Claude Code plugin. Run the two plugin commands in a terminal, or send the same two as slash commands inside Claude Code, then run /reload-plugins (without it the commands do not appear).
+install_steps:
+  - claude plugin marketplace add imsaif/design-with-claude
+  - claude plugin install design-with-claude@design-with-claude
+install_check: ~/.claude/plugins/cache/design-with-claude/design-with-claude
+install_claude:
+  - /plugin marketplace add imsaif/design-with-claude
+  - /plugin install design-with-claude@design-with-claude
+installed_as: design-with-claude
+requires:
+  - Claude Code (plugin route). Commands are namespaced, for example /design-with-claude:design-brief
+  - "Optional audit CLI `npx dwic-audit` (runs an npm package; it sends an anonymous run counter unless --no-telemetry or DWIC_TELEMETRY=off is set)"
+  - Optional MCP server for interactive use needs a token from designwithclaude.com
+license: MIT
+note: "verified 2026-10-21; `npx skills add imsaif/design-with-claude --list` still reports 'YAML parse error: Nested mappings are not allowed in compact mappings at line 2' (unquoted ': ' in the description), although the upstream README advertises that command. Re-check with --list and switch to install_default once upstream quotes the description. Plugin route checked against marketplace.json (marketplace and plugin are both design-with-claude), not run; install_check path follows the documented plugin cache layout (~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/, per code.claude.com plugins/loading) but was not run."

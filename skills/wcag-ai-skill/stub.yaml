@@ -1,7 +1,11 @@
-type: package
+type: skill
 tier: experimental
 category: accessibility-quality
 rank: 1
 upstream: https://github.com/Raze-Systems/wcag-ai-skill
+upstream_path: .agents/skills/wcag-2.2/SKILL.md
 version: latest
-install_default: "npx skills add Raze-Systems/wcag-ai-skill"
+install_default: npx skills add Raze-Systems/wcag-ai-skill --skill wcag-22
+installed_as: wcag-22
+license: AGPL-3.0 (copyleft; stated in the README and SKILL.md, the repo has no LICENSE file)
+note: "verified 2026-10-21. The skill is called wcag-22 (folder wcag-2.2), not wcag-ai-skill, and installs next to this pointer; `--skill wcag-ai-skill` fails with No matching skills found"

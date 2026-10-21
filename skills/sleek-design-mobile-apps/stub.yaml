@@ -1,6 +1,14 @@
-type: platform
+type: skill
 tier: community
 category: visual-components
 rank: 3
 upstream: https://github.com/sleekdotdesign/agent-skills
+upstream_path: skills/design-mobile-apps/SKILL.md
 version: latest
+install_default: npx skills add sleekdotdesign/agent-skills --skill sleek-design-mobile-apps
+installed_as: sleek-design-mobile-apps
+requires:
+  - A Sleek account (sleek.design). Free accounts only get one-time trial credits (about one design run); sustained use needs a paid plan, see the upstream README for current pricing
+  - SLEEK_API_KEY environment variable, created at sleek.design/agents/setup. The skill calls the Sleek REST API, so designs and briefs are sent to Sleek (a third party)
+license: MIT
+note: "verified 2026-10-21; type changed platform -> skill (a plain --skill install works); the upstream directory is design-mobile-apps but the skill's frontmatter name is sleek-design-mobile-apps, which is what --skill matches and what lands in .agents/skills"

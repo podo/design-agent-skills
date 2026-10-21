@@ -4,4 +4,28 @@ category: product-pm
 rank: 3
 upstream: https://github.com/chadboyda/agent-gtm-skills
 version: latest
-install_default: "npx skills add chadboyda/agent-gtm-skills"
+install_default: npx skills add chadboyda/agent-gtm-skills --skill positioning-icp ai-pricing sales-motion-design ai-cold-outreach ai-sdr lead-enrichment video-outreach multi-platform-launch ai-seo social-selling content-to-pipeline ai-ugc-ads paid-creative-ai expansion-retention partner-affiliate gtm-engineering solo-founder-gtm gtm-metrics
+installed_as:
+  - positioning-icp
+  - ai-pricing
+  - sales-motion-design
+  - ai-cold-outreach
+  - ai-sdr
+  - lead-enrichment
+  - video-outreach
+  - multi-platform-launch
+  - ai-seo
+  - social-selling
+  - content-to-pipeline
+  - ai-ugc-ads
+  - paid-creative-ai
+  - expansion-retention
+  - partner-affiliate
+  - gtm-engineering
+  - solo-founder-gtm
+  - gtm-metrics
+install_claude:
+  - /plugin marketplace add chadboyda/agent-gtm-skills
+  - /plugin install agent-gtm-skills@agent-gtm-skills
+license: MIT (stated in the README; the repo has no LICENSE file)
+note: "verified 2026-10-21; plugin route checked against .claude-plugin/marketplace.json only (not run). ai-seo is also installed by coreyhaines-marketing (see report). Skills are playbooks that name paid third-party tools (Clay, Apollo, DataForSEO, Arcads, HeyGen...) but need no key to install"

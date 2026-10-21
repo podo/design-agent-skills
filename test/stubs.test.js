@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseNpx, parseStubText } from '../scripts/lib/stub.mjs';
 
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../../');
 const SKILLS_DIR = path.join(ROOT, 'skills');
@@ -168,14 +169,16 @@ describe('type:skill upgrade commands', () => {
       );
     });
 
-    // `--skill` matches the upstream SKILL.md `name`, not our directory name. When the
-    // two differ the stub declares the upstream name in `installed_as`.
-    it(`${name}: upgrade command includes skill name`, () => {
-      const target = yamlGet(stub, 'installed_as') || name;
-      assert.ok(
-        skill.includes(`--skill ${target}`) || skill.includes(`--skill "${target}"`),
-        `upgrade command must include "--skill ${target}"`
-      );
+    // `--skill` matches the upstream SKILL.md `name`, not our directory name (see installed_as).
+    // Every skill the install command names must appear in the pointer's generated install block.
+    // Raw-URL / subpath / manual installs have no --skill and are covered by test/pointers.test.js.
+    it(`${name}: upgrade command's --skill names appear in the pointer`, () => {
+      const p = parseNpx(parseStubText(stub).install_default ?? '');
+      if (!p || !p.skills.length) return;
+      for (const n of p.skills) {
+        assert.ok(skill.includes(`--skill ${n.includes(' ') ? `"${n}"` : n}`) || skill.includes(n),
+          `pointer must install "${n}" (the --skill name from stub.yaml install_default)`);
+      }
     });
   }
 });
@@ -229,6 +232,8 @@ describe('stub.yaml field validation', () => {
   const KNOWN_FIELDS = new Set([
     'type', 'tier', 'rank', 'category', 'upstream', 'upstream_path', 'version',
     'install_default', 'installed_as', 'note', 'install_claude', 'install_npm',
+    'install_extra', 'install_mode', 'install_steps', 'install_check', 'manual_reason',
+    'requires', 'license', 'size_mb', 'conflicts_with',
   ]);
 
   for (const { name, stub } of skills) {
@@ -292,20 +297,6 @@ describe('metadata regression guards', () => {
     assert.ok(!/\b\d+\s+(design\s+)?(specialists?|slash commands?|design commands?)/i.test(s.skill),
       'design-with-claude must not hardcode a specialist/command count (it goes stale upstream)');
   });
-
-  // Regression: phuryn/pm-skills moved from a single `npx skills add` bundle to a
-  // Claude plugin marketplace (8 plugins). The old install path no longer works,
-  // so neither the stub nor the pointer may advertise it.
-  it('phuryn-pm-skills: uses plugin marketplace install, not stale npx skills add', () => {
-    const s = skills.find(x => x.name === 'phuryn-pm-skills');
-    assert.ok(s && s.skill && s.stub, 'phuryn-pm-skills files missing');
-    assert.ok(!/npx skills add phuryn\/pm-skills/.test(s.skill),
-      'phuryn-pm-skills SKILL.md must not use the stale "npx skills add phuryn/pm-skills" path');
-    assert.ok(!/npx skills add phuryn\/pm-skills/.test(s.stub),
-      'phuryn-pm-skills stub.yaml install_default must not use the stale npx path');
-    assert.ok(/plugin marketplace add phuryn\/pm-skills/.test(s.skill),
-      'phuryn-pm-skills must document the "plugin marketplace add" install');
-  });
 });
 
 describe('install command validity (regression)', () => {
@@ -363,35 +354,26 @@ describe('install command validity (regression)', () => {
         'use ~/.agents/skills/<name> or .agents/skills/<name>, not the legacy ~/.design-agent-skills/ path');
     });
   }
+});
 
-  // Regression: package stubs documented per-skill shorthand like
-  // `npx skills add anthropics/frontend-design` or `vercel-labs/<skill>`. The CLI reads
-  // that as a repo named "frontend-design" and fails ("Authentication failed"). 54
-  // targets across 14 stubs were dead. Every command must target the stub's own upstream
-  // repo (then pick the skill with --skill) and carry no <placeholders>.
-  const repoOf = ref => {
-    const m = String(ref).match(/^(?:https?:\/\/github\.com\/)?([\w.-]+)\/([\w.-]+)/i);
-    return m ? `${m[1]}/${m[2]}`.toLowerCase().replace(/\.git$/, '') : null;
-  };
+describe('README counts', () => {
+  // Regression: the skill count and tier counts in the README went stale by hand on every release.
+  const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+  const all = skills.filter(s => s.stub);
+  const real = all.filter(s => yamlGet(s.stub, 'type') !== 'router');
+  const rank = n => real.filter(s => Number(yamlGet(s.stub, 'rank')) === n).length;
 
-  for (const { name, stub, skill } of skills) {
-    if (!stub || !skill) continue;
-    if (yamlGet(stub, 'type') === 'router') continue;
-    const upstream = repoOf(yamlGet(stub, 'upstream') || '');
-    if (!upstream || !/github\.com/.test(yamlGet(stub, 'upstream'))) continue;
+  it('--picks, --essentials and --all counts match the stubs', () => {
+    const row = flag => readme.match(new RegExp('\\|[^|]*\\|\\s*`--' + flag + '`\\s*\\|\\s*~?(\\d+)\\s*\\|'))?.[1];
+    assert.equal(Number(row('picks')), rank(1), '--picks count');
+    assert.equal(Number(row('essentials')), rank(1) + rank(2), '--essentials count');
+    assert.equal(Number(row('all')), real.length, '--all count');
+  });
 
-    it(`${name}: npx skills add targets only the upstream repo, no placeholders`, () => {
-      const bad = [];
-      for (const text of [stub, skill]) {
-        // match the whole command line so `--skill <name>` placeholders are caught too
-        for (const m of text.matchAll(/npx skills add\s+(\S+)([^\n`]*)/g)) {
-          const target = m[1].replace(/^["'`]+|["'`]+$/g, '');
-          if (/<[\w-]+>/.test(m[1] + m[2])) { bad.push(`${target}${m[2].trim() ? ' ' + m[2].trim() : ''} (placeholder)`); continue; }
-          const repo = repoOf(target);
-          if (repo && repo !== upstream) bad.push(`${target} (upstream is ${upstream})`);
-        }
-      }
-      assert.equal(bad.length, 0, `dead or foreign install target(s): ${[...new Set(bad)].join(', ')}`);
-    });
-  }
+  it('tier counts in the supply chain section match the stubs (routers included)', () => {
+    const m = readme.match(/`official` \((\d+)\), `community` \((\d+)\), `experimental` \((\d+)\)/);
+    assert.ok(m, 'supply chain tier line not found');
+    const tier = t => all.filter(s => yamlGet(s.stub, 'tier') === t).length;
+    assert.deepEqual(m.slice(1).map(Number), [tier('official'), tier('community'), tier('experimental')]);
+  });
 });

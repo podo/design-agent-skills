@@ -1,6 +1,14 @@
-type: package
+type: skill
 tier: community
 category: visual-components
 rank: 1
 upstream: https://github.com/hamen/material-3-skill
+upstream_path: skills/material-3/SKILL.md
 version: latest
+install_default: npx skills add hamen/material-3-skill --skill material-3
+installed_as: material-3
+install_claude:
+  - /plugin marketplace add hamen/material-3-skill
+  - /plugin install material-3@material-3-skill
+license: MIT
+note: "verified 2026-10-21; the old curl route fetched only SKILL.md and dropped the skill's reference files (the skill points at them throughout), so it was replaced by the skills CLI route that upstream documents since v1.1.1. Type changed package -> skill; upstream default branch is master. Plugin route checked against marketplace.json and README only, not run"

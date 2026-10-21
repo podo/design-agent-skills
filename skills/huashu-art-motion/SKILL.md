@@ -19,13 +19,14 @@ das:
 
 > Catalogue stub — full skill: [alchaincyf/huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/huashu-art-motion/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/huashu-art-motion/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/huashu-art-motion/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/huashu-art-motion/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `huashu-art-motion`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,6 +43,14 @@ das:
    ```bash
    npx skills add alchaincyf/huashu-art-motion --skill huashu-art-motion -y
    ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** uv; ffmpeg; Playwright Chromium (first run: uv run --with playwright playwright install chromium); Skill text and references are in Chinese
+- **License:** MIT; bundled stroke data is Arphic Public License, fonts are SIL OFL, and the Huashu character artwork and demo videos are demo-use only (not MIT)
+- **Large download (~154 MB):** the skills CLI gives up cloning after 300 s; if it times out, retry with `SKILLS_CLONE_TIMEOUT_MS=900000`.
+<!-- das:install:end -->
 
 ## Invoke after install
 

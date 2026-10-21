@@ -5,4 +5,10 @@ category: presentations
 upstream: https://github.com/LearnPrompt/humanize-ppt
 upstream_path: SKILL.md
 version: latest
-note: "Planner and checker only; it never renders slides. Pair with a renderer skill such as guizang-ppt or frontend-slides"
+install_default: npx skills add LearnPrompt/humanize-ppt --skill humanize-ppt
+installed_as: humanize-ppt
+requires:
+  - A downstream renderer skill (it never renders slides itself): guizang-ppt-skill for Chinese decks, frontend-slides for English HTML decks
+license: MIT (LICENSE file; GitHub reports it as non-standard)
+size_mb: 40
+note: "Planner and checker only; it never renders slides. Pair with a renderer skill such as guizang-ppt or frontend-slides. verified 2026-10-21: installs the whole repo as the skill directory (~290 files, ~52 MB incl. docs/showcase images and tests) because SKILL.md refers to references/, scripts/ and docs/"

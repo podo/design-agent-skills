@@ -1,9 +1,9 @@
 ---
 name: ai-graphic-design-skill
 description: |
-  Maps 15 AI tools to design scenarios — Midjourney for ideation, Stable Diffusion for
-  production, ControlNet for composition control, vectorization pipelines, and mockup
-  generation. Includes a 2025-2026 AI Creative Director competency roadmap.
+  Guide for creating logos, brand identities, and visual assets with AI tools: which tool fits which
+  scenario (Recraft, Midjourney, Firefly, DALL-E, Stable Diffusion), prompt engineering per tool,
+  vectorization pipelines, mockups, Python automation, and IP safety. The skill text is in Portuguese.
 triggers:
   - "AI graphic design"
   - "AI design tools"
@@ -23,33 +23,37 @@ das:
 
 > Catalogue stub — full skill: [designrique/ai-graphic-design-skill](https://github.com/designrique/ai-graphic-design-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Upstream names this skill `ai-graphic-design`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
-   - Global: `[ -f ~/.agents/skills/ai-graphic-design/SKILL.md ] && echo "installed" || echo "pointer"`
-   - Project: `[ -f .agents/skills/ai-graphic-design/SKILL.md ] && echo "installed" || echo "pointer"`
-   - `installed` → the full skill is installed as `ai-graphic-design`, invoke it and proceed
+   Upstream names this skill `ai-graphic-design`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/ai-graphic-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/ai-graphic-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `ai-graphic-design`, invoke it and proceed
    - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/ai-graphic-design-skill ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
    npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
    npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -58,7 +62,7 @@ das:
 
 ## What it does
 
-Provides a decision framework mapping 15 AI image and design tools to specific production scenarios: Midjourney for concept ideation and moodboarding, Stable Diffusion for production image generation, ControlNet for precise composition and pose control, plus vectorization pipelines and product mockup generation workflows. Includes a structured 2025-2026 AI Creative Director competency roadmap covering prompt engineering, tool orchestration, and quality control. Helps designers and agents choose the right AI tool for each phase of a graphic design project.
+Provides a decision framework for using AI tools in logo, brand-identity, and graphic-asset work. A tool-selection matrix maps scenarios to tools: Recraft for clean vector logos, Midjourney for concept ideation and moodboards, Adobe Firefly for IP-safe commercial use, DALL-E for conversational iteration, Stable Diffusion (with ControlNet) for full control and batch work. It also covers briefing frameworks, per-tool prompt engineering, an end-to-end workflow from brief to delivery, visual consistency across campaigns, raster-to-vector pipelines, professional mockup techniques, delivery formats, Python automation, an IP-risk matrix per tool, anti-patterns, and a 2025-2026 designer-competency roadmap (the "AI Creative Director" role). The skill text itself is written in Portuguese.
 
 ## When NOT to use
 

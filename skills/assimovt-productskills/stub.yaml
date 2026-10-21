@@ -4,4 +4,29 @@ category: product-pm
 rank: 2
 upstream: https://github.com/assimovt/productskills
 version: latest
-install_default: "npx skills add assimovt/productskills"
+install_default: npx skills add assimovt/productskills --skill user-interview problem-validation jtbd-analysis research-synthesis opportunity-mapping competitor-analysis product-positioning strategy-doc feature-prioritization scope-cutting bet-sizing prd-writing launch-plan metrics-framework experiment-design roadmap-planning
+installed_as:
+  - user-interview
+  - problem-validation
+  - jtbd-analysis
+  - research-synthesis
+  - opportunity-mapping
+  - competitor-analysis
+  - product-positioning
+  - strategy-doc
+  - feature-prioritization
+  - scope-cutting
+  - bet-sizing
+  - prd-writing
+  - launch-plan
+  - metrics-framework
+  - experiment-design
+  - roadmap-planning
+install_claude:
+  - /plugin marketplace add assimovt/productskills
+  - /plugin install product-skills@productskills
+license: MIT
+note: "verified 2026-10-21; plugin route checked against .claude-plugin/marketplace.json only (not run). experiment-design and roadmap-planning are also installed by other PM stubs (see report)"
+conflicts_with:
+  - phuryn-pm-skills
+  - claude-pm-skills

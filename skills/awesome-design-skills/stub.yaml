@@ -4,3 +4,13 @@ category: visual-components
 rank: 3
 upstream: https://github.com/bergside/awesome-design-skills
 version: latest
+install_default: npx skills add bergside/awesome-design-skills --skill glassmorphism brutalism claymorphism neumorphism editorial bento
+installed_as:
+  - glassmorphism
+  - brutalism
+  - claymorphism
+  - neumorphism
+  - editorial
+  - bento
+license: MIT
+note: "verified 2026-10-21; the repo holds one skill per visual style (see skills/ upstream), so the default installs a handful of popular ones rather than the whole registry. Other style slugs can collide with unrelated skills (matrix, pulse, codex, shadcn, storytelling), so always install by --skill, never the bare repo. Upstream's own CLI route is `npx typeui.sh pull <slug>` (not verified here: it runs downloaded npm code)."

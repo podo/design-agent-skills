@@ -5,3 +5,10 @@ rank: 3
 upstream: https://github.com/muthuishere/hand-drawn-diagrams
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add muthuishere/hand-drawn-diagrams --skill hand-drawn-diagrams
+installed_as: hand-drawn-diagrams
+requires:
+  - Python with uv (the skill runs scripts/*.py through `uv run python`)
+  - Chrome DevTools MCP or Playwright, only for PNG and animated-SVG rendering
+license: MIT (GitHub reports it as NOASSERTION)
+note: "verified 2026-10-21; the skill dir also ships install.sh, uninstall.sh, AGENTS.md and CLAUDE.md (inert unless run or opened as a project). The edit and animation links open the author's GitHub Pages site (muthuishere.github.io) with the diagram encoded in the URL"

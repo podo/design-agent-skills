@@ -21,13 +21,14 @@ das:
 
 > Catalogue stub — full skill: [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/design-negotiation/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/design-negotiation/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/design-negotiation/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/design-negotiation/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `design-negotiation`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -44,11 +45,28 @@ das:
    ```bash
    npx skills add Owl-Listener/designer-skills --skill design-negotiation -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add Owl-Listener/designer-skills
+/plugin install designer-toolkit@designer-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `design-negotiation`
+- Trigger phrases: "design negotiation", "design advocacy", "defend design decisions", "stakeholder pushback"
 
 ## What it does
 
-Owls design-negotiation skill: ready-to-use approaches for timeline compression, scope cuts made without design review, stakeholder overrides ("make the button red"), and headcount requests — each grounded in evidence (research, metrics, accessibility, precedent) rather than taste. Plus building long-term influence. Web research found NO public rival; the only matching file online is Owl’s own.
+Owl's design-negotiation skill: ready-to-use approaches for timeline compression, scope cuts made without design review, stakeholder overrides ("make the button red"), and headcount requests, each grounded in evidence (research, metrics, accessibility, precedent) rather than taste. Plus building long-term influence. It points to a sibling skill, `business-design` (in the same repo's ux-strategy plugin), for commercial vocabulary; that one is not installed by this pointer.
 
 ## When NOT to use
 

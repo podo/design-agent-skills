@@ -20,13 +20,14 @@ das:
 
 > Catalogue stub — full skill: [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/content-strategy/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/content-strategy/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/content-strategy/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/content-strategy/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `content-strategy`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -43,13 +44,31 @@ das:
    ```bash
    npx skills add Owl-Listener/designer-skills --skill content-strategy -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add Owl-Listener/designer-skills
+/plugin install ux-strategy@designer-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `content-strategy`
+- Trigger phrases: "content strategy", "content model", "content governance", "voice and tone framework"
 
 ## What it does
 
-Owls product content-strategy framework: content audit (keep/revise/consolidate/remove), content model with typed attributes and relationships, voice-vs-tone with registers, governance (owners/review cycles/source-of-truth), and content hierarchy. Distinct from microcopy/UX-writing — this is the upstream framework that UX writing executes within.
+Owl's product content-strategy framework: content audit (keep/revise/consolidate/remove), content model with typed attributes and relationships, voice-vs-tone with registers, governance (owners/review cycles/source-of-truth), and content hierarchy. Distinct from microcopy/UX-writing — this is the upstream framework that UX writing executes within.
 
 ## When NOT to use
 
 - Writing individual UI strings → use `ux-writing-skill`
 - Long-form marketing copy → use `copywriting-skill`
+- Structuring where content lives (navigation, labelling) → use `information-architecture-and-navigation`

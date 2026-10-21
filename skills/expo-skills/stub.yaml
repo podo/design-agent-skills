@@ -4,20 +4,37 @@ category: official-suites
 rank: 2
 upstream: https://github.com/expo/skills
 version: latest
-install_default: "npx skills add expo/skills"
+install_default: npx skills add expo/skills --skill expo-overview expo-project-structure expo-router expo-animation expo-native-ui expo-design-system expo-ui expo-data-fetching expo-dom expo-web-to-native expo-module expo-brownfield expo-dev-client expo-examples expo-app-clip expo-upgrade expo-skill-feedback eas-app-stores eas-hosting eas-workflows eas-observe eas-update eas-update-insights eas-simulator expo-migrate-module
 installed_as:
-  - add-app-clip
-  - building-native-ui
-  - eas-update-insights
-  - expo-api-routes
-  - expo-brownfield
-  - expo-cicd-workflows
-  - expo-deployment
-  - expo-dev-client
+  - expo-overview
+  - expo-project-structure
+  - expo-router
+  - expo-animation
+  - expo-native-ui
+  - expo-design-system
+  - expo-ui
+  - expo-data-fetching
+  - expo-dom
+  - expo-web-to-native
   - expo-module
-  - expo-tailwind-setup
-  - expo-ui-jetpack-compose
-  - expo-ui-swift-ui
-  - native-data-fetching
-  - upgrading-expo
-  - use-dom
+  - expo-brownfield
+  - expo-dev-client
+  - expo-examples
+  - expo-app-clip
+  - expo-upgrade
+  - expo-skill-feedback
+  - eas-app-stores
+  - eas-hosting
+  - eas-workflows
+  - eas-observe
+  - eas-update
+  - eas-update-insights
+  - eas-simulator
+  - expo-migrate-module
+install_claude:
+  - /plugin install expo@claude-plugins-official
+requires:
+  - Expo MCP server (recommended for live docs and EAS access; the Claude Code plugin wires it up, other agents need docs.expo.dev/eas/ai/mcp)
+  - Expo Application Services (EAS) account for the eas-* skills
+license: MIT
+note: "verified 2026-10-21. Upstream reorganised into plugins/expo/skills/* (old names like building-native-ui, native-data-fetching, upgrading-expo, use-dom, expo-tailwind-setup, expo-api-routes, expo-cicd-workflows, expo-deployment no longer exist). The bare repo install also lands expo-skill-eval (maintainer eval harness), deliberately left out here. Plugin route taken from upstream README, not run"

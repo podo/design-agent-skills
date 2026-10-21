@@ -5,3 +5,10 @@ rank: 2
 upstream: https://github.com/Owl-Listener/designer-skills
 upstream_path: design-ops/skills/design-debt-audit/SKILL.md
 version: latest
+install_default: npx skills add Owl-Listener/designer-skills --skill design-debt-audit
+installed_as: design-debt-audit
+install_claude:
+  - /plugin marketplace add Owl-Listener/designer-skills
+  - /plugin install design-ops@designer-skills
+license: MIT
+note: "verified 2026-10-21; plugin route installs the whole design-ops plugin (not just this skill), read from marketplace.json and the upstream README, not run"

@@ -1,8 +1,13 @@
-type: package
+type: skill
 tier: community
 category: visual-components
 rank: 3
-upstream: https://github.com/dimillian/Skills
+upstream: https://github.com/Dimillian/Skills
 upstream_path: swiftui-ui-patterns/SKILL.md
 version: latest
-install_default: "npx skills add dimillian/Skills --skill swiftui-ui-patterns"
+install_default: npx skills add Dimillian/Skills --skill swiftui-ui-patterns
+installed_as: swiftui-ui-patterns
+license: MIT
+note: "verified 2026-10-21; upstream skill is named swiftui-ui-patterns, so it installs next to this pointer (stub name swiftui-patterns). Type changed package -> skill. Upstream repo name is Dimillian/Skills (the lowercase form redirects)"
+conflicts_with:
+  - swiftui-claude-skills

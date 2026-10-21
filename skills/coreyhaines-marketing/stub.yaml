@@ -4,8 +4,13 @@ category: product-pm
 rank: 3
 upstream: https://github.com/coreyhaines31/marketingskills
 version: latest
-install_default: "npx skills add coreyhaines31/marketingskills"
+install_default: npx skills add coreyhaines31/marketingskills --skill cro onboarding signup
 installed_as:
-  - onboarding
   - cro
+  - onboarding
   - signup
+install_claude:
+  - /plugin marketplace add coreyhaines31/marketingskills
+  - /plugin install marketing-skills@marketingskills
+license: MIT
+note: "verified 2026-10-21; narrowed from a bare repo install (the whole library is ~50 generically named skills such as image, video, ads, schema). install_claude installs the WHOLE library, not just these three; checked against .claude-plugin/marketplace.json and the upstream README only, not run."

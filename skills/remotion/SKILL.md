@@ -23,40 +23,51 @@ das:
 
 > Catalogue stub — full package: [remotion-dev/skills](https://github.com/remotion-dev/skills)
 
-> **Note:** Upstream restructured the single `remotion` skill into a package of focused
-> sub-skills — `remotion-best-practices`, `remotion-create`, `remotion-render`,
-> `remotion-captions`, `remotion-docs`, `remotion-interactivity`, `remotion-markup`,
-> `remotion-saas`, `remotion-upgrade`, plus `mediabunny`. Install the package to get them all.
-
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Is the package already installed?**
-   Check: your agent's skills directory contains the `remotion-*` skills with content beyond this stub.
-   - Yes → invoke the relevant `remotion-*` skill and proceed
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   This package installs 12 skills (`remotion-best-practices`, `remotion-captions`, `remotion-create`, `remotion-docs`, `remotion-interactivity`, `remotion-maps`, `remotion-markup`, `remotion-multimedia`, `remotion-render`, `remotion-saas`, `remotion-studio`, `remotion-upgrade`); checking the first.
+   - Global: `f=~/.agents/skills/remotion-best-practices/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/remotion-best-practices/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `remotion-best-practices`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Which agent are you on?**
-   - Claude Code → `npx skills add remotion-dev/skills` — or send `! npx skills add …` as a chat message (add `-g` for global, omit for project-only)
-   - Cursor → `npx skills add remotion-dev/skills`
-   - Other → `npx skills add remotion-dev/skills` or see [GitHub README](https://github.com/remotion-dev/skills)
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/remotion ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add remotion-dev/skills
-```
+   **Global:**
+   ```bash
+   npx skills add remotion-dev/skills --skill remotion-best-practices remotion-captions remotion-create remotion-docs remotion-interactivity remotion-maps remotion-markup remotion-multimedia remotion-render remotion-saas remotion-studio remotion-upgrade -g -y
+   ```
 
-> Installs all Remotion sub-skills. To install just one, append its name, e.g.
-> `npx skills add remotion-dev/skills --skill remotion-best-practices`.
+   **Project:**
+   ```bash
+   npx skills add remotion-dev/skills --skill remotion-best-practices remotion-captions remotion-create remotion-docs remotion-interactivity remotion-maps remotion-markup remotion-multimedia remotion-render remotion-saas remotion-studio remotion-upgrade -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** Node.js and a Remotion project (remotion-create scaffolds one)
+- **License:** skills repo has no LICENSE file; Remotion itself is free for individuals, non-profits and for-profit teams up to 3 employees, otherwise a company license is required (remotion.dev/license)
+- **Name collision:** `remotion` is also written by `google-stitch-skills` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill names: `remotion-best-practices`, `remotion-create`, `remotion-render`, `remotion-captions`, `remotion-docs`, `remotion-interactivity`, `remotion-markup`, `remotion-saas`, `remotion-upgrade`, `mediabunny`
+- Skill names: `remotion-best-practices`, `remotion-create`, `remotion-markup`, `remotion-studio`, `remotion-render`, `remotion-captions`, `remotion-multimedia`, `remotion-maps`, `remotion-interactivity`, `remotion-saas`, `remotion-docs`, `remotion-upgrade`
+- Not sure which one? Start with `remotion-best-practices`, which routes to the others
 - Trigger phrases: "remotion", "programmatic video", "React video", "animated video", "render video"
 
 ## What it does
 
-Official Remotion skill package for creating programmatic videos with React. Compose video sequences as React components, animate with spring physics and interpolation, and render to MP4, WebM, or GIF. Sub-skills cover best practices, scaffolding new projects (`remotion-create`), rendering (`remotion-render`), captions, interactivity, markup, SaaS integration, and version upgrades. Best for product demos, data-driven visualizations, and explainer animations that require code-controlled precision.
+Official Remotion skill package for creating programmatic videos with React. Compose video sequences as React components, animate with spring physics and interpolation, and render to MP4, WebM, or GIF. The sub-skills cover scaffolding a new project (`remotion-create`), markup best practices (`remotion-markup`), previewing in Remotion Studio (`remotion-studio`), rendering (`remotion-render`), captions, Mediabunny media handling (`remotion-multimedia`), map animations (`remotion-maps`), interactivity, building a SaaS app around Remotion, searching the docs and version upgrades. Best for product demos, data-driven visualizations, and explainer animations that require code-controlled precision.
+
+Note that Remotion itself is licensed per organization size: free for individuals and very small companies, a company license for larger for-profit teams.
 
 ## When NOT to use
 

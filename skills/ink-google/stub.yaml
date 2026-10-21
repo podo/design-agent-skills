@@ -1,0 +1,15 @@
+type: skill
+tier: official
+category: tui-terminal
+rank: 3
+upstream: https://github.com/vercel-labs/json-render
+upstream_path: skills/ink/SKILL.md
+version: latest
+install_default: npx skills add vercel-labs/json-render --skill ink
+installed_as: ink
+requires:
+  - Node.js with the @json-render/ink package (npm install @json-render/ink) to run what the skill generates
+license: Apache-2.0
+note: "verified 2026-10-21; the old pointer described an 'ink-style editorial visual design' skill that does not exist; the real skill named ink is the json-render Ink terminal renderer, canonical in vercel-labs/json-render (skills/ink) and vendored in google-labs-code/design.md (.agents/skills/ink), hence the historical dir name ink-google"
+conflicts_with:
+  - simota-agent-skills

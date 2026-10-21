@@ -5,3 +5,10 @@ rank: 2
 upstream: https://github.com/Owl-Listener/designer-skills
 upstream_path: designer-toolkit/skills/design-negotiation/SKILL.md
 version: latest
+install_default: npx skills add Owl-Listener/designer-skills --skill design-negotiation
+installed_as: design-negotiation
+install_claude:
+  - /plugin marketplace add Owl-Listener/designer-skills
+  - /plugin install designer-toolkit@designer-skills
+license: MIT
+note: "verified 2026-10-21. install_claude installs the whole designer-toolkit plugin (design rationale, case study, presentations, UX writing, design negotiation, /start-here), checked against .claude-plugin/marketplace.json only, not run. The skill refers to a sibling skill business-design (ux-strategy plugin) that this install does not bring."

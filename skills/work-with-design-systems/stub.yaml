@@ -5,3 +5,10 @@ rank: 2
 upstream: https://github.com/natdexterra/work-with-design-systems
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add natdexterra/work-with-design-systems --skill work-with-design-systems
+requires:
+  - The figma-use skill (installed by the figma-official-skills stub) and the remote Figma MCP server connected; the skill must invoke figma-use before every use_figma call
+  - Figma MCP read calls are rate-limited per plan and seat (upstream cites 10 calls/min and 200/day on a Professional Full or Dev seat)
+license: MIT
+note: "verified 2026-10-21; skill dir holds SKILL.md plus references/, scripts/ and assets/. Frontmatter compatibility field states the figma-use + Figma MCP requirement. Phase 6 (sync to code, writes tokens.css and AI rules files) is off by default and only runs on explicit user request"
+installed_as: work-with-design-systems

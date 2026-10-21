@@ -5,4 +5,9 @@ rank: 3
 upstream: https://github.com/talknerdytome-labs/wiggle-claude-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add talknerdytome-labs/wiggle-claude-skill --skill wiggle
 installed_as: wiggle
+requires:
+  - Python 3 with `pip install lottie[all] Pillow pycairo`, plus the Cairo system library (`brew install cairo pkg-config`, or `apt-get install libcairo2-dev pkg-config python3-dev`)
+license: Apache-2.0 (LICENSE.txt; GitHub shows NOASSERTION)
+note: "verified 2026-10-21; upstream skill is named wiggle, installs next to this pointer; ships Python scripts under scripts/"

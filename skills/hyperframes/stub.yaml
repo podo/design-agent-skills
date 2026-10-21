@@ -4,4 +4,30 @@ category: motion-animation
 rank: 3
 upstream: https://github.com/heygen-com/hyperframes
 version: latest
-install_default: "npx skills add heygen-com/hyperframes"
+install_mode: manual
+manual_reason: The repository is about 500 MB (showcase media and test baselines), so the skills CLI's full clone can exceed its 300 s limit. Sparse-clone only the skills folder, then install the entry skill and the core set from the local clone; the entry skill installs the other workflow skills on demand. For a global install add -g to the last command.
+install_steps:
+  - git clone --depth=1 --filter=blob:none --sparse https://github.com/heygen-com/hyperframes.git /tmp/hyperframes-skills
+  - git -C /tmp/hyperframes-skills sparse-checkout set skills
+  - npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-core hyperframes-cli hyperframes-animation hyperframes-audio hyperframes-creative hyperframes-keyframes hyperframes-registry hyperframes-studio media-use -y
+  - rm -rf /tmp/hyperframes-skills
+installed_as:
+  - hyperframes
+  - hyperframes-core
+  - hyperframes-cli
+  - hyperframes-animation
+  - hyperframes-audio
+  - hyperframes-creative
+  - hyperframes-keyframes
+  - hyperframes-registry
+  - hyperframes-studio
+  - media-use
+install_claude:
+  - claude plugin marketplace add heygen-com/hyperframes
+  - claude plugin install hyperframes@hyperframes
+requires:
+  - Node.js 22+ and FFmpeg (upstream requirements)
+  - Network access at use time. The entry skill installs the workflow skills it routes to (slideshow, general-video, product-launch-video and others) on demand with `npx hyperframes skills update <workflow>`
+  - HeyGen CLI sign-in (free OAuth allowance) only for background music, TTS voiceover and avatar video. Sound effects and animation authoring need no account
+license: Apache-2.0
+note: "verified 2026-10-21; size_mb deliberately omitted: the repo is 501 MB but the sparse route downloads under 20 MB. The 10 installed skills are the upstream 'core set' (README: standalone installs default to the core set and the router installs workflows lazily; same list as the core-skills plugin in marketplace.json). A bare `npx skills add heygen-com/hyperframes -y` installs all published skills, including generically named ones (figma, slideshow, general-video) that would collide with other stubs. The plugin route installs the full bundle; checked against marketplace.json and README only, not run"

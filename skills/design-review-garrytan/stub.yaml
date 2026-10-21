@@ -5,6 +5,15 @@ rank: 2
 upstream: https://github.com/garrytan/gstack
 upstream_path: design-review/SKILL.md
 version: latest
-install_default: "git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup"
-installed_as: gstack
-note: "gstack skills depend on shared gstack/bin tooling (needs Bun); npx skills add of a single skill installs the instructions without it"
+install_mode: manual
+manual_reason: This skill is part of gstack and calls gstack's shared tooling (`~/.claude/skills/gstack/bin/…`), so install gstack itself rather than the single skill (`--skill design-review` fails because the CLI only sees gstack's root router, and even with `--full-depth` the copied instructions lack the tooling). `./setup` needs Bun, builds binaries, downloads Chromium and registers a Stop hook in your Claude settings (opt out with `./setup --no-timeline-stop-hook`); ask the user before running it. Upstream's README also tells agents to add a gstack section to CLAUDE.md after setup.
+install_steps:
+  - git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack
+  - cd ~/.claude/skills/gstack && ./setup
+install_check: ~/.claude/skills/gstack/design-review/SKILL.md
+installed_as: design-review
+requires:
+  - Bun (setup refuses versions older than 1.3.3; upstream tests 1.4.2+), Git and Claude Code
+license: MIT
+size_mb: 98
+note: "verified 2026-10-21; the shallow clone is about 98 MB on disk (GitHub reports 185 MB for the full history), ./setup deliberately not run; design-review/SKILL.md has frontmatter name design-review and its preamble calls ~/.claude/skills/gstack/bin/gstack-skill-start; shares the clone with design-consultation, plan-design-review and design-html (same upstream, same ~/.claude/skills/gstack dir); was install_default git clone + ./setup with installed_as gstack"

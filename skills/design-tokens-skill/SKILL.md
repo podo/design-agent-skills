@@ -26,33 +26,37 @@ das:
 
 > Catalogue stub — full skill: [ilikescience/design-tokens-skill](https://github.com/ilikescience/design-tokens-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Upstream names this skill `design-tokens`, so it installs next to this pointer (the pointer is not replaced). Check for the installed copy:
-   - Global: `[ -f ~/.agents/skills/design-tokens/SKILL.md ] && echo "installed" || echo "pointer"`
-   - Project: `[ -f .agents/skills/design-tokens/SKILL.md ] && echo "installed" || echo "pointer"`
-   - `installed` → the full skill is installed as `design-tokens`, invoke it and proceed
+   Upstream names this skill `design-tokens`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/design-tokens/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/design-tokens/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `design-tokens`, invoke it and proceed
    - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/design-tokens-skill ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
    npx skills add ilikescience/design-tokens-skill --skill design-tokens -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
    npx skills add ilikescience/design-tokens-skill --skill design-tokens -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 

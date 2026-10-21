@@ -4,4 +4,17 @@ category: figma-code
 rank: 2
 upstream: https://github.com/senlindesign/claude2figma
 version: latest
-install_default: "npx skills add senlindesign/claude2figma"
+install_default: npx skills add senlindesign/claude2figma --skill figma-preflight component-rules figma-style-binding reference-interpreter
+installed_as:
+  - figma-preflight
+  - component-rules
+  - figma-style-binding
+  - reference-interpreter
+install_claude:
+  - /plugin marketplace add senlindesign/claude2figma
+  - /plugin install claude2figma@claude2figma
+requires:
+  - Figma MCP server connected and authenticated
+  - a Figma file with a Design System (local, or linked through a Library)
+license: MIT
+note: "verified 2026-10-21; no skill named claude2figma exists, the repo ships the 4 skills above. install_claude checked against .claude-plugin/marketplace.json and plugin.json only, not run. The README also asks users to copy .claude/settings.json (Figma tool permissions + a PostToolUse reminder hook) and CLAUDE.md.template; neither is installed by the skills CLI."

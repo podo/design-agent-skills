@@ -20,26 +20,19 @@ das:
 
 > Catalogue stub — platform: [nimbalyst.com/skills](https://nimbalyst.com/skills)
 
-These skills are built into the Nimbalyst app and produce artifacts inside its visual editors, so they cannot be installed with `npx skills add`. Use them from within Nimbalyst.
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
+## Install
 
-## Decision tree
+These skills are built into the Nimbalyst desktop app (github.com/nimbalyst/nimbalyst) and drive its Excalidraw, mockup and data-model editors through the app's own MCP tools, so there is nothing to install with the skills CLI. Download the app and use the slash commands inside it.
 
-Run this for Nimbalyst workspace workflows:
+**Heads-up**
 
-1. **Are you working inside the Nimbalyst app?**
-   - Yes → run the slash command directly: `/mockup`, `/excalidraw`, `/datamodel`
-   - No → go to step 2
-
-2. **Install the app (free, MIT-licensed desktop app for macOS, Windows, and Linux):**
-   Download it from [github.com/nimbalyst/nimbalyst](https://github.com/nimbalyst/nimbalyst), then use the slash commands above.
-
-   Only want the portable skills? Nimbalyst's separate public repo has product, developer, content, and research skills (no diagram skills):
-
-   ```bash
-   npx skills add nimbalyst/skills -y    # add -g for global install
-   ```
+- **License:** MIT (Nimbalyst app)
+<!-- das:install:end -->
 
 ## Invoke inside Nimbalyst
+
+Are you working inside the Nimbalyst app? Then run the commands directly. If not, download the free, MIT-licensed desktop app (macOS, Windows, Linux) from [github.com/nimbalyst/nimbalyst](https://github.com/nimbalyst/nimbalyst) first.
 
 - `/excalidraw` — architecture diagrams, flowcharts, system maps (programmatic shapes, arrows, frames, Mermaid import via MCP tools)
 - `/mockup` — UI mockups and wireframes from text descriptions
@@ -47,7 +40,9 @@ Run this for Nimbalyst workspace workflows:
 
 ## What it does
 
-Nimbalyst's visual output skills: Excalidraw with programmatic element manipulation through MCP tools, UI wireframing from a text description, and structured data model design. The artifacts open in Nimbalyst's integrated editors rather than as plain files.
+Nimbalyst's visual output skills: Excalidraw with programmatic element manipulation through MCP tools, UI wireframing from a text description (`.mockup.html` files), and structured data model design. The artifacts open in Nimbalyst's integrated editors rather than as plain files.
+
+Nimbalyst also publishes a separate [nimbalyst/skills](https://github.com/nimbalyst/skills) repo of portable skills for product, developer, content, and research work. It contains no diagram, mockup, or data-model skill, so it is not a way to get the skills above outside the app.
 
 ## When NOT to use
 

@@ -5,4 +5,9 @@ rank: 3
 upstream: https://github.com/google-labs-code/stitch-skills
 upstream_path: plugins/stitch-design/skills/extract-design-md/SKILL.md
 version: latest
+install_default: npx skills add google-labs-code/stitch-skills --skill stitch::extract-design-md
 installed_as: "stitch::extract-design-md"
+requires:
+  - Optional Stitch MCP server, only to push the resulting DESIGN.md into a Stitch project (the extraction itself reads source files only)
+license: Apache-2.0
+note: "verified 2026-10-21; the skill name contains '::' (outside the Agent Skills spec), the CLI sanitises it to the directory stitch-extract-design-md. The same repo's other Stitch skills are covered by google-stitch-skills (same upstream, so no conflict). Upstream has no Claude Code /plugin route, only `npx plugins add`."

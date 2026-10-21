@@ -5,3 +5,10 @@ rank: 2
 upstream: https://github.com/Owl-Listener/designer-skills
 upstream_path: ux-strategy/skills/content-strategy/SKILL.md
 version: latest
+install_default: npx skills add Owl-Listener/designer-skills --skill content-strategy
+installed_as: content-strategy
+install_claude:
+  - /plugin marketplace add Owl-Listener/designer-skills
+  - /plugin install ux-strategy@designer-skills
+license: MIT
+note: "verified 2026-10-21; same skill is also installed by `designer-skills` (same upstream, same content). The Claude plugin ux-strategy bundles this with the other UX-strategy skills (plugin route checked against marketplace.json only, not run)"

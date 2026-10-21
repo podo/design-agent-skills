@@ -1,8 +1,11 @@
-type: package
+type: skill
 tier: community
 category: motion-animation
 rank: 2
 upstream: https://github.com/kylezantos/design-motion-principles
+upstream_path: skills/design-motion-principles/SKILL.md
 version: latest
-install_default: "npx skills add kylezantos/design-motion-principles"
-note: "Requires workflow files alongside SKILL.md — install via npx, not curl"
+install_default: npx skills add kylezantos/design-motion-principles --skill design-motion-principles
+installed_as: design-motion-principles
+license: MIT
+note: "verified 2026-10-21; the skill needs its workflows/ and references/ folders next to SKILL.md, so install through the skills CLI, never by fetching SKILL.md alone"

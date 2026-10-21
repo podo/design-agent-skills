@@ -4,10 +4,27 @@ category: official-suites
 rank: 2
 upstream: https://github.com/software-mansion-labs/skills
 version: latest
-install_default: "/plugin marketplace add software-mansion-labs/skills"
+install_default: npx skills add software-mansion-labs/skills --skill react-native-best-practices rnrepo radon-mcp typegpu expo-horizon pulsar-haptics fishjam react-native-moq moq-kit detour-onboarding migrate-to-detour
 installed_as:
-  - expo-horizon
-  - radon-mcp
   - react-native-best-practices
   - rnrepo
+  - radon-mcp
   - typegpu
+  - expo-horizon
+  - pulsar-haptics
+  - fishjam
+  - react-native-moq
+  - moq-kit
+  - detour-onboarding
+  - migrate-to-detour
+install_claude:
+  - /plugin marketplace add software-mansion-labs/skills
+  - /plugin install skills@swmansion
+requires:
+  - radon-mcp needs Radon IDE and its MCP tools
+  - fishjam, detour-onboarding and migrate-to-detour target Software Mansion hosted products (a Fishjam instance, the Detour dashboard)
+  - moq-kit and react-native-moq need a MoQ relay
+license: no LICENSE file in the repo (the plugin manifest says MIT)
+note: "verified 2026-10-21 (npx route really installed all 11); the plugin route was checked against .claude-plugin/marketplace.json only (marketplace swmansion, plugin skills, README adds /reload-plugins); react-native-best-practices is also installed by callstack-agent-skills (different upstream); trim to a subset with --skill if 11 skill descriptions in context is too many"
+conflicts_with:
+  - callstack-agent-skills

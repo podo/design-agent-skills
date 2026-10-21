@@ -5,4 +5,11 @@ rank: 2
 upstream: https://github.com/yhassy/wireframe-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add yhassy/wireframe-skill --skill wireframe
 installed_as: wireframe
+requires:
+  - Python 3 (the skill assembles the HTML preview with a python3 one-liner) and a browser to open the preview
+license: MIT
+note: "verified 2026-10-21; upstream skill is named wireframe and its frontmatter description is only 'Generate JSON wireframe with HTML preview'. Installs the same .agents/skills/wireframe directory as claude-wireframe-skill (different upstream and different content), the last installer wins. The repo ships a stray .claude/settings.local.json with the author's local paths."
+conflicts_with:
+  - claude-wireframe-skill

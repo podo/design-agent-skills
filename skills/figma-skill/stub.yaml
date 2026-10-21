@@ -1,7 +1,15 @@
-type: package
+type: skill
 tier: experimental
 category: figma-code
 rank: 3
 upstream: https://github.com/nafiurrahmanniloy/figma-skill
+upstream_path: figma/SKILL.md
 version: latest
-install_default: "npx skills add nafiurrahmanniloy/figma-skill"
+install_default: npx skills add nafiurrahmanniloy/figma-skill --skill figma
+installed_as: figma
+requires:
+  - Figma personal access token (FIGMA_API_KEY)
+  - the figma-developer-mcp server configured in .mcp.json
+  - Python 3.8+ (for the token and code scripts)
+license: MIT
+note: "verified 2026-10-21; upstream skill is named figma (layout figma/SKILL.md + scripts/ + data/); the generic dir name figma could collide with another stub that writes .agents/skills/figma (openai-skills did before its rewrite)"

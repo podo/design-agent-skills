@@ -1,7 +1,7 @@
 ---
 name: color-expert
 description: |
-  286K words of color science applied to UI/UX design. Covers OKLCH/OKLAB color spaces,
+  A large color-science knowledge base applied to UI/UX design. Covers OKLCH/OKLAB color spaces,
   palette generation, accessibility contrast ratios, color naming, pigment mixing,
   and historical color theory. By meodai, creator of color-names.
 triggers:
@@ -26,33 +26,36 @@ das:
 
 > Catalogue stub — full skill: [meodai/skill.color-expert](https://github.com/meodai/skill.color-expert)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/color-expert/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/color-expert/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/color-expert/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/color-expert/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `color-expert`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/color-expert ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
    npx skills add meodai/skill.color-expert --skill color-expert -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
    npx skills add meodai/skill.color-expert --skill color-expert -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** CC-BY-4.0 (original material; third-party source material keeps its own licenses)
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -61,4 +64,9 @@ das:
 
 ## What it does
 
-Brings 286K words of color science into design decisions. Covers perceptually uniform color spaces (OKLCH, OKLAB), palette generation algorithms, WCAG accessibility contrast, color naming conventions, pigment mixing theory, and the history of color in art and design. Ideal for building color systems, choosing palettes with correct contrast, or understanding why certain color combinations feel wrong.
+Brings a deep color-science reference library into design decisions: the skill file carries the essentials and an index points into hundreds of reference files. Covers perceptually uniform color spaces (OKLCH, OKLAB), palette generation algorithms, WCAG accessibility contrast, color naming conventions, pigment mixing theory, CSS color syntax, and the history of color in art and design. Ideal for building color systems, choosing palettes with correct contrast, or understanding why certain color combinations feel wrong.
+
+## When NOT to use
+
+- Design-token file structure (DTCG, aliasing, theme resolvers) → use `design-tokens-skill`
+- A full accessibility audit (WCAG beyond contrast) → use `wcag-audit-patterns` or `addyosmani-quality`

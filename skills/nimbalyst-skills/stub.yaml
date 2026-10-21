@@ -4,5 +4,7 @@ category: diagrams
 rank: 3
 upstream: https://nimbalyst.com/skills
 version: latest
-install_default: "Built into the Nimbalyst app (github.com/nimbalyst/nimbalyst); no standalone skill install"
-note: "Verified 2026-10-21: nimbalyst/skills on GitHub has no excalidraw/mockup/datamodel; they are app built-ins"
+install_mode: builtin
+manual_reason: These skills are built into the Nimbalyst desktop app (github.com/nimbalyst/nimbalyst) and drive its Excalidraw, mockup and data-model editors through the app's own MCP tools, so there is nothing to install with the skills CLI. Download the app and use the slash commands inside it.
+license: MIT (Nimbalyst app)
+note: "verified 2026-10-21; nimbalyst/skills on GitHub (npx skills add nimbalyst/skills) has no excalidraw/mockup/datamodel skill, only non-design product, developer and content skills. The app repo does contain SKILL.md files for them (packages/extensions/{excalidraw,mockuplm,datamodellm}/claude-plugin/skills/) but they call app-only MCP tools."

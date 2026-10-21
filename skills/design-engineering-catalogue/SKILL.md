@@ -38,19 +38,20 @@ Activate when the user:
 
 | Skill | Best for |
 |-------|----------|
-| [`taste-skill`](../taste-skill/SKILL.md) | Premium, non-generic UI — variance, motion, density dials |
-| [`impeccable`](../impeccable/SKILL.md) | 23 commands, Chrome extension, Live Mode browser iteration |
+| [`taste-skill`](../taste-skill/SKILL.md) | Premium, non-generic UI: researched art directions, real-browser inspector, look-and-fix loop |
+| [`impeccable`](../impeccable/SKILL.md) | Design fluency: slash commands (polish, audit, critique…), anti-pattern detection, theming, typography, motion |
 | [`hallmark`](../hallmark/SKILL.md) | Anti-AI-slop: design, audit, redesign, and extract design DNA from screenshots/URLs; structural variety |
 | [`make-interfaces-better`](../make-interfaces-better/SKILL.md) | Polish: micro-interactions, typography details, visual refinement |
 | [`ui-craft`](../ui-craft/SKILL.md) | 18 slash commands, anti-slop CLI, 3 style variants — deepest design engineering skill |
-| [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Brutalist, Nordic, Cyberpunk…) with locked CSS tokens per theme |
+| [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Swiss, Brutalist, Aurora Maximalism, Retro-Futuristic…) with locked CSS tokens per theme |
+| [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | Distinctive, non-generic interfaces: extreme typography, cohesive themes, staggered animation, layered backgrounds |
 | [`huashu-design`](../huashu-design/SKILL.md) | Magazine-grade typography, CSS Grid, animated prototypes, MP4 export |
-| [`brand-design-md`](../brand-design-md/SKILL.md) | Fetches exact tokens for 62 world-class brands (Stripe, Linear, Apple…) at runtime |
+| [`brand-design-md`](../brand-design-md/SKILL.md) | Looks up DESIGN.md specs for well-known brands (Stripe, Linear, Apple…) from getdesign.md at runtime |
 | [`ai-graphic-design-skill`](../ai-graphic-design-skill/SKILL.md) | Maps 15 AI tools to design scenarios + 2025-26 Creative Director roadmap |
 | [`logo-designer-skill`](../logo-designer-skill/SKILL.md) | Brand interview → 3-5 SVG concepts → PNG export 16px–2048px |
-| [`design-for-ai`](../design-for-ai/SKILL.md) | CHECKER (7-category audit) + APPLIER (6-phase creation) dual-mode |
-| [`superdesign-skill`](../superdesign-skill/SKILL.md) | Infinite-canvas ideation: brand extraction, design drafts, IDE-native |
-| [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
+| [`design-for-ai`](../design-for-ai/SKILL.md) | Four-stage workflow (research → plan → mock → build) with seeded design DNA and dual-blind review |
+| [`superdesign-skill`](../superdesign-skill/SKILL.md) | Hosted infinite-canvas design agent for UI, decks and graphics; branchable drafts (needs @superdesign/cli + account) |
+| [`styleseed`](../styleseed/SKILL.md) | Design method engine: setup, build, review, scoring, tokens, a11y, copy; brand skins + score-then-fix gate |
 | [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
 | [`interaction-design`](../interaction-design/SKILL.md) | IxD principles, component states, micro-interactions, affordances, task flows — Norman + Tognazzini |
 | [`format-storybook`](../format-storybook/SKILL.md) | Storybook file structure, template composition, controls, Chromatic visual regression, CSF patterns |
@@ -67,16 +68,16 @@ Activate when the user:
 | [`building-components`](../building-components/SKILL.md) | Vercel: accessible, composable, themeable UI component authoring |
 | [`wpds`](../wpds/SKILL.md) | Official WordPress Design System: components, tokens, patterns (needs WPDS MCP) |
 | [`ui-ux-pro-max`](../ui-ux-pro-max/SKILL.md) | 50+ styles, 97 palettes, 9 tech stacks |
-| [`google-fonts-skill`](../google-fonts-skill/SKILL.md) | 1,923 Google Fonts with mood tags + 73 pairings + CSS vars + Tailwind config |
+| [`google-fonts-skill`](../google-fonts-skill/SKILL.md) | Google Fonts search with mood tags, pairings, CSS custom properties, Tailwind config, type scales |
 | [`design-tokens-skill`](../design-tokens-skill/SKILL.md) | W3C DTCG token spec: OKLCH, references/aliasing, Terrazzo, Figma exports |
-| [`open-design`](../open-design/SKILL.md) | 31 skills + 71 brand design systems — local-first Claude Design alternative |
+| [`open-design`](../open-design/SKILL.md) | Local-first Claude Design alternative: app + daemon running design skills and brand design systems on your own agent (an app, not a skill install) |
 | [`material-3-skill`](../material-3-skill/SKILL.md) | Material Design 3 / Material You: dynamic color, tonal surfaces, 30+ components (Compose + Flutter) |
 
 ## Mobile & Platform Design
 
 | Skill | Best for |
 |-------|----------|
-| [`mobile-app-design`](../mobile-app-design/SKILL.md) | iOS HIG + Android MD3 + RN best practices — 26K words |
+| [`mobile-app-design`](../mobile-app-design/SKILL.md) | iOS HIG + Android MD3 + RN best practices: touch targets, thumb zones, adaptive patterns, audit scripts |
 | [`mobile-app-ui-design`](../mobile-app-ui-design/SKILL.md) | Professional mobile UI: intentional, smooth, alive interfaces |
 | [`apple-hig-skills`](../apple-hig-skills/SKILL.md) | Apple HIG: iOS, macOS, visionOS, watchOS, tvOS |
 | [`hig-doctor`](../hig-doctor/SKILL.md) | Diagnose and fix Apple HIG violations |
@@ -84,7 +85,7 @@ Activate when the user:
 | [`swiftui-claude-skills`](../swiftui-claude-skills/SKILL.md) | WWDC 2025 verified SwiftUI, iOS 26.4 RC, Xcode 26 |
 | [`swiftui-design-skill`](../swiftui-design-skill/SKILL.md) | SwiftUI visual design craft — anti-AI-slop, typography, color, brand |
 | [`liquid-glass-skill`](../liquid-glass-skill/SKILL.md) | iOS 26 Liquid Glass: .glassEffect(), GlassEffectContainer, migration patterns |
-| [`platform-design-skills`](../platform-design-skills/SKILL.md) | 300+ HIG/MD3/WCAG rules for cross-platform |
+| [`platform-design-skills`](../platform-design-skills/SKILL.md) | HIG, Material 3 and WCAG 2.2 rules, one skill per platform: iOS, iPadOS, macOS, watchOS, visionOS, tvOS, Android, web |
 | [`sleek-design-mobile-apps`](../sleek-design-mobile-apps/SKILL.md) | Sleek platform: design screens, projects, assets (account req.) |
 
 ## Interaction & Polish
@@ -96,7 +97,7 @@ Activate when the user:
 | [`interface-design-dammyjay`](../interface-design-dammyjay/SKILL.md) | Dashboards, admin panels, SaaS information-dense UI |
 | [`bencium-ux-designer`](../bencium-ux-designer/SKILL.md) | Distinctive, production-grade frontend |
 | [`neo-user-journey`](../neo-user-journey/SKILL.md) | UX journey mapping + Playwright testing + 50+ patterns + Nielsen scoring |
-| [`simota-agent-skills`](../simota-agent-skills/SKILL.md) | 15 design sub-skills: Vision, Frame (Figma bridge), Pixel, Clay, Ink, Sketch |
+| [`simota-agent-skills`](../simota-agent-skills/SKILL.md) | Design suite: Vision, Muse, Frame (Figma bridge), Pixel, Echo, Prose, Ink (SVG icons) |
 | [`design-auditor`](../design-auditor/SKILL.md) | 19-category audit: typography, dark mode, RTL, dark patterns; 0-100 score |
 | [`composio-artifacts`](../composio-artifacts/SKILL.md) | Artifacts connected to GitHub/Slack/Linear via Composio |
 | [`search-ux`](../search-ux/SKILL.md) | Search input, autocomplete, ranking, faceted filters, zero-results, search analytics |

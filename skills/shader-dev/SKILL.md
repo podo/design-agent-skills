@@ -1,9 +1,10 @@
 ---
 name: shader-dev
 description: |
-  GLSL shader development: ray marching, fluid simulation, particle systems,
-  and procedural generation. Official MiniMax skill for creating real-time
-  visual effects in WebGL and creative coding contexts.
+  GLSL shader development: ray marching, SDF modeling, fluid simulation,
+  particle systems, procedural generation, lighting, and post-processing.
+  Official MiniMax skill for creating real-time visual effects in WebGL and
+  creative coding contexts (ShaderToy-compatible techniques).
 triggers:
   - "shader"
   - "GLSL"
@@ -24,33 +25,36 @@ das:
 
 > Catalogue stub — full skill: [MiniMax-AI/skills](https://github.com/MiniMax-AI/skills/blob/main/skills/shader-dev/SKILL.md)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/shader-dev/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/shader-dev/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/shader-dev/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/shader-dev/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `shader-dev`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/shader-dev ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
    npx skills add MiniMax-AI/skills --skill shader-dev -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
    npx skills add MiniMax-AI/skills --skill shader-dev -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -59,4 +63,9 @@ das:
 
 ## What it does
 
-Official MiniMax GLSL shader skill covering the full real-time graphics toolbox: ray marching for 3D SDFs, fluid dynamics simulation, particle systems, and procedural pattern generation. Produces working WebGL fragment/vertex shaders with correct uniforms, time-based animation, and noise functions.
+Official MiniMax GLSL shader skill: one skill with a library of ShaderToy-compatible techniques and references covering ray marching and SDF modeling for 3D, fluid dynamics simulation, particle systems, procedural pattern generation, lighting, and post-processing. Produces working WebGL fragment/vertex shaders with correct uniforms, time-based animation, and noise functions.
+
+## When NOT to use
+
+- Three.js scenes, WebGPU, or TSL node materials → use `cloudai-threejs`, `threejs-claude-skill-package`, or `webgpu-claude-skill`
+- Generative art with p5.js → use `p5js-hermes` or `algorithmic-art`

@@ -1,6 +1,16 @@
-type: platform
+type: skill
 tier: experimental
 category: visual-components
 rank: 2
 upstream: https://github.com/sliday/google-fonts-skill
+upstream_path: SKILL.md
 version: latest
+install_default: npx skills add sliday/google-fonts-skill --skill google-fonts
+installed_as: google-fonts
+install_claude:
+  - claude plugin marketplace add sliday/google-fonts-skill
+  - claude plugin install google-fonts@google-fonts-skill
+requires:
+  - Python 3 (a skill-only install runs the bundled scripts/search.py and scripts/generate-css.py)
+license: MIT
+note: "verified 2026-10-21; was type platform with a plugin install lacking marketplace add and a wrong skill name (google-fonts-skill); upstream skill name is google-fonts; the install copies the whole repo (about 23 MB incl. data, showcase, scripts) into the skill directory; the optional MCP server is documented in SKILL.md prose only: claude mcp add google-fonts -- uvx google-fonts-mcp (PyPI google-fonts-mcp, not run); plugin route documented in the upstream README, not run"

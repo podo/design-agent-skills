@@ -5,4 +5,7 @@ rank: 2
 upstream: https://github.com/szilu/ux-designer-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add szilu/ux-designer-skill --skill ux-designer
 installed_as: ux-designer
+license: MIT
+note: "verified 2026-10-21; upstream skill is named ux-designer (SKILL.md plus a references/ folder loaded on demand). The README documents only a manual clone into the skills directory; the skills CLI route installs the same layout."

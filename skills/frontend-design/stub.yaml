@@ -5,3 +5,9 @@ rank: 2
 upstream: https://github.com/Ilm-Alan/frontend-design
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add Ilm-Alan/frontend-design --skill frontend-design
+installed_as: frontend-design
+license: MIT
+note: "verified 2026-10-21; installs the directory frontend-design, which anthropics-skills (Anthropic's different frontend-design skill) also writes, so conflicts_with must be declared on both stubs. Upstream rewrote its anchors since the old pointer (Swiss, Industrial, Brutalist, Aurora Maximalism, Chaotic Maximalism, Retro-Futuristic, Organic, Lo-Fi; no Nordic, Cyberpunk, Vaporwave, Luxury or Editorial any more), so the old nordic design trigger was replaced by swiss design"
+conflicts_with:
+  - anthropics-skills

@@ -82,5 +82,5 @@ jobs:
           fi
           echo "Changed skills: $CHANGED"
           node scripts/check-upstreams.mjs --only "$CHANGED"
-          # --skill matches the upstream SKILL.md name, not our directory name; prove each command works
-          node scripts/check-installs.mjs --only "$CHANGED"
+          # a REAL install per changed stub: the directories that land must exactly equal installed_as
+          node scripts/check-installs.mjs --real --only "$CHANGED"

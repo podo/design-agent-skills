@@ -5,4 +5,9 @@ rank: 2
 upstream: https://github.com/delphi-ai/animate-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add delphi-ai/animate-skill --skill animate
 installed_as: animate
+license: no LICENSE file
+note: "verified 2026-10-21; upstream skill is named `animate` (generic directory name, also written by emilkowalski-skill and ui-craft)"
+conflicts_with:
+  - emilkowalski-skill

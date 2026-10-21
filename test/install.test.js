@@ -228,27 +228,68 @@ describe('install.sh — status command', () => {
       cleanup(tmp);
     }
   });
+});
 
-  // Regression: guizang-ppt's upstream skill is named guizang-ppt-skill, so installing the
-  // full skill puts it NEXT TO the pointer (the pointer is never replaced). status kept
-  // reporting the pointer as "stub" forever; it must follow `installed_as`.
-  it('status reports a pointer as upgraded once the full skill exists under installed_as', () => {
-    const tmp = makeTempHome();
-    const row = out => out.split('\n').find(l => /\bguizang-ppt\b/.test(l)) ?? '';
-    try {
-      assert.equal(run(['install'], { home: tmp }).status, 0, 'install must succeed');
-      assert.match(row(run(['status'], { home: tmp }).stdout), /\bstub\b/,
-        'before the full skill is installed the pointer is a stub');
+// A fixture catalogue next to a copy of install.sh, so status logic is tested without depending on real stubs.
+describe('install.sh — status from installed_as (fixture catalogue)', () => {
+  const FX = [
+    ['pkg-two', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstalled_as:\n  - a\n  - "Weird::Name"\n'],
+    ['single', 'type: skill\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstalled_as: real-name\n'],
+    ['manual', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstall_mode: manual\ninstalled_as: m\ninstall_check: ~/.claude/skills/m/SKILL.md\n'],
+  ];
+  const POINTER = '---\nname: x\ndescription: d\ntriggers:\n  - "t"\ndas:\n  type: skill\n---\n# x\n';
+  const FULL = '---\nname: real\ndescription: full skill\n---\n# real\n';
 
-      const full = path.join(tmp, '.claude', 'skills', 'guizang-ppt-skill');
-      fs.mkdirSync(full, { recursive: true });
-      fs.writeFileSync(path.join(full, 'SKILL.md'), '---\nname: guizang-ppt-skill\ndescription: full\n---\n');
-
-      assert.match(row(run(['status'], { home: tmp }).stdout), /\bupgraded\b/,
-        'full skill installed under installed_as must read as upgraded');
-    } finally {
-      cleanup(tmp);
+  function fixture() {
+    const repo = fs.mkdtempSync(path.join(os.tmpdir(), 'das-fx-'));
+    fs.copyFileSync(INSTALL, path.join(repo, 'install.sh'));
+    for (const [name, yaml] of FX) {
+      fs.mkdirSync(path.join(repo, 'skills', name), { recursive: true });
+      fs.writeFileSync(path.join(repo, 'skills', name, 'stub.yaml'), yaml);
+      fs.writeFileSync(path.join(repo, 'skills', name, 'SKILL.md'), POINTER.replace('name: x', `name: ${name}`));
     }
+    const home = makeTempHome();
+    fs.mkdirSync(path.join(home, '.claude', 'skills'), { recursive: true });
+    const put = (rel, body = FULL) => {
+      fs.mkdirSync(path.dirname(path.join(home, '.claude', 'skills', rel)), { recursive: true });
+      fs.writeFileSync(path.join(home, '.claude', 'skills', rel), body);
+    };
+    const status = () => {
+      const r = spawnSync('bash', [path.join(repo, 'install.sh'), 'status'], { encoding: 'utf8', env: { ...process.env, HOME: home }, timeout: 60000 });
+      const row = n => r.stdout.split('\n').find(l => l.includes(n) && !/^\s*skill\b/.test(l)) ?? '';
+      return { out: r.stdout, row };
+    };
+    return { repo, home, put, status, done: () => { cleanup(repo); cleanup(home); } };
+  }
+
+  it('reports package as not installed, partial (1/2), then installed, using sanitised installed_as dirs', () => {
+    const f = fixture();
+    try {
+      assert.match(f.status().row('pkg-two'), /\bpackage\b/);
+      f.put('a/SKILL.md');
+      assert.match(f.status().row('pkg-two'), /\b1\/2\b/);
+      f.put('weird-name/SKILL.md');                       // "Weird::Name" is installed as weird-name
+      assert.match(f.status().row('pkg-two'), /\binstalled\b/);
+    } finally { f.done(); }
+  });
+
+  it('a skill installed beside its pointer under installed_as reads as upgraded; a pointer copy does not', () => {
+    const f = fixture();
+    try {
+      f.put('real-name/SKILL.md', POINTER);               // still the pointer (carries das:) -> not installed
+      assert.doesNotMatch(f.status().row('single'), /\bupgraded\b/);
+      f.put('real-name/SKILL.md', FULL);
+      assert.match(f.status().row('single'), /\bupgraded\b/);
+    } finally { f.done(); }
+  });
+
+  it('manual stubs use install_check', () => {
+    const f = fixture();
+    try {
+      assert.match(f.status().row('manual'), /\bpackage\b/);
+      f.put('m/SKILL.md');
+      assert.match(f.status().row('manual'), /\binstalled\b/);
+    } finally { f.done(); }
   });
 });
 

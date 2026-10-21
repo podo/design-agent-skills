@@ -1,8 +1,11 @@
-type: package
+type: skill
 tier: community
 category: motion-animation
 rank: 3
 upstream: https://github.com/ibelick/ui-skills
 upstream_path: skills/fixing-motion-performance/SKILL.md
 version: latest
-install_default: "npx skills add ibelick/ui-skills --skill fixing-motion-performance"
+install_default: npx skills add ibelick/ui-skills --skill fixing-motion-performance
+installed_as: fixing-motion-performance
+license: MIT
+note: "verified 2026-10-21. The old pointer advertised `claude skills add ibelick/ui-skills`, which is not a Claude Code command (the repo has no plugin manifest). The repo holds other ui-skills (baseline-ui, fixing-accessibility, ...) that other stubs install"

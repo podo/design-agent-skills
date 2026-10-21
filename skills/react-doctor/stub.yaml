@@ -1,7 +1,15 @@
-type: package
+type: skill
 tier: community
 category: accessibility-quality
 rank: 2
 upstream: https://github.com/millionco/react-doctor
+upstream_path: skills/react-doctor/SKILL.md
 version: latest
-install_default: "npx skills add millionco/react-doctor"
+install_default: npx skills add millionco/react-doctor --skill react-doctor
+installed_as: react-doctor
+requires:
+  - Node.js with network access, because the skill runs `npx react-doctor@latest` at use time
+  - the /doctor workflow fetches a remote playbook from www.react.doctor with curl on every run
+license: Modified MIT, GitHub shows NOASSERTION (prior written permission needed to use it as AI training or evaluation data, or to sell it as a hosted service)
+size_mb: 120
+note: "verified 2026-10-21; a bare npx skills add millionco/react-doctor installs 16 skills, 12 of them the maintainers' internal .agents/skills/* tooling, so only react-doctor is installed. The repo also ships improve-react, improve-threejs and performance skills (performance clashes with addyosmani-quality's directory); add them with --skill if wanted"

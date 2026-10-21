@@ -1,9 +1,10 @@
 ---
 name: generative-media-skills
 description: |
-  41 workflow recipes for AI media generation covering Midjourney v7, Flux Kontext, Kling 3.0,
-  Veo3, Seedance 2.0, and 100+ models. Covers image generation, video creation, audio (Suno),
-  and social media content. Requires a muapi account and muapi-cli.
+  Skills for AI media generation through the muapi.ai platform: cinematic video direction, image
+  generation with Nano Banana, Seedance 2.0 video, UGC and product video ads, logos, UI mockups,
+  YouTube thumbnails and shorts, social posts and AI clipping. Routes to models such as Midjourney
+  v7, Flux Kontext, Kling 3.0 and Veo3. Requires a muapi account and the muapi CLI.
 triggers:
   - "generative media"
   - "Flux Kontext"
@@ -11,6 +12,7 @@ triggers:
   - "Veo3"
   - "SamurAIGPT"
 das:
+  type: package
   category: creative-3d
   upstream: "https://github.com/SamurAIGPT/Generative-Media-Skills"
   version: latest
@@ -19,38 +21,60 @@ das:
 
 # generative-media-skills
 
-> Catalogue stub — full platform: [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills)
+> Catalogue stub — full package: [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills)
 
-## Account requirement
-
-**A muapi account is required.** Sign up at [muapi.ai](https://muapi.ai) before installing. The `muapi-cli` tool provides the runtime bridge to 100+ AI media models.
-
-## Install methods
-
-| Method | Command |
-|--------|---------|
-| Install all skills | `npx skills add SamurAIGPT/Generative-Media-Skills --all` |
-| Install one skill (e.g. the cinema director; list names with `--list`) | `npx skills add SamurAIGPT/Generative-Media-Skills --skill muapi-cinema-director` |
-| Authenticate muapi | `npx muapi-cli auth login` |
-
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Do you have a muapi account?**
-   - No → direct user to [muapi.ai](https://muapi.ai) to create an account first.
-   - Yes → go to step 2.
-2. **Is muapi-cli authenticated?** Run `npx muapi-cli auth status`.
-   - No → run `npx muapi-cli auth login`
-   - Yes → go to step 3.
-3. **Are the skills installed?** Check `~/.agents/skills/` (or `.agents/skills/` for a project install) for generative-media skill directories.
-   - No → run the install command above.
-   - Yes → invoke the relevant skill by name.
+1. **Is the full skill already installed?**
+   This package installs 13 skills (`muapi-ad-creative`, `muapi-ai-clipping`, `muapi-cinema-director`, `muapi-instagram-post`, `muapi-logo-creator`, `muapi-nano-banana`, `muapi-product-video-ad-maker`, `muapi-seedance-2`, `muapi-social-media-video`, `muapi-ugc-video-factory`, `muapi-ui-design`, `muapi-youtube-shorts`, `muapi-youtube-thumbnail`); checking the first.
+   - Global: `f=~/.agents/skills/muapi-ad-creative/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/muapi-ad-creative/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `muapi-ad-creative`, invoke it and proceed
+   - `pointer` → go to step 2
+
+2. **Detect scope, then install:**
+
+   ```bash
+   [ -e ~/.agents/skills/generative-media-skills ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
+   ```bash
+   npx skills add SamurAIGPT/Generative-Media-Skills --skill muapi-ad-creative muapi-ai-clipping muapi-cinema-director muapi-instagram-post muapi-logo-creator muapi-nano-banana muapi-product-video-ad-maker muapi-seedance-2 muapi-social-media-video muapi-ugc-video-factory muapi-ui-design muapi-youtube-shorts muapi-youtube-thumbnail -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add SamurAIGPT/Generative-Media-Skills --skill muapi-ad-creative muapi-ai-clipping muapi-cinema-director muapi-instagram-post muapi-logo-creator muapi-nano-banana muapi-product-video-ad-maker muapi-seedance-2 muapi-social-media-video muapi-ugc-video-factory muapi-ui-design muapi-youtube-shorts muapi-youtube-thumbnail -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** a muapi.ai account and API key (MUAPI_API_KEY); every skill calls the muapi service and generation consumes muapi credits; the muapi CLI (npm install -g muapi-cli, then muapi auth configure) and curl; generated prompts and uploaded media are sent to the third-party muapi.ai service
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+Every skill is named `muapi-<recipe>`; the agent picks one from the task:
+
+- `muapi-cinema-director`, `muapi-seedance-2` — directed cinematic video
+- `muapi-product-video-ad-maker`, `muapi-ugc-video-factory`, `muapi-ad-creative` — product and UGC ads
+- `muapi-nano-banana`, `muapi-logo-creator`, `muapi-ui-design` — image generation, logos, UI mockups
+- `muapi-youtube-thumbnail`, `muapi-youtube-shorts`, `muapi-social-media-video`, `muapi-instagram-post`, `muapi-ai-clipping` — social and short-form content
+
+Before first use: install the muapi CLI and run `muapi auth configure` with your muapi.ai API key (see the heads-up above).
 
 ## What it does
 
-Provides 41 structured workflow recipes that orchestrate 100+ AI media generation models through the muapi platform. Covers text-to-image (Midjourney v7, Flux Kontext, DALL-E), text-to-video (Kling 3.0, Veo3, Seedance 2.0), music and audio generation (Suno), and social media content creation workflows. Each skill encapsulates prompt patterns, parameter tuning, and model selection for a specific media output type.
+Structured workflow recipes that turn a creative brief into calls to the muapi.ai platform, which fronts many image, video and audio models (Midjourney v7, Flux Kontext, Kling 3.0, Veo3, Seedance 2.0, Suno and others). Each skill encapsulates prompt patterns, parameter choices and model selection for one output type, for example a cinematic shot list for video models or a UGC ad built from a person photo, a product photo and a script. The skills CLI installs the packaged set listed above. The repo holds many more recipes under `library/<group>/<name>`; install one by path, for example `npx skills add SamurAIGPT/Generative-Media-Skills/library/motion/music-video`.
+
+Everything runs against a third-party paid service: prompts and uploaded media leave your machine and generation consumes muapi credits.
 
 ## When NOT to use
 
-- Without a muapi account — the skills require muapi-cli authentication
+- Without a muapi account — the skills require muapi CLI authentication
 - fal.ai model workflows specifically — use fal-ai-skills instead
 - Static image editing without AI generation

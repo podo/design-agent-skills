@@ -1,0 +1,11 @@
+type: skill
+tier: experimental
+category: design-systems
+rank: 3
+upstream: https://github.com/Zambudio/buenchollo-app
+upstream_path: .agents/skills/distinctive-frontend/SKILL.md
+version: latest
+install_default: npx skills add Zambudio/buenchollo-app --skill distinctive-frontend
+installed_as: distinctive-frontend
+license: MIT (original Koomook/claude-frontend-skills); the mirror repo has no LICENSE file
+note: "repointed 2026-10-21 to a verbatim mirror. The original, Koomook/claude-frontend-skills, ships the skill only as a loose skills/distinctive-frontend.md with no SKILL.md or frontmatter (the skills CLI finds no skill there, also with --full-depth or a raw URL), and its documented npm package @bong/claude-frontend-skills returns 404 on the registry, so the old `npm install -g` route installed nothing. Zambudio/buenchollo-app is an unrelated app repo that carries the same body text under .agents/skills/distinctive-frontend/SKILL.md with frontmatter added (diff against the original shows only that header); it holds a few other skills that --skill leaves out. If the original gains a SKILL.md, point back at it"

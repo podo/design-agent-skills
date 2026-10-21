@@ -5,4 +5,14 @@ rank: 1
 upstream: https://github.com/Leonxlnx/taste-skill
 upstream_path: skills/taste-skill/SKILL.md
 version: latest
+install_default: npx skills add Leonxlnx/taste-skill --skill design-taste-frontend
 installed_as: design-taste-frontend
+install_claude:
+  - /plugin marketplace add Leonxlnx/taste-skill
+  - /plugin install taste-skill@taste-skill
+requires:
+  - Node.js 22 or later and an installed Chrome, Edge or Chromium (for the bundled inspector and screenshot scripts)
+  - network access for the asset script (it fetches pictures from open collections, no API keys)
+license: MIT
+size_mb: 39
+note: "verified 2026-10-21; installed skill is tasteskill v2 (researched art directions from a library, real-browser inspector, screenshot look-and-fix loop). The earlier v1 text about design-variance/motion/density dials no longer applies. Working files are written to .taste-skill/ in the project root. Plugin route checked against .claude-plugin/marketplace.json only, not run."

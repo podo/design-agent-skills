@@ -5,6 +5,16 @@ rank: 3
 upstream: https://github.com/garrytan/gstack
 upstream_path: design-html/SKILL.md
 version: latest
-install_default: "git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup"
-installed_as: gstack
-note: "gstack skills depend on shared gstack/bin tooling (needs Bun); npx skills add of a single skill installs the instructions without it"
+install_mode: manual
+manual_reason: This skill is part of gstack and calls gstack's shared tooling (`~/.claude/skills/gstack/bin/…`), so install gstack itself rather than the single skill. `./setup` needs Bun, builds binaries, downloads Chromium and registers a Stop hook in your Claude settings; ask the user before running it.
+install_steps:
+  - git clone --single-branch --depth=1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack
+  - cd ~/.claude/skills/gstack && ./setup
+install_check: ~/.claude/skills/gstack/design-html/SKILL.md
+installed_as: design-html
+requires:
+  - Bun
+  - Claude Code
+license: MIT
+size_mb: 185
+note: "verified 2026-10-21 (clone + upstream_path only; ./setup never run). npx skills add garrytan/gstack --skill design-html fails unless --full-depth is used (the repo root SKILL.md hides the nested skills), and even then the skill lacks gstack/bin and degrades"

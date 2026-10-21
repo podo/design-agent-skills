@@ -1,9 +1,9 @@
 ---
 name: impeccable
 description: |
-  Design fluency for frontend development. 1 skill with 23 slash commands
-  (/impeccable polish, /impeccable audit, /impeccable critique, etc.),
-  curated anti-pattern detection CLI, and runtime node scripts.
+  Design fluency for frontend development. One skill with a suite of slash commands
+  (/impeccable polish, /impeccable audit, /impeccable critique, etc.), curated
+  anti-pattern detection, and a runtime launcher script.
   Covers UI design, redesign, critique, accessibility, motion, theming,
   typography, and component craft across websites, dashboards, and apps.
 triggers:
@@ -14,62 +14,86 @@ triggers:
   - "design commands"
   - "anti-pattern detection"
 das:
+  type: skill
   category: design-systems
-  type: platform
   upstream: "https://github.com/pbakaus/impeccable"
+  upstream_path: ".agents/skills/impeccable/SKILL.md"
   version: latest
 ---
 
 # impeccable
 
-> Catalogue stub — full platform: [pbakaus/impeccable](https://github.com/pbakaus/impeccable)  
-> Type: platform — do NOT curl SKILL.md directly (contains unresolved template variables)
+> Catalogue stub — full skill: [pbakaus/impeccable](https://github.com/pbakaus/impeccable)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any design work:
+1. **Is the full skill already installed?**
+   - Global: `f=~/.agents/skills/impeccable/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/impeccable/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `impeccable`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is impeccable already installed for your agent?**
-   - Claude Code: does `/impeccable` slash command exist in this session?
-   - Other agents: check if `impeccable` skill is loaded
-   - Yes → invoke `/impeccable <command>` and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Install via your agent's preferred method:**
+   ```bash
+   [ -e ~/.agents/skills/impeccable ] && echo "global" || echo "project"
+   ```
 
-| Agent | Install command |
-|-------|----------------|
-| Claude Code | `claude plugin install pbakaus/impeccable` |
-| All agents | `npx skills add impeccable` |
-| npm (global) | `npm install -g impeccable` |
+   **Global:**
+   ```bash
+   npx skills add pbakaus/impeccable --skill impeccable -g -y
+   ```
 
-3. **After install, restart your agent session** so the skill and commands are loaded.
+   **Project:**
+   ```bash
+   npx skills add pbakaus/impeccable --skill impeccable -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
-> **Why not curl?** `impeccable`'s SKILL.md contains `{{scripts_path}}`,
-> `{{command_prefix}}`, and other template variables resolved at install time.
-> A raw curl produces a broken skill with unresolved placeholders.
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add pbakaus/impeccable
+/plugin install impeccable@impeccable
+```
+
+**Heads-up**
+
+- **Requires:** the skill's launcher (scripts/impeccable) downloads a native engine binary to ~/.impeccable/bin on first run; anonymous usage telemetry is on by default (opt out with IMPECCABLE_NO_TELEMETRY=1 or DO_NOT_TRACK=1)
+- **License:** Apache-2.0
+- **Large download (~737 MB):** the skills CLI gives up cloning after 300 s; if it times out, retry with `SKILLS_CLONE_TIMEOUT_MS=900000`.
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `impeccable`
+- Run `/impeccable <command> <target>`, and `/impeccable init` once per project to capture PRODUCT.md
+- Restart your agent session after installing so the skill and commands load
+
+`npx skills add` installs the skill only. Upstream's own installer (`npx impeccable install`) also registers edit hooks that run the design detector after UI file edits; review those hooks before using it.
 
 ## What it does
 
-1 skill + 23 slash commands. Invoke as `/impeccable <command>`:
+A single skill whose commands are invoked as `/impeccable <command>`:
 
 | Command | Purpose |
 |---------|---------|
-| `polish` | Refine visual hierarchy, spacing, and details |
-| `audit` | Accessibility and UX pattern review |
-| `critique` | Honest design criticism |
-| `shape` | Layout and composition work |
-| `animate` | Motion and transition guidance |
-| `colorize` | Palette and contrast |
-| `typeset` | Typography decisions |
-| `harden` | Edge cases and error states |
-| `distill` | Simplify and reduce |
-| + 14 more | See upstream README |
+| `shape` | Plan UX/UI before writing code |
+| `init` / `document` | Capture product context (PRODUCT.md) and generate DESIGN.md from existing code |
+| `critique` | UX design review with heuristic scoring |
+| `audit` | Technical quality checks (accessibility, performance, responsive) |
+| `polish` | Final quality pass before shipping |
+| `bolder` / `quieter` / `distill` | Amplify, calm down, or simplify a design |
+| `animate` / `colorize` / `typeset` / `layout` / `delight` | Targeted enhancement passes |
+| `harden` / `onboard` / `clarify` / `adapt` / `optimize` | Edge cases, first-run flows, UX copy, responsiveness, performance |
+| `live` / `generate` | Pick elements in the browser and iterate on variants |
+| + more | See the upstream README and the skill's command table |
 
-Also ships `npx impeccable` CLI for anti-pattern detection in CI/CD pipelines.
+It also ships a detector for design anti-patterns that can run from the command line. Commands read PRODUCT.md for durable product context; missing it, the skill runs `init` for a new surface rather than guessing.
 
-## What it does NOT do
+## When NOT to use
 
-- Backend, API, or data pipeline work
+- Backend, API, or data-pipeline work
 - Non-UI tasks (routing, auth, database)
-- Works without PRODUCT.md context (it loads this file at startup — see upstream docs)
+- Deep color-science work such as OKLCH palette generation (use `color-expert`)

@@ -4,4 +4,24 @@ category: product-pm
 rank: 3
 upstream: https://github.com/pratikshadake/claude-product-management-skills
 version: latest
-install_default: "npx skills add pratikshadake/claude-product-management-skills"
+install_default: npx skills add pratikshadake/claude-product-management-skills --skill problem-clarity outcome-definition assumption-mapper jtbd-extractor value-vs-effort user-segment-prioritizer tradeoff-articulator roadmap-reality-checker experiment-design feature-adoption-analyzer retention-drop-diagnoser prd-critic stakeholder-alignment-checker launch-readiness post-launch-learning
+installed_as:
+  - problem-clarity
+  - outcome-definition
+  - assumption-mapper
+  - jtbd-extractor
+  - value-vs-effort
+  - user-segment-prioritizer
+  - tradeoff-articulator
+  - roadmap-reality-checker
+  - experiment-design
+  - feature-adoption-analyzer
+  - retention-drop-diagnoser
+  - prd-critic
+  - stakeholder-alignment-checker
+  - launch-readiness
+  - post-launch-learning
+license: MIT
+note: "verified 2026-10-21; upstream README documents `npx add-skill`, the skills CLI install above is equivalent. Skills are short (about 0.5-1 KB each) decision prompts"
+conflicts_with:
+  - assimovt-productskills

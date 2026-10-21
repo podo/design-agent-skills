@@ -61,8 +61,18 @@ detected_agents() {
 }
 
 stub_yaml_value() {
-  # $1=key  $2=stub.yaml path — minimal key: value parser
-  grep "^${1}:" "$2" | sed 's/^[^:]*: *//' | tr -d '"'
+  # $1=key  $2=stub.yaml path — minimal key: value parser. Pure bash: this runs for every stub in
+  # status/install/doctor/help, and a grep|sed|tr pipeline per call made each of them take seconds.
+  local line v
+  while IFS= read -r line || [ -n "$line" ]; do
+    case "$line" in
+      "$1":*)
+        v="${line#*:}"
+        v="${v#"${v%%[! ]*}"}"
+        printf '%s\n' "${v//\"/}"
+        ;;
+    esac
+  done < "$2"
 }
 
 stub_yaml_list() {
@@ -164,60 +174,80 @@ lockfile_upsert() {
   mv "$tmp" "$LOCKFILE"
 }
 
+# installed_as items (list form or scalar), one per line
+stub_installed_as() {
+  local yaml="$1" items
+  items="$(stub_yaml_list installed_as "$yaml" 2>/dev/null || true)"
+  [ -z "$items" ] && items="$(stub_yaml_value installed_as "$yaml" 2>/dev/null || true)"
+  [ -n "$items" ] && printf '%s\n' "$items"
+  return 0
+}
+
+# Directories the skills CLI installs a stub's skills into, one per line: lowercase, runs of
+# [^a-z0-9._] -> '-', trimmed. One awk for the whole list (big packages list 100+ skills; a fork
+# per name made `status` take over ten seconds).
+stub_installed_dirs() {
+  stub_installed_as "$1" | awk '{ s = tolower($0); gsub(/[^a-z0-9._]+/, "-", s); sub(/^[.-]+/, "", s); sub(/[.-]+$/, "", s); if (s != "") print s }'
+}
+
+# Facts about a stub that do not depend on the agent. Computed once per stub, then skill_state
+# runs once per agent column without re-reading stub.yaml.
+SS_TYPE="" SS_CHECK="" SS_DIRS=""
+skill_state_prepare() {
+  local src="$1"
+  SS_TYPE="$(stub_type "$src")"
+  SS_CHECK="$(stub_yaml_value install_check "$src/stub.yaml" 2>/dev/null || true)"
+  SS_DIRS="$(stub_installed_dirs "$src/stub.yaml")"
+}
+
+# Needs skill_state_prepare "$src" first.
 skill_state() {
   local target="$1" src="$2"
-  local stype
-  stype="$(stub_type "$src")"
-  if [ "$stype" = "package" ] || [ "$stype" = "platform" ]; then
-    local yaml="$src/stub.yaml"
-    local skills_dir
-    skills_dir="$(dirname "$target")"
-    # Check for block-list installed_as first
-    local list_items
-    list_items="$(stub_yaml_list installed_as "$yaml" 2>/dev/null || true)"
-    if [ -n "$list_items" ]; then
-      local total=0 found=0
-      while IFS= read -r item; do
-        total=$((total + 1))
-        local t="$skills_dir/$item"
-        if [ -d "$t" ] && ! grep -q "^das:" "$t/SKILL.md" 2>/dev/null; then
-          found=$((found + 1))
-        fi
-      done <<< "$list_items"
-      if [ "$found" -eq 0 ]; then
-        echo "package"
-      elif [ "$found" -eq "$total" ]; then
-        echo "installed"
-      else
-        echo "${found}/${total}"
-      fi
-      return
-    fi
-    # Scalar installed_as
-    local installed_as
-    installed_as="$(stub_yaml_value installed_as "$yaml" 2>/dev/null || true)"
-    [ -z "$installed_as" ] && installed_as="$(basename "$src")"
-    local installed_target="$skills_dir/$installed_as"
-    if [ -d "$installed_target" ] && ! grep -q "^das:" "$installed_target/SKILL.md" 2>/dev/null; then
-      echo "installed"
+  local stype="$SS_TYPE" skills_dir="${1%/*}"
+
+  # Manual installs declare a path whose existence means "installed" (e.g. gstack).
+  local check="$SS_CHECK"
+  if [ -n "$check" ]; then
+    check="${check/#\~/$HOME}"
+    if [ -f "$check" ]; then
+      [ "$stype" = "package" ] || [ "$stype" = "platform" ] && echo "installed" || echo "upgraded"
     else
-      echo "package"
+      [ "$stype" = "package" ] || [ "$stype" = "platform" ] && echo "package" || echo "stub"
     fi
     return
   fi
-  # type:skill whose upstream skill name differs from this pointer's directory:
-  # the full skill installs *beside* the pointer (under the sanitised upstream
-  # name), so the pointer never gets replaced — look for it via installed_as.
-  local ia
-  ia="$(stub_yaml_value installed_as "$src/stub.yaml" 2>/dev/null || true)"
-  if [ -n "$ia" ]; then
-    local ia_dir ia_target
-    ia_dir="$(printf '%s' "$ia" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._]\{1,\}/-/g; s/^[.-]*//; s/[.-]*$//')"
-    ia_target="$(dirname "$target")/$ia_dir"
-    if [ -d "$ia_target" ] && ! grep -q "^das:" "$ia_target/SKILL.md" 2>/dev/null; then
-      echo "upgraded"
-      return
+
+  # How many of the skills this stub installs are present (and no longer carry the pointer's das: marker)?
+  # The full skill usually installs *beside* the pointer under the upstream name, so look for installed_as.
+  local total=0 found=0 item dir
+  if [ -n "$SS_DIRS" ]; then
+    while IFS= read -r item; do
+      total=$((total + 1))
+      dir="$skills_dir/$item"
+      if [ -f "$dir/SKILL.md" ] && ! grep -q "^das:" "$dir/SKILL.md" 2>/dev/null; then
+        found=$((found + 1))
+      fi
+    done <<< "$SS_DIRS"
+  fi
+
+  if [ "$stype" = "package" ] || [ "$stype" = "platform" ]; then
+    if [ "$total" -eq 0 ]; then
+      # legacy stub without installed_as: the package installs under the pointer's own name
+      dir="$skills_dir/${src##*/}"
+      if [ -d "$dir" ] && ! grep -q "^das:" "$dir/SKILL.md" 2>/dev/null; then echo "installed"; else echo "package"; fi
+    elif [ "$found" -eq 0 ]; then
+      echo "package"
+    elif [ "$found" -eq "$total" ]; then
+      echo "installed"
+    else
+      echo "${found}/${total}"
     fi
+    return
+  fi
+
+  if [ "$total" -gt 0 ] && [ "$found" -eq "$total" ]; then
+    echo "upgraded"
+    return
   fi
   if [ -L "$target" ] && [ ! -e "$target" ]; then
     echo "BROKEN"
@@ -233,8 +263,9 @@ skill_state() {
 }
 
 skill_names() {
+  local d
   for d in "$SKILLS_SRC"/*/; do
-    [ -d "$d" ] && basename "${d%/}"
+    if [ -d "$d" ]; then d="${d%/}"; echo "${d##*/}"; fi
   done
 }
 
@@ -328,6 +359,7 @@ cmd_status() {
       *)            tier_char="?" ;;
     esac
     printf "%-22s  %-4s" "$skill" "$tier_char"
+    skill_state_prepare "$src"
     local i=0
     while [ $i -lt $ncols ]; do
       local target="${dirs[$i]}/$skill"

@@ -1,8 +1,11 @@
-type: package
+type: skill
 tier: community
 category: accessibility-quality
 rank: 2
 upstream: https://github.com/ibelick/ui-skills
 upstream_path: skills/baseline-ui/SKILL.md
 version: latest
-install_default: "npx skills add ibelick/ui-skills --skill baseline-ui"
+install_default: npx skills add ibelick/ui-skills --skill baseline-ui
+installed_as: baseline-ui
+license: MIT
+note: "verified 2026-10-21; type changed package -> skill (single --skill install); the same repo also holds fixing-accessibility, fixing-motion-performance, improve-ui and others"

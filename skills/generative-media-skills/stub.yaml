@@ -1,6 +1,27 @@
-type: platform
+type: package
 tier: experimental
 category: creative-3d
 rank: 2
 upstream: https://github.com/SamurAIGPT/Generative-Media-Skills
 version: latest
+install_default: npx skills add SamurAIGPT/Generative-Media-Skills --skill muapi-ad-creative muapi-ai-clipping muapi-cinema-director muapi-instagram-post muapi-logo-creator muapi-nano-banana muapi-product-video-ad-maker muapi-seedance-2 muapi-social-media-video muapi-ugc-video-factory muapi-ui-design muapi-youtube-shorts muapi-youtube-thumbnail
+installed_as:
+  - muapi-ad-creative
+  - muapi-ai-clipping
+  - muapi-cinema-director
+  - muapi-instagram-post
+  - muapi-logo-creator
+  - muapi-nano-banana
+  - muapi-product-video-ad-maker
+  - muapi-seedance-2
+  - muapi-social-media-video
+  - muapi-ugc-video-factory
+  - muapi-ui-design
+  - muapi-youtube-shorts
+  - muapi-youtube-thumbnail
+requires:
+  - a muapi.ai account and API key (MUAPI_API_KEY); every skill calls the muapi service and generation consumes muapi credits
+  - the muapi CLI (npm install -g muapi-cli, then muapi auth configure) and curl
+  - generated prompts and uploaded media are sent to the third-party muapi.ai service
+license: MIT
+note: "verified 2026-10-21; the CLI only discovers the 13 skills mirrored under .opencode/skills, the other recipes live under library/<group>/<name> and install by subpath, e.g. npx skills add SamurAIGPT/Generative-Media-Skills/library/motion/music-video (lands muapi-music-video); the old --all flag also created .claude and agent dirs and is not used; was type platform, changed to package"

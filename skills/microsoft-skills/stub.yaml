@@ -4,8 +4,11 @@ category: official-suites
 rank: 3
 upstream: https://github.com/microsoft/skills
 version: latest
-install_default: "npx skills add microsoft/skills --skill frontend-design-review"
-note: "Huge repo of Azure SDK skills; only the two frontend skills are catalogued. frontend-ui-dark-ts is not discoverable by --skill name, install it by subpath"
+install_default: npx skills add microsoft/skills --skill frontend-design-review
+install_extra:
+  - npx skills add microsoft/skills/.github/plugins/azure-sdk-typescript/skills/frontend-ui-dark-ts
 installed_as:
   - frontend-design-review
   - frontend-ui-dark-ts
+license: MIT (frontend-ui-dark-ts also bundles Segoe UI font files; check font licensing before redistributing)
+note: "verified 2026-10-21; only the two frontend skills of microsoft/skills are catalogued (the rest is Azure SDK skills). --skill frontend-ui-dark-ts is not selectable because the skill sits under a plugin path, so it installs by subpath, which is fragile if Microsoft re-lays-out the repo. No Claude plugin route: frontend-design-review is not in any plugin, and the plugin holding frontend-ui-dark-ts (azure-sdk-typescript) is the whole Azure TypeScript SDK bundle. Each command took about a minute"

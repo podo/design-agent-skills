@@ -61,19 +61,20 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
-| [`taste-skill`](../taste-skill/SKILL.md) | Premium, non-generic UI — variance, motion, density dials |
-| [`impeccable`](../impeccable/SKILL.md) | 23 commands, Chrome extension, Live Mode browser iteration |
+| [`taste-skill`](../taste-skill/SKILL.md) | Premium, non-generic UI: researched art directions, real-browser inspector, look-and-fix loop |
+| [`impeccable`](../impeccable/SKILL.md) | Design fluency: slash commands (polish, audit, critique…), anti-pattern detection, theming, typography, motion |
 | [`hallmark`](../hallmark/SKILL.md) | Anti-AI-slop: design, audit, redesign, and extract design DNA from screenshots/URLs; structural variety |
 | [`emilkowalski-skill`](../emilkowalski-skill/SKILL.md) | Animation decision framework, easing curves, interaction principles |
 | [`make-interfaces-better`](../make-interfaces-better/SKILL.md) | Polish: micro-interactions, typography details, visual refinement |
 | [`ui-craft`](../ui-craft/SKILL.md) | 18 slash commands, anti-slop CLI, 3 style variants — deepest design engineering skill |
-| [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Brutalist, Nordic, Cyberpunk…) with locked CSS tokens per theme |
+| [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Swiss, Brutalist, Aurora Maximalism, Retro-Futuristic…) with locked CSS tokens per theme |
+| [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | Distinctive, non-generic interfaces: extreme typography, cohesive themes, staggered animation, layered backgrounds |
 | [`huashu-design`](../huashu-design/SKILL.md) | Magazine-grade typography, CSS Grid, animated prototypes, MP4 export |
-| [`brand-design-md`](../brand-design-md/SKILL.md) | Fetches exact tokens for 62 world-class brands (Stripe, Linear, Apple…) at runtime |
+| [`brand-design-md`](../brand-design-md/SKILL.md) | Looks up DESIGN.md specs for well-known brands (Stripe, Linear, Apple…) from getdesign.md at runtime |
 | [`ai-graphic-design-skill`](../ai-graphic-design-skill/SKILL.md) | Maps 15 AI tools to design scenarios + 2025-26 Creative Director roadmap |
 | [`logo-designer-skill`](../logo-designer-skill/SKILL.md) | Brand interview → 3-5 SVG concepts → PNG export 16px–2048px |
-| [`design-for-ai`](../design-for-ai/SKILL.md) | CHECKER (7-category audit) + APPLIER (6-phase creation) dual-mode plugin |
-| [`styleseed`](../styleseed/SKILL.md) | 69 design rules, 60+ brand skins (Toss, Stripe, Linear, Vercel…), 13 slash commands |
+| [`design-for-ai`](../design-for-ai/SKILL.md) | Four-stage workflow (research → plan → mock → build) with seeded design DNA and dual-blind review |
+| [`styleseed`](../styleseed/SKILL.md) | Design method engine: setup, build, review, scoring, tokens, a11y, copy; brand skins + score-then-fix gate |
 | [`awesome-design-skills`](../awesome-design-skills/SKILL.md) | 67-style aesthetic registry: glassmorphism, brutalism, bento, editorial, riso… |
 | [`interaction-design`](../interaction-design/SKILL.md) | IxD principles, component states, micro-interactions, affordances, task flows — Norman + Tognazzini |
 | [`format-storybook`](../format-storybook/SKILL.md) | Storybook story structure, template composition, controls, Chromatic, CSF patterns |
@@ -91,12 +92,13 @@ instead of scrolling the full index below:
 | [`remotion`](../remotion/SKILL.md) | Programmatic video with React |
 | [`motion-design-skill`](../motion-design-skill/SKILL.md) | Official LottieFiles: timing, easing, choreography, Disney 12 principles for UI |
 | [`gsap-skills`](../gsap-skills/SKILL.md) | Official GSAP: 8 skills — core, timeline, ScrollTrigger, Flip, Draggable, SplitText |
+| [`motion`](../motion/SKILL.md) | Official Motion team skill (Motion, ex Framer Motion, + CSS): best practices, docs/example search, CSS springs, performance audits, upgrades |
 | [`framer-motion-skills`](../framer-motion-skills/SKILL.md) | 6 Framer Motion skills: core, Next.js, variants, scroll, gestures, layout |
 | [`animate-skill`](../animate-skill/SKILL.md) | Emil-inspired Next.js/React patterns: hover, toast, text reveal, modals |
 | [`animate-css-skill`](../animate-css-skill/SKILL.md) | Animate.css v4 + scroll triggers + RTL + prefers-reduced-motion |
 | [`css-animation-skill`](../css-animation-skill/SKILL.md) | Scrapes live app design language, interviews, produces standalone animation file |
 | [`wiggle-claude-skill`](../wiggle-claude-skill/SKILL.md) | Animates SVG logos → Lottie JSON → GIF + MP4 |
-| [`claudedesignskills`](../claudedesignskills/SKILL.md) | 22-skill bundle: Three.js, GSAP, R3F, Framer, Babylon, A-Frame, PixiJS, Rive, Lottie |
+| [`claudedesignskills`](../claudedesignskills/SKILL.md) | Motion/creative-coding bundle: Three.js, GSAP, R3F, Framer Motion, Babylon, A-Frame, PixiJS, Rive, Lottie, Spline |
 | [`hyperframes`](../hyperframes/SKILL.md) | "Write HTML → render video": GSAP/CSS/Lottie/Three.js + TTS media (HeyGen) |
 | [`huashu-art-motion`](../huashu-art-motion/SKILL.md) | Art-style and explainer video animation by code: storyboard → render → QA → deliver (Chinese docs) |
 | [`oil-motion`](../oil-motion/SKILL.md) | Scroll/pointer-driven web animation from AI video or sprite sequences (Chinese docs) |
@@ -110,7 +112,7 @@ instead of scrolling the full index below:
 | [`interface-design-dammyjay`](../interface-design-dammyjay/SKILL.md) | Dashboards, admin panels, SaaS information-dense UI |
 | [`bencium-ux-designer`](../bencium-ux-designer/SKILL.md) | Distinctive, production-grade frontend |
 | [`neo-user-journey`](../neo-user-journey/SKILL.md) | UX journey mapping + Playwright testing + 50+ patterns + Nielsen scoring |
-| [`simota-agent-skills`](../simota-agent-skills/SKILL.md) | 15 design sub-skills: Vision, Frame (Figma bridge), Pixel, Clay, Ink, Sketch |
+| [`simota-agent-skills`](../simota-agent-skills/SKILL.md) | Design suite: Vision, Muse, Frame (Figma bridge), Pixel, Echo, Prose, Ink (SVG icons) |
 | [`design-auditor`](../design-auditor/SKILL.md) | 19-category audit: typography, dark mode, RTL, dark patterns; 0-100 score |
 | [`search-ux`](../search-ux/SKILL.md) | Search input, autocomplete, ranking, faceted filters, zero-results, search analytics |
 | [`interfaces-that-feel`](../interfaces-that-feel/SKILL.md) | Emotional design: felt-state → physical analogue → motion/copy/spacing changes |
@@ -126,13 +128,13 @@ instead of scrolling the full index below:
 | [`building-components`](../building-components/SKILL.md) | Vercel: accessible, composable, themeable UI component authoring |
 | [`wpds`](../wpds/SKILL.md) | Official WordPress Design System: components, tokens, patterns (needs WPDS MCP) |
 | [`ui-ux-pro-max`](../ui-ux-pro-max/SKILL.md) | 50+ styles, 97 palettes, 9 tech stacks |
-| [`platform-design-skills`](../platform-design-skills/SKILL.md) | 300+ HIG/MD3/WCAG rules for cross-platform |
+| [`platform-design-skills`](../platform-design-skills/SKILL.md) | HIG, Material 3 and WCAG 2.2 rules, one skill per platform: iOS, iPadOS, macOS, watchOS, visionOS, tvOS, Android, web |
 | [`apple-hig-skills`](../apple-hig-skills/SKILL.md) | Apple HIG: iOS, macOS, visionOS, watchOS, tvOS |
 | [`hig-doctor`](../hig-doctor/SKILL.md) | Diagnose and fix Apple HIG violations |
 | [`swiftui-patterns`](../swiftui-patterns/SKILL.md) | SwiftUI view and component best practices |
 | [`design-tokens-skill`](../design-tokens-skill/SKILL.md) | W3C DTCG token spec: OKLCH, references/aliasing, Terrazzo, Figma exports |
-| [`google-fonts-skill`](../google-fonts-skill/SKILL.md) | 1,923 Google Fonts with mood tags + 73 pairings + CSS vars + Tailwind config |
-| [`mobile-app-design`](../mobile-app-design/SKILL.md) | iOS HIG + Android MD3 + RN best practices — 26K words |
+| [`google-fonts-skill`](../google-fonts-skill/SKILL.md) | Google Fonts search with mood tags, pairings, CSS custom properties, Tailwind config, type scales |
+| [`mobile-app-design`](../mobile-app-design/SKILL.md) | iOS HIG + Android MD3 + RN best practices: touch targets, thumb zones, adaptive patterns, audit scripts |
 | [`mobile-app-ui-design`](../mobile-app-ui-design/SKILL.md) | Professional mobile UI: intentional, smooth, alive interfaces |
 | [`sleek-design-mobile-apps`](../sleek-design-mobile-apps/SKILL.md) | Sleek platform: design screens, projects, assets via natural language (account req.) |
 | [`liquid-glass-skill`](../liquid-glass-skill/SKILL.md) | iOS 26 Liquid Glass: .glassEffect(), GlassEffectContainer, migration patterns |
@@ -152,34 +154,36 @@ instead of scrolling the full index below:
 | [`react-doctor`](../react-doctor/SKILL.md) | React security, performance, correctness scoring |
 | [`mastepanoski-skills`](../mastepanoski-skills/SKILL.md) | 6 audits: ux-rethink, Nielsen, WCAG POUR, Don Norman, cognitive walkthrough |
 | [`wcag-ai-skill`](../wcag-ai-skill/SKILL.md) | WCAG 2.2 full workflow: design → frontend → QA → conformance docs |
-| [`accessibility-agents`](../accessibility-agents/SKILL.md) | 25 specialist a11y agents: web code, Office/PDF docs, markdown auditors |
+| [`accessibility-agents`](../accessibility-agents/SKILL.md) | WCAG 2.2 AA package: router skills for web UI, site audits, Office/PDF/ePub, markdown, desktop and Python tooling, GitHub workflows |
 | [`dark-pattern-audit`](../dark-pattern-audit/SKILL.md) | Static audit of codebase + copy for deceptive dark patterns — confidence-graded, source-located |
 
 ### Design Review & Creative Direction
 
 | Skill | Best for |
 |-------|----------|
-| [`creative-director`](../creative-director/SKILL.md) | 20+ ideation methods, Cannes/D&AD evaluation |
+| [`creative-director`](../creative-director/SKILL.md) | Concept generation (SIT, TRIZ, SCAMPER, lateral thinking) scored against Cannes/D&AD/HumanKind criteria |
 | [`design-brief`](../design-brief/SKILL.md) | Structured design briefs from loose requirements |
 | [`design-consultation`](../design-consultation/SKILL.md) | Complete design system from scratch |
 | [`design-review-garrytan`](../design-review-garrytan/SKILL.md) | Visual audit + atomic fix commits |
-| [`plan-design-review`](../plan-design-review/SKILL.md) | Scored critique (0–10) with AI slop detection |
+| [`plan-design-review`](../plan-design-review/SKILL.md) | Designer review of a plan before implementation: 0–10 per design dimension, fills gaps, flags AI-slop (gstack) |
 | [`design-html`](../design-html/SKILL.md) | Implement designs as production HTML/CSS |
 | [`digidai-pm`](../digidai-pm/SKILL.md) | Senior PM: 30+ frameworks, SaaS metrics |
-| [`ux-ui-mastery`](../ux-ui-mastery/SKILL.md) | 19 skills: cognitive psych, spatial UX, ambient UI, iOS 26, WCAG 3.0 |
-| [`designer-skills`](../designer-skills/SKILL.md) | 91 skills, 28 commands: design research, systems, ux-strategy, critique |
+| [`ux-ui-mastery`](../ux-ui-mastery/SKILL.md) | Sumi (ex ux-ui-mastery): cognitive UX, NN/g heuristics, research, interaction/motion, a11y, i18n, agentic AI UX, design systems |
+| [`designer-skills`](../designer-skills/SKILL.md) | Nine-plugin designer toolkit: research, systems, UX strategy, UI, interaction, testing, ops, critique (installs every skill) |
 | [`design-with-claude`](../design-with-claude/SKILL.md) | Deterministic WCAG/token audit + design slash commands: dashboards, b2b SaaS, healthcare UX, onboarding |
-| [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | Synthesizes 19 authoritative UX sources (NNG, Laws of UX) — 2026 best practices |
-| [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Design of Everyday Things, Sprint, Lean UX |
+| [`ux-designer-skill`](../ux-designer-skill/SKILL.md) | UX/UI review and critique grounded in Nielsen heuristics, Laws of UX and WCAG 2.2; references loaded on demand |
+| [`wondelai-skills`](../wondelai-skills/SKILL.md) | Book-derived: Refactoring UI, Everyday Things, Microinteractions, Lean UX, Inspired, JTBD, Hook Model, Design Sprint |
 | [`design-impact-reporting`](../design-impact-reporting/SKILL.md) | Design ROI: user→product→business metrics, scorecard / before-after / A-B / portfolio |
 | [`design-debt-audit`](../design-debt-audit/SKILL.md) | Design-debt taxonomy + audit process + Severity×Frequency/Effort scoring + register |
 | [`design-negotiation`](../design-negotiation/SKILL.md) | Advocacy scripts: timeline / scope / stakeholder override / headcount, evidence-based |
+| [`service-blueprint`](../service-blueprint/SKILL.md) | Service blueprints (NN/g, GDS): five swim lanes, lines of visibility/interaction, JSON schema + render pipeline |
 
 ### Design Research
 
 | Skill | Best for |
 |-------|----------|
-| [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, AI-moderated interviews, survey design, transcript synthesis, research reports |
+| [`user-research-cookiy`](../user-research-cookiy/SKILL.md) | End-to-end user research: study planning, discussion guides, transcript synthesis, reports; optional AI-moderated interviews on Cookiy |
+| [`software-ux-research`](../software-ux-research/SKILL.md) | UX research methods, study design, synthesis and research ops: reference guides + templates |
 
 ### Figma & Design-to-Code
 
@@ -192,7 +196,7 @@ instead of scrolling the full index below:
 | [`claude2figma`](../claude2figma/SKILL.md) | 4 skills enforcing token compliance: colors/fonts/spacing bind to Figma variables |
 | [`work-with-design-systems`](../work-with-design-systems/SKILL.md) | Inspect (WCAG audit) + Build (6-phase with variable bindings) dual-mode |
 | [`figma-variables-tokens-generator`](../figma-variables-tokens-generator/SKILL.md) | Questionnaire → W3C token ZIP + Figma plugin for import |
-| [`figma-skill`](../figma-skill/SKILL.md) | Figma API + Community resources → design tokens → 7 frameworks |
+| [`figma-skill`](../figma-skill/SKILL.md) | Figma files via figma-developer-mcp → assets, tokens, code for Tailwind/React/Vue/Svelte/RN/Flutter/CSS (needs Figma token) |
 | [`extract-design-system`](../extract-design-system/SKILL.md) | Reverse-engineers tokens from any live website → tokens.json + tokens.css |
 
 ### Official Platform Suites
@@ -210,11 +214,11 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
-| [`excalidraw-diagram`](../excalidraw-diagram/SKILL.md) | Excalidraw with visual validation loop (3.2k stars) |
+| [`excalidraw-diagram`](../excalidraw-diagram/SKILL.md) | Excalidraw diagrams with a visual validation loop |
 | [`hand-drawn-diagrams`](../hand-drawn-diagrams/SKILL.md) | Quick hand-drawn sketch diagrams |
 | [`excalidraw-agents365`](../excalidraw-agents365/SKILL.md) | Excalidraw tuned for coding agent workflows |
 | [`wireframer`](../wireframer/SKILL.md) | Low-fidelity wireframes, structure-first |
-| [`softaworks-agent-toolkit`](../softaworks-agent-toolkit/SKILL.md) | 40+ skills: mermaid, excalidraw, draw-io, C4, marp |
+| [`softaworks-agent-toolkit`](../softaworks-agent-toolkit/SKILL.md) | Design-adjacent picks: mermaid, excalidraw, draw-io, C4, marp, schema designer, design-system starter |
 | [`nimbalyst-skills`](../nimbalyst-skills/SKILL.md) | Nimbalyst app built-ins: Excalidraw with MCP tools, mockups, data models |
 | [`wireframe-skill`](../wireframe-skill/SKILL.md) | NL → wireframe JSON + interactive HTML with drag/drop, undo/redo |
 | [`claude-wireframe-skill`](../claude-wireframe-skill/SKILL.md) | 5 UX approaches as interactive prototypes — B&W first then color variants |
@@ -223,10 +227,11 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
-| [`antvis-chart-skills`](../antvis-chart-skills/SKILL.md) | 7 AntV skills: 26+ chart types, 98.2% accuracy |
-| [`markdown-viewer-skills`](../markdown-viewer-skills/SKILL.md) | 14 skills: Vega, PlantUML, JSON Canvas, infographics |
+| [`antvis-chart-skills`](../antvis-chart-skills/SKILL.md) | AntV chart skills: chart images, G2, G6 graphs, X6 diagrams, infographics, GPT-Vis, T8 narrative text |
+| [`markdown-viewer-skills`](../markdown-viewer-skills/SKILL.md) | Text-driven visuals in Markdown (docu.md): Vega-Lite/ECharts charts, UML, BPMN, ArchiMate, infographics |
 | [`d3js-skill`](../d3js-skill/SKILL.md) | D3.js: data binding, scales, transitions, interactive charts |
 | [`claud3`](../claud3/SKILL.md) | D3 v7 + Tufte principles: 80+ chart types, dark theme, annotations |
+| [`data-viz-agent`](../data-viz-agent/SKILL.md) | Data-viz engineer agent: D3, Chart.js, Matplotlib, Plotly; perceptual encodings, colorblind-safe, accessible |
 | [`data-analysis-skill`](../data-analysis-skill/SKILL.md) | Multi-expert parallel analysis → HTML reports + PowerPoint export |
 
 ### 3D, Creative & Media
@@ -239,15 +244,15 @@ instead of scrolling the full index below:
 | [`webgpu-claude-skill`](../webgpu-claude-skill/SKILL.md) | Three.js TSL, node materials, GPU compute, WGSL — r183+ |
 | [`threejs-ecs-ts`](../threejs-ecs-ts/SKILL.md) | Three.js + Entity Component Systems + TypeScript |
 | [`threejs-claude-skill-package`](../threejs-claude-skill-package/SKILL.md) | 24 skills: WebGL, WebGPU, R3F, physics, IFC/BIM architecture |
-| [`generative-media-skills`](../generative-media-skills/SKILL.md) | 41 workflows: Midjourney v7, Flux Kontext, Kling 3.0, Veo3, Suno audio |
-| [`open-design`](../open-design/SKILL.md) | 31 skills + 71 brand design systems — local-first Claude Design alternative |
-| [`superdesign-skill`](../superdesign-skill/SKILL.md) | Infinite-canvas ideation: brand extraction, design drafts, IDE-native |
+| [`generative-media-skills`](../generative-media-skills/SKILL.md) | AI media via muapi.ai: cinematic video, Nano Banana images, Seedance, product ads, thumbnails (needs muapi account + CLI) |
+| [`open-design`](../open-design/SKILL.md) | Local-first Claude Design alternative: app + daemon running design skills and brand design systems on your own agent (an app, not a skill install) |
+| [`superdesign-skill`](../superdesign-skill/SKILL.md) | Hosted infinite-canvas design agent for UI, decks and graphics; branchable drafts (needs @superdesign/cli + account) |
 
 ### Presentations
 
 | Skill | Best for |
 |-------|----------|
-| [`nanobanan-ppt`](../nanobanan-ppt/SKILL.md) | AI-powered PPT with document analysis and image generation |
+| [`nanobanan-ppt`](../nanobanan-ppt/SKILL.md) | AI slide decks: document analysis → styled slide images + HTML player (needs a Gemini key) |
 | [`guizang-ppt`](../guizang-ppt/SKILL.md) | Structured PowerPoint from outline (no API deps) |
 | [`frontend-slides`](../frontend-slides/SKILL.md) | Animation-rich HTML presentations |
 | [`html-ppt`](../html-ppt/SKILL.md) | HTML PPT Studio: themes, layouts, full-deck templates, presenter mode with speaker script |
@@ -264,15 +269,15 @@ instead of scrolling the full index below:
 | Skill | Best for |
 |-------|----------|
 | [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | 9 skills: journey maps, OST, story mapping, PRD |
-| [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | 65 skills / 8 plugins: discovery, strategy, execution, market research, data analytics, GTM, growth |
+| [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | Nine PM plugins: discovery, strategy, execution, market research, analytics, GTM, growth, toolkit, AI shipping |
 | [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
-| [`pm-skills`](../pm-skills/SKILL.md) | 55 skills: Triple Diamond, 26 phases, Design Sprint, Foundation Sprint |
+| [`pm-skills`](../pm-skills/SKILL.md) | Triple Diamond phase skills, foundation skills (personas, OKRs, lean canvas), Design Sprint and Foundation Sprint tools |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
-| [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues with dependencies |
+| [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues (GitHub/Backlog; installs create-issue) |
 | [`product-position`](../product-position/SKILL.md) | B2B SaaS positioning: messaging hierarchy, competitive framing, strategic narrative — Dunford + JTBD frameworks |
-| [`lenny-skills`](../lenny-skills/SKILL.md) | 86 PM skills: behavioral product design, surveys, user interviews, design reviews, onboarding, growth loops (945 ★) |
-| [`assimovt-productskills`](../assimovt-productskills/SKILL.md) | 16 skills: roadmaps, North Star metrics, A/B experiments, competitor analysis, strategy docs, Shape Up scoping |
-| [`chadboyda-gtm`](../chadboyda-gtm/SKILL.md) | 18 go-to-market skills: positioning/ICP, pricing, sales motion, outbound, launches, GTM metrics |
+| [`lenny-skills`](../lenny-skills/SKILL.md) | Design-relevant skills from Lenny's archive: interviews, discovery, onboarding, PRDs, product taste, AI-native UX |
+| [`assimovt-productskills`](../assimovt-productskills/SKILL.md) | Roadmaps, North Star metrics, A/B experiments, competitor analysis, strategy docs, Shape Up scoping |
+| [`chadboyda-gtm`](../chadboyda-gtm/SKILL.md) | Go-to-market skills: positioning/ICP, pricing, sales motion, outbound, launches, retention, GTM metrics |
 
 ### Content Design & Copy
 
@@ -287,14 +292,15 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
-| [`email-html-mjml`](../email-html-mjml/SKILL.md) | MJML 4.x → cross-client HTML email, WCAG 2.1 AA, Outlook-safe |
+| [`email-html-mjml`](../email-html-mjml/SKILL.md) | MJML 5.x → cross-client HTML email, WCAG 2.1 AA, Outlook-safe |
 
 ### TUI & Terminal Design
 
 | Skill | Best for |
 |-------|----------|
 | [`tui-design-skill`](../tui-design-skill/SKILL.md) | Terminal UI design: Bubble Tea (Go), Ratatui (Rust), Textual (Python), Ink (TS) |
-| [`textual-tui-skill`](../textual-tui-skill/SKILL.md) | Textual (Python) deep-dive: 40+ widgets, TCSS, reactive, workers, Pilot testing |
+| [`textual-tui-skill`](../textual-tui-skill/SKILL.md) | Textual (Python) deep-dive: widgets, TCSS, reactive, workers, Pilot testing, common pitfalls |
+| [`ink-google`](../ink-google/SKILL.md) | json-render Ink renderer: JSON specs → interactive terminal UIs |
 
 ---
 
@@ -303,7 +309,7 @@ instead of scrolling the full index below:
 | User says | Route to |
 |-----------|----------|
 | "good taste", "anti slop", "premium UI", "not generic" | `taste-skill` or `ui-craft` |
-| "design variance", "motion intensity", "visual density" | `taste-skill` |
+| "art direction", "look and fix", "real-browser inspector" | `taste-skill` |
 | "no Inter font", "no 3-column cards", "no centered hero" | `taste-skill` or `ui-craft` |
 | "anti-slop detector", "33 rules", "ui-craft", "18 slash commands" | `ui-craft` |
 | "polish", "micro-interactions", "make it feel better" | `make-interfaces-better` |
@@ -317,7 +323,8 @@ instead of scrolling the full index below:
 | "WCAG", "accessibility audit", "contrast" | `fixing-accessibility` or `addyosmani-quality` |
 | "Core Web Vitals", "LCP", "CLS" | `cloudflare-web-perf` or `addyosmani-quality` |
 | "React performance", "React audit" | `react-doctor` |
-| "design review", "visual audit", "AI slop" | `plan-design-review` |
+| "design review", "visual audit", "AI slop" | `design-review-garrytan` or `hallmark` |
+| "review my design plan", "plan design review" | `plan-design-review` |
 | "design system", "build from scratch" | `design-consultation` |
 | "Apple HIG", "iOS design", "visionOS" | `apple-hig-skills` |
 | "HIG compliance", "fix HIG" | `hig-doctor` |
@@ -337,10 +344,12 @@ instead of scrolling the full index below:
 | "Hallmark", "design audit", "extract design DNA", "study this design" | `hallmark` |
 | "platform design", "cross-platform rules" | `platform-design-skills` |
 | "creative strategy", "campaign concept", "SCAMPER" | `creative-director` |
-| "design brief", "requirements spec" | `design-brief` |
+| "design brief", "visual brief", "I-Lang brief" | `design-brief` |
+| "product brief", "project brief", "requirements spec" | `designer-skills` |
 | "motion principles", "purposeful motion", "motion audit", "AI slop motion", "hover state design", "micro-interaction design", "Emil Kowalski motion", "Jhey Tompkins" | `design-motion-principles` |
 | "GSAP", "ScrollTrigger", "GreenSock" | `gsap-skills` |
 | "Framer Motion", "framer animation", "layout animation" | `framer-motion-skills` |
+| "Motion library", "motion.dev", "CSS springs", "MotionScore" | `motion` |
 | "Lottie", "motion principles", "Disney principles" | `motion-design-skill` |
 | "SVG logo animation", "wiggle", "logo GIF" | `wiggle-claude-skill` |
 | "Animate.css", "bounce", "fadeIn" | `animate-css-skill` |
@@ -359,9 +368,9 @@ instead of scrolling the full index below:
 | "SwiftUI iOS 26", "WWDC 2025 SwiftUI" | `swiftui-claude-skills` |
 | "SwiftUI design", "SwiftUI visual design", "iOS visual design" | `swiftui-design-skill` |
 | "WCAG 2.2 guidance", "conformance docs" | `wcag-ai-skill` |
-| "25 a11y agents", "PDF accessibility", "document a11y" | `accessibility-agents` |
+| "PDF accessibility", "Office document a11y", "document a11y" | `accessibility-agents` |
 | "Don Norman audit", "cognitive walkthrough", "ux-rethink" | `mastepanoski-skills` |
-| "91 design skills", "design ops", "visual critique" | `designer-skills` |
+| "designer toolkit", "design ops", "visual critique" | `designer-skills` |
 | "audit my design system", "healthcare UX", "b2b SaaS UX" | `design-with-claude` |
 | "UX principles", "Laws of UX", "usability guidelines" | `ux-designer-skill` |
 | "Refactoring UI", "Design Sprint book", "Lean UX" | `wondelai-skills` |
@@ -373,19 +382,21 @@ instead of scrolling the full index below:
 | "React Native animations", "Reanimated", "Gesture Handler" | `software-mansion-skills` |
 | "Expo", "EAS Build", "Expo Router" | `expo-skills` |
 | "React Native profiling", "Turbo Modules", "brownfield" | `callstack-agent-skills` |
-| "D3 Tufte", "80 chart types", "dark chart" | `claud3` |
+| "D3 Tufte", "dark chart", "annotated chart" | `claud3` |
+| "dataviz agent", "colorblind-safe charts", "Plotly", "Matplotlib", "Chart.js" | `data-viz-agent` |
 | "parallel data analysis", "data to PowerPoint" | `data-analysis-skill` |
 | "WebGPU", "TSL Three.js", "GPU compute" | `webgpu-claude-skill` |
 | "Three.js ECS", "entity component 3D" | `threejs-ecs-ts` |
 | "Three.js BIM", "IFC architecture", "AEC 3D" | `threejs-claude-skill-package` |
 | "Midjourney workflow", "Kling", "Veo3", "Flux Kontext" | `generative-media-skills` |
 | "infinite canvas design", "SuperDesign" | `superdesign-skill` |
-| "open-design platform", "31 design skills local" | `open-design` |
-| "Triple Diamond PM", "55 PM skills", "Design Sprint method" | `pm-skills` |
+| "open-design platform", "local Claude Design alternative" | `open-design` |
+| "Triple Diamond PM", "Foundation Sprint", "Design Sprint method" | `pm-skills` |
 | "MJML", "HTML email", "Outlook-safe email" | `email-html-mjml` |
 | "terminal UI", "TUI", "Bubble Tea", "Ratatui", "Textual" | `tui-design-skill` |
-| "brand tokens Stripe", "62 brands" | `brand-design-md` |
-| "aesthetic anchor", "Brutalist CSS", "Nordic design" | `frontend-design` |
+| "brand tokens Stripe", "brand DESIGN.md" | `brand-design-md` |
+| "aesthetic anchor", "Brutalist CSS", "Swiss design" | `frontend-design` |
+| "distinctive frontend", "avoid generic AI aesthetics", "extreme typography" | `distinctive-frontend` |
 | "logo SVG", "brand interview", "logo PNG" | `logo-designer-skill` |
 | "AI Midjourney design", "AI Creative Director" | `ai-graphic-design-skill` |
 | "button label", "error message copy", "empty state", "microcopy" | `ux-writing-skill` |
@@ -395,9 +406,12 @@ instead of scrolling the full index below:
 | "brand skin", "design token engine", "styleseed" | `styleseed` |
 | "design aesthetic", "glassmorphism", "brutalism style", "claymorphism" | `awesome-design-skills` |
 | "Textual TUI", "Textual Python", "Textual widget", "TCSS" | `textual-tui-skill` |
+| "json-render Ink", "terminal UI from JSON" | `ink-google` |
 | "interaction design", "component states", "affordance", "micro-interaction timing" | `interaction-design` |
 | "Storybook", "Storybook story", "CSF", "Chromatic visual regression" | `format-storybook` |
 | "user research", "user interview", "research synthesis", "usability study" | `user-research-cookiy` |
+| "UX research methods", "research ops", "study design" | `software-ux-research` |
+| "service blueprint", "swim lanes", "line of visibility" | `service-blueprint` |
 | "feature design sprint", "design to issues", "decompose feature" | `design-sprint` |
 | "product positioning", "messaging hierarchy", "value proposition", "competitive framing" | `product-position` |
 | "behavioral product design", "designing surveys", "running design reviews", "growth loops" | `lenny-skills` |

@@ -1,8 +1,14 @@
-type: package
+type: skill
 tier: community
 category: accessibility-quality
 rank: 3
 upstream: https://github.com/wshobson/agents
 upstream_path: plugins/accessibility-compliance/skills/wcag-audit-patterns/SKILL.md
 version: latest
-install_default: "npx skills add wshobson/agents --skill wcag-audit-patterns"
+install_default: npx skills add wshobson/agents --skill wcag-audit-patterns
+installed_as: wcag-audit-patterns
+install_claude:
+  - /plugin marketplace add wshobson/agents
+  - /plugin install accessibility-compliance@claude-code-workflows
+license: MIT
+note: "verified 2026-10-21; the plugin route installs the whole accessibility-compliance plugin (this skill, screen-reader-testing, plus its agents and commands); checked against marketplace.json only, not run"

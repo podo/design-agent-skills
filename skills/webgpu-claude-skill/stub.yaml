@@ -1,7 +1,14 @@
-type: package
+type: skill
 tier: experimental
 category: creative-3d
 rank: 3
 upstream: https://github.com/dgreenheck/webgpu-claude-skill
+upstream_path: skills/webgpu-threejs-tsl/SKILL.md
 version: latest
-install_default: "npx skills add dgreenheck/webgpu-claude-skill"
+install_default: npx skills add dgreenheck/webgpu-claude-skill --skill webgpu-threejs-tsl
+installed_as: webgpu-threejs-tsl
+install_claude:
+  - /plugin marketplace add dgreenheck/webgpu-claude-skill
+  - /plugin install webgpu-threejs-tsl@webgpu-threejs-tsl
+license: MIT per the plugin manifest; no LICENSE file in the repo
+note: "verified 2026-10-21; the upstream skill is named webgpu-threejs-tsl, so it installs next to this pointer (stub name webgpu-claude-skill). Type changed package -> skill. Plugin route checked against marketplace.json and plugin.json only, not run. The repo also ships Cursor rules (.cursor/rules) that are not installed by the skills CLI"

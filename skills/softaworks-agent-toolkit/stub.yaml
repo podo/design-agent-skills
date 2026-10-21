@@ -4,5 +4,25 @@ category: diagrams
 rank: 2
 upstream: https://github.com/softaworks/agent-toolkit
 version: latest
-install_default: "npx skills add softaworks/agent-toolkit"
-installed_as: mermaid-diagrams
+install_default: npx skills add softaworks/agent-toolkit --skill mermaid-diagrams excalidraw draw-io c4-architecture marp-slide database-schema-designer design-system-starter
+installed_as:
+  - mermaid-diagrams
+  - excalidraw
+  - draw-io
+  - c4-architecture
+  - marp-slide
+  - database-schema-designer
+  - design-system-starter
+install_claude:
+  - /plugin marketplace add softaworks/agent-toolkit
+  - /plugin install mermaid-diagrams@agent-toolkit
+  - /plugin install excalidraw@agent-toolkit
+  - /plugin install draw-io@agent-toolkit
+  - /plugin install c4-architecture@agent-toolkit
+  - /plugin install marp-slide@agent-toolkit
+  - /plugin install database-schema-designer@agent-toolkit
+  - /plugin install design-system-starter@agent-toolkit
+license: MIT
+note: "verified 2026-10-21; narrowed from a bare repo install (the whole toolkit is dozens of mostly non-design skills such as jira, codex, gemini, commit-work, datadog-cli, humanizer). The excalidraw skill here is a context-saving delegation guide for reading .excalidraw JSON and writes the same directory as the excalidraw-agents365 stub (different upstream, different skill). Plugin names checked against .claude-plugin/marketplace.json only, not run. Last push 2026-03-05."
+conflicts_with:
+  - excalidraw-agents365

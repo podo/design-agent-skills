@@ -1,9 +1,10 @@
 ---
 name: brand-design-md
 description: |
-  Fetches exact design tokens (colors, type weights, letter-spacing) for 62 world-class brands
-  including Stripe, Linear, Apple, Figma, Notion, and Nike at runtime, then applies them to
-  your project.
+  Looks up the design spec (a DESIGN.md of colors, type weights, letter-spacing, radii,
+  shadows) for well-known brands such as Stripe, Linear, Apple, Figma, Notion and Nike
+  from getdesign.md at runtime, then applies it to your project. The installed skill is
+  written in Chinese but accepts English brand names.
 triggers:
   - "brand tokens"
   - "brand design"
@@ -13,7 +14,7 @@ triggers:
 das:
   type: skill
   category: design-systems
-  upstream: "https://github.com/zephyrwang6/brand-design-md"
+  upstream: "https://github.com/SpaceZephyr/brand-design-md"
   upstream_path: "SKILL.md"
   version: latest
   install: true
@@ -21,35 +22,39 @@ das:
 
 # brand-design-md
 
-> Catalogue stub — full skill: [zephyrwang6/brand-design-md](https://github.com/zephyrwang6/brand-design-md)
+> Catalogue stub — full skill: [SpaceZephyr/brand-design-md](https://github.com/SpaceZephyr/brand-design-md)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/brand-design-md/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/brand-design-md/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/brand-design-md/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/brand-design-md/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `brand-design-md`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/brand-design-md ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add zephyrwang6/brand-design-md --skill brand-design-md -g -y
+   npx skills add SpaceZephyr/brand-design-md --skill brand-design-md -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add zephyrwang6/brand-design-md --skill brand-design-md -y
+   npx skills add SpaceZephyr/brand-design-md --skill brand-design-md -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** Node.js and network access at use time (the skill runs `npx getdesign@latest add <brand>`, which downloads and executes an unpinned third-party npm package)
+- **License:** no LICENSE file
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -58,10 +63,13 @@ das:
 
 ## What it does
 
-At runtime, fetches the precise design tokens — primary and accent colors, type weights, letter-spacing, border-radius, and shadow values — for any of 62 documented world-class brands including Stripe, Linear, Apple, Figma, Notion, Vercel, Airbnb, and Nike. Once fetched, applies those tokens to the current project's CSS variables or Tailwind config so the output accurately reflects the chosen brand's visual language. Useful for building demos, pitch materials, or brand-matched prototypes quickly without manual research.
+Maps a brand name (Chinese or English, e.g. "做成 Stripe 的感觉", "make it feel like Linear") to a slug in its brand registry, runs `npx getdesign@latest add <slug>` in a temp directory to fetch that brand's `DESIGN.md` from getdesign.md, and then generates UI code that follows the exact values in it (colors, type scale, spacing, border-radius, shadows). It can blend several brands ("Notion colors + Linear typography"). Useful for demos, pitch material or brand-matched prototypes without manual research.
+
+Two things to know before using it: the skill's own instructions are written in Chinese, and it executes an unpinned third-party npm package (`getdesign@latest`) at use time, so it needs Node.js and network access.
 
 ## When NOT to use
 
 - When you need to develop a custom brand identity from scratch (this skill matches existing brands, not creates new ones)
-- When none of the 62 brands match your target (use `design-consultation` to build a bespoke system)
+- When none of the registry brands match your target (use `design-consultation` to build a bespoke system)
 - When brand token accuracy is legally or contractually sensitive (always verify tokens against official brand guidelines)
+- When running an unpinned `npx` package at use time is not acceptable in your environment

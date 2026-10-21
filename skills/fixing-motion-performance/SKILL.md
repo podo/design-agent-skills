@@ -21,28 +21,36 @@ das:
 
 > Catalogue stub — full skill: [ibelick/ui-skills](https://github.com/ibelick/ui-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any motion performance audit:
-
 1. **Is the full skill already installed?**
-   Check: `~/.agents/skills/fixing-motion-performance/SKILL.md` or `.agents/skills/fixing-motion-performance/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `fixing-motion-performance` and proceed
-   - No → go to step 2
+   - Global: `f=~/.agents/skills/fixing-motion-performance/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/fixing-motion-performance/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `fixing-motion-performance`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/fixing-motion-performance ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add ibelick/ui-skills --skill fixing-motion-performance
-```
+   **Global:**
+   ```bash
+   npx skills add ibelick/ui-skills --skill fixing-motion-performance -g -y
+   ```
 
-Or per-agent:
-- Claude Code: `claude skills add ibelick/ui-skills`
-- Cursor/OpenCode: `npx skills add ibelick/ui-skills --skill fixing-motion-performance`
+   **Project:**
+   ```bash
+   npx skills add ibelick/ui-skills --skill fixing-motion-performance -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -52,3 +60,8 @@ Or per-agent:
 ## What it does
 
 Audits animations for layout thrashing, incorrect compositor property usage, scroll-linked motion anti-patterns, and expensive blur effects. Provides concrete fixes to move animations onto the GPU and eliminate frame drops for smooth, production-grade motion.
+
+## When NOT to use
+
+- Choosing easing, timing, or motion design principles (not performance) → use `design-motion-principles`
+- Library-specific GSAP work (ScrollTrigger, timelines, `useGSAP`) → use `gsap-skills`

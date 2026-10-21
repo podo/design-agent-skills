@@ -4,4 +4,20 @@ category: motion-animation
 rank: 1
 upstream: https://github.com/greensock/gsap-skills
 version: latest
-install_default: "npx skills add https://github.com/greensock/gsap-skills"
+install_default: npx skills add greensock/gsap-skills --skill gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks
+installed_as:
+  - gsap-core
+  - gsap-timeline
+  - gsap-scrolltrigger
+  - gsap-plugins
+  - gsap-utils
+  - gsap-react
+  - gsap-performance
+  - gsap-frameworks
+install_claude:
+  - /plugin marketplace add greensock/gsap-skills
+  - /plugin install gsap-skills@gsap-skills
+license: MIT
+note: "verified 2026-10-21; plugin route checked against .claude-plugin/marketplace.json only (not run). No skill is called gsap-skills; the old pointer checked for that name"
+conflicts_with:
+  - claudedesignskills

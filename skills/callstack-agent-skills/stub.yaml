@@ -4,5 +4,22 @@ category: official-suites
 rank: 3
 upstream: https://github.com/callstackincubator/agent-skills
 version: latest
-install_default: "/plugin install react-native-best-practices@callstack-agent-skills"
-installed_as: react-native-best-practices
+install_default: npx skills add callstackincubator/agent-skills --skill react-native-best-practices react-navigation react-native-tv-best-practices create-react-native-library upgrading-react-native github-actions assess-react-native-migration react-native-brownfield-migration
+installed_as:
+  - react-native-best-practices
+  - react-navigation
+  - react-native-tv-best-practices
+  - create-react-native-library
+  - upgrading-react-native
+  - github-actions
+  - assess-react-native-migration
+  - react-native-brownfield-migration
+install_claude:
+  - /plugin marketplace add callstackincubator/agent-skills
+  - /plugin install building-react-native-apps@callstack-agent-skills
+  - /plugin install testing-react-native-apps@callstack-agent-skills
+  - /plugin install migrating-to-react-native@callstack-agent-skills
+license: MIT
+note: "verified 2026-10-21; old documented plugin react-native-best-practices@callstack-agent-skills never existed (it is a skill inside the building-react-native-apps plugin); a bare repo install would also pull the contributor-only skills validate-skills and writing-user-docs, so --skill is used; plugin route read from marketplace.json/plugin.json only (not in upstream README, not run); testing-react-native-apps also bundles the external skills react-native-testing, agent-device and dogfood"
+conflicts_with:
+  - software-mansion-skills

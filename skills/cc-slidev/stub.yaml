@@ -4,4 +4,19 @@ category: presentations
 rank: 3
 upstream: https://github.com/rhuss/cc-slidev
 version: latest
-install_default: "/plugin marketplace add rhuss/cc-slidev"
+install_default: npx skills add rhuss/cc-slidev --skill "Slidev Mastery" "Presentation Design" "Slide Quality Assessment" "Visual Design" "Excalidraw Generation" "LaTeX Handouts"
+install_claude:
+  - /plugin marketplace add rhuss/cc-slidev
+  - /plugin install slidev@slidev-dev-marketplace
+requires:
+  - Slidev CLI (`npm install -g @slidev/cli`) and Node.js 18+
+  - Optional: LaTeX (pdflatex) for handouts, mermaid-cli for offline diagram rendering
+license: MIT
+note: "verified 2026-10-21; upstream plugin is named slidev (manifest slidev/.claude-plugin/plugin.json) and the repo root marketplace is slidev-dev-marketplace; README recommends the separate rhuss/cc-rhuss-marketplace instead, which also lists slidev (not used here, the repo's own marketplace is self-contained). The skills CLI route installs skills only, no slash commands. Upstream skills with no usable frontmatter are skipped by the CLI: slidev/skills/diagram-design (no name/description) and slidev/skills/slide-management (unquoted description starting with ** is a YAML error). Plugin route checked against manifests only, not run (it writes to ~/.claude)"
+installed_as:
+  - Slidev Mastery
+  - Presentation Design
+  - Slide Quality Assessment
+  - Visual Design
+  - Excalidraw Generation
+  - LaTeX Handouts

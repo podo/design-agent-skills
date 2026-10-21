@@ -1,7 +1,13 @@
-type: package
+type: skill
 tier: community
 category: design-systems
 rank: 3
 upstream: https://github.com/neonwatty/logo-designer-skill
+upstream_path: skills/logo-designer/SKILL.md
 version: latest
-install_default: "claude plugin add neonwatty/logo-designer-skill"
+install_default: npx skills add neonwatty/logo-designer-skill --skill logo-designer
+installed_as: logo-designer
+requires:
+  - an SVG-to-PNG converter for PNG export (resvg, Inkscape, or librsvg)
+license: MIT
+note: "verified 2026-10-21; the documented `claude plugin add` is not a Claude Code command and the repo has no marketplace.json (only .claude-plugin/plugin.json), so no plugin route exists. Installed skill is named logo-designer, not logo-designer-skill."

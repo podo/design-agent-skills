@@ -1,7 +1,13 @@
-type: package
+type: skill
 tier: experimental
 category: figma-code
 rank: 2
 upstream: https://github.com/arvindrk/extract-design-system
+upstream_path: skills/extract-design-system/SKILL.md
 version: latest
-install_default: "npx skills add arvindrk/extract-design-system"
+install_default: npx skills add arvindrk/extract-design-system --skill extract-design-system
+installed_as: extract-design-system
+requires:
+  - Node.js with npx and network access (at use time the skill runs `npx playwright install chromium` and the `extract-design-system` npm package)
+license: MIT
+note: "verified 2026-10-21; type changed package -> skill (single skill). The skill itself is a short SKILL.md that drives the bundled npm CLI"

@@ -4,5 +4,17 @@ category: visual-components
 rank: 2
 upstream: https://github.com/ehmo/platform-design-skills
 version: latest
-install_default: "npx skills add ehmo/platform-design-skills"
-installed_as: platform-design
+install_default: npx skills add ehmo/platform-design-skills --skill ios-design-guidelines ipados-design-guidelines macos-design-guidelines watchos-design-guidelines visionos-design-guidelines tvos-design-guidelines android-design-guidelines web-design-guidelines
+installed_as:
+  - ios-design-guidelines
+  - ipados-design-guidelines
+  - macos-design-guidelines
+  - watchos-design-guidelines
+  - visionos-design-guidelines
+  - tvos-design-guidelines
+  - android-design-guidelines
+  - web-design-guidelines
+license: MIT
+note: "verified 2026-10-21. No skill is called platform-design; the upstream folders (skills/ios, skills/web, ...) differ from the frontmatter names above. web-design-guidelines is also installed by vercel-skills (different content, different upstream), see report"
+conflicts_with:
+  - vercel-skills

@@ -4,4 +4,92 @@ category: product-pm
 rank: 2
 upstream: https://github.com/phuryn/pm-skills
 version: latest
-install_default: "claude plugin marketplace add phuryn/pm-skills"
+install_default: npx skills add https://github.com/phuryn/pm-skills
+installed_as:
+  - analyze-feature-requests
+  - brainstorm-experiments-existing
+  - brainstorm-experiments-new
+  - brainstorm-ideas-existing
+  - brainstorm-ideas-new
+  - identify-assumptions-existing
+  - identify-assumptions-new
+  - interview-script
+  - metrics-dashboard
+  - opportunity-solution-tree
+  - prioritize-assumptions
+  - prioritize-features
+  - summarize-interview
+  - ansoff-matrix
+  - business-model
+  - lean-canvas
+  - monetization-strategy
+  - pestle-analysis
+  - porters-five-forces
+  - pricing-strategy
+  - product-strategy
+  - product-vision
+  - startup-canvas
+  - swot-analysis
+  - value-proposition
+  - brainstorm-okrs
+  - create-prd
+  - dummy-dataset
+  - job-stories
+  - outcome-roadmap
+  - pre-mortem
+  - prioritization-frameworks
+  - release-notes
+  - retro
+  - sprint-plan
+  - stakeholder-map
+  - strategy-red-team
+  - summarize-meeting
+  - test-scenarios
+  - user-stories
+  - wwas
+  - competitor-analysis
+  - customer-journey-map
+  - market-segments
+  - market-sizing
+  - sentiment-analysis
+  - user-personas
+  - user-segmentation
+  - ab-test-analysis
+  - cohort-analysis
+  - sql-queries
+  - beachhead-segment
+  - competitive-battlecard
+  - growth-loops
+  - gtm-motions
+  - gtm-strategy
+  - ideal-customer-profile
+  - marketing-ideas
+  - north-star-metric
+  - positioning-ideas
+  - product-name
+  - value-prop-statements
+  - draft-nda
+  - grammar-check
+  - privacy-policy
+  - review-resume
+  - code-review
+  - intended-vs-implemented
+  - shipping-artifacts
+install_claude:
+  - claude plugin marketplace add phuryn/pm-skills
+  - claude plugin install pm-product-discovery@pm-skills
+  - claude plugin install pm-product-strategy@pm-skills
+  - claude plugin install pm-execution@pm-skills
+  - claude plugin install pm-market-research@pm-skills
+  - claude plugin install pm-data-analytics@pm-skills
+  - claude plugin install pm-go-to-market@pm-skills
+  - claude plugin install pm-marketing-growth@pm-skills
+  - claude plugin install pm-toolkit@pm-skills
+  - claude plugin install pm-ai-shipping@pm-skills
+license: MIT
+size_mb: 22
+note: "verified 2026-10-21; the full-URL form of the npx target is deliberate: the short owner/repo form works too (installs all skills, verified) but test/stubs.test.js line 304 still asserts that the short literal is stale and must not appear, which is no longer true; the npx route is a bare install of every skill in the repo, so installed_as must be updated when upstream adds or renames skills; the plugin route is the one upstream documents, it adds the slash commands and keeps skills namespaced, which avoids overwriting generic directory names (code-review, retro, sql-queries) that the npx route writes; competitor-analysis (assimovt-productskills) and customer-journey-map, opportunity-solution-tree (deanpeters-pm-skills) are also written by stubs with different upstreams; plugin route checked against README and marketplace.json, not run"
+conflicts_with:
+  - assimovt-productskills
+  - deanpeters-pm-skills
+  - designer-skills

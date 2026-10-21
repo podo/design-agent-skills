@@ -5,4 +5,7 @@ rank: 3
 upstream: https://github.com/designrique/ai-graphic-design-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add designrique/ai-graphic-design-skill --skill ai-graphic-design
 installed_as: ai-graphic-design
+license: MIT
+note: "verified 2026-10-21; upstream SKILL.md is written in Portuguese"

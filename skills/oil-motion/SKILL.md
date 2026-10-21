@@ -12,6 +12,7 @@ das:
   type: skill
   category: motion-animation
   upstream: "https://github.com/oil-oil/oil-motion"
+  upstream_path: "SKILL.md"
   version: latest
 ---
 
@@ -19,13 +20,14 @@ das:
 
 > Catalogue stub — full skill: [oil-oil/oil-motion](https://github.com/oil-oil/oil-motion)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/oil-motion/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/oil-motion/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/oil-motion/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/oil-motion/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `oil-motion`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,6 +44,13 @@ das:
    ```bash
    npx skills add oil-oil/oil-motion --skill oil-motion -y
    ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** Python 3.10+, Pillow, ffmpeg and ffprobe (the skill has the agent run `pip install -r scripts/requirements.txt` at use time); For AI keyframe and video generation only (local processing of existing media needs no key): a ZenMux API key, billed per generation. Prompts, reference images and key frames are sent to ZenMux and the model providers behind it. The key-entry setup page needs Node.js 22.18+ and upstream says it has so far been verified on macOS only
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -50,7 +59,7 @@ das:
 
 ## What it does
 
-Converts an interaction intent into verified animation assets, a timeline manifest, and a web runtime. AI generation handles semantic changes such as a character turning, a product exploding into parts, or a camera flying through a scene; deterministic code handles input mapping, playback control, media processing, and performance. It also cleans up, keys out, frame-interpolates, and compresses green-screen video and sprite sheets. Four single sources of truth (concept contract, motion brief, timeline, motion budget) keep the pipeline consistent. Needs Python 3.10+, Pillow, and `ffmpeg`; AI generation defaults to ZenMux and needs an API key, while local processing of existing media does not. Skill text is in Chinese.
+Converts an interaction intent into verified animation assets, a timeline manifest, and a web runtime. AI generation handles semantic changes such as a character turning, a product exploding into parts, or a camera flying through a scene; deterministic code handles input mapping, playback control, media processing, and performance. It also cleans up, keys out, frame-interpolates, and compresses green-screen video and sprite sheets. Four single sources of truth (concept contract, motion brief, timeline, motion budget) keep the pipeline consistent. AI generation defaults to ZenMux and needs an API key (and sends prompts and images to a third party), while local processing of existing media does not; see the heads-up above. Skill text is in Chinese.
 
 ## When NOT to use
 

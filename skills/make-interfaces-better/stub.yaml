@@ -5,4 +5,7 @@ rank: 2
 upstream: https://github.com/jakubkrehel/make-interfaces-feel-better
 upstream_path: skills/make-interfaces-feel-better/SKILL.md
 version: latest
+install_default: npx skills add jakubkrehel/make-interfaces-feel-better --skill make-interfaces-feel-better
 installed_as: make-interfaces-feel-better
+license: MIT
+note: "verified 2026-10-21; upstream skill is named make-interfaces-feel-better, so it installs next to this pointer; installs SKILL.md plus 5 sibling .md files and agents/openai.yaml"

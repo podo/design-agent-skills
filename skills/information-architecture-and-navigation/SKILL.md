@@ -22,13 +22,14 @@ das:
 
 > Catalogue stub — full skill: [jpoindexter/design-and-ai-skills](https://github.com/jpoindexter/design-and-ai-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/information-architecture-and-navigation/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/information-architecture-and-navigation/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/information-architecture-and-navigation/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/information-architecture-and-navigation/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `information-architecture-and-navigation`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -45,11 +46,21 @@ das:
    ```bash
    npx skills add jpoindexter/design-and-ai-skills --skill information-architecture-and-navigation -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** no LICENSE file
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `information-architecture-and-navigation`
+- Trigger phrases: "information architecture", "navigation design", "site map structure", "card sorting analysis", "tree testing", "findability audit"
 
 ## What it does
 
-A 23.8KB IA reference built on Rosenfeld/Morville/Arango (the "polar bear book") four-systems model — organization, labeling, navigation, search — with exact-vs-ambiguous schemes, depth/breadth + faceted classification, per-device navigation patterns, wayfinding mechanics, URLs-as-IA, and the research methods (card sort, tree test, first-click) that prove findability. A strict superset of Owl’s IA skill.
+A long IA reference built on Rosenfeld/Morville/Arango (the "polar bear book") four-systems model — organization, labeling, navigation, search — with exact-vs-ambiguous schemes, depth/breadth and faceted classification, per-device navigation patterns, wayfinding mechanics, URLs-as-IA, and the research methods (card sort, tree test, first-click) that prove findability. Much more extensive than the short `information-architecture` skill in the `designer-skills` package.
 
 ## When NOT to use
 

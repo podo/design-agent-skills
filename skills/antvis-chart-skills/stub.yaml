@@ -4,5 +4,27 @@ category: data-visualization
 rank: 1
 upstream: https://github.com/antvis/chart-visualization-skills
 version: latest
-install_default: "npx skills add antvis/chart-visualization-skills"
-installed_as: chart-visualization
+install_default: npx skills add antvis/chart-visualization-skills --skill chart-visualization antv-g2-chart antv-g6-graph antv-x6-editor antv-infographic antv-t8-ntv antv-gpt-vis icon-retrieval
+installed_as:
+  - chart-visualization
+  - antv-g2-chart
+  - antv-g6-graph
+  - antv-x6-editor
+  - antv-infographic
+  - antv-t8-ntv
+  - antv-gpt-vis
+  - icon-retrieval
+install_claude:
+  - /plugin marketplace add antvis/chart-visualization-skills
+  - /plugin install chart-visualization@visualization-skills
+  - /plugin install antv-g2-chart@visualization-skills
+  - /plugin install antv-g6-graph@visualization-skills
+  - /plugin install antv-x6-editor@visualization-skills
+  - /plugin install antv-infographic@visualization-skills
+  - /plugin install antv-t8-ntv@visualization-skills
+  - /plugin install antv-gpt-vis@visualization-skills
+  - /plugin install icon-retrieval@visualization-skills
+requires:
+  - "Network access: chart-visualization POSTs your chart data to the third-party endpoint antv-studio.alipay.com to render images; antv-g2-chart, antv-g6-graph and icon-retrieval also call AntV HTTP APIs with curl"
+license: MIT
+note: "verified 2026-10-21; Chinese duplicate skill gpt-vis (same content as antv-gpt-vis) deliberately not installed; upstream also lists it, dead trigger S2/pivot table removed because antv-s2-expert no longer exists upstream; plugin route checked against marketplace.json (name visualization-skills) only, not run"

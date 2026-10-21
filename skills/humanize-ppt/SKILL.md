@@ -19,13 +19,14 @@ das:
 
 > Catalogue stub — full skill: [LearnPrompt/humanize-ppt](https://github.com/LearnPrompt/humanize-ppt)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/humanize-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/humanize-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/humanize-ppt/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/humanize-ppt/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `humanize-ppt`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,6 +43,14 @@ das:
    ```bash
    npx skills add LearnPrompt/humanize-ppt --skill humanize-ppt -y
    ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** A downstream renderer skill (it never renders slides itself): guizang-ppt-skill for Chinese decks, frontend-slides for English HTML decks
+- **License:** MIT (LICENSE file; GitHub reports it as non-standard)
+- **Download size:** ~40 MB.
+<!-- das:install:end -->
 
 ## Invoke after install
 

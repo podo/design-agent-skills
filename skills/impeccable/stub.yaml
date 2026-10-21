@@ -1,10 +1,18 @@
-type: platform
+type: skill
 tier: community
 category: design-systems
 rank: 2
 upstream: https://github.com/pbakaus/impeccable
+upstream_path: .agents/skills/impeccable/SKILL.md
 version: latest
-install_default: "npx skills add impeccable"
-install_claude: "claude plugin install pbakaus/impeccable"
-install_npm: "npm install -g impeccable"
-note: "SKILL.md contains unresolved template vars — do not curl directly"
+install_default: npx skills add pbakaus/impeccable --skill impeccable
+installed_as: impeccable
+install_claude:
+  - /plugin marketplace add pbakaus/impeccable
+  - /plugin install impeccable@impeccable
+requires:
+  - the skill's launcher (scripts/impeccable) downloads a native engine binary to ~/.impeccable/bin on first run
+  - anonymous usage telemetry is on by default (opt out with IMPECCABLE_NO_TELEMETRY=1 or DO_NOT_TRACK=1)
+license: Apache-2.0
+size_mb: 737
+note: "verified 2026-10-21; no longer a platform: upstream ships fully resolved SKILL.md copies (source template is skill/SKILL.src.md). Plugin route checked against .claude-plugin/marketplace.json only (marketplace impeccable, plugin impeccable), not run. npx skills add installs the skill only; upstream's recommended npx impeccable install also adds edit hooks. Measured install time was about 10 s despite the repo size"

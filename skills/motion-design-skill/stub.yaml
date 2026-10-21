@@ -3,5 +3,9 @@ tier: official
 category: motion-animation
 rank: 2
 upstream: https://github.com/lottiefiles/motion-design-skill
+upstream_path: skills/motion-design/SKILL.md
 version: latest
-install_default: "npx skills add LottieFiles/motion-design-skill"
+install_default: npx skills add LottieFiles/motion-design-skill --skill motion-design
+installed_as: motion-design
+license: MIT
+note: "verified 2026-10-21; upstream skill name is motion-design (not motion-design-skill) and the skill ships director/, patterns/ and reference/ folders next to SKILL.md"

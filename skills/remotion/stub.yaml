@@ -4,4 +4,23 @@ category: creative-3d
 rank: 1
 upstream: https://github.com/remotion-dev/skills
 version: latest
-note: "Upstream restructured 2026: single skills/remotion/SKILL.md split into 10 sub-skills (remotion-best-practices, remotion-create, remotion-render, remotion-captions, remotion-docs, remotion-interactivity, remotion-markup, remotion-saas, remotion-upgrade) + mediabunny. Installed as a package so all sub-skills are fetched."
+install_default: npx skills add remotion-dev/skills --skill remotion-best-practices remotion-captions remotion-create remotion-docs remotion-interactivity remotion-maps remotion-markup remotion-multimedia remotion-render remotion-saas remotion-studio remotion-upgrade
+installed_as:
+  - remotion-best-practices
+  - remotion-captions
+  - remotion-create
+  - remotion-docs
+  - remotion-interactivity
+  - remotion-maps
+  - remotion-markup
+  - remotion-multimedia
+  - remotion-render
+  - remotion-saas
+  - remotion-studio
+  - remotion-upgrade
+requires:
+  - Node.js and a Remotion project (remotion-create scaffolds one)
+license: "skills repo has no LICENSE file; Remotion itself is free for individuals, non-profits and for-profit teams up to 3 employees, otherwise a company license is required (remotion.dev/license)"
+note: "verified 2026-10-21; upstream restructured: the single remotion skill became sub-skills, mediabunny is now remotion-multimedia, remotion-maps and remotion-studio were added. Upstream is very active, so rerun verify:installs when the list changes. remotion-dev is on the CLI's blob fast-path (no full clone)."
+conflicts_with:
+  - google-stitch-skills

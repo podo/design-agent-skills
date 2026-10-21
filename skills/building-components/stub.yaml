@@ -5,3 +5,7 @@ category: visual-components
 upstream: https://github.com/vercel/components.build
 upstream_path: skills/building-components/SKILL.md
 version: latest
+install_default: npx skills add vercel/components.build --skill building-components
+installed_as: building-components
+license: Apache-2.0 (LICENSE notice; GitHub reports NOASSERTION)
+note: "verified 2026-10-21; installs SKILL.md plus 15 references/*.mdx"

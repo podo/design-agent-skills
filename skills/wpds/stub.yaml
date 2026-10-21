@@ -5,4 +5,9 @@ category: design-systems
 upstream: https://github.com/WordPress/agent-skills
 upstream_path: skills/wpds/SKILL.md
 version: latest
-note: "Works best with the WPDS MCP server configured; targets WordPress 7.0+. The repo holds many other WordPress development skills; this pointer installs only wpds"
+install_default: npx skills add WordPress/agent-skills --skill wpds
+installed_as: wpds
+requires:
+  - WPDS MCP server (@wordpress/design-system-mcp, experimental); the skill is small and defers to it instead of web lookups
+license: GPL-2.0-or-later
+note: "Works best with the WPDS MCP server configured; targets WordPress 7.0+. The repo holds many other WordPress development skills; this pointer installs only wpds. verified 2026-10-21. MCP setup (README of WordPress/gutenberg packages/design-system-mcp): claude mcp add wordpress-design-system -- npx -y --ignore-scripts @wordpress/design-system-mcp@latest. The older Automattic/wpds-mcp repo is archived in favour of that package. Default branch of the upstream repo is trunk"

@@ -1,8 +1,13 @@
 type: skill
-tier: official
+tier: community
 category: official-suites
 rank: 3
 upstream: https://github.com/ComposioHQ/awesome-claude-skills
 upstream_path: artifacts-builder/SKILL.md
-version: master
+version: latest
+install_default: npx skills add ComposioHQ/awesome-claude-skills --skill artifacts-builder
 installed_as: artifacts-builder
+requires:
+  - Node.js 18+ and a shell (the bundled init script runs `npm install -g pnpm` if pnpm is missing, then installs npm dependencies)
+license: Apache-2.0 (skill's own LICENSE.txt; the repo has no top-level LICENSE file)
+note: "verified 2026-10-21; despite the repo owner and the old pointer text this is NOT a Composio tool-integration skill. artifacts-builder is a vendored copy of Anthropic's web-artifacts-builder, listed in Composio's awesome-claude-skills collection. Tier changed official to community (Composio is not the publisher). Category left as official-suites (copy of an official skill); consider moving it."

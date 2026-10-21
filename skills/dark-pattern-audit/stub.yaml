@@ -1,6 +1,11 @@
-type: package
+type: skill
 tier: community
 category: accessibility-quality
 rank: 2
 upstream: https://github.com/SidKH/skills
+upstream_path: dark-pattern-audit/SKILL.md
 version: latest
+install_default: npx skills add SidKH/skills --skill dark-pattern-audit
+installed_as: dark-pattern-audit
+license: no LICENSE file in the repo
+note: "verified 2026-10-21. Upstream SKILL.md sets disable-model-invocation: true, so the agent cannot start it by itself; the user has to run /dark-pattern-audit. The old git clone + cp -r route nested the skill inside the pointer directory; the repo also holds docs-quiz, explain-code and understand-diff"

@@ -4,6 +4,28 @@ category: figma-code
 rank: 1
 upstream: https://github.com/figma/mcp-server-guide
 version: latest
-install_default: "npx skills add figma/mcp-server-guide"
-install_claude: "claude plugin install figma@claude-plugins-official"
-installed_as: figma-use
+install_default: npx skills add figma/mcp-server-guide --skill figma-use figma-design-to-code figma-generate-design figma-generate-library figma-code-connect figma-create-new-file figma-generate-diagram figma-use-figjam figma-use-slides figma-use-motion figma-implement-motion figma-swiftui figma-code-workflows figma-generative-plugins figma-shaders figma-spec
+installed_as:
+  - figma-use
+  - figma-design-to-code
+  - figma-generate-design
+  - figma-generate-library
+  - figma-code-connect
+  - figma-create-new-file
+  - figma-generate-diagram
+  - figma-use-figjam
+  - figma-use-slides
+  - figma-use-motion
+  - figma-implement-motion
+  - figma-swiftui
+  - figma-code-workflows
+  - figma-generative-plugins
+  - figma-shaders
+  - figma-spec
+install_claude:
+  - claude plugin install figma@claude-plugins-official
+requires:
+  - Figma account; the Figma MCP server (https://mcp.figma.com/mcp), which the Claude Code plugin sets up and the skills CLI does not
+  - a Dev or Full seat on a paid Figma plan for normal use (Starter plan, View and Collab seats are limited to 6 MCP tool calls per month)
+license: no LICENSE file
+note: "verified 2026-10-21; targeted install of the 16 skills under skills/ (same set as a bare repo install, listed so installed_as stays exact). figma-generate-design and figma-generate-library collide with the same-named skills of openai-skills, which no longer installs them. Plugin id checked against the upstream README and .claude-plugin/plugin.json, not run."

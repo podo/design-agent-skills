@@ -3,8 +3,18 @@ tier: community
 category: presentations
 rank: 3
 upstream: https://github.com/op7418/NanoBanana-PPT-Skills
-upstream_path: SKILL.md
 version: latest
-install_default: "git clone https://github.com/op7418/NanoBanana-PPT-Skills.git ~/.claude/skills/ppt-generator"
+install_mode: manual
+manual_reason: Upstream's SKILL.md has no YAML frontmatter, so the skills CLI cannot see it; upstream's own README documents this clone into the Claude Code skills directory. The pip line adds PyJWT and requests, which upstream's video scripts import but its README omits.
+install_steps:
+  - git clone https://github.com/op7418/NanoBanana-PPT-Skills.git ~/.claude/skills/ppt-generator
+  - cd ~/.claude/skills/ppt-generator && python3 -m venv venv && source venv/bin/activate
+  - pip install google-genai pillow python-dotenv PyJWT requests
+  - cp ~/.claude/skills/ppt-generator/.env.example ~/.claude/skills/ppt-generator/.env
+install_check: ~/.claude/skills/ppt-generator/SKILL.md
 installed_as: ppt-generator
-note: "Upstream SKILL.md has no YAML frontmatter, so npx skills add finds nothing (verified 2026-10-21); install is the clone documented in its README"
+requires:
+  - Python 3 and a Gemini API key (GEMINI_API_KEY in .env) for image generation
+  - Optional, for the video feature: Kling AI keys (KLING_ACCESS_KEY, KLING_SECRET_KEY) and FFmpeg
+license: MIT per the README; no LICENSE file in the repository
+note: "verified 2026-10-21; upstream_path deliberately omitted because check-installs requires frontmatter in upstream_path and the root SKILL.md has none; clone, root SKILL.md (header names it ppt-generator-pro), generate_ppt.py and .env.example exist and match the README steps; the cp/pip/venv steps are not replayed by check-installs. transition_prompt_generator.py also imports anthropic (optional)"

@@ -22,41 +22,39 @@ das:
 
 > Catalogue stub — full package: [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before using Vercel skill workflows:
+1. **Is the full skill already installed?**
+   This package installs 5 skills (`web-design-guidelines`, `writing-guidelines`, `vercel-react-best-practices`, `vercel-composition-patterns`, `vercel-react-view-transitions`); checking the first.
+   - Global: `f=~/.agents/skills/web-design-guidelines/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/web-design-guidelines/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `web-design-guidelines`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is a Vercel skill already installed?**
-   Check: `~/.agents/skills/web-design-guidelines/SKILL.md` (global) or `.agents/skills/web-design-guidelines/SKILL.md` (project) exists (representative skill).
-   - Yes → invoke the specific skill by name and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Do you have shell access?**
-   - Yes → install the specific skill below, then invoke it
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+   ```bash
+   [ -e ~/.agents/skills/vercel-skills ] && echo "global" || echo "project"
+   ```
 
-## Install command
+   **Global:**
+   ```bash
+   npx skills add vercel-labs/agent-skills --skill web-design-guidelines writing-guidelines vercel-react-best-practices vercel-composition-patterns vercel-react-view-transitions -g -y
+   ```
 
-All skills live in the single `vercel-labs/agent-skills` repo; pick one with `--skill` (add `-g` for global install):
+   **Project:**
+   ```bash
+   npx skills add vercel-labs/agent-skills --skill web-design-guidelines writing-guidelines vercel-react-best-practices vercel-composition-patterns vercel-react-view-transitions -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
-```bash
-# Review UI code against the Web Interface Guidelines
-npx skills add vercel-labs/agent-skills --skill web-design-guidelines -y
+**Heads-up**
 
-# Review docs and prose against the Writing Guidelines
-npx skills add vercel-labs/agent-skills --skill writing-guidelines -y
-
-# React/Next.js performance optimization
-npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices -y
-
-# React component composition and reusable patterns
-npx skills add vercel-labs/agent-skills --skill vercel-composition-patterns -y
-
-# Native-feeling animations with React's View Transition API
-npx skills add vercel-labs/agent-skills --skill vercel-react-view-transitions -y
-```
-
-For accessible, composable component authoring, see `building-components` (a separate Vercel repo).
+- **Requires:** Network access at use time: web-design-guidelines and writing-guidelines are thin skills that fetch their current rules from vercel-labs/web-interface-guidelines and vercel-labs/writing-guidelines on GitHub before each review
+- **License:** no LICENSE file in the repository
+- **Name collision:** `web-design-guidelines` is also written by `platform-design-skills` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -68,4 +66,11 @@ For accessible, composable component authoring, see `building-components` (a sep
 
 ## What it does
 
-Vercel's official skill collection: reviews UI code against the Web Interface Guidelines, reviews prose against the Writing Guidelines, optimizes React/Next.js performance, establishes reusable component composition patterns, and guides smooth native-feeling transitions with the React View Transition API. The repo also holds Vercel deployment and CLI skills that are not catalogued here.
+Vercel's official skill collection, narrowed to the design-relevant five: reviews UI code against the Web Interface Guidelines, reviews prose against the Writing Guidelines (both fetch their current rules from GitHub at use time), optimizes React/Next.js performance, establishes reusable component composition patterns, and guides smooth native-feeling transitions with the React View Transition API. The repo also holds Vercel deployment, CLI, optimization and React Native skills that are not catalogued here.
+
+For accessible, composable component authoring, see `building-components` (a separate Vercel repo).
+
+## When NOT to use
+
+- Review of platform-specific Apple or Android UI guidelines — use `platform-design-skills` (note it also installs a different skill named `web-design-guidelines`, so installing both overwrites one)
+- Component library setup rather than review — use `shadcn-ui`

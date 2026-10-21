@@ -5,3 +5,11 @@ rank: 3
 upstream: https://github.com/alchaincyf/huashu-design
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add alchaincyf/huashu-design --skill huashu-design
+requires:
+  - Python 3 for the skill's helper scripts (learn.py, design_lint.py, capabilities.py)
+  - Node.js with the packages in the skill's package.json (Playwright, pptxgenjs, sharp, pdf-lib) and ffmpeg on PATH for PPTX, PDF, MP4 and GIF export; the skills CLI installs none of these
+license: MIT
+size_mb: 224
+note: "verified 2026-10-21; the repo root is the skill (SKILL.md plus references/, assets/, scripts/, demos/), about 47 MB installed because of audio and video assets. Real installs succeeded; a clone timed out at the CLI default 300 s only under 8-way parallel load. Agent-facing prompts (SKILL.md, references) are in Chinese; upstream says the agent works fine with English tasks"
+installed_as: huashu-design

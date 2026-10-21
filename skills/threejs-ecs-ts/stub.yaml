@@ -4,6 +4,31 @@ category: creative-3d
 rank: 3
 upstream: https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts
 version: latest
-install_default: "git clone https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts.git && ln -s \"$(pwd)/claude-skills-threejs-ecs-ts\" ~/.claude/plugins/threejs-ecs-skills"
-installed_as: threejs-ecs-skills
-note: "Upstream has no SKILL.md (plain markdown + plugin manifest), so npx skills add finds nothing (verified 2026-10-21); install is the clone + symlink from its README"
+install_default: npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/architecture.md
+install_extra:
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/component-patterns.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/system-patterns.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/queries.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/events.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/serialization.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/ecs/performance.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/typescript/game-types.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/typescript/typescript-ecs-types.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/typescript/typescript-performance.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/threejs/scene-setup.md
+  - npx skills add https://raw.githubusercontent.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts/main/skills/react/r3f-ecs-integration.md
+license: MIT
+note: "verified 2026-10-21; upstream has no SKILL.md files, only topic markdown under skills/<area>/<topic>.md, each with name/description frontmatter, plus a non-standard claude-code-plugin.json. Its README route (git clone + ln -s into ~/.claude/plugins) registers nothing in Claude Code. The skills CLI accepts a raw URL to such a file and installs it as a skill named by its frontmatter, so each topic is one command; this stub installs the ECS, TypeScript, scene-setup and R3F-ECS core and the repo holds many more topics (three.js, mobile, react, game-systems) that can be added the same way. Upstream status doc says all of them are complete; README lists far fewer"
+installed_as:
+  - ecs-architecture
+  - ecs-component-patterns
+  - ecs-system-patterns
+  - ecs-queries
+  - ecs-events
+  - ecs-serialization
+  - ecs-performance
+  - typescript-game-types
+  - typescript-ecs-types
+  - typescript-performance
+  - threejs-scene-setup
+  - r3f-ecs-integration

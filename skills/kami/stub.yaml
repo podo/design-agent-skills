@@ -5,3 +5,18 @@ category: presentations
 upstream: https://github.com/tw93/Kami
 upstream_path: skills/kami/SKILL.md
 version: latest
+install_mode: manual
+manual_reason: The repo is ~180 MB (fonts, site assets) and a plain `npx skills add tw93/Kami` clone takes minutes and can hit the CLI's 300 s clone timeout. Cloning only `skills/kami` (about 3 MB) takes seconds, then the skills CLI installs it from that local path. This is a project install; add `-g` to the last command for a global one (the installed check then lives under `~/.agents/skills/kami/`). If `/tmp/kami-skill` already exists, remove it first.
+install_steps:
+  - git clone --depth=1 --filter=blob:none --sparse https://github.com/tw93/Kami.git /tmp/kami-skill
+  - git -C /tmp/kami-skill sparse-checkout set skills/kami
+  - npx skills add /tmp/kami-skill/skills/kami -y
+install_check: .agents/skills/kami/CHEATSHEET.md
+installed_as: kami
+install_claude:
+  - /plugin marketplace add tw93/kami
+  - /plugin install kami@kami
+requires:
+  - Python 3 with WeasyPrint to build PDFs (python-pptx for editable PPTX); the commercial TsangerJinKai02 CJK font is not bundled
+license: MIT
+note: "verified 2026-10-21; size_mb deliberately omitted (repo is ~180 MB but the sparse route downloads ~3 MB, so the generated large-download warning would mislead). Shallow full clone took 111 s here, the sparse clone 7 s; a plain `npx skills add tw93/Kami --skill kami` timed out at the default 300 s clone timeout under load and only passed with SKILLS_CLONE_TIMEOUT_MS=900000. CHEATSHEET.md exists only in the real skill (the pointer has none), so it makes the installed check discriminating. Plugin route taken from the upstream README (marketplace and plugin both named kami), not run"

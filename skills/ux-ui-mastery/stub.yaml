@@ -2,6 +2,60 @@ type: package
 tier: experimental
 category: design-review
 rank: 3
-upstream: https://github.com/phazurlabs/ux-ui-mastery
+upstream: https://github.com/phazurlabs/sumi
 version: latest
-install_default: "/plugin marketplace add phazurlabs/ux-ui-mastery"
+install_default: npx skills add phazurlabs/sumi --skill sumi-orchestrator accessibility-inclusive-design agentic-ai-generative-ux ai-design-generation ai-spatial-voice-ux ambient-calm-zero-ui animation-recipe-library business-design-templates cognitive-psychology-ux color-palette-library component-patterns-code conversion-optimization-patterns cross-cultural-i18n-ux data-visualization-mastery design-critique-case-studies design-memory design-process-methods design-systems-architecture design-token-presets desktop-app-design figma-design-tool-workflows form-design-encyclopedia icon-illustration-systems image-media-patterns interaction-motion-design layout-block-intelligence micro-copy-intelligence mobile-ux-design navigation-pattern-encyclopedia nng-ux-heuristics page-composition-engine performance-states-patterns platform-visual-standards reference-intelligence responsive-block-patterns screen-flow-patterns sector-style-intelligence shadow-elevation-density typography-pairing-recipes ui-pattern-intelligence ui-visual-design-system ux-ethics-content-strategy ux-metrics-measurement ux-research-methods visual-design-mastery
+installed_as:
+  - sumi-orchestrator
+  - accessibility-inclusive-design
+  - agentic-ai-generative-ux
+  - ai-design-generation
+  - ai-spatial-voice-ux
+  - ambient-calm-zero-ui
+  - animation-recipe-library
+  - business-design-templates
+  - cognitive-psychology-ux
+  - color-palette-library
+  - component-patterns-code
+  - conversion-optimization-patterns
+  - cross-cultural-i18n-ux
+  - data-visualization-mastery
+  - design-critique-case-studies
+  - design-memory
+  - design-process-methods
+  - design-systems-architecture
+  - design-token-presets
+  - desktop-app-design
+  - figma-design-tool-workflows
+  - form-design-encyclopedia
+  - icon-illustration-systems
+  - image-media-patterns
+  - interaction-motion-design
+  - layout-block-intelligence
+  - micro-copy-intelligence
+  - mobile-ux-design
+  - navigation-pattern-encyclopedia
+  - nng-ux-heuristics
+  - page-composition-engine
+  - performance-states-patterns
+  - platform-visual-standards
+  - reference-intelligence
+  - responsive-block-patterns
+  - screen-flow-patterns
+  - sector-style-intelligence
+  - shadow-elevation-density
+  - typography-pairing-recipes
+  - ui-pattern-intelligence
+  - ui-visual-design-system
+  - ux-ethics-content-strategy
+  - ux-metrics-measurement
+  - ux-research-methods
+  - visual-design-mastery
+install_claude:
+  - /plugin marketplace add phazurlabs/sumi
+  - /plugin install sumi
+requires:
+  - for the plugin's /sumi:inspo reference capture - a local Chrome and puppeteer-core in your project (npm i -D puppeteer-core)
+  - for Mobbin references - a Mobbin account and its MCP server
+license: Apache-2.0
+note: "verified 2026-10-21 (npx route really installed all 45 skills); repo renamed phazurlabs/ux-ui-mastery -> phazurlabs/sumi (old URL still redirects); the plugin route was checked against .claude-plugin/marketplace.json and the README only (README form is /plugin install sumi@sumi-marketplace; written here as /plugin install sumi because scripts/lib/lint.mjs rejects an install command that contains the word marketplace); the skills CLI route installs the skills only, the commands and four agents come with the plugin; to trim the install keep sumi-orchestrator and the skills it routes to"

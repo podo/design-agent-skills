@@ -5,3 +5,7 @@ rank: 3
 upstream: https://github.com/ceorkm/mobile-app-ui-design
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add ceorkm/mobile-app-ui-design --skill mobile-app-ui-design
+installed_as: mobile-app-ui-design
+license: no LICENSE file in the repo
+note: "verified 2026-10-21; installs SKILL.md plus INDEX.md, README.md and references/"

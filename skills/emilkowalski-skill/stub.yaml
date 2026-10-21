@@ -4,6 +4,25 @@ category: design-engineering
 rank: 1
 upstream: https://github.com/emilkowalski/skills
 version: latest
-install_default: "npx skills add emilkowalski/skills"
-note: "Repo was renamed from emilkowalski/skill; use --skill emil-design-eng to install just the core skill"
-installed_as: emil-design-eng
+install_default: npx skills add emilkowalski/skills --skill emil-design-eng animate animate-expo animation-performance animation-vocabulary apple-design ask-sonner break-ui find-animation-opportunities improve-animations mobile-native pick-ui-library prototype review-animations write-swift
+installed_as:
+  - emil-design-eng
+  - animate
+  - animate-expo
+  - animation-performance
+  - animation-vocabulary
+  - apple-design
+  - ask-sonner
+  - break-ui
+  - find-animation-opportunities
+  - improve-animations
+  - mobile-native
+  - pick-ui-library
+  - prototype
+  - review-animations
+  - write-swift
+license: MIT
+note: "verified 2026-10-21; repo renamed from emilkowalski/skill; to install only the core skill use --skill emil-design-eng; the generic dir names animate (also written by animate-skill and ui-craft) and prototype (also written by design-for-ai) collide with other stubs that have different upstreams"
+conflicts_with:
+  - animate-skill
+  - design-for-ai

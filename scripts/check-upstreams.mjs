@@ -49,12 +49,16 @@ if (!token) {
 
 const field = (raw, key) => (raw.match(new RegExp(`^${key}:\\s*(.+)$`, 'm')) || [])[1]?.trim();
 
-/** GET with retry on transient errors (network failure, 5xx, secondary rate limit). */
+/**
+ * GET with retry on transient errors (network failure, 5xx, secondary rate limit). GitHub answers a
+ * burst of requests with a plain 403 even when the hourly quota is nowhere near used, so 403 is retried
+ * with a growing delay too; a repo that is really forbidden still ends up as "could not verify".
+ */
 async function getJSON(url, attempt = 1) {
   try {
     const r = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(10000) });
-    if ((r.status >= 500 || r.status === 429) && attempt < 3) {
-      await new Promise(res => setTimeout(res, 500 * attempt));
+    if ((r.status >= 500 || r.status === 429 || r.status === 403) && attempt < (r.status === 403 ? 4 : 3)) {
+      await new Promise(res => setTimeout(res, (r.status === 403 ? 1500 : 500) * attempt));
       return getJSON(url, attempt + 1);
     }
     return r;
@@ -75,7 +79,13 @@ const dirs = fs.readdirSync(SKILLS_DIR).filter(n => {
   try { return fs.statSync(path.join(SKILLS_DIR, n)).isDirectory(); } catch { return false; }
 });
 
-await Promise.all(dirs.map(async name => {
+// Bounded: ~160 simultaneous requests trip GitHub's secondary rate limit, which then hides real problems.
+async function pool(items, fn, n) {
+  const queue = [...items];
+  await Promise.all(Array.from({ length: n }, async () => { while (queue.length) await fn(queue.shift()); }));
+}
+
+await pool(dirs, async name => {
   if (ONLY && !ONLY.has(name)) return;            // PR-scoped: only the changed skills
   const stubPath = path.join(SKILLS_DIR, name, 'stub.yaml');
   if (!fs.existsSync(stubPath)) return;
@@ -115,7 +125,7 @@ await Promise.all(dirs.map(async name => {
       if (r.status === 404) stale.push(`${name}: upstream_path "${upPath}" not found in ${repo}@${branch}`);
     }
   }
-}));
+}, 6);
 
 if (stale.length) {
   console.warn(`\n⚠ ${stale.length} stale/unverified upstream(s):\n  ${stale.join('\n  ')}`);

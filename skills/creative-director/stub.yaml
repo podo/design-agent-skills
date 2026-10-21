@@ -5,3 +5,7 @@ rank: 2
 upstream: https://github.com/smixs/creative-director-skill
 upstream_path: creative-director/SKILL.md
 version: latest
+install_default: npx skills add smixs/creative-director-skill --skill creative-director
+installed_as: creative-director
+license: CC-BY-4.0 (attribution required: Serge Shima)
+note: "verified 2026-10-21; installs SKILL.md plus a large references/ tree (~600 files, ~2 MB)"

@@ -19,13 +19,14 @@ das:
 
 > Catalogue stub — full skill: [WordPress/agent-skills](https://github.com/WordPress/agent-skills) (`skills/wpds`)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/wpds/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/wpds/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/wpds/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/wpds/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `wpds`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,12 +43,19 @@ das:
    ```bash
    npx skills add WordPress/agent-skills --skill wpds -y
    ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** WPDS MCP server (@wordpress/design-system-mcp, experimental); the skill is small and defers to it instead of web lookups
+- **License:** GPL-2.0-or-later
+<!-- das:install:end -->
 
 ## Invoke after install
 
 - Skill name: `wpds`
 - Trigger phrases: "WordPress Design System", "WPDS", "WordPress design tokens", "WordPress UI components"
-- Works best with the WPDS MCP server configured and running; it targets WordPress 7.0+
+- Needs the WPDS MCP server configured and running; it targets WordPress 7.0+. Ask the user before adding it. For Claude Code the upstream package documents: `claude mcp add wordpress-design-system -- npx -y --ignore-scripts @wordpress/design-system-mcp@latest` (the package is WordPress/gutenberg `packages/design-system-mcp`, still experimental)
 
 ## What it does
 

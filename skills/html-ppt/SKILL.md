@@ -20,13 +20,14 @@ das:
 
 > Catalogue stub — full skill: [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/html-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/html-ppt/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/html-ppt/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/html-ppt/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `html-ppt`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -43,6 +44,12 @@ das:
    ```bash
    npx skills add lewislulu/html-ppt-skill --skill html-ppt -y
    ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -55,7 +62,7 @@ Authors professional presentations as plain static HTML/CSS/JS, driven by a toke
 
 ## When NOT to use
 
-- Editable `.pptx` output → use `kami` or `guizang-ppt`
+- Editable `.pptx` output → use `anthropics-skills` (its `pptx` skill)
 - Markdown-driven developer decks → use `slidev-skill`, `marp-slides`, or `revealjs-skill`
 - A different animation-rich HTML presentation approach → use `frontend-slides`
 - Planning the story and auditing delivery before rendering → use `humanize-ppt`

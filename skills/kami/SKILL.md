@@ -20,33 +20,40 @@ das:
 
 > Catalogue stub — full skill: [tw93/Kami](https://github.com/tw93/Kami)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/kami/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/kami/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   Check: `.agents/skills/kami/CHEATSHEET.md` exists.
+   - Yes → invoke it and proceed
+   - No → go to step 2
 
-2. **Detect scope, then install:**
+2. **Install** (the skills CLI cannot install this one):
+
+   The repo is ~180 MB (fonts, site assets) and a plain `npx skills add tw93/Kami` clone takes minutes and can hit the CLI's 300 s clone timeout. Cloning only `skills/kami` (about 3 MB) takes seconds, then the skills CLI installs it from that local path. This is a project install; add `-g` to the last command for a global one (the installed check then lives under `~/.agents/skills/kami/`). If `/tmp/kami-skill` already exists, remove it first.
 
    ```bash
-   [ -e ~/.agents/skills/kami ] && echo "global" || echo "project"
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/tw93/Kami.git /tmp/kami-skill
+   git -C /tmp/kami-skill sparse-checkout set skills/kami
+   npx skills add /tmp/kami-skill/skills/kami -y
    ```
 
-   **Global:**
-   ```bash
-   npx skills add tw93/Kami --skill kami -g -y
-   ```
+**Claude Code plugin route:**
 
-   **Project:**
-   ```bash
-   npx skills add tw93/Kami --skill kami -y
-   ```
+```
+/plugin marketplace add tw93/kami
+/plugin install kami@kami
+```
+
+**Heads-up**
+
+- **Requires:** Python 3 with WeasyPrint to build PDFs (python-pptx for editable PPTX); the commercial TsangerJinKai02 CJK font is not bundled
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `kami` (also available as the `/kami` command)
+- Skill name: `kami` (also available as the /kami command; the Claude Code plugin route namespaces it as /kami:kami)
 - Trigger phrases: "Kami document typesetting", "Kami templates", "typeset a resume", "white paper layout"
 
 ## What it does

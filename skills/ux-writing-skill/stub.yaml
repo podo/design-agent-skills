@@ -5,4 +5,10 @@ rank: 1
 upstream: https://github.com/content-designer/ux-writing-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add content-designer/ux-writing-skill --skill ux-writing
 installed_as: ux-writing
+license: MIT
+size_mb: 21
+note: "verified 2026-10-21; upstream skill name is ux-writing (not ux-writing-skill); the install copies the whole repo (about 35 MB including two demo mp4 files, dist/ and index.html) into the skill directory; ux-writing is a generic directory name that other skills also use; git clone of this repo was intermittently very slow on a saturated link (66 s once, over 15 min another time), retry with SKILLS_CLONE_TIMEOUT_MS=900000"
+conflicts_with:
+  - designer-skills

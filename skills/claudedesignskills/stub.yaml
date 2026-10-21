@@ -4,4 +4,38 @@ category: motion-animation
 rank: 2
 upstream: https://github.com/freshtechbro/claudedesignskills
 version: latest
-install_default: "/plugin marketplace add freshtechbro/claudedesignskills"
+install_default: npx skills add freshtechbro/claudedesignskills --skill threejs-webgl gsap-scrolltrigger react-three-fiber motion-framer babylonjs-engine aframe-webxr lightweight-3d-effects playcanvas-engine pixijs-2d locomotive-scroll barba-js react-spring-physics animated-component-libraries scroll-reveal-libraries animejs lottie-animations blender-web-pipeline spline-interactive rive-interactive substance-3d-texturing web3d-integration-patterns modern-web-design
+installed_as:
+  - threejs-webgl
+  - gsap-scrolltrigger
+  - react-three-fiber
+  - motion-framer
+  - babylonjs-engine
+  - aframe-webxr
+  - lightweight-3d-effects
+  - playcanvas-engine
+  - pixijs-2d
+  - locomotive-scroll
+  - barba-js
+  - react-spring-physics
+  - animated-component-libraries
+  - scroll-reveal-libraries
+  - animejs
+  - lottie-animations
+  - blender-web-pipeline
+  - spline-interactive
+  - rive-interactive
+  - substance-3d-texturing
+  - web3d-integration-patterns
+  - modern-web-design
+install_claude:
+  - /plugin marketplace add freshtechbro/claudedesignskills
+  - /plugin install core-3d-animation@claude-design-skillstack
+  - /plugin install extended-3d-scroll@claude-design-skillstack
+  - /plugin install animation-components@claude-design-skillstack
+  - /plugin install authoring-motion@claude-design-skillstack
+  - /plugin install meta-skills@claude-design-skillstack
+license: MIT
+note: "verified 2026-10-21 (npx route really installed); the repo also ships a skill-creator that is deliberately left out because it would overwrite the skill-creator dir of other stubs; the plugin route (5 bundles from marketplace claude-design-skillstack, also adds slash commands and agents) was checked against .claude-plugin/marketplace.json only; fixed trigger typo Spine -> Spline"
+conflicts_with:
+  - gsap-skills

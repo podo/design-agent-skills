@@ -23,40 +23,46 @@ das:
 
 > Catalogue stub — full package: [fal-ai-community/skills](https://github.com/fal-ai-community/skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before using fal.ai generation features:
+1. **Is the full skill already installed?**
+   This package installs 16 skills (`genmedia`, `model-routing`, `fal-models-catalog`, `fal-prompting`, `fal-recipes`, `character-design`, `cinematography`, `commercial`, `marketing`, `storytelling`, `ugc`, `fal-gamedev`, `fal-redesign`, `fal-regenerate-3d`, `fan-cam`, `genmedia-workflow`); checking the first.
+   - Global: `f=~/.agents/skills/genmedia/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/genmedia/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `genmedia`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is a fal.ai skill already installed?**
-   Check: `~/.agents/skills/genmedia/SKILL.md` (global) or `.agents/skills/genmedia/SKILL.md` (project) exists.
-   - Yes → invoke the specific skill by name and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+   ```bash
+   [ -e ~/.agents/skills/fal-ai-skills ] && echo "global" || echo "project"
+   ```
 
-## Install command
+   **Global:**
+   ```bash
+   npx skills add fal-ai-community/skills --skill genmedia model-routing fal-models-catalog fal-prompting fal-recipes character-design cinematography commercial marketing storytelling ugc fal-gamedev fal-redesign fal-regenerate-3d fan-cam genmedia-workflow -g -y
+   ```
 
-```bash
-# Everything in the package
-npx skills add fal-ai-community/skills -y
+   **Project:**
+   ```bash
+   npx skills add fal-ai-community/skills --skill genmedia model-routing fal-models-catalog fal-prompting fal-recipes character-design cinematography commercial marketing storytelling ugc fal-gamedev fal-redesign fal-regenerate-3d fan-cam genmedia-workflow -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
-# Or pick skills with --skill (add -g for global install)
-npx skills add fal-ai-community/skills --skill genmedia -y        # the CLI core every other skill calls
-npx skills add fal-ai-community/skills --skill fal-recipes -y     # use-case pipelines
-npx skills add fal-ai-community/skills --skill fal-redesign -y    # website redesign from screenshots
-```
+**Heads-up**
 
-Requires a fal.ai account and API key for generation.
+- **Requires:** fal.ai account and API key (FAL_KEY); generation calls are charged per endpoint (check cost with `genmedia pricing`); the genmedia CLI (the genmedia skill installs it with `curl https://genmedia.sh/install -fsS | bash`; source at fal-ai-community/genmedia-cli)
+- **License:** MIT per the README; no LICENSE file in the repo
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- `genmedia` — "fal generate", "generate image fal", "generate video fal"
+- `genmedia` — "fal generate", "generate image fal", "generate video fal" (the CLI core every other skill calls)
 - `fal-models-catalog` / `model-routing` — choosing the right endpoint per modality
 - `fal-prompting` / `fal-recipes` — family-specific prompt craft and use-case pipelines
 - `fal-regenerate-3d` — "fal 3D", "3D model from image"
-- `fal-redesign`, `fal-gamedev`, `character-design`, `cinematography`, `commercial`, `marketing`, `storytelling`, `ugc` — production and vertical skills
+- `fal-redesign`, `fal-gamedev`, `fan-cam`, `genmedia-workflow`, `character-design`, `cinematography`, `commercial`, `marketing`, `storytelling`, `ugc` — production and vertical skills
 
 ## What it does
 

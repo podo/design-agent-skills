@@ -3,5 +3,12 @@ tier: experimental
 category: interaction-polish
 rank: 3
 upstream: https://github.com/Dammyjay93/interface-design
+upstream_path: .claude/skills/interface-design/SKILL.md
 version: latest
-install_default: "npx skills add Dammyjay93/interface-design"
+install_default: npx skills add Dammyjay93/interface-design --skill interface-design
+installed_as: interface-design
+install_claude:
+  - /plugin marketplace add Dammyjay93/interface-design
+  - /plugin install interface-design@interface-design
+license: MIT
+note: "verified 2026-10-21; upstream skill name is interface-design (not interface-design-dammyjay) and lives at .claude/skills/interface-design/SKILL.md; the skills CLI installs only the skill, the plugin route also adds the commands design-review and design-deslop; plugin route read from marketplace.json and the upstream README, not run"

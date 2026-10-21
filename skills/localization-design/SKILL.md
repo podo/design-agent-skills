@@ -22,13 +22,14 @@ das:
 
 > Catalogue stub — full skill: [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/localization-design/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/localization-design/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/localization-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/localization-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `localization-design`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -45,13 +46,31 @@ das:
    ```bash
    npx skills add Owl-Listener/designer-skills --skill localization-design -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add Owl-Listener/designer-skills
+/plugin install design-systems@designer-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `localization-design`
+- Trigger phrases: "localization design", "RTL layout design", "text expansion design", "internationalization design", "right-to-left UI"
 
 ## What it does
 
-Owls best-in-class localization-design skill. Covers the failure modes generic agents miss: text-expansion budgets per language (German +35%, Finnish +40%), full RTL layout mirroring (what flips vs what does not), non-Latin script typography, `margin-inline-start`-style logical properties, and culturally loaded color/icon meanings. Web research found no public skill with deeper localization-*design* coverage.
+Design guidance for shipping an interface in more than one locale. Covers the failure modes generic agents miss: text-expansion budgets per language (German, French, Finnish and others), full RTL layout mirroring (what flips and what does not, including icons), non-Latin script typography, `margin-inline-start`-style logical properties, locale-aware date, time and number formats, and culturally loaded color and icon meanings. It covers localization-*design*; for the words themselves it defers to a UX writing skill.
 
 ## When NOT to use
 
 - Pure string/i18n plumbing (use an i18n library, not a design skill)
 - General accessibility audits → use `wcag-audit-patterns` or `fixing-accessibility`
+- The wording of interface copy itself (use `ux-writing-skill`)

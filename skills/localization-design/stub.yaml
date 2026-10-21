@@ -5,3 +5,10 @@ rank: 2
 upstream: https://github.com/Owl-Listener/designer-skills
 upstream_path: design-systems/skills/localization-design/SKILL.md
 version: latest
+install_default: npx skills add Owl-Listener/designer-skills --skill localization-design
+installed_as: localization-design
+install_claude:
+  - /plugin marketplace add Owl-Listener/designer-skills
+  - /plugin install design-systems@designer-skills
+license: MIT
+note: "verified 2026-10-21; the plugin route installs the whole design-systems plugin (this skill plus its siblings), checked against .claude-plugin/marketplace.json only, not run. Same upstream repo as designer-skills"

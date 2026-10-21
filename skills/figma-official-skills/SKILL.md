@@ -24,51 +24,44 @@ das:
 
 > Catalogue stub — full package: [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any Figma ↔ code workflow:
+1. **Is the full skill already installed?**
+   This package installs 16 skills (`figma-use`, `figma-design-to-code`, `figma-generate-design`, `figma-generate-library`, `figma-code-connect`, `figma-create-new-file`, `figma-generate-diagram`, `figma-use-figjam`, `figma-use-slides`, `figma-use-motion`, `figma-implement-motion`, `figma-swiftui`, `figma-code-workflows`, `figma-generative-plugins`, `figma-shaders`, `figma-spec`); checking the first.
+   - Global: `f=~/.agents/skills/figma-use/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/figma-use/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `figma-use`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is a Figma skill already installed?**
-   Check: `~/.agents/skills/figma-use/SKILL.md` (global) or `.agents/skills/figma-use/SKILL.md` (project) exists (representative skill).
-   - Yes → invoke the specific Figma skill by name and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Do you have shell access?**
-   - Yes → install the specific skill below, then invoke it
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+   ```bash
+   [ -e ~/.agents/skills/figma-official-skills ] && echo "global" || echo "project"
+   ```
 
-## Install command
+   **Global:**
+   ```bash
+   npx skills add figma/mcp-server-guide --skill figma-use figma-design-to-code figma-generate-design figma-generate-library figma-code-connect figma-create-new-file figma-generate-diagram figma-use-figjam figma-use-slides figma-use-motion figma-implement-motion figma-swiftui figma-code-workflows figma-generative-plugins figma-shaders figma-spec -g -y
+   ```
 
-These skills drive the Figma MCP server, so it must be connected too. In Claude Code the official plugin installs the MCP server settings and the skills together:
+   **Project:**
+   ```bash
+   npx skills add figma/mcp-server-guide --skill figma-use figma-design-to-code figma-generate-design figma-generate-library figma-code-connect figma-create-new-file figma-generate-diagram figma-use-figjam figma-use-slides figma-use-motion figma-implement-motion figma-swiftui figma-code-workflows figma-generative-plugins figma-shaders figma-spec -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
-```bash
+**Claude Code plugin route:**
+
+```
 claude plugin install figma@claude-plugins-official
 ```
 
-With the skills CLI (any agent), install only what you need with `--skill` (add `-g` for global install):
+**Heads-up**
 
-```bash
-# Foundations for the use_figma MCP tool (Plugin API scripting)
-npx skills add figma/mcp-server-guide --skill figma-use -y
-
-# Figma design to production code
-npx skills add figma/mcp-server-guide --skill figma-design-to-code -y
-
-# Build or update Figma screens from code or a description
-npx skills add figma/mcp-server-guide --skill figma-generate-design -y
-
-# Build a design system library in Figma from a codebase
-npx skills add figma/mcp-server-guide --skill figma-generate-library -y
-
-# Map Figma components to code (Code Connect)
-npx skills add figma/mcp-server-guide --skill figma-code-connect -y
-
-# Create a blank Figma, FigJam, or Slides file
-npx skills add figma/mcp-server-guide --skill figma-create-new-file -y
-
-# Or everything in the package
-npx skills add figma/mcp-server-guide -y
-```
+- **Requires:** Figma account; the Figma MCP server (https://mcp.figma.com/mcp), which the Claude Code plugin sets up and the skills CLI does not; a Dev or Full seat on a paid Figma plan for normal use (Starter plan, View and Collab seats are limited to 6 MCP tool calls per month)
+- **License:** no LICENSE file
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -85,8 +78,16 @@ npx skills add figma/mcp-server-guide -y
 | `figma-implement-motion` | "implement this motion", "animate from Figma" |
 | `figma-swiftui` | SwiftUI ↔ Figma in either direction |
 
-Also in the package: `figma-code-workflows`, `figma-generative-plugins`, `figma-shaders`, `figma-spec`.
+Also installed: `figma-code-workflows`, `figma-generative-plugins`, `figma-shaders`, `figma-spec`.
 
 ## What it does
 
 Official Figma skill suite covering the complete design ↔ code bridge. Converts Figma designs to production code, generates or updates Figma screens from code changes, builds design system libraries, connects Figma components to code components via Code Connect, scripts the Figma Plugin API for custom automation, and extends to FigJam, Slides, motion, shaders, and SwiftUI. Each skill is a required prerequisite before calling its matching Figma MCP tool.
+
+These skills drive the Figma MCP server, so it must be connected too and you need a Figma account. In Claude Code the official plugin sets up the MCP server and the skills together; with the skills CLI you get only the skills and add the server yourself (`claude mcp add --transport http figma https://mcp.figma.com/mcp`).
+
+## When NOT to use
+
+- Design-token compliance on every Figma write against an existing design system — use `claude2figma`
+- Token architecture outside Figma — use `design-tokens-skill`
+- Static design-to-code without the Figma MCP server (the skills assume the server's tools)

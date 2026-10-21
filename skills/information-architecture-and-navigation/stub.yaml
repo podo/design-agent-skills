@@ -5,3 +5,7 @@ rank: 2
 upstream: https://github.com/jpoindexter/design-and-ai-skills
 upstream_path: design-system-skills/information-architecture-and-navigation/SKILL.md
 version: latest
+install_default: npx skills add jpoindexter/design-and-ai-skills --skill information-architecture-and-navigation
+installed_as: information-architecture-and-navigation
+license: no LICENSE file
+note: "verified 2026-10-21; single skill inside a multi-skill repo, --skill name matches the upstream frontmatter."

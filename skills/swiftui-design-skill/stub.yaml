@@ -4,3 +4,6 @@ rank: 2
 category: visual-components
 upstream: https://github.com/wholiver/swiftui-design-skill
 version: latest
+install_default: npx skills add wholiver/swiftui-design-skill --skill swiftui-design-skill
+installed_as: swiftui-design-skill
+license: MIT
