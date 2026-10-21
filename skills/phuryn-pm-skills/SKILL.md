@@ -30,7 +30,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   This package installs 69 skills (`analyze-feature-requests`, `brainstorm-experiments-existing`, `brainstorm-experiments-new`, `brainstorm-ideas-existing`, `brainstorm-ideas-new`, `identify-assumptions-existing`, `identify-assumptions-new`, `interview-script`, `metrics-dashboard`, `opportunity-solution-tree`, `prioritize-assumptions`, `prioritize-features`, `summarize-interview`, `ansoff-matrix`, `business-model`, `lean-canvas`, `monetization-strategy`, `pestle-analysis`, `porters-five-forces`, `pricing-strategy`, `product-strategy`, `product-vision`, `startup-canvas`, `swot-analysis`, `value-proposition`, `brainstorm-okrs`, `create-prd`, `dummy-dataset`, `job-stories`, `outcome-roadmap`, `pre-mortem`, `prioritization-frameworks`, `release-notes`, `retro`, `sprint-plan`, `stakeholder-map`, `strategy-red-team`, `summarize-meeting`, `test-scenarios`, `user-stories`, `wwas`, `competitor-analysis`, `customer-journey-map`, `market-segments`, `market-sizing`, `sentiment-analysis`, `user-personas`, `user-segmentation`, `ab-test-analysis`, `cohort-analysis`, `sql-queries`, `beachhead-segment`, `competitive-battlecard`, `growth-loops`, `gtm-motions`, `gtm-strategy`, `ideal-customer-profile`, `marketing-ideas`, `north-star-metric`, `positioning-ideas`, `product-name`, `value-prop-statements`, `draft-nda`, `grammar-check`, `privacy-policy`, `review-resume`, `code-review`, `intended-vs-implemented`, `shipping-artifacts`); checking the first.
+   This package installs 58 skills (`analyze-feature-requests`, `brainstorm-experiments-existing`, `brainstorm-experiments-new`, `brainstorm-ideas-existing`, `brainstorm-ideas-new`, `identify-assumptions-existing`, `identify-assumptions-new`, `interview-script`, `metrics-dashboard`, `opportunity-solution-tree`, `prioritize-assumptions`, `prioritize-features`, `summarize-interview`, `ansoff-matrix`, `business-model`, `lean-canvas`, `monetization-strategy`, `pestle-analysis`, `porters-five-forces`, `pricing-strategy`, `product-strategy`, `product-vision`, `startup-canvas`, `swot-analysis`, `value-proposition`, `brainstorm-okrs`, `create-prd`, `job-stories`, `outcome-roadmap`, `pre-mortem`, `prioritization-frameworks`, `release-notes`, `sprint-plan`, `stakeholder-map`, `strategy-red-team`, `test-scenarios`, `user-stories`, `wwas`, `competitor-analysis`, `customer-journey-map`, `market-segments`, `market-sizing`, `sentiment-analysis`, `user-personas`, `user-segmentation`, `ab-test-analysis`, `cohort-analysis`, `beachhead-segment`, `competitive-battlecard`, `growth-loops`, `gtm-motions`, `gtm-strategy`, `ideal-customer-profile`, `marketing-ideas`, `north-star-metric`, `positioning-ideas`, `product-name`, `value-prop-statements`); checking the first.
    - Global: `f=~/.agents/skills/analyze-feature-requests/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
    - Project: `f=.agents/skills/analyze-feature-requests/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
    - `installed` → the skill is installed as `analyze-feature-requests`, invoke it and proceed
@@ -44,12 +44,12 @@ das:
 
    **Global:**
    ```bash
-   npx skills add https://github.com/phuryn/pm-skills -g -y
+   npx skills add phuryn/pm-skills --skill analyze-feature-requests brainstorm-experiments-existing brainstorm-experiments-new brainstorm-ideas-existing brainstorm-ideas-new identify-assumptions-existing identify-assumptions-new interview-script metrics-dashboard opportunity-solution-tree prioritize-assumptions prioritize-features summarize-interview ansoff-matrix business-model lean-canvas monetization-strategy pestle-analysis porters-five-forces pricing-strategy product-strategy product-vision startup-canvas swot-analysis value-proposition brainstorm-okrs create-prd job-stories outcome-roadmap pre-mortem prioritization-frameworks release-notes sprint-plan stakeholder-map strategy-red-team test-scenarios user-stories wwas competitor-analysis customer-journey-map market-segments market-sizing sentiment-analysis user-personas user-segmentation ab-test-analysis cohort-analysis beachhead-segment competitive-battlecard growth-loops gtm-motions gtm-strategy ideal-customer-profile marketing-ideas north-star-metric positioning-ideas product-name value-prop-statements -g -y
    ```
 
    **Project:**
    ```bash
-   npx skills add https://github.com/phuryn/pm-skills -y
+   npx skills add phuryn/pm-skills --skill analyze-feature-requests brainstorm-experiments-existing brainstorm-experiments-new brainstorm-ideas-existing brainstorm-ideas-new identify-assumptions-existing identify-assumptions-new interview-script metrics-dashboard opportunity-solution-tree prioritize-assumptions prioritize-features summarize-interview ansoff-matrix business-model lean-canvas monetization-strategy pestle-analysis porters-five-forces pricing-strategy product-strategy product-vision startup-canvas swot-analysis value-proposition brainstorm-okrs create-prd job-stories outcome-roadmap pre-mortem prioritization-frameworks release-notes sprint-plan stakeholder-map strategy-red-team test-scenarios user-stories wwas competitor-analysis customer-journey-map market-segments market-sizing sentiment-analysis user-personas user-segmentation ab-test-analysis cohort-analysis beachhead-segment competitive-battlecard growth-loops gtm-motions gtm-strategy ideal-customer-profile marketing-ideas north-star-metric positioning-ideas product-name value-prop-statements -y
    ```
    > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
@@ -79,7 +79,7 @@ claude plugin install pm-ai-shipping@pm-skills
 
 ## Invoke after install
 
-Skills load automatically when relevant; force one by name (for example `create-prd`, `user-personas`, `opportunity-solution-tree`, `interview-script`, `sql-queries`). The Claude Code plugin route also adds the slash commands (`/discover`, `/strategy`, `/write-prd` and others); the skills CLI route installs the skills only.
+Skills load automatically when relevant; force one by name (for example `create-prd`, `user-personas`, `opportunity-solution-tree`, `interview-script`). The Claude Code plugin route also adds the slash commands (`/discover`, `/strategy`, `/write-prd` and others); the skills CLI route installs the skills only.
 
 In Claude Cowork: **Customize → Browse plugins → Personal → + → Add marketplace from GitHub → `phuryn/pm-skills`**.
 
@@ -99,7 +99,7 @@ PM skills plus chained workflows, grouped in plugins:
 | `pm-toolkit` | Resume review, NDA and privacy-policy drafting, grammar check |
 | `pm-ai-shipping` | For people accountable for AI-built code: document a vibe-coded app, review it, produce a shipping packet |
 
-The npx route installs every skill in the repository, which adds a lot of skill descriptions to the agent's context and writes some generic directory names (`code-review`, `retro`, `sql-queries`). On Claude Code prefer the plugin route and install only the plugins you need; with the skills CLI, narrow the install by naming skills: `npx skills add https://github.com/phuryn/pm-skills --skill create-prd user-personas`.
+The skills CLI route installs the product-management skills from the discovery, strategy, execution, market-research, go-to-market and marketing plugins, plus A/B-test and cohort analysis. It leaves out the generically named skills (`code-review`, `retro`, `sql-queries`, `summarize-meeting`, `grammar-check`, `dummy-dataset`) and the toolkit and AI-shipping skills (NDA, privacy policy, resume review, vibe-code review) so they cannot overwrite a skill of yours with the same name. The plugin route installs everything, namespaced: on Claude Code prefer it and install only the plugins you need.
 
 ## When NOT to use
 

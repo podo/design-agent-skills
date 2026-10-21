@@ -5,7 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { SKILLS_DIR, installMode, parseNpx, repoOf, sanitize } from './stub.mjs';
+import { SKILLS_DIR, installMode, parseNpx, repoOf } from './stub.mjs';
 import { applyBlock, claimedDirs, installedDirs, renderInstallBlock } from './pointer.mjs';
 
 const MODES = new Set(['npx', 'manual', 'builtin']);
@@ -15,7 +15,31 @@ const BANNED = [
   [/\.design-agent-skills/, 'legacy ~/.design-agent-skills path (installs live in ~/.agents/skills or .agents/skills)'],
   [/--skill\s+<[^>]*>/, '`--skill <placeholder>` is not an installable command'],
 ];
-const COUNT_CLAIM = /\b\d{2,}\+?\s+(?:skills|agents|commands|specialists|recipes|plugins|workflows)\b/i;
+// "31 skills", "31 design skills", "71 brand design systems": a number, up to two words, then the noun
+const COUNT_CLAIM = /\b\d{2,}\+?\s+(?:[A-Za-z-]+\s+){0,2}?(?:skills|agents|commands|specialists|recipes|plugins|workflows|systems)\b/i;
+
+/**
+ * Values a real YAML parser reads differently from our line reader: a plain scalar containing ': ' is a
+ * mapping (or an error), and one containing ' #' loses the rest as a comment. Quote them.
+ */
+function rawYamlProblems(raw) {
+  const out = [];
+  for (const [i, line] of raw.replace(/\r\n?/g, '\n').split('\n').entries()) {
+    const m = line.match(/^(?:[a-z_]+:\s+|\s+-\s+)(.+?)\s*$/);
+    if (!m) continue;
+    const at = `stub.yaml line ${i + 1}`;
+    const quoted = m[1].match(/^"(?:[^"\\]|\\.)*"(.*)$/) || m[1].match(/^'[^']*'(.*)$/);
+    if (quoted) {
+      // the shell reader in install.sh keeps whatever follows the closing quote, so there must be nothing
+      if (quoted[1].trim()) out.push(`${at}: text after the closing quote (a comment or a stray character); remove it`);
+      continue;
+    }
+    if (/^["'|>\[{]/.test(m[1])) continue;                  // block scalars, flow collections, unterminated quotes: not ours to judge
+    if (/: /.test(m[1]) || /:$/.test(m[1])) out.push(`${at}: unquoted value contains ": " (a real YAML parser reads it as a mapping); wrap it in double quotes`);
+    else if (/\s#/.test(m[1])) out.push(`${at}: unquoted value contains " #" (a real YAML parser drops the rest as a comment); wrap it in double quotes`);
+  }
+  return out;
+}
 
 function checkNpx(label, cmd, upstreamRepo, out) {
   const p = parseNpx(cmd);
@@ -40,6 +64,7 @@ export function lintStub(stub, all, md = fs.existsSync(stub.mdPath) ? fs.readFil
   const mode = installMode(stub);
   const upstreamRepo = /github\.com/.test(stub.upstream ?? '') ? repoOf(stub.upstream) : null;
 
+  if (stub.raw) out.push(...rawYamlProblems(stub.raw));
   if (!MODES.has(mode)) out.push(`install_mode "${mode}" must be one of ${[...MODES].join(', ')}`);
 
   if (mode !== 'builtin') {
@@ -67,6 +92,12 @@ export function lintStub(stub, all, md = fs.existsSync(stub.mdPath) ? fs.readFil
   } else if (mode === 'manual') {
     if (!stub.install_steps?.length) out.push('install_mode: manual needs install_steps');
     if (!stub.manual_reason) out.push('install_mode: manual needs manual_reason (why the skills CLI cannot install it)');
+    for (const step of stub.install_steps ?? []) {
+      const p = parseNpx(step);
+      const bad = p?.flags.filter(f => ['-g', '--global', '-y', '--yes', '--all'].includes(f));
+      if (bad?.length) out.push(`install_steps "${step}": do not put ${bad.join(' ')} in a step (global vs project scope is the user's choice; --all installs every skill in the repo)`);
+      if (p && /npx skills add[^&;|]*[&;|]/.test(step)) out.push(`install_steps "${step}": keep \`npx skills add\` the last command of its step (the pointer appends -g/-y to it)`);
+    }
   } else if (mode === 'builtin') {
     if (!stub.manual_reason) out.push('install_mode: builtin needs manual_reason');
   }
@@ -150,5 +181,3 @@ export function lintCatalogue(stubs) {
   }
   return out;
 }
-
-export { sanitize };

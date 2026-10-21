@@ -53,7 +53,7 @@ README.md       — skills table, router table, supply chain section
 6. Write "What it does" / "When NOT to use" by hand (no hardcoded counts)
 7. Update `skills/design-catalogue/SKILL.md` — add to the right section + routing guide (`npm test` fails on a stub missing from it)
 8. Update the relevant domain catalogue SKILL.md
-9. Regenerate the README table: `node scripts/generate-readme-table.mjs`, then update the counts
+9. Regenerate the README table: `node scripts/generate-readme-table.mjs --write`, then update the counts (lines 4, the profile table and the tier line; `npm test` checks them)
 10. Run `npm test` — must pass 100%
 11. Bump version (see versioning section)
 12. Open a PR (`main` is protected); push the version tag after it merges — CI creates the release with the skills zip and publishes to npm automatically
@@ -177,14 +177,18 @@ and `## When NOT to use`.
 |-------|------|
 | `installed_as` | Exact upstream skill names (frontmatter `name`, which is what `--skill` matches). The CLI installs each into `.agents/skills/<sanitised name>` (lowercase, runs of characters outside `[a-z0-9._]` become `-`; `stitch::x` → `stitch-x`). **This list must equal what the install really lands** — `npm run verify:installs` checks it exactly. |
 | `install_default` | `npx skills add <owner/repo or owner/repo/subpath or raw SKILL.md URL> [--skill a b c]`. Must target the stub's own upstream repo. **No `-g`, `-y`, `--yes` or `--all`** (the pointer adds `-g -y` itself). Prefer a targeted `--skill a b c` over a bare repo install so `installed_as` is exact. |
-| `install_mode: manual` | For skills the CLI cannot install (no/unparseable frontmatter, shared tooling like gstack, a repo too big to clone). Needs `manual_reason`, `install_steps` (shell lines) and optionally `install_check` (a path whose existence means "installed"). `npm run verify:installs` replays only the safe steps (`git clone`, `git -C … sparse-checkout`, `npx skills add <clone path>`) in a scratch dir and never runs `./setup`, `cp`, `curl` or `pip`. |
+| `install_mode: manual` | For skills the CLI cannot install (no/unparseable frontmatter, shared tooling like gstack, a repo too big to clone). Needs `manual_reason`, `install_steps` (shell lines) and optionally `install_check`: a file or directory whose existence means "installed" (`~/…`, absolute, or relative to the scope root such as `.agents/skills/x/SKILL.md`, which the pointer probes under both `~` and the project; the pointer's own `SKILL.md` never counts). **Steps carry no `-g`, `-y` or `--all`**, and an `npx skills add` step must be the last command of its step: the pointer renders Global (`-g -y`) and Project (`-y`) variants itself. `npm run verify:installs` replays only the safe steps (`git clone`, `git -C … sparse-checkout`, `npx skills add <clone path>`, never with `-g`) in a scratch dir, requires the landed directories to equal `installed_as` and a relative `install_check` to exist, and never runs `./setup`, `cp`, `curl` or `pip`. |
 | `install_mode: builtin` | The skill is a feature of an app, nothing to install (e.g. Nimbalyst). Needs `manual_reason`. |
 | `install_claude` | The **complete** plugin route: a `/plugin marketplace add …` is only valid together with a `/plugin install name@marketplace`. Must start with `/plugin` or `claude plugin`. |
 | `conflicts_with` | Two different upstreams that write the same directory overwrite each other silently. That includes a stub's own pointer directory (`skills/<name>`): if another stub installs a skill with that name, installing it replaces your pointer. Declare it on both stubs; the pointer then warns. The same upstream listed twice is fine. |
 
 Banned in any install field or pointer (lint-enforced): `claude skills add` and `claude plugin add`
 (neither is a Claude Code command), `--skill <placeholder>`, the legacy `~/.design-agent-skills` path,
-and hardcoded skill/agent/command counts in the description or prose (they go stale; see `design-with-claude`).
+and hardcoded skill/agent/command counts in the description or prose, such as "31 skills" or "71 design systems" (they go stale; see `design-with-claude`).
+
+**Quote YAML values that contain `: ` or ` #`** (lint-enforced). The repo reads `stub.yaml` with small line readers (`scripts/lib/stub.mjs`, `install.sh`), but a real YAML parser reads
+`- Network access: x` as a mapping and drops everything after ` #`. Write `- "Network access: x"`. Nothing may follow a closing quote. A value that is wrapped in quotes
+loses only that wrapping pair, so `install_default: npx skills add o/r --skill "Two Words"` keeps its inner quotes.
 
 Offline checks for one stub, without running the whole suite:
 
@@ -500,8 +504,11 @@ committing.
 | `SKILL.md frontmatter` | Has `name`, `description`, `triggers` (≥1); `name` matches directory name |
 | `type:skill upgrade commands` | Contains `npx skills add`; contains `--skill <name>`; no legacy `~/.design-agent-skills/` paths; no `curl` |
 | `catalogue-level invariants` | Exactly 6 routers; no duplicate trigger phrases across all skills |
-| `pointers.test.js` (install schema) | Every stub has `installed_as` and a valid install route; install commands target the stub's own upstream, with no `-g`/`-y`/`--all`/placeholders; every `--skill` name is declared; the generated install section matches `stub.yaml`; "Skill name" lines are installed skills; no banned commands or hardcoded counts; no two different upstreams write the same directory (unless both declare `conflicts_with`); every stub is in the top-level router |
-| `check-installs.test.js` | The real-install checker's pass/fail logic, offline, against a fake skills CLI |
+| `pointers.test.js` (install schema) | Every stub has `installed_as` and a valid install route; install commands target the stub's own upstream, with no `-g`/`-y`/`--all`/placeholders; every `--skill` name is declared; the generated install section matches `stub.yaml`; "Skill name" lines are installed skills; no banned commands or hardcoded counts; `stub.yaml` values a real YAML parser would read differently are quoted; manual steps carry no `-g`/`-y`; no two different upstreams write the same directory, including another stub's own pointer directory (unless both declare `conflicts_with`); every stub is in the top-level router |
+| `check-installs.test.js` | The real-install checker's pass/fail logic, offline, against a fake skills CLI and a local fixture repository: exact landed directories, manual routes (`-g` never reaches the CLI, `install_check`, unreadable clone URLs), clone timeout only for heavy stubs |
+| `install.test.js` | `install.sh` commands against the real catalogue, `status` against a fixture catalogue (`installed_as`, `install_check` as file, directory or scope-relative path, dangling symlinks), and that its `stub.yaml` reader returns what the JS reader returns for every scalar key of every stub |
+| `add-skill.test.js` | The wizard's output is lint-clean; it refuses `--type router`, an existing name and a path-like name |
+| README counts (`stubs.test.js`) | The `--all`, `--essentials`, `--picks` and tier counts in README.md match the stubs |
 
 ### Diagnosing failures
 
@@ -558,7 +565,10 @@ SKILLS_BIN=/path/to/skills node scripts/check-installs.mjs --real   # use a loca
 directory and requires the directories that land in `.agents/skills/` to **exactly equal** `installed_as`
 (sanitised), each with a SKILL.md carrying `name` and `description`. Manual stubs have only their clone,
 sparse-checkout and `npx skills add <clone path>` steps replayed; `./setup`, `cp`, `curl` and `pip` are
-never run. Clone failures under load are retried; stubs with `size_mb >= 100` run one at a time.
+never run, and `-g` is dropped so the developer's real skills directory is never touched. After the replay the landed directories must equal `installed_as`
+and a project-relative `install_check` must exist. Clone failures under load are retried; stubs with `size_mb >= 100` run one at a time and are the only ones
+given a longer clone timeout (`SKILLS_CLONE_TIMEOUT_MS=900000`). Every other stub runs with the CLI's own 300 s default, so a repo that is too big to install for
+users but is not marked `size_mb >= 100` fails here instead of passing on a generous limit. One stub that cannot be replayed does not abort the run; it is reported.
 
 It runs on PRs (changed stubs only) and weekly (every stub). When it fails, fix `installed_as` / `install_default`
 in `stub.yaml` and run `npm run generate`.
@@ -569,7 +579,7 @@ in `stub.yaml` and run `npm run generate`.
 |---------|---------------------|-----|
 | `name:` in SKILL.md frontmatter doesn't match directory name | `SKILL.md frontmatter → name matches directory` | Make them identical |
 | `type:skill` SKILL.md uses `curl` instead of `npx skills add` | `type:skill upgrade commands` | Replace with `npx skills add owner/repo --skill <name>` |
-| `type:skill` SKILL.md missing `--skill <name>` flag | `upgrade command includes skill name` | Add `--skill <name>` to both install commands |
+| `type:skill` pointer does not install the `--skill` names of `stub.yaml` | `type:skill upgrade commands → the pointer installs exactly the --skill names` | Edit `stub.yaml`, then `npm run generate` (never hand-edit the install block) |
 | Trigger phrase already used by another skill | `no duplicate trigger phrases` | Pick a more specific phrase; check with grep first |
 | New router added (8th router) | `has exactly 6 router skills` | Routers are permanent and fixed — never add a new router |
 | `type:router` has `upstream` field | `router type has no upstream` | Remove the `upstream` field |
@@ -577,8 +587,11 @@ in `stub.yaml` and run `npm run generate`.
 | Non-router stub missing `rank` field | `non-router has rank` | Add `rank: 1`, `2`, or `3` to stub.yaml |
 | Forgot to update both routers | Manual review | Always update design-catalogue + domain catalogue |
 | Forgot to update README skill count | Manual review | Update count on lines 4, 20, and tier table |
-| `--skill <directory-name>` when the upstream skill is named differently | `install command validity → installs upstream skill` (table of known names) | Add `installed_as: <upstream name>`, use it in `--skill`; confirm with `npx skills add owner/repo --list` |
-| Per-skill shorthand like `npx skills add owner/<skill>` or `owner/skill-name` | `install command validity → targets only the upstream repo` | Use `npx skills add <upstream owner/repo> --skill <name>` |
+| `--skill <directory-name>` when the upstream skill is named differently | `install command validity → installs upstream skill` (table of known names), `pointers.test.js` | Add `installed_as: <upstream name>`, use it in `--skill`; confirm with `npx skills add owner/repo --list` |
+| Per-skill shorthand like `npx skills add owner/<skill>` or `owner/skill-name` | `pointers.test.js → install fields are valid` (target must be the stub's own upstream repo) | Use `npx skills add <upstream owner/repo> --skill <name>` |
+| `- Some text: more text` or a trailing `# comment` in `stub.yaml` | `pointers.test.js → values a real YAML parser would read differently` | Wrap the value in double quotes |
+| `-g` / `-y` in a manual `install_steps` line | `pointers.test.js → manual install_steps` | Remove it; the pointer adds `-g -y` / `-y` to the `npx skills add` step |
+| A skill installed by another stub is named like this stub's directory | `pointers.test.js → has no install-directory collisions` | Declare `conflicts_with` on both stubs |
 | Legacy `~/.design-agent-skills/skills/...` detection path | `install command validity → no legacy path` | Use `~/.agents/skills/<name>` (global) or `.agents/skills/<name>` (project) |
 
 ---
@@ -596,32 +609,51 @@ in `stub.yaml` and run `npm run generate`.
 
 ## Worked example — adding a new skill
 
-Say you want to add `aperepel/textual-tui-skill`:
+Say you want to add `aperepel/textual-tui-skill`, whose upstream skill is named `textual-tui`:
 
 ```bash
-# 1. Create the files
-mkdir skills/textual-tui-skill
+# 1. Find the real upstream skill name: it is what --skill and installed_as use, not our directory name
+npx skills add aperepel/textual-tui-skill --list
 
-# 2. stub.yaml — type:package because install is via quickstart.sh, not npx skills add
-cat > skills/textual-tui-skill/stub.yaml << 'EOF'
-type: package
+# 2. Branch (main is protected), then write the stub and pointer
+git checkout -b add-textual-tui-skill
+node scripts/add-skill.mjs --name textual-tui-skill --type skill \
+  --upstream https://github.com/aperepel/textual-tui-skill --upstream-path skill/SKILL.md \
+  --category tui-terminal --tier community --rank 3 --installed-as textual-tui \
+  --description "Deep-dive Textual (Python) TUI skill" --trigger "Textual TUI" --yes
+```
+
+That writes `skills/textual-tui-skill/stub.yaml`:
+
+```yaml
+type: skill
 tier: community
+rank: 3
 category: tui-terminal
-rank: 2
 upstream: https://github.com/aperepel/textual-tui-skill
+upstream_path: skill/SKILL.md
 version: latest
-EOF
+install_default: npx skills add aperepel/textual-tui-skill --skill textual-tui
+installed_as: textual-tui
+```
 
-# 3. SKILL.md — see format above; category: tui-terminal
-# 4. Add to content-catalogue (TUI & Terminal Design section)
-# 5. Add to design-catalogue (TUI & Terminal Design section + routing guide)
-# 6. Add to README.md (TUI & Terminal Design table)
-# 7. Run tests
+and a `SKILL.md` whose install section is generated from it. Then:
+
+```bash
+# 3. Add requires / license / size_mb when they apply, hand-write "What it does" and "When NOT to use"
+#    (no hardcoded counts), then regenerate the install section
+npm run generate
+
+# 4. Prove it installs: the directories that land must equal installed_as
+node scripts/check-installs.mjs --real --only textual-tui-skill
+
+# 5. Routers and README: add the skill to skills/design-catalogue/SKILL.md (index row + routing guide)
+#    and skills/content-catalogue/SKILL.md, then regenerate the table and update the counts
+node scripts/generate-readme-table.mjs --write
 npm test
 
-# 8. Commit all changes together
-git add skills/textual-tui-skill/ skills/content-catalogue/SKILL.md \
-        skills/design-catalogue/SKILL.md README.md CHANGELOG.md VERSION package.json
+# 6. CHANGELOG entry + version bump (a new skill is a minor bump), commit, and open a PR
+git add skills/textual-tui-skill skills/design-catalogue skills/content-catalogue README.md CHANGELOG.md VERSION package.json
 git commit -m "feat: add textual-tui-skill (Textual Python TUI, deep-dive)"
-git push origin <branch>:main
+git push -u origin add-textual-tui-skill && gh pr create --base main
 ```

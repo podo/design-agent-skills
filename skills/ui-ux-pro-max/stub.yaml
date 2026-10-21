@@ -11,6 +11,6 @@ install_claude:
   - /plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill
   - /plugin install ui-ux-pro-max@ui-ux-pro-max-skill
 requires:
-  - Python 3 (no extra packages): the skill queries its bundled database by running scripts/search.py. The installed SKILL.md writes that path as ${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py, which only resolves with the plugin route; with the npx install the script sits at ui-ux-pro-max/scripts/search.py inside the skills directory
+  - "Python 3 (no extra packages): the skill queries its bundled database by running scripts/search.py. The installed SKILL.md writes that path as ${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py, which only resolves with the plugin route; with the npx install the script sits at ui-ux-pro-max/scripts/search.py inside the skills directory"
 license: MIT
 note: "verified 2026-10-21; type changed platform -> skill (the skills CLI installs it fine). The same repo also ships the generically named skills design, brand, slides, design-system, banner-design and ui-styling, which collide with names of other tools and are left out on purpose. Upstream also advertises its own `uipro` CLI and a premium tier (not checked). Plugin route checked against marketplace.json and plugin.json, not run"

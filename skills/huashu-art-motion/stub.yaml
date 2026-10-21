@@ -10,7 +10,7 @@ installed_as: huashu-art-motion
 requires:
   - uv
   - ffmpeg
-  - Playwright Chromium (first run: uv run --with playwright playwright install chromium)
+  - "Playwright Chromium (first run: uv run --with playwright playwright install chromium)"
   - Skill text and references are in Chinese
 license: "MIT; bundled stroke data is Arphic Public License, fonts are SIL OFL, and the Huashu character artwork and demo videos are demo-use only (not MIT)"
 size_mb: 154

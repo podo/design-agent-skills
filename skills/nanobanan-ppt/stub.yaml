@@ -15,6 +15,6 @@ install_check: ~/.claude/skills/ppt-generator/SKILL.md
 installed_as: ppt-generator
 requires:
   - Python 3 and a Gemini API key (GEMINI_API_KEY in .env) for image generation
-  - Optional, for the video feature: Kling AI keys (KLING_ACCESS_KEY, KLING_SECRET_KEY) and FFmpeg
+  - "Optional, for the video feature: Kling AI keys (KLING_ACCESS_KEY, KLING_SECRET_KEY) and FFmpeg"
 license: MIT per the README; no LICENSE file in the repository
 note: "verified 2026-10-21; upstream_path deliberately omitted because check-installs requires frontmatter in upstream_path and the root SKILL.md has none; clone, root SKILL.md (header names it ppt-generator-pro), generate_ppt.py and .env.example exist and match the README steps; the cp/pip/venv steps are not replayed by check-installs. transition_prompt_generator.py also imports anthropic (optional)"

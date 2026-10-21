@@ -7,7 +7,7 @@ upstream_path: SKILL.md
 version: latest
 install_default: npx skills add nibzard/marp-slide-quality --skill marp-slide-quality
 requires:
-  - uv (provides uvx): the skill runs `uvx --from git+https://github.com/nibzard/slidegauge slidegauge ...`, which fetches and executes SlideGauge from that GitHub repo at use time (not a PyPI package)
+  - "uv (provides uvx): the skill runs `uvx --from git+https://github.com/nibzard/slidegauge slidegauge ...`, which fetches and executes SlideGauge from that GitHub repo at use time (not a PyPI package)"
   - jq for the JSON-filter examples in the skill
 license: Apache-2.0
 note: "verified 2026-10-21; skill dir holds SKILL.md plus EXAMPLES.md, FIXES.md, REFERENCE.md. SlideGauge itself lives in a separate repo (nibzard/slidegauge) and is not installed by npx skills add"

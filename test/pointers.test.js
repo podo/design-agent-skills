@@ -49,6 +49,29 @@ describe('stub.yaml parsing', () => {
   });
   it('tokenizes quotes', () => assert.deepEqual(tokenize('a "b c" \'d e\' f'), ['a', 'b c', 'd e', 'f']));
 
+  // Regression: a CRLF checkout dropped every scalar key (the regex's `.*` stopped at \r), so type and tier vanished.
+  it('accepts CRLF line endings', () => {
+    const s = parseStubText('type: skill\r\ntier: community\r\ninstalled_as:\r\n  - a\r\n  - b\r\nlicense: MIT\r\n');
+    assert.deepEqual([s.type, s.tier, s.license], ['skill', 'community', 'MIT']);
+    assert.deepEqual(s.installed_as, ['a', 'b']);
+  });
+  // Regression: `license:` with no value became [] (truthy), printing an empty "License:" heads-up.
+  it('reads a key with no value as an empty string, or an empty list for list keys', () => {
+    const s = parseStubText('license:\nrank: 2\ninstalled_as:\nrequires:\n');
+    assert.equal(s.license, '');
+    assert.ok(!s.license, 'an empty scalar must be falsy');
+    assert.deepEqual([s.installed_as, s.requires], [[], []]);
+  });
+  // Regression: `type: skill # why` kept the comment in the value.
+  it('drops a trailing comment but keeps # inside quotes and URLs', () => {
+    const s = parseStubText('type: skill # why\ninstall_default: npx skills add o/r --skill a # x\nnote: "keep # this" # trailing\nupstream: https://x.test/a#frag\ninstalled_as:\n  - a # c\n');
+    assert.equal(s.type, 'skill');
+    assert.equal(s.install_default, 'npx skills add o/r --skill a');
+    assert.equal(s.note, 'keep # this');
+    assert.equal(s.upstream, 'https://x.test/a#frag');
+    assert.deepEqual(s.installed_as, ['a']);
+  });
+
   // Regression: the checker dropped the value of `--depth 1`, replayed `--depth <url>`, and failed every clone.
   it('parses git clone flags together with their values, and finds url and destination', () => {
     const a = parseGitClone(['--single-branch', '--depth', '1', 'https://x.test/o/r.git', '~/dest']);
@@ -90,7 +113,36 @@ describe('pointer generator', () => {
     assert.match(b, /\/plugin install p@m/);
     assert.match(b, /Requires:\*\* Bun/);
     assert.match(b, /Large download \(~150 MB\).*SKILLS_CLONE_TIMEOUT_MS/);
-    assert.match(b, /Check: `~\/y\/SKILL\.md` exists/);
+    assert.match(b, /`f=~\/y\/SKILL\.md; \[ -e "\$f" \] && ! grep -qs "\^das:" "\$f"/);
+  });
+
+  // Regression: a manual stub's check was one path with no scope handling, tested with [ -f ], and ignored the
+  // pointer's own marker, so directories never counted, a global install of a project-relative path was never
+  // found (the agent re-cloned and git clone failed), and a stub installing into its own directory was always "installed".
+  describe('manual routes', () => {
+    const kami = stubOf('kam', 'type: skill\ninstall_mode: manual\nmanual_reason: Big repo.\ninstall_steps:\n  - git clone --depth=1 https://x.test/o/r.git /tmp/r\n  - git -C /tmp/r sparse-checkout set skills/kam\n  - npx skills add /tmp/r/skills/kam\ninstall_check: .agents/skills/kam/CHEATSHEET.md\ninstalled_as: kam\n');
+    it('a project-relative install_check is probed for both scopes (global = under ~)', () => {
+      const b = renderInstallBlock(kami, new Map());
+      assert.match(b, /Global: `f=~\/\.agents\/skills\/kam\/CHEATSHEET\.md; \[ -e "\$f" \]/);
+      assert.match(b, /Project: `f=\.agents\/skills\/kam\/CHEATSHEET\.md; \[ -e "\$f" \]/);
+      assert.match(b, /grep -qs "\^das:"/, 'the pointer\'s own SKILL.md must not count as installed');
+    });
+    it('an npx step gets the same global/project commands as an npx route, and the clone carries no flags', () => {
+      const b = renderInstallBlock(kami, new Map());
+      assert.match(b, /\*\*Global:\*\*[\s\S]*?npx skills add \/tmp\/r\/skills\/kam -g -y/);
+      assert.match(b, /\*\*Project:\*\*[\s\S]*?npx skills add \/tmp\/r\/skills\/kam -y\n/);
+      assert.doesNotMatch(b, /git (clone|-C)[^\n]* -[gy]\b/);
+    });
+    it('tells users to delete a staging clone left by an earlier attempt', () => {
+      assert.match(renderInstallBlock(kami, new Map()), /left `\/tmp\/r` behind, delete it first \(`rm -rf \/tmp\/r`\)/);
+    });
+    it('does not suggest deleting a clone that IS the install, and has no scope split without an npx step', () => {
+      const g = stubOf('gst', 'type: skill\ninstall_mode: manual\nmanual_reason: Needs the repo.\ninstall_steps:\n  - git clone https://x.test/o/g.git ~/.claude/skills/g\n  - cd ~/.claude/skills/g && ./setup\ninstall_check: ~/.claude/skills/g/a/SKILL.md\ninstalled_as: a\n');
+      const b = renderInstallBlock(g, new Map());
+      assert.doesNotMatch(b, /rm -rf/);
+      assert.doesNotMatch(b, /\*\*Global:\*\*/);
+      assert.match(b, /`f=~\/\.claude\/skills\/g\/a\/SKILL\.md; \[ -e "\$f" \]/, 'an absolute check is probed once');
+    });
   });
   it('applyBlock is idempotent and replaces only the marked region', () => {
     const s = npxStub();
@@ -155,6 +207,51 @@ describe('lint rules', () => {
     const md = synced(s).replace('--skill real-name -y', '--skill other -y');
     assert.ok(lintStub(s, new Map([[s.name, s]]), md).some(m => /out of date with stub\.yaml/.test(m)));
   });
+  // Regression: the count pattern needed "<number> skills" with nothing between, so open-design's triggers
+  // "31 design skills" and "71 design systems" passed while the pointer promised numbers it no longer keeps.
+  it('flags counts with words between the number and the noun, but not small numbers or sizes', () => {
+    for (const claim of ['31 design skills', '71 brand design systems', '120 specialist agents']) {
+      const s = npxStub();
+      const md = synced(s).replace('A skill.', `Offers ${claim} for you.`);
+      assert.ok(lintStub(s, new Map([[s.name, s]]), md).some(m => /hardcodes a skill\/agent\/command count/.test(m)), claim);
+    }
+    const s = npxStub();
+    const ok = synced(s).replace('A skill.', 'Covers 3 skills in a 12-column grid.');
+    assert.ok(!lintStub(s, new Map([[s.name, s]]), ok).some(m => /hardcodes/.test(m)));
+  });
+
+  // Regression: 16 stubs had `requires:` items like `- Network access: x`, which a real YAML parser reads as a
+  // mapping, and one `license: CC-BY-4.0 (attribution required: …)` that is not valid YAML at all. The line
+  // reader accepted them, so the divergence was invisible.
+  describe('values a real YAML parser would read differently', () => {
+    const raw = (label, extra, expect) => it(label, () => {
+      assert.ok(violations(npxStub(extra)).some(m => expect.test(m)), `expected ${expect} in ${JSON.stringify(violations(npxStub(extra)))}`);
+    });
+    raw('flags an unquoted list item containing ": "', 'requires:\n  - Network access at use time: fetches rules', /unquoted value contains ": "/);
+    raw('flags an unquoted scalar containing ": "', 'license: CC-BY-4.0 (attribution required: someone)', /unquoted value contains ": "/);
+    raw('flags an unquoted value with a trailing comment', 'license: MIT # see file', /unquoted value contains " #"/);
+    raw('flags text after a closing quote (the shell reader keeps it)', 'note: "x" # c', /text after the closing quote/);
+    it('accepts the same values when quoted', () => {
+      assert.deepEqual(violations(npxStub('requires:\n  - "Network access at use time: fetches rules"\nlicense: "CC-BY-4.0 (attribution required: someone)"\nnote: "a # b"')), []);
+    });
+  });
+
+  describe('manual install_steps', () => {
+    const manual = steps => stubOf('man', `type: package\nupstream: https://github.com/o/r\ninstall_mode: manual\nmanual_reason: x\ninstall_steps:\n${steps.map(s => `  - ${s}`).join('\n')}\ninstalled_as: y\n`);
+    const flagged = (steps, expect) => violations(manual(steps)).some(m => expect.test(m));
+    it('flags -y, -g and --all: the pointer adds scope flags itself', () => {
+      assert.ok(flagged(['git clone https://x.test/o/r.git /tmp/r', 'npx skills add /tmp/r -y'], /do not put -y in a step/));
+      assert.ok(flagged(['git clone https://x.test/o/r.git /tmp/r', 'npx skills add /tmp/r -g'], /do not put -g in a step/));
+      assert.ok(flagged(['git clone https://x.test/o/r.git /tmp/r', 'npx skills add /tmp/r --all'], /--all/));
+    });
+    it('flags an npx step that is not the last command of its step (flags are appended there)', () => {
+      assert.ok(flagged(['npx skills add /tmp/r && rm -rf /tmp/r'], /keep `npx skills add` the last command/));
+    });
+    it('accepts a clean step list', () => {
+      assert.ok(!flagged(['git clone https://x.test/o/r.git /tmp/r', 'npx skills add /tmp/r --skill y', 'rm -rf /tmp/r'], /install_steps/));
+    });
+  });
+
   it('requires conflicts_with to be mutual and real', () => {
     const a = npxStub('conflicts_with: b');
     const b = stubOf('b', 'type: skill\nupstream: https://github.com/x/y\ninstall_default: npx skills add x/y --skill real-name\ninstalled_as: real-name\n');

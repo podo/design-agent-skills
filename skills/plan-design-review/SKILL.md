@@ -27,9 +27,9 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/skills/gstack/plan-design-review/SKILL.md` exists.
-   - Yes → invoke it and proceed
-   - No → go to step 2
+   - `f=~/.claude/skills/gstack/plan-design-review/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Install** (the skills CLI cannot install this one):
 

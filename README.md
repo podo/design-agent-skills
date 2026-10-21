@@ -161,7 +161,7 @@ das:
 1. `node scripts/add-skill.mjs` — writes `stub.yaml` (with `installed_as` and `install_default`) and a `SKILL.md` whose install section is generated
 2. Check the real names: `npx skills add owner/repo --list`, fix `installed_as` / `install_default`, then `npm run generate`
 3. Prove it installs: `node scripts/check-installs.mjs --real --only <name>`
-4. Fill in "What it does" / "When NOT to use", add router rows, regenerate the README table (`node scripts/generate-readme-table.mjs`)
+4. Fill in "What it does" / "When NOT to use", add router rows, regenerate the README table (`node scripts/generate-readme-table.mjs --write`)
 5. Open a PR — `npm test` enforces the schema, collisions, and that the pointer matches `stub.yaml`
 
 ## Trigger routing and known overlaps

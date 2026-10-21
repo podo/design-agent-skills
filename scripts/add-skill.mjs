@@ -193,6 +193,11 @@ function skillMd({ name, type, description, trigger, category, upstream, install
 async function main() {
   console.log('\ndesign-agent-skills — add skill wizard\n');
 
+  if (flagType === 'router') {
+    console.error('Error: routers are a fixed set of six; this script only adds skill, package and platform stubs.');
+    process.exit(1);
+  }
+
   // Collect fields — use flags first, then prompt for missing ones
 
   const name = flagName ?? await ask('Skill name (directory name)', null, val => {
@@ -201,8 +206,14 @@ async function main() {
     if (fs.existsSync(path.join(SKILLS_DIR, val))) return `skills/${val} already exists`;
   });
 
-  if (!flagName && fs.existsSync(path.join(SKILLS_DIR, name))) {
-    console.error(`Error: skills/${name} already exists. Remove it first or use a different name.`);
+  // --name skips the prompt's validation, so check it here: no path tricks, and never overwrite a stub
+  // (that would silently drop its conflicts_with, requires, license and note).
+  if (!/^[a-z0-9-]+$/.test(name)) {
+    console.error('Error: the skill name may only contain lowercase letters, numbers and hyphens.');
+    process.exit(1);
+  }
+  if (fs.existsSync(path.join(SKILLS_DIR, name))) {
+    console.error(`Error: skills/${name} already exists. Edit its stub.yaml instead, or use a different name.`);
     process.exit(1);
   }
 

@@ -6,7 +6,7 @@ upstream: https://github.com/vercel-labs/agent-skills
 version: latest
 install_default: npx skills add vercel-labs/agent-skills --skill web-design-guidelines writing-guidelines vercel-react-best-practices vercel-composition-patterns vercel-react-view-transitions
 requires:
-  - Network access at use time: web-design-guidelines and writing-guidelines are thin skills that fetch their current rules from vercel-labs/web-interface-guidelines and vercel-labs/writing-guidelines on GitHub before each review
+  - "Network access at use time: web-design-guidelines and writing-guidelines are thin skills that fetch their current rules from vercel-labs/web-interface-guidelines and vercel-labs/writing-guidelines on GitHub before each review"
 license: no LICENSE file in the repository
 note: "verified 2026-10-21; the repo holds more skills (deploy-to-vercel, vercel-cli-with-tokens, vercel-optimize, vercel-react-native-skills) that are not part of this stub; building-components is a separate repo with its own stub"
 installed_as:

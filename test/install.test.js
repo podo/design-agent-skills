@@ -236,6 +236,9 @@ describe('install.sh — status from installed_as (fixture catalogue)', () => {
     ['pkg-two', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstalled_as:\n  - a\n  - "Weird::Name"\n'],
     ['single', 'type: skill\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstalled_as: real-name\n'],
     ['manual', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstall_mode: manual\ninstalled_as: m\ninstall_check: ~/.claude/skills/m/SKILL.md\n'],
+    ['dir-check', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstall_mode: manual\ninstalled_as: d\ninstall_check: ~/.claude/plugins/dir-plugin\n'],
+    ['rel-check', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstall_mode: manual\ninstalled_as: r\ninstall_check: .claude/rel/MARK.md\n'],
+    ['own-dir', 'type: package\ntier: community\nrank: 3\nupstream: https://github.com/o/r\ninstall_mode: manual\ninstalled_as: own-dir\ninstall_check: .claude/skills/own-dir/SKILL.md\n'],
   ];
   const POINTER = '---\nname: x\ndescription: d\ntriggers:\n  - "t"\ndas:\n  type: skill\n---\n# x\n';
   const FULL = '---\nname: real\ndescription: full skill\n---\n# real\n';
@@ -290,6 +293,115 @@ describe('install.sh — status from installed_as (fixture catalogue)', () => {
       f.put('m/SKILL.md');
       assert.match(f.status().row('manual'), /\binstalled\b/);
     } finally { f.done(); }
+  });
+
+  // Regression: install_check was tested with [ -f ], so a directory (design-with-claude's plugin cache dir)
+  // never counted and `status` always said "package".
+  it('install_check may be a directory', () => {
+    const f = fixture();
+    try {
+      assert.match(f.status().row('dir-check'), /\bpackage\b/);
+      fs.mkdirSync(path.join(f.home, '.claude', 'plugins', 'dir-plugin'), { recursive: true });
+      assert.match(f.status().row('dir-check'), /\binstalled\b/);
+    } finally { f.done(); }
+  });
+
+  // Regression: a project-relative install_check (".agents/skills/…") was looked up under the caller's cwd, so
+  // a correct install was never detected when `status` ran from anywhere else (for example the repo clone).
+  it('a relative install_check resolves under HOME for user scope and under the current directory for project scope', () => {
+    const f = fixture();
+    const proj = fs.mkdtempSync(path.join(os.tmpdir(), 'das-proj-'));
+    try {
+      assert.match(f.status().row('rel-check'), /\bpackage\b/);
+      fs.mkdirSync(path.join(f.home, '.claude', 'rel'), { recursive: true });
+      fs.writeFileSync(path.join(f.home, '.claude', 'rel', 'MARK.md'), 'x');
+      assert.match(f.status().row('rel-check'), /\binstalled\b/, 'user scope: $HOME/.claude/rel/MARK.md');
+
+      // project scope looks under the cwd instead (HOME has the file, the project does not)
+      const inProject = () => spawnSync('bash', [path.join(f.repo, 'install.sh'), '--scope=project', 'status'], { encoding: 'utf8', cwd: proj, env: { ...process.env, HOME: f.home }, timeout: 60000 })
+        .stdout.split('\n').find(l => l.includes('rel-check')) ?? '';
+      fs.mkdirSync(path.join(proj, '.claude'), { recursive: true });
+      assert.match(inProject(), /\bpackage\b/, 'project scope must not use the HOME copy');
+      fs.mkdirSync(path.join(proj, '.claude', 'rel'), { recursive: true });
+      fs.writeFileSync(path.join(proj, '.claude', 'rel', 'MARK.md'), 'x');
+      assert.match(inProject(), /\binstalled\b/, 'project scope: <cwd>/.claude/rel/MARK.md');
+    } finally { f.done(); cleanup(proj); }
+  });
+
+  // Regression: software-ux-research installs into its own pointer directory and its check was that directory's
+  // SKILL.md, so the pointer itself read as "installed".
+  it("the pointer's own SKILL.md (das: marker) never counts as the installed skill", () => {
+    const f = fixture();
+    try {
+      f.put('own-dir/SKILL.md', POINTER);
+      assert.match(f.status().row('own-dir'), /\bpackage\b/);
+      f.put('own-dir/SKILL.md', FULL);
+      assert.match(f.status().row('own-dir'), /\binstalled\b/);
+    } finally { f.done(); }
+  });
+
+  // Regression: the installed_as shortcut ran before the dangling-symlink check, so a broken pointer link read as
+  // "upgraded" whenever the upstream-named skill was installed, and the user was never told to run `fix`.
+  it('a dangling pointer symlink is BROKEN even when the upstream-named skill is installed', () => {
+    const f = fixture();
+    try {
+      f.put('real-name/SKILL.md', FULL);
+      fs.symlinkSync(path.join(f.home, 'does-not-exist'), path.join(f.home, '.claude', 'skills', 'single'));
+      assert.match(f.status().row('single'), /\bBROKEN\b/);
+    } finally { f.done(); }
+  });
+});
+
+// ── the shell reader must read stub.yaml the way the JS reader does ──────────────────────────────
+
+function shellFunction(name) {
+  const m = fs.readFileSync(INSTALL, 'utf8').match(new RegExp(`^${name}\\(\\) \\{\\n[\\s\\S]*?\\n\\}\\n`, 'm'));
+  assert.ok(m, `${name} not found in install.sh`);
+  return m[0];
+}
+
+describe('install.sh — stub.yaml reader agrees with scripts/lib/stub.mjs', () => {
+  // Regression: the rewritten reader removed every `"`, so `update` printed
+  // `--skill "Slidev Mastery" "Presentation Design"` as `--skill Slidev Mastery Presentation Design`.
+  it('keeps the inner quotes of a command and strips only a wrapping pair', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'das-yaml-'));
+    try {
+      fs.writeFileSync(path.join(tmp, 's.yaml'), [
+        'install_default: npx skills add o/r --skill "Two Words" other',
+        'note: "wrapped: ok"',
+        "alt: 'single quoted'",
+        'plain: just text',
+        'escaped: "say \\"hi\\""',
+        '',
+      ].join('\n'));
+      fs.writeFileSync(path.join(tmp, 'run.sh'), `${shellFunction('stub_yaml_value')}\nfor k in install_default note alt plain escaped; do stub_yaml_value "$k" "${tmp}/s.yaml"; done\n`);
+      const r = spawnSync('bash', [path.join(tmp, 'run.sh')], { encoding: 'utf8' });
+      assert.equal(r.status, 0, r.stderr);
+      assert.deepEqual(r.stdout.trimEnd().split('\n'), [
+        'npx skills add o/r --skill "Two Words" other', 'wrapped: ok', 'single quoted', 'just text', 'say "hi"',
+      ]);
+    } finally { cleanup(tmp); }
+  });
+
+  it('returns what the JS reader returns for every scalar key of every stub', async () => {
+    const { allStubs } = await import('../scripts/lib/stub.mjs');
+    const META = new Set(['name', 'dir', 'stubPath', 'mdPath', 'raw']);
+    const rows = [];
+    for (const s of allStubs()) {
+      for (const [k, v] of Object.entries(s)) if (typeof v === 'string' && v !== '' && !META.has(k)) rows.push([s.stubPath, k, v]);
+    }
+    assert.ok(rows.length > 500, `expected many scalar fields, got ${rows.length}`);
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'das-yaml-'));
+    try {
+      const calls = rows.map(([f, k]) => `printf '%s\\0' "$(stub_yaml_value ${k} '${f}')"`).join('\n');
+      fs.writeFileSync(path.join(tmp, 'run.sh'), `${shellFunction('stub_yaml_value')}\n${calls}\n`);
+      const r = spawnSync('bash', [path.join(tmp, 'run.sh')], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 120000 });
+      assert.equal(r.status, 0, r.stderr);
+      const got = r.stdout.split('\0').slice(0, -1);
+      assert.equal(got.length, rows.length);
+      const diffs = rows.flatMap(([f, k, v], i) => (got[i] === v ? [] : [`${f.split('/').slice(-2)[0]}.${k}: shell=${JSON.stringify(got[i]).slice(0, 80)} js=${JSON.stringify(v).slice(0, 80)}`]));
+      assert.deepEqual(diffs, []);
+    } finally { cleanup(tmp); }
   });
 });
 

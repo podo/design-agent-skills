@@ -9,6 +9,6 @@ install_default: npx skills add oil-oil/oil-motion --skill oil-motion
 installed_as: oil-motion
 requires:
   - Python 3.10+, Pillow, ffmpeg and ffprobe (the skill has the agent run `pip install -r scripts/requirements.txt` at use time)
-  - For AI keyframe and video generation only (local processing of existing media needs no key): a ZenMux API key, billed per generation. Prompts, reference images and key frames are sent to ZenMux and the model providers behind it. The key-entry setup page needs Node.js 22.18+ and upstream says it has so far been verified on macOS only
+  - "For AI keyframe and video generation only (local processing of existing media needs no key): a ZenMux API key, billed per generation. Prompts, reference images and key frames are sent to ZenMux and the model providers behind it. The key-entry setup page needs Node.js 22.18+ and upstream says it has so far been verified on macOS only"
 license: MIT
 note: "verified 2026-10-21. Skill text is in Chinese (README.en.md exists). The repo root holds SKILL.md alongside scripts, references and evals; the CLI installs the whole skill directory"

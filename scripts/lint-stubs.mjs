@@ -6,12 +6,10 @@
  *   node scripts/lint-stubs.mjs --only a,b      # just these stubs (cross-stub rules skipped)
  */
 import fs from 'node:fs';
-import { allStubs } from './lib/stub.mjs';
+import { allStubs, onlyFilter } from './lib/stub.mjs';
 import { lintCatalogue, lintStub } from './lib/lint.mjs';
 
-const onlyArg = process.argv.find(a => a.startsWith('--only='))?.slice(7)
-  ?? (process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : undefined);
-const ONLY = onlyArg ? new Set(onlyArg.split(',').map(s => s.trim()).filter(Boolean)) : null;
+const ONLY = onlyFilter();
 
 const stubs = allStubs();
 const byName = new Map(stubs.map(s => [s.name, s]));

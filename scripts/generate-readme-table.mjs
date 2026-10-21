@@ -4,14 +4,16 @@
  *
  *   node scripts/generate-readme-table.mjs          # print to stdout
  *   node scripts/generate-readme-table.mjs --check  # diff against current README
+ *   node scripts/generate-readme-table.mjs --write  # replace the "## Skills" section of README.md in place
+ *
+ * The skill counts elsewhere in README.md are not generated: update them by hand (a test checks them).
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { ROOT, allStubs } from './lib/stub.mjs';
 
-const ROOT       = path.resolve(fileURLToPath(import.meta.url), '../..');
-const SKILLS_DIR = path.join(ROOT, 'skills');
 const checkMode  = process.argv.includes('--check');
+const writeMode  = process.argv.includes('--write');
 
 const SECTION_HEADERS = {
   'design-systems':       'Design Engineering',
@@ -34,34 +36,18 @@ const SECTION_HEADERS = {
   'design-research':      'Design Research',
 };
 
-// Load stubs
-const stubs = [];
-for (const name of fs.readdirSync(SKILLS_DIR)) {
-  const dir  = path.join(SKILLS_DIR, name);
-  if (!fs.statSync(dir).isDirectory()) continue;
-  const stubPath = path.join(dir, 'stub.yaml');
-  const mdPath   = path.join(dir, 'SKILL.md');
-  if (!fs.existsSync(stubPath) || !fs.existsSync(mdPath)) continue;
-
-  const raw  = fs.readFileSync(stubPath, 'utf8');
-  const get  = k => (raw.match(new RegExp(`^${k}:\\s*(.+)$`, 'm')) || [])[1]?.trim();
-  const type = get('type');
-  if (type === 'router') continue;
-
-  let category = get('category');
-  if (!category) {
-    const md = fs.readFileSync(mdPath, 'utf8');
-    category = (md.match(/^das:[\s\S]*?^\s+category:\s*(.+)$/m) || [])[1]?.trim();
-  }
-
-  const upstream = get('upstream') || '';
-  const repoMatch = upstream.match(/github\.com\/(.+?)(?:\.git)?\/?$/);
-  const repoShort = repoMatch ? repoMatch[1] : upstream;
-  const rank = Number(get('rank'));
-  const star = rank === 1 ? ' ★' : '';
-
-  stubs.push({ name, type, tier: get('tier'), rank, category: category || '(none)', upstream, repoShort, star });
-}
+// Load stubs (the shared reader, so this table cannot disagree with lint, install.sh tests or the pointers)
+const stubs = allStubs()
+  .filter(s => s.type !== 'router' && fs.existsSync(s.mdPath))
+  .map(s => {
+    const upstream = s.upstream || '';
+    const repoMatch = upstream.match(/github\.com\/(.+?)(?:\.git)?\/?$/);
+    const rank = Number(s.rank);
+    return {
+      name: s.name, type: s.type, tier: s.tier, rank, category: s.category || '(none)',
+      upstream, repoShort: repoMatch ? repoMatch[1] : upstream, star: rank === 1 ? ' ★' : '',
+    };
+  });
 
 // Group by category
 const byCategory = {};
@@ -102,15 +88,22 @@ for (const [cat, header] of Object.entries(SECTION_HEADERS)) {
 
 const output = lines.join('\n') + '\n';
 
-if (checkMode) {
-  const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
-  const start  = readme.indexOf('## Skills\n');
-  const end    = readme.indexOf('\n## ', start + 1);
+const readmePath = path.join(ROOT, 'README.md');
+const readme     = fs.readFileSync(readmePath, 'utf8');
+const start      = readme.indexOf('## Skills\n');
+const end        = readme.indexOf('\n## ', start + 1);
+
+if (writeMode) {
+  if (start === -1) { console.error('README.md has no "## Skills" section'); process.exit(1); }
+  const next = readme.slice(0, start) + '## Skills\n\n' + output + (end === -1 ? '' : readme.slice(end));
+  if (next === readme) console.log('README Skills section already up to date');
+  else { fs.writeFileSync(readmePath, next); console.log('README Skills section rewritten'); }
+} else if (checkMode) {
   const current = readme.slice(start + '## Skills\n'.length, end === -1 ? undefined : end);
   if (current.trim() === output.trim()) {
     console.log('OK — README Skills section matches generated output');
   } else {
-    console.log('DIFF — README Skills section is out of date. Run without --check to see fresh output.');
+    console.log('DIFF — README Skills section is out of date. Run with --write to update it.');
     process.exit(1);
   }
 } else {

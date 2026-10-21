@@ -23,9 +23,9 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.agents/service-blueprint-skill/SKILL.md` exists.
-   - Yes → invoke it and proceed
-   - No → go to step 2
+   - `f=~/.agents/service-blueprint-skill/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Install** (the skills CLI cannot install this one):
 

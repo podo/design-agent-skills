@@ -25,18 +25,33 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `.agents/skills/vision/SKILL.md` exists.
-   - Yes → invoke it and proceed
-   - No → go to step 2
+   - Global: `f=~/.agents/skills/vision/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/vision/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Install** (the skills CLI cannot install this one):
 
-   The skills CLI cannot copy this repo as-is, because every skill folder links to a shared _common folder that links back (cyclic symlinks, ELOOP), and it reports success while installing nothing usable for Claude Code. A sparse clone of only the design-related skill folders leaves those links dangling, so the CLI installs each skill with its reference folder but without the shared _common docs. Add -g to the last command for a global install, and delete the clone afterwards. Upstream's own route is `make link` from a full clone, which symlinks every skill in the repo into ~/.claude/skills, ~/.agents/skills and ~/.gemini/antigravity-cli/skills.
+   The skills CLI cannot copy this repo as-is, because every skill folder links to a shared _common folder that links back (cyclic symlinks, ELOOP), and it reports success while installing nothing usable for Claude Code. A sparse clone of only the design-related skill folders leaves those links dangling, so the CLI installs each skill with its reference folder but without the shared _common docs. Upstream's own route is `make link` from a full clone, which symlinks every skill in the repo into ~/.claude/skills, ~/.agents/skills and ~/.gemini/antigravity-cli/skills.
 
+   If an earlier attempt left `/tmp/simota-agent-skills` behind, delete it first (`rm -rf /tmp/simota-agent-skills`): `git clone` refuses a non-empty directory.
+
+   ```bash
+   [ -e ~/.agents/skills/simota-agent-skills ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
    ```bash
    git clone --depth=1 --filter=blob:none --sparse https://github.com/simota/agent-skills.git /tmp/simota-agent-skills
    git -C /tmp/simota-agent-skills sparse-checkout set vision muse frame pixel echo prose ink
-   npx skills add /tmp/simota-agent-skills --skill vision muse frame pixel echo prose ink
+   npx skills add /tmp/simota-agent-skills --skill vision muse frame pixel echo prose ink -g -y
+   ```
+
+   **Project:**
+   ```bash
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/simota/agent-skills.git /tmp/simota-agent-skills
+   git -C /tmp/simota-agent-skills sparse-checkout set vision muse frame pixel echo prose ink
+   npx skills add /tmp/simota-agent-skills --skill vision muse frame pixel echo prose ink -y
    ```
 
 **Heads-up**

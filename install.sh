@@ -63,13 +63,19 @@ detected_agents() {
 stub_yaml_value() {
   # $1=key  $2=stub.yaml path — minimal key: value parser. Pure bash: this runs for every stub in
   # status/install/doctor/help, and a grep|sed|tr pipeline per call made each of them take seconds.
+  # Only a quote pair wrapping the whole value is removed (like scripts/lib/stub.mjs), so a command such as
+  # `npx skills add o/r --skill "Two Words"` keeps its inner quotes.
   local line v
   while IFS= read -r line || [ -n "$line" ]; do
     case "$line" in
       "$1":*)
         v="${line#*:}"
         v="${v#"${v%%[! ]*}"}"
-        printf '%s\n' "${v//\"/}"
+        case "$v" in
+          \"?*\") v="${v#\"}"; v="${v%\"}"; v="${v//\\\"/\"}"; v="${v//\\\\/\\}" ;;
+          \'?*\') v="${v#\'}"; v="${v%\'}" ;;
+        esac
+        printf '%s\n' "$v"
         ;;
     esac
   done < "$2"
@@ -80,7 +86,7 @@ stub_yaml_list() {
   awk -v key="$1" '
     $0 ~ ("^" key ":") { in_list=1; next }
     in_list && /^[[:space:]]*-[[:space:]]/ {
-      line=$0; sub(/^[[:space:]]*-[[:space:]]+/,"",line); gsub(/"/,"",line)
+      line=$0; sub(/^[[:space:]]*-[[:space:]]+/,"",line); sub(/^"/,"",line); sub(/"$/,"",line)
       print line; next
     }
     in_list && /^[^[:space:]]/ { exit }
@@ -190,26 +196,40 @@ stub_installed_dirs() {
   stub_installed_as "$1" | awk '{ s = tolower($0); gsub(/[^a-z0-9._]+/, "-", s); sub(/^[.-]+/, "", s); sub(/[.-]+$/, "", s); if (s != "") print s }'
 }
 
-# Facts about a stub that do not depend on the agent. Computed once per stub, then skill_state
-# runs once per agent column without re-reading stub.yaml.
-SS_TYPE="" SS_CHECK="" SS_DIRS=""
+# Facts about a stub that do not depend on the agent. Computed once per stub (cmd_status calls
+# skill_state_prepare before its agent-column loop); skill_state prepares by itself when the stub
+# it is asked about is not the one prepared last, so a caller cannot get stale or empty facts.
+SS_SRC="" SS_TYPE="" SS_CHECK="" SS_DIRS=""
 skill_state_prepare() {
   local src="$1"
+  SS_SRC="$src"
   SS_TYPE="$(stub_type "$src")"
   SS_CHECK="$(stub_yaml_value install_check "$src/stub.yaml" 2>/dev/null || true)"
   SS_DIRS="$(stub_installed_dirs "$src/stub.yaml")"
 }
 
-# Needs skill_state_prepare "$src" first.
 skill_state() {
   local target="$1" src="$2"
+  [ "$SS_SRC" = "$src" ] || skill_state_prepare "$src"
   local stype="$SS_TYPE" skills_dir="${1%/*}"
 
-  # Manual installs declare a path whose existence means "installed" (e.g. gstack).
+  # A dangling symlink is broken whatever else is installed: `fix` removes it.
+  if [ -L "$target" ] && [ ! -e "$target" ]; then
+    echo "BROKEN"
+    return
+  fi
+
+  # Manual installs declare a path whose existence means "installed" (e.g. gstack). The path may be a file or a
+  # directory, may start with ~, or be relative to the scope root (".agents/skills/x/SKILL.md": $HOME for
+  # user scope, the current directory for project scope). The pointer's own SKILL.md does not count.
   local check="$SS_CHECK"
   if [ -n "$check" ]; then
-    check="${check/#\~/$HOME}"
-    if [ -f "$check" ]; then
+    case "$check" in
+      "~"*) check="${check/#\~/$HOME}" ;;
+      /*)   ;;
+      *)    if [ "$SCOPE" = "project" ]; then check="$PWD/$check"; else check="$HOME/$check"; fi ;;
+    esac
+    if [ -e "$check" ] && ! grep -qs "^das:" "$check"; then
       [ "$stype" = "package" ] || [ "$stype" = "platform" ] && echo "installed" || echo "upgraded"
     else
       [ "$stype" = "package" ] || [ "$stype" = "platform" ] && echo "package" || echo "stub"
@@ -249,9 +269,7 @@ skill_state() {
     echo "upgraded"
     return
   fi
-  if [ -L "$target" ] && [ ! -e "$target" ]; then
-    echo "BROKEN"
-  elif [ -L "$target" ] && is_stub "$src"; then
+  if [ -L "$target" ] && is_stub "$src"; then
     echo "stub"
   elif [ -L "$target" ]; then
     echo "upgraded"

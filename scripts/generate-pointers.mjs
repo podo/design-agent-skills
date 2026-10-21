@@ -9,13 +9,11 @@
  * Needs `installed_as` (and an install route) in stub.yaml; stubs without them are reported, not guessed.
  */
 import fs from 'node:fs';
-import { allStubs } from './lib/stub.mjs';
+import { allStubs, onlyFilter } from './lib/stub.mjs';
 import { applyBlock, renderInstallBlock } from './lib/pointer.mjs';
 
 const CHECK = process.argv.includes('--check');
-const onlyArg = process.argv.find(a => a.startsWith('--only='))?.slice(7)
-  ?? (process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : undefined);
-const ONLY = onlyArg ? new Set(onlyArg.split(',').map(s => s.trim()).filter(Boolean)) : null;
+const ONLY = onlyFilter();
 
 const stubs = allStubs().filter(s => s.type !== 'router');
 const byName = new Map(stubs.map(s => [s.name, s]));

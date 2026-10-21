@@ -26,18 +26,33 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `.agents/skills/software-ux-research/SKILL.md` exists.
-   - Yes → invoke it and proceed
-   - No → go to step 2
+   - Global: `f=~/.agents/skills/software-ux-research/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/software-ux-research/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Install** (the skills CLI cannot install this one):
 
    The original repository (vasilyu1983/AI-Agents-public) is no longer on GitHub (404), so this skill comes from gabrielmoreira/agent-skills-mirror, an automated mirror of agent-skill repositories. That repo is about 1.4 GB, so only this one skill directory is sparse-checked out (about 75 MB of git metadata, roughly 12 s) and installed from the local path; the clone can be deleted afterwards.
 
+   If an earlier attempt left `~/.cache/skill-mirrors/agent-skills-mirror` behind, delete it first (`rm -rf ~/.cache/skill-mirrors/agent-skills-mirror`): `git clone` refuses a non-empty directory.
+
+   ```bash
+   [ -e ~/.agents/skills/software-ux-research ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
    ```bash
    git clone --depth=1 --filter=blob:none --sparse https://github.com/gabrielmoreira/agent-skills-mirror.git ~/.cache/skill-mirrors/agent-skills-mirror
    git -C ~/.cache/skill-mirrors/agent-skills-mirror sparse-checkout set mirrors/repos/vasilyu1983@AI-Agents-public/skills/universal/software-ux-research
-   npx skills add ~/.cache/skill-mirrors/agent-skills-mirror/mirrors/repos/vasilyu1983@AI-Agents-public/skills/universal/software-ux-research
+   npx skills add ~/.cache/skill-mirrors/agent-skills-mirror/mirrors/repos/vasilyu1983@AI-Agents-public/skills/universal/software-ux-research -g -y
+   ```
+
+   **Project:**
+   ```bash
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/gabrielmoreira/agent-skills-mirror.git ~/.cache/skill-mirrors/agent-skills-mirror
+   git -C ~/.cache/skill-mirrors/agent-skills-mirror sparse-checkout set mirrors/repos/vasilyu1983@AI-Agents-public/skills/universal/software-ux-research
+   npx skills add ~/.cache/skill-mirrors/agent-skills-mirror/mirrors/repos/vasilyu1983@AI-Agents-public/skills/universal/software-ux-research -y
    ```
 
 **Heads-up**

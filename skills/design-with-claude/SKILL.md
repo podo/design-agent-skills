@@ -24,9 +24,9 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `~/.claude/plugins/cache/design-with-claude/design-with-claude` exists.
-   - Yes → invoke it and proceed
-   - No → go to step 2
+   - `f=~/.claude/plugins/cache/design-with-claude/design-with-claude; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Install** (the skills CLI cannot install this one):
 

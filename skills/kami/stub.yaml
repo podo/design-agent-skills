@@ -6,11 +6,11 @@ upstream: https://github.com/tw93/Kami
 upstream_path: skills/kami/SKILL.md
 version: latest
 install_mode: manual
-manual_reason: The repo is ~180 MB (fonts, site assets) and a plain `npx skills add tw93/Kami` clone takes minutes and can hit the CLI's 300 s clone timeout. Cloning only `skills/kami` (about 3 MB) takes seconds, then the skills CLI installs it from that local path. This is a project install; add `-g` to the last command for a global one (the installed check then lives under `~/.agents/skills/kami/`). If `/tmp/kami-skill` already exists, remove it first.
+manual_reason: The repo is ~180 MB (fonts, site assets) and a plain `npx skills add tw93/Kami` clone takes minutes and can hit the CLI's 300 s clone timeout. Cloning only `skills/kami` (about 3 MB) takes seconds, then the skills CLI installs it from that local path.
 install_steps:
   - git clone --depth=1 --filter=blob:none --sparse https://github.com/tw93/Kami.git /tmp/kami-skill
   - git -C /tmp/kami-skill sparse-checkout set skills/kami
-  - npx skills add /tmp/kami-skill/skills/kami -y
+  - npx skills add /tmp/kami-skill/skills/kami
 install_check: .agents/skills/kami/CHEATSHEET.md
 installed_as: kami
 install_claude:

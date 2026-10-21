@@ -27,5 +27,7 @@ jobs:
       - name: Really install every stub and compare with installed_as
         # an alive repo does not prove `npx skills add owner/repo --skill name` works (names, renames, frontmatter,
         # clone size); this installs each stub in a scratch dir and fails if the landed skills differ from installed_as
+        # `!cancelled()` so one dead upstream above does not hide a week of install rot (both findings are reported)
+        if: ${{ !cancelled() }}
         timeout-minutes: 180
         run: node scripts/check-installs.mjs --real

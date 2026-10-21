@@ -35,8 +35,23 @@ das:
 
 2. **Install** (the skills CLI cannot install this one):
 
-   The repository is about 500 MB (showcase media and test baselines), so the skills CLI's full clone can exceed its 300 s limit. Sparse-clone only the skills folder, then install the entry skill and the core set from the local clone; the entry skill installs the other workflow skills on demand. For a global install add -g to the last command.
+   The repository is about 500 MB (showcase media and test baselines), so the skills CLI's full clone can exceed its 300 s limit. Sparse-clone only the skills folder, then install the entry skill and the core set from the local clone; the entry skill installs the other workflow skills on demand.
 
+   If an earlier attempt left `/tmp/hyperframes-skills` behind, delete it first (`rm -rf /tmp/hyperframes-skills`): `git clone` refuses a non-empty directory.
+
+   ```bash
+   [ -e ~/.agents/skills/hyperframes ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
+   ```bash
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/heygen-com/hyperframes.git /tmp/hyperframes-skills
+   git -C /tmp/hyperframes-skills sparse-checkout set skills
+   npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-core hyperframes-cli hyperframes-animation hyperframes-audio hyperframes-creative hyperframes-keyframes hyperframes-registry hyperframes-studio media-use -g -y
+   rm -rf /tmp/hyperframes-skills
+   ```
+
+   **Project:**
    ```bash
    git clone --depth=1 --filter=blob:none --sparse https://github.com/heygen-com/hyperframes.git /tmp/hyperframes-skills
    git -C /tmp/hyperframes-skills sparse-checkout set skills

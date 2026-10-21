@@ -6,7 +6,7 @@ upstream: https://github.com/google-labs-code/stitch-skills
 version: latest
 install_default: npx skills add google-labs-code/stitch-skills
 requires:
-  - Stitch MCP server configured with its credentials (Stitch MCP setup guide: https://stitch.withgoogle.com/docs/mcp/setup/); upstream says the skills need it running
+  - "Stitch MCP server configured with its credentials (Stitch MCP setup guide: https://stitch.withgoogle.com/docs/mcp/setup/); upstream says the skills need it running"
 license: Apache-2.0
 note: "verified 2026-10-21; bare repo install is deliberate: upstream README says the skills have inter-dependencies and documents exactly this bare install. Names with a :: prefix land in dirs sanitised to a stitch- prefix. Upstream also recommends its plugin suite via `npx plugins add google-labs-code/stitch-skills --scope project --target claude-code` (not a /plugin command, so not in install_claude). Installs dirs `shadcn-ui` and `remotion`, which are also the names of the catalogue stubs shadcn-ui and remotion (different upstreams); the Stitch versions are Stitch-specific so they were kept. extract-design-md and taste-design-stitch point at skills inside this same repo"
 installed_as:

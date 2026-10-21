@@ -172,6 +172,41 @@ describe('scripts/add-skill.mjs — integration: validation errors', () => {
   });
 });
 
+describe('scripts/add-skill.mjs — refuses what it must not do', () => {
+  const withTmp = fn => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'das-add-'));
+    try { return fn(tmp); } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+  };
+
+  // Regression: `--type router` crashed with "Cannot read properties of null" (no upstream to build a command from).
+  it('--type router is rejected with a message, not a stack trace', () => withTmp(tmp => {
+    const r = run(FULL_FLAGS.map(f => (f === 'skill' ? 'router' : f)).concat(['--skills-dir', tmp]));
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /routers are a fixed set/);
+    assert.ok(!/TypeError|at .*\.mjs/.test(r.stderr), `unexpected stack trace: ${r.stderr}`);
+    assert.deepEqual(fs.readdirSync(tmp), []);
+  }));
+
+  // Regression: the "already exists" guard only ran when --name was not given, so `--name hallmark --yes`
+  // overwrote an existing stub and dropped its conflicts_with, requires, license and note.
+  it('--name of an existing stub does not overwrite it', () => withTmp(tmp => {
+    fs.mkdirSync(path.join(tmp, 'test-skill-dry'));
+    fs.writeFileSync(path.join(tmp, 'test-skill-dry', 'stub.yaml'), 'type: skill\nlicense: MIT\n');
+    const r = run([...FULL_FLAGS, '--installed-as', 'x', '--skills-dir', tmp]);
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /already exists/);
+    assert.equal(fs.readFileSync(path.join(tmp, 'test-skill-dry', 'stub.yaml'), 'utf8'), 'type: skill\nlicense: MIT\n');
+  }));
+
+  it('--name cannot point outside the skills directory', () => withTmp(tmp => {
+    const flags = FULL_FLAGS.map(f => (f === 'test-skill-dry' ? '../escape' : f));
+    const r = run([...flags, '--installed-as', 'x', '--skills-dir', path.join(tmp, 'skills')]);
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /lowercase letters, numbers and hyphens/);
+    assert.ok(!fs.existsSync(path.join(tmp, 'escape')));
+  }));
+});
+
 describe('scripts/add-skill.mjs — generated stubs pass the install lint', () => {
   it('writes a stub + pointer that lintStub accepts without manual edits', async () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'das-add-'));

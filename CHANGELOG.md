@@ -44,24 +44,49 @@ instructions are stored, generated and checked. Catalogue: 151 → 160 skills; n
   plugin route), `install_mode: npx | manual | builtin` with `manual_reason` and
   `install_steps`, `install_check`, `requires`, `license`, `size_mb`, `conflicts_with`.
 - **Offline lint** (`npm run lint:stubs`, also part of the tests): install target must be the
-  stub's own upstream repo, no `-g`/`-y`/`--all`/placeholders in `stub.yaml`, every `--skill`
-  listed in `installed_as`, plugin routes must include the `install` step, no hardcoded
-  skill/agent counts in descriptions, every stub listed in `design-catalogue`.
+  stub's own upstream repo, no `-g`/`-y`/`--all`/placeholders in `stub.yaml` (including manual
+  `install_steps`), every `--skill` listed in `installed_as`, plugin routes must include the
+  `install` step, no hardcoded skill/agent counts in descriptions or triggers (also "31 design
+  skills"), every stub listed in `design-catalogue`, and `stub.yaml` values that a real YAML
+  parser would read differently (an unquoted `: ` or ` #`) must be quoted.
 - **Name collisions are declared.** Two stubs from different upstreams that write the same skill
   directory — or one that writes another stub's own pointer directory — must list each other in
   `conflicts_with`; the pointer then says so. 23 such pairs existed and are now declared.
 - **`npm run verify:installs`** (`scripts/check-installs.mjs`) runs the real skills CLI: `--list`
   mode checks every target resolves and offers the `--skill` names; `--real` installs each stub
   into a scratch directory and requires the directories that land to equal `installed_as`
-  exactly (manual stubs replay only `git clone` / sparse-checkout / `npx skills add <path>`;
-  nothing downloaded is ever executed). Runs on PRs (changed stubs) and weekly (everything).
+  exactly (manual stubs replay only `git clone` / sparse-checkout / `npx skills add <path>`, never
+  with `-g`, then must land exactly `installed_as` and satisfy a relative `install_check`;
+  nothing downloaded is ever executed). Only stubs with `size_mb >= 100` get a longer clone
+  timeout, so a repo that is too big for the CLI's 300 s default but not marked heavy fails
+  here instead of for users. Runs on PRs (changed stubs) and weekly (everything).
   `check-upstreams.mjs` only proves a repo is alive, which is why none of the breakage below
   was caught.
+- **Manual pointers get the same scope handling as `npx` ones.** `install_steps` no longer
+  carry `-y`/`-g`; the pointer renders Global (`-g -y`) and Project (`-y`) variants, probes a
+  project-relative `install_check` under both `~` and the project, accepts a directory, never
+  counts the pointer's own `SKILL.md`, and tells users to delete a leftover staging clone
+  (`git clone` refuses a non-empty directory).
 - **`install.sh`** — `status` follows `installed_as` (it kept reporting `stub` forever) and
-  `install_check`, and is several times faster: `stub_yaml_value` is pure bash (it forked three
-  processes per field, ~480 per `help`), per-stub facts are read once instead of once per
-  agent column, and names are sanitised by one `awk`. `install.sh` tests: 95 s → 32 s.
-- **`scripts/add-skill.mjs`** writes the new schema; CLAUDE.md and README document it.
+  `install_check` (file or directory, `~`, absolute, or relative to the scope root), reports a
+  dangling pointer symlink as `BROKEN` before anything else, and is several times faster:
+  `stub_yaml_value` is pure bash (it forked three processes per field, ~480 per `help`),
+  per-stub facts are read once instead of once per agent column, and names are sanitised by
+  one `awk`. The reader strips only a quote pair that wraps a whole value, so commands with
+  quoted multi-word `--skill` names print correctly in `update`, and a test pins it to the JS
+  reader for every scalar key of every stub. `install.sh` tests: 95 s → 32 s.
+- **One stub reader.** `scripts/lib/stub.mjs` now reads CRLF, empty values and trailing
+  comments, is used by every script (`check-upstreams`, `generate-readme-table`, `--only`
+  parsing and `pool()` are shared instead of copied), and was diffed against Ruby's real YAML
+  parser on all 166 stubs. `bin/cli.mjs` ships on its own, so a test pins its view of type, tier,
+  rank and category to the shared reader instead.
+- **`scripts/check-upstreams.mjs`** fired ~160 requests at once, which trips GitHub's secondary
+  rate limit and left up to a fifth of the catalogue "could not verify" (the weekly run too).
+  It now runs a bounded pool and retries 403s.
+- **`scripts/add-skill.mjs`** writes the new schema, rejects `--type router` (it crashed),
+  refuses to overwrite an existing stub and a name that is not lowercase-and-hyphens.
+  **`generate-readme-table.mjs --write`** updates the README table in place.
+- **Weekly `upstream-check.yml`** runs the real-install step even when the upstream step fails.
 
 ### Fixed — install commands
 
@@ -86,7 +111,10 @@ something other than documented are listed here.
   14 engine skills into `documd-visuals`; `design-sprint` is now `create-issue` in
   `aoshimash/skills` (upstream merged it); `hig-doctor` installs the real audit skill
   `hig-doctor-audit`; `phuryn-pm-skills` is installable with `npx` again (the old regression
-  test claiming otherwise was wrong and is gone); `styleseed` is one skill, not a clone + `cp`.
+  test claiming otherwise was wrong) as a targeted list of its product-management skills, not a
+  bare install that wrote generic names (`code-review`, `retro`, `sql-queries`, `draft-nda`, …)
+  over users' own skills; the full set stays on its plugin route; `styleseed` is one skill,
+  not a clone + `cp`.
 - **Routes that could not work** replaced: `textual-tui-skill` (`curl -o` failed,
   `quickstart.sh` does not install the skill), `logo-designer-skill` and
   `interface-design-dammyjay` (`claude plugin add` / `claude skills add` are not Claude Code
@@ -122,7 +150,13 @@ something other than documented are listed here.
   same reason (an app).
 - Triggers that promised things the skill no longer does were replaced
   (`design-brief`, `frontend-design` "nordic design" → "swiss design", `ux-ui-mastery`,
-  `open-design`, `markdown-viewer-skills`, `antvis-chart-skills`, `design-for-ai`).
+  `open-design` — its "31 design skills" and "71 design systems" counts were still there —
+  `markdown-viewer-skills`, `antvis-chart-skills`, `design-for-ai`).
+- **17 `stub.yaml` files were not valid YAML for a real parser:** 16 had `requires:` items like
+  `- Network access: x`, which parse as a mapping instead of a string, and `creative-director`'s
+  `license: CC-BY-4.0 (attribution required: …)` is a syntax error. Our line reader accepted them
+  all. They are quoted now, the lint rejects the pattern, and a Ruby-parser diff over every stub
+  shows the two readers agree.
 - Router rows, README table and counts regenerated or corrected (All 160, Essentials ~96,
   Picks 24; official 34, community 72, experimental 60), and a test now keeps the README
   counts in sync with the stubs.
@@ -158,8 +192,13 @@ is removed: each was repaired.
 - **CLAUDE.md** — rewritten for the schema, install-route rules, `conflicts_with`, and the
   checklist; the type:skill rule that `--skill` must equal the directory name was wrong.
 - **Tests** — new `pointers`, `check-installs` and README-count suites, a fake skills CLI
-  fixture, fixture-catalogue `install.sh status` tests. Removed two obsolete guards (a
-  per-stub install-target regex that the lint now does properly, and the phuryn "no npx" check).
+  fixture (with a local git repository for manual routes), fixture-catalogue `install.sh status`
+  tests, bash-versus-JS and CLI-versus-JS reader agreement tests over every stub. Removed two
+  obsolete guards (a per-stub install-target regex that the lint now does properly, and the
+  phuryn "no npx" check, replaced by a check of the targeted list). The upgrade-command test now
+  compares the pointer's parsed `--skill` names with `stub.yaml` exactly; the old substring check
+  passed for a wrong name that merely contained the right one (`ux-writing` in `ux-writing-skill`).
+  New tests were checked to fail when the fix they cover is removed.
 
 ---
 

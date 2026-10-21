@@ -5,12 +5,10 @@
  * installed?" paths, stale skill names, per-skill shorthand that never worked), so it is now
  * generated: edit stub.yaml, run `npm run generate`, never hand-edit between the markers.
  */
-import { installMode, parseNpx, sanitize, repoOf } from './stub.mjs';
+import { HEAVY_MB, installMode, parseGitClone, parseNpx, sanitize, tokenize } from './stub.mjs';
 
 export const START = '<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->';
 export const END = '<!-- das:install:end -->';
-
-const HEAVY_MB = 100;
 
 /** Directories this stub writes (what `installed_as` becomes after the CLI sanitises it). */
 export function installedDirs(stub) {
@@ -24,6 +22,22 @@ export function claimedDirs(stub) {
 
 function code(lang, lines) {
   return ['```' + lang, ...lines, '```'];
+}
+
+/** Probe for an `install_check` path: it exists (file or directory) and is not this pointer's own marker. */
+const probe = p => `f=${p}; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`;
+
+/** Clone directories a manual route only stages: a later `npx skills add` reads from them. */
+function stagedClones(steps) {
+  const dests = [];
+  for (const s of steps) {
+    const t = tokenize(s);
+    if (t[0] === 'git' && t[1] === 'clone') {
+      const { dest } = parseGitClone(t.slice(2));
+      if (dest) dests.push(dest);
+    }
+  }
+  return dests.filter(d => steps.some(s => parseNpx(s) && s.includes(d)));
 }
 
 function checkCommands(stub) {
@@ -71,8 +85,11 @@ export function renderInstallBlock(stub, all) {
   const dirs = installedDirs(stub);
   out.push('## Decision tree', '', '1. **Is the full skill already installed?**');
   if (mode === 'manual' && stub.install_check) {
-    out.push(`   Check: \`${stub.install_check}\` exists.`);
-    out.push('   - Yes → invoke it and proceed', '   - No → go to step 2');
+    const c = stub.install_check;
+    // a project-relative check (".agents/skills/…") also exists under ~ for a global install
+    if (/^[/~]/.test(c)) out.push(`   - \`${probe(c)}\``);
+    else out.push(`   - Global: \`${probe(`~/${c}`)}\``, `   - Project: \`${probe(c)}\``);
+    out.push('   - `installed` → invoke it and proceed', '   - `pointer` → go to step 2');
   } else {
     if (dirs.length > 1) {
       out.push(`   This package installs ${dirs.length} skills (\`${dirs.join('`, `')}\`); checking the first.`);
@@ -84,9 +101,21 @@ export function renderInstallBlock(stub, all) {
   }
 
   if (mode === 'manual') {
+    const steps = stub.install_steps ?? [];
+    const indent = lines => lines.map(l => `   ${l}`);
     out.push('', '2. **Install** (the skills CLI cannot install this one):', '');
     if (stub.manual_reason) out.push(`   ${stub.manual_reason}`, '');
-    out.push(...code('bash', stub.install_steps ?? []).map(l => `   ${l}`));
+    for (const d of stagedClones(steps)) {
+      out.push(`   If an earlier attempt left \`${d}\` behind, delete it first (\`rm -rf ${d}\`): \`git clone\` refuses a non-empty directory.`, '');
+    }
+    if (steps.some(s => parseNpx(s))) {
+      // same scope handling as the npx route: the step carries no -g/-y, the pointer adds them
+      const run = flags => indent(code('bash', steps.map(s => (parseNpx(s) ? `${s}${flags}` : s))));
+      out.push(...indent(code('bash', [`[ -e ~/.agents/skills/${stub.name} ] && echo "global" || echo "project"`])));
+      out.push('', '   **Global:**', ...run(' -g -y'), '', '   **Project:**', ...run(' -y'));
+    } else {
+      out.push(...indent(code('bash', steps)));
+    }
     out.push(...pluginRoute(stub));
     out.push(...headsUp(stub, all), END);
     return out.join('\n');
@@ -125,12 +154,4 @@ export function applyBlock(md, block) {
   const anchor = lines.findIndex(l => ANCHORS.test(l));
   if (anchor !== -1) return [...lines.slice(0, anchor), block, '', ...lines.slice(anchor)].join('\n');
   return md.replace(/\n*$/, '\n\n') + block + '\n';
-}
-
-/** Names a pointer tells agents to invoke ("Skill name: `x`" lines). */
-export function claimedNames(md) {
-  return [...md.matchAll(/Skill names?:\s*`([^`]+)`(?:\s*(?:,|and|or)\s*`([^`]+)`)*/g)].flatMap(m => {
-    const line = m[0];
-    return [...line.matchAll(/`([^`]+)`/g)].map(x => x[1]);
-  });
 }

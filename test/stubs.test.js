@@ -14,6 +14,13 @@ const VALID_RANKS  = new Set([1, 2, 3]);
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
+/** The `npx skills add …` commands of a pointer's generated install block, parsed. */
+const pointerCommands = md => {
+  const block = md.slice(md.indexOf('das:install:start'), md.indexOf('das:install:end'));
+  return [...block.matchAll(/^\s*(npx skills add .*)$/gm)].map(m => parseNpx(m[1])).filter(Boolean);
+};
+const sameSet = (a, b) => a.length === b.length && [...a].sort().join('\0') === [...b].sort().join('\0');
+
 function skillDirs() {
   return fs.readdirSync(SKILLS_DIR).filter(n =>
     fs.statSync(path.join(SKILLS_DIR, n)).isDirectory()
@@ -169,15 +176,20 @@ describe('type:skill upgrade commands', () => {
       );
     });
 
-    // `--skill` matches the upstream SKILL.md `name`, not our directory name (see installed_as).
-    // Every skill the install command names must appear in the pointer's generated install block.
+    // `--skill` matches the upstream SKILL.md `name`, not our directory name (see installed_as). The pointer's
+    // parsed install commands must install exactly the --skill names of stub.yaml's install_default (a substring
+    // check would pass for a wrong name that merely contains the right one, e.g. ux-writing in ux-writing-skill).
     // Raw-URL / subpath / manual installs have no --skill and are covered by test/pointers.test.js.
-    it(`${name}: upgrade command's --skill names appear in the pointer`, () => {
-      const p = parseNpx(parseStubText(stub).install_default ?? '');
-      if (!p || !p.skills.length) return;
-      for (const n of p.skills) {
-        assert.ok(skill.includes(`--skill ${n.includes(' ') ? `"${n}"` : n}`) || skill.includes(n),
-          `pointer must install "${n}" (the --skill name from stub.yaml install_default)`);
+    it(`${name}: the pointer installs exactly the --skill names of stub.yaml`, () => {
+      const fields = parseStubText(stub);
+      const want = parseNpx(fields.install_default ?? '')?.skills ?? [];
+      if (!want.length) return;
+      const cmds = pointerCommands(skill);
+      assert.ok(cmds.some(c => sameSet(c.skills, want)), `no command in the pointer installs exactly: ${want.join(', ')}`);
+      for (const c of cmds) {
+        for (const n of c.skills) {
+          assert.ok((fields.installed_as ?? []).includes(n), `the pointer installs "${n}", which installed_as does not list`);
+        }
       }
     });
   }
@@ -227,11 +239,10 @@ describe('CLI data integrity', () => {
 });
 
 describe('stub.yaml field validation', () => {
-  // Keep in sync with documented fields in CLAUDE.md stub.yaml section
   // Keep in sync with documented fields in CLAUDE.md stub.yaml → Fields section
   const KNOWN_FIELDS = new Set([
     'type', 'tier', 'rank', 'category', 'upstream', 'upstream_path', 'version',
-    'install_default', 'installed_as', 'note', 'install_claude', 'install_npm',
+    'install_default', 'installed_as', 'note', 'install_claude',
     'install_extra', 'install_mode', 'install_steps', 'install_check', 'manual_reason',
     'requires', 'license', 'size_mb', 'conflicts_with',
   ]);
@@ -279,6 +290,22 @@ describe('catalogue-level invariants', () => {
 });
 
 describe('metadata regression guards', () => {
+  // Regression: the npx route was a bare install of every skill in the repo, which wrote generic names
+  // (code-review, retro, sql-queries, draft-nda, …) over users' own skills and needed a hand-copied 69-name list
+  // that broke whenever upstream added a skill. It is a targeted list now; the full set stays on the plugin route.
+  it('phuryn-pm-skills: npx route is a targeted --skill list without generic-named skills; plugin route kept', () => {
+    const s = skills.find(x => x.name === 'phuryn-pm-skills');
+    assert.ok(s && s.stub, 'phuryn-pm-skills stub missing');
+    const f = parseStubText(s.stub);
+    const p = parseNpx(f.install_default);
+    assert.equal(p.target, 'phuryn/pm-skills');
+    assert.ok(p.skills.length > 0 && sameSet(p.skills, f.installed_as), 'a --skill list that equals installed_as, not a bare install');
+    for (const generic of ['code-review', 'retro', 'sql-queries', 'draft-nda', 'grammar-check']) {
+      assert.ok(!f.installed_as.includes(generic), `${generic} would overwrite a user skill of the same name`);
+    }
+    assert.ok(f.install_claude.some(c => /marketplace add phuryn\/pm-skills/.test(c)), 'the plugin route is still documented');
+  });
+
   // Regression: product-on-purpose/pm-skills shrank from 63 → 55 skills upstream.
   // The stale "63" count must not reappear in the pointer.
   it('pm-skills: no stale "63" skill count', () => {
@@ -334,12 +361,16 @@ describe('install command validity (regression)', () => {
     it(`${dir}: installs upstream skill "${real}", not the directory name`, () => {
       const s = skills.find(x => x.name === dir);
       assert.ok(s && s.stub && s.skill, `${dir} files missing`);
-      assert.equal(yamlGet(s.stub, 'installed_as'), real,
-        `stub.yaml installed_as must be the upstream skill name "${real}"`);
-      assert.ok(s.skill.includes(`--skill ${real}`) || s.skill.includes(`--skill "${real}"`),
-        `SKILL.md must install with --skill ${real}`);
-      assert.ok(!s.skill.includes(`--skill ${dir} `),
-        `SKILL.md must not use the directory name as --skill (${dir} is not an upstream skill)`);
+      const fields = parseStubText(s.stub);
+      assert.deepEqual(fields.installed_as, [real], `stub.yaml installed_as must be the upstream skill name "${real}"`);
+      // manual routes (a local-path `npx skills add`, no --skill) take the name from the skill's own frontmatter
+      if (!fields.install_default) return;
+      assert.deepEqual(parseNpx(fields.install_default).skills, [real], 'install_default must install exactly that skill');
+      const cmds = pointerCommands(s.skill);
+      assert.ok(cmds.length > 0 && cmds.every(c => sameSet(c.skills, [real])),
+        `every install command in the pointer must use --skill ${real}`);
+      assert.ok(real === dir || cmds.every(c => !c.skills.includes(dir)),
+        `the pointer must not use the directory name as --skill (${dir} is not an upstream skill)`);
     });
   }
 

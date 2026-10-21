@@ -9,8 +9,8 @@ triggers:
   - "open-design"
   - "open design platform"
   - "nexu-io platform"
-  - "31 design skills"
-  - "71 design systems"
+  - "local Claude Design alternative"
+  - "open-source Claude Design"
 das:
   category: creative-3d
   upstream: "https://github.com/nexu-io/open-design"

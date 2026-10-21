@@ -7,7 +7,7 @@ upstream_path: skills/shadcn/SKILL.md
 version: latest
 install_default: npx skills add shadcn-ui/ui --skill shadcn
 requires:
-  - Node.js: the skill runs the shadcn CLI through your package runner (`npx shadcn@latest ...`, fetched from npm at use time), including `info --json` for project context
+  - "Node.js: the skill runs the shadcn CLI through your package runner (`npx shadcn@latest ...`, fetched from npm at use time), including `info --json` for project context"
   - A project with a components.json file (or one you are about to create with `shadcn init`)
 license: MIT
 size_mb: 71

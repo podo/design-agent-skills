@@ -13,31 +13,42 @@
  *   node scripts/check-installs.mjs --only a,b      # only these skill dirs (PR-scoped gate)
  *
  * Env: SKILLS_BIN=/path/to/skills (default: `npx --yes skills`), CONCURRENCY (default 3).
- * manual-mode stubs: only their `git clone` steps are run (into the scratch dir) and upstream_path /
- * install_check are looked up in the clone; nothing from a downloaded repo is ever executed.
+ *
+ * Clone timeout: the skills CLI gives up cloning after 300 s. Stubs with size_mb >= 100 get a longer limit
+ * (and a warning in their pointer); every other stub runs with the CLI's own default, so a repo that is
+ * too big to install for users, but not marked heavy, fails here instead of passing on a generous limit.
+ *
+ * manual-mode stubs: only their `git clone`, `git -C <clone> sparse-checkout` and `npx skills add <clone>`
+ * steps are replayed (into the scratch dir, never with -g), then the landed directories must equal
+ * installed_as and a project-relative install_check / upstream_path must exist. Nothing from a downloaded
+ * repo is ever executed.
  */
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
-import { allStubs, installMode, parseGitClone, parseNpx, tokenize } from './lib/stub.mjs';
+import { HEAVY_MB, allStubs, installMode, onlyFilter, parseGitClone, parseNpx, pool, tokenize } from './lib/stub.mjs';
 import { installedDirs } from './lib/pointer.mjs';
 
 const REAL = process.argv.includes('--real');
-const onlyArg = process.argv.find(a => a.startsWith('--only='))?.slice(7)
-  ?? (process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : undefined);
-const ONLY = onlyArg ? new Set(onlyArg.split(',').map(s => s.trim()).filter(Boolean)) : null;
+const ONLY = onlyFilter();
 const CONCURRENCY = Number(process.env.CONCURRENCY) || 3;
 const BIN = process.env.SKILLS_BIN ? [process.env.SKILLS_BIN] : ['npx', '--yes', 'skills'];
 const TIMEOUT_MS = REAL ? 1_000_000 : 180_000;
-const HEAVY_MB = 100;
+const LONG_CLONE = { SKILLS_CLONE_TIMEOUT_MS: '900000' };
 
-/** Run a command with stdin closed; kill the whole process group on timeout. Resolves { code, out }. */
-function run(argv, cwd) {
+/**
+ * Run a command with stdin closed; kill the whole process group on timeout. Resolves { code, out }.
+ * `env` is merged over the parent's; the parent's SKILLS_CLONE_TIMEOUT_MS is dropped unless `env` sets it,
+ * so the CLI's real default applies.
+ */
+function run(argv, cwd, env = {}) {
   return new Promise(resolve => {
+    const base = { ...process.env };
+    delete base.SKILLS_CLONE_TIMEOUT_MS;
     const p = spawn(argv[0], argv.slice(1), {
       cwd, detached: true, stdio: ['ignore', 'pipe', 'pipe'],
-      env: { ...process.env, GIT_TERMINAL_PROMPT: '0', NO_COLOR: '1', CI: '1', SKILLS_CLONE_TIMEOUT_MS: '900000' },
+      env: { ...base, GIT_TERMINAL_PROMPT: '0', NO_COLOR: '1', CI: '1', ...env },
     });
     let out = '';
     p.stdout.on('data', d => (out += d));
@@ -57,7 +68,7 @@ async function listNames(target) {
   try {
     let r;
     for (let i = 0; i < 3; i++) {
-      r = await run([...BIN, 'add', target, '--list'], cwd);
+      r = await run([...BIN, 'add', target, '--list'], cwd, LONG_CLONE);   // list mode checks resolution, not clone time
       if (/Found \d+ skills?/.test(r.out) || !/clone|TIMEOUT/i.test(r.out)) break;   // retry transient clone failures only
     }
     const names = [...r.out.matchAll(/^│ {4}(\S.*?)\s*$/gm)].map(m => m[1]);
@@ -79,13 +90,14 @@ function frontmatter(file) {
 async function realNpx(stub) {
   const problems = [];
   const cwd = scratch();
+  const env = Number(stub.size_mb) >= HEAVY_MB ? LONG_CLONE : {};
   try {
     const cmds = [stub.install_default, ...(stub.install_extra ?? [])].filter(Boolean);
     for (const cmd of cmds) {
       const t = tokenize(cmd);
       let r;
       for (let attempt = 0; attempt < 3; attempt++) {   // clone failures under load are usually transient
-        r = await run([...BIN, 'add', ...t.slice(t.indexOf('add') + 1), '-y'], cwd);
+        r = await run([...BIN, 'add', ...t.slice(t.indexOf('add') + 1), '-y'], cwd, env);
         if (r.code === 0 || !/clone|TIMEOUT|ECONN|ETIMEDOUT|network/i.test(r.out)) break;
       }
       if (r.code !== 0) problems.push(`\`${cmd}\` exited ${r.code}: ${r.out.trim().split('\n').slice(-2).join(' | ')}`);
@@ -105,8 +117,11 @@ async function realNpx(stub) {
 
 /**
  * manual stubs: replay only the *safe* steps in a scratch dir: `git clone` (flags such as --filter and
- * --sparse are kept), `git -C <clone> sparse-checkout …`, and `npx skills add <clone path>`. Anything
- * else (./setup, cp, curl, pip, …) is never executed. Then look for upstream_path in the clone.
+ * --sparse are kept), `git -C <clone> sparse-checkout …`, and `npx skills add <clone path>` (always as a
+ * project install: -g / --global are dropped so the developer's real skills directory is never touched).
+ * Anything else (./setup, cp, curl, pip, …) is never executed. Then the directories that landed must equal
+ * installed_as, and upstream_path (in the clone) and a project-relative install_check (in the scratch
+ * project) must exist.
  */
 async function realManual(stub) {
   const steps = (stub.install_steps ?? []).flatMap(s => s.split('&&').map(x => x.trim()));
@@ -119,28 +134,40 @@ async function realManual(stub) {
     for (const [from, to] of mapped) if (p === from || p.startsWith(from + '/')) return to + p.slice(from.length);
     return p;
   };
+  const lastLine = out => out.trim().split('\n').slice(-1)[0];
   try {
     let cloned = null;
+    let installed = false;
     for (const step of steps) {
       const t = tokenize(step);
       if (t[0] === 'git' && t[1] === 'clone') {
         const { url, dest: after, flags } = parseGitClone(t.slice(2));
-        const documented = after ?? path.basename(url ?? 'repo', '.git');
+        if (!url) { problems.push(`cannot replay "${step}": only \`git clone <https url> [dir]\` is supported`); return { skipped: false, problems }; }
+        const documented = after ?? path.basename(url, '.git');
         const dest = path.join(cwd, path.basename(documented));
         const r = await run(['git', 'clone', ...flags, url, dest], cwd);
-        if (r.code !== 0) { problems.push(`git clone ${url} failed: ${r.out.trim().split('\n').slice(-1)[0]}`); return { skipped: false, problems }; }
+        if (r.code !== 0) { problems.push(`git clone ${url} failed: ${lastLine(r.out)}`); return { skipped: false, problems }; }
         for (const k of new Set([documented, documented.replace(/^~/, home), path.resolve(documented.replace(/^~/, home))])) mapped.set(k, dest);
         cloned = dest;
       } else if (t[0] === 'git' && t[1] === '-C' && t[3] === 'sparse-checkout') {
         const r = await run(['git', '-C', toScratch(t[2].replace(/^~/, home)), ...t.slice(3)], cwd);
-        if (r.code !== 0) problems.push(`${step} failed: ${r.out.trim().split('\n').slice(-1)[0]}`);
+        if (r.code !== 0) problems.push(`${step} failed: ${lastLine(r.out)}`);
       } else if (t[0] === 'npx' && t[1] === 'skills' && t[2] === 'add') {
-        const args = t.slice(3).map(x => toScratch(x.replace(/^~/, home)));
+        const args = t.slice(3).filter(x => x !== '-g' && x !== '--global').map(x => toScratch(x.replace(/^~/, home)));
         const r = await run([...BIN, 'add', ...args, '-y'], cwd);
-        if (r.code !== 0) problems.push(`${step} exited ${r.code}: ${r.out.trim().split('\n').slice(-1)[0]}`);
-        const base = path.join(cwd, '.agents', 'skills');
-        const landed = fs.existsSync(base) ? fs.readdirSync(base) : [];
-        for (const e of installedDirs(stub)) if (!landed.includes(e)) problems.push(`expected "${e}" to land from \`${step}\`, got: ${landed.join(', ') || 'nothing'}`);
+        if (r.code !== 0) problems.push(`${step} exited ${r.code}: ${lastLine(r.out)}`);
+        installed = true;
+      }
+    }
+    if (installed) {
+      const base = path.join(cwd, '.agents', 'skills');
+      const landed = fs.existsSync(base) ? fs.readdirSync(base).filter(d => fs.existsSync(path.join(base, d, 'SKILL.md'))) : [];
+      const expected = installedDirs(stub);
+      for (const e of expected) if (!landed.includes(e)) problems.push(`expected "${e}" to be installed, but it was not (landed: ${landed.join(', ') || 'nothing'})`);
+      for (const l of landed) if (!expected.includes(l)) problems.push(`unexpected "${l}" landed (add it to installed_as or narrow the install)`);
+      const check = stub.install_check;
+      if (check && !/^[/~]/.test(check) && !fs.existsSync(path.join(cwd, check))) {
+        problems.push(`install_check "${check}" does not exist after the install, so the pointer would never detect it`);
       }
     }
     if (cloned && stub.upstream_path) {
@@ -156,11 +183,6 @@ const stubs = allStubs().filter(s => s.type !== 'router' && (!ONLY || ONLY.has(s
 const failures = [];
 const note = (stub, msgs) => msgs.forEach(m => failures.push(`${stub.name}: ${m}`));
 
-async function pool(items, fn, n) {
-  const q = [...items];
-  await Promise.all(Array.from({ length: n }, async () => { while (q.length) await fn(q.shift()); }));
-}
-
 if (REAL) {
   const heavy = stubs.filter(s => Number(s.size_mb) >= HEAVY_MB);
   const light = stubs.filter(s => !heavy.includes(s));
@@ -168,8 +190,12 @@ if (REAL) {
   const one = async stub => {
     const mode = installMode(stub);
     if (mode === 'builtin') return;
-    if (mode === 'manual') { const r = await realManual(stub); if (r.skipped) manualSkipped++; note(stub, r.problems); }
-    else note(stub, await realNpx(stub));
+    try {
+      if (mode === 'manual') { const r = await realManual(stub); if (r.skipped) manualSkipped++; note(stub, r.problems); }
+      else note(stub, await realNpx(stub));
+    } catch (e) {
+      note(stub, [`the checker itself failed: ${e.message}`]);   // one bad stub must not abort the whole run
+    }
     process.stdout.write('.');
   };
   await pool(light, one, CONCURRENCY);

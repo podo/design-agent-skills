@@ -5,7 +5,7 @@ rank: 3
 upstream: https://github.com/simota/agent-skills
 version: latest
 install_mode: manual
-manual_reason: The skills CLI cannot copy this repo as-is, because every skill folder links to a shared _common folder that links back (cyclic symlinks, ELOOP), and it reports success while installing nothing usable for Claude Code. A sparse clone of only the design-related skill folders leaves those links dangling, so the CLI installs each skill with its reference folder but without the shared _common docs. Add -g to the last command for a global install, and delete the clone afterwards. Upstream's own route is `make link` from a full clone, which symlinks every skill in the repo into ~/.claude/skills, ~/.agents/skills and ~/.gemini/antigravity-cli/skills.
+manual_reason: The skills CLI cannot copy this repo as-is, because every skill folder links to a shared _common folder that links back (cyclic symlinks, ELOOP), and it reports success while installing nothing usable for Claude Code. A sparse clone of only the design-related skill folders leaves those links dangling, so the CLI installs each skill with its reference folder but without the shared _common docs. Upstream's own route is `make link` from a full clone, which symlinks every skill in the repo into ~/.claude/skills, ~/.agents/skills and ~/.gemini/antigravity-cli/skills.
 install_steps:
   - git clone --depth=1 --filter=blob:none --sparse https://github.com/simota/agent-skills.git /tmp/simota-agent-skills
   - git -C /tmp/simota-agent-skills sparse-checkout set vision muse frame pixel echo prose ink

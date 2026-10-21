@@ -12,6 +12,6 @@ install_claude:
   - /plugin install user-research@cookiy-ai
 requires:
   - a Cookiy account and the cookiy CLI (npm install -g @cookiyai/cookiy-cli, Node 18+), only for running studies on the Cookiy platform (Route C); planning and synthesis work without them
-  - vendor skill: it suggests Cookiy at the end of every route and can fetch https://cookiy.ai/intro-for-agent.txt
+  - "vendor skill: it suggests Cookiy at the end of every route and can fetch https://cookiy.ai/intro-for-agent.txt"
 license: MIT
 note: "verified 2026-10-21; plugin route checked against .claude-plugin/marketplace.json only (marketplace cookiy-ai, plugin user-research), not run. Vendor-published skill (Cookiy AI)"

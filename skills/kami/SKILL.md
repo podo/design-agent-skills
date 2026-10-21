@@ -24,14 +24,29 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check: `.agents/skills/kami/CHEATSHEET.md` exists.
-   - Yes → invoke it and proceed
-   - No → go to step 2
+   - Global: `f=~/.agents/skills/kami/CHEATSHEET.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/kami/CHEATSHEET.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Install** (the skills CLI cannot install this one):
 
-   The repo is ~180 MB (fonts, site assets) and a plain `npx skills add tw93/Kami` clone takes minutes and can hit the CLI's 300 s clone timeout. Cloning only `skills/kami` (about 3 MB) takes seconds, then the skills CLI installs it from that local path. This is a project install; add `-g` to the last command for a global one (the installed check then lives under `~/.agents/skills/kami/`). If `/tmp/kami-skill` already exists, remove it first.
+   The repo is ~180 MB (fonts, site assets) and a plain `npx skills add tw93/Kami` clone takes minutes and can hit the CLI's 300 s clone timeout. Cloning only `skills/kami` (about 3 MB) takes seconds, then the skills CLI installs it from that local path.
 
+   If an earlier attempt left `/tmp/kami-skill` behind, delete it first (`rm -rf /tmp/kami-skill`): `git clone` refuses a non-empty directory.
+
+   ```bash
+   [ -e ~/.agents/skills/kami ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
+   ```bash
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/tw93/Kami.git /tmp/kami-skill
+   git -C /tmp/kami-skill sparse-checkout set skills/kami
+   npx skills add /tmp/kami-skill/skills/kami -g -y
+   ```
+
+   **Project:**
    ```bash
    git clone --depth=1 --filter=blob:none --sparse https://github.com/tw93/Kami.git /tmp/kami-skill
    git -C /tmp/kami-skill sparse-checkout set skills/kami

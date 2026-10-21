@@ -16,7 +16,13 @@ const sanitize = n => n.toLowerCase().replace(/[^a-z0-9._]+/g, '-').replace(/^[.
 if (args[0] !== 'add') process.exit(2);
 const rest = args.slice(1);
 const target = rest.find(a => !a.startsWith('-'));
-const names = catalog[target];
+// $FAKE_SKILLS_LOG: one JSON line per call, so tests can assert which flags and env the checker passed on
+if (process.env.FAKE_SKILLS_LOG) {
+  fs.appendFileSync(process.env.FAKE_SKILLS_LOG, JSON.stringify({ args, cloneTimeout: process.env.SKILLS_CLONE_TIMEOUT_MS ?? null }) + '\n');
+}
+// a local directory (a clone made by a manual route) offers the skills listed under "@local"
+const isLocalDir = target && fs.existsSync(target) && fs.statSync(target).isDirectory();
+const names = catalog[target] ?? (isLocalDir ? catalog['@local'] : undefined);
 if (!names) { console.error('■ Failed to clone repository'); process.exit(1); }
 
 if (rest.includes('--list')) {
