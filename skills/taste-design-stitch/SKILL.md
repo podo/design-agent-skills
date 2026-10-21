@@ -1,9 +1,9 @@
 ---
 name: taste-design-stitch
 description: |
-  Apply design taste and aesthetic judgment to Google Stitch UI output. Elevates
-  AI-generated Stitch interfaces beyond generic defaults with opinionated visual
-  choices, spacing, and typographic refinement.
+  Generates agent-friendly DESIGN.md files for Google Stitch that enforce premium, anti-generic
+  UI standards: strict typography, calibrated color, asymmetric layouts, and perpetual micro-motion.
+  The DESIGN.md then steers Stitch's screen generation away from generic AI defaults.
 triggers:
   - "taste design"
   - "stitch taste"
@@ -11,6 +11,7 @@ triggers:
   - "improve stitch UI"
   - "stitch aesthetics"
 das:
+  type: skill
   category: interaction-polish
   upstream: "https://github.com/google-labs-code/stitch-skills"
   upstream_path: "plugins/stitch-utilities/skills/taste-design/SKILL.md"
@@ -22,39 +23,50 @@ das:
 
 > Catalogue stub — full skill: [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills/blob/main/plugins/stitch-utilities/skills/taste-design/SKILL.md)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/taste-design-stitch/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/taste-design-stitch/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `taste-design`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/taste-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/taste-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `taste-design`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/taste-design-stitch ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add google-labs-code/stitch-skills --skill taste-design-stitch -g -y
+   npx skills add google-labs-code/stitch-skills --skill taste-design -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add google-labs-code/stitch-skills --skill taste-design-stitch -y
+   npx skills add google-labs-code/stitch-skills --skill taste-design -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** access to Google Stitch (stitch.withgoogle.com), where the generated DESIGN.md is used; the Stitch MCP server is optional, for programmatic use (the skill's allowed-tools lists StitchMCP)
+- **License:** Apache-2.0
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `taste-design-stitch`
+- Skill name: `taste-design`
 - Trigger phrases: "taste design", "stitch taste", "improve stitch UI", "stitch aesthetics"
 
 ## What it does
 
-Applies aesthetic judgment and design taste to Google Stitch UI output. Pushes generated interfaces past generic AI defaults — opinionated choices on spacing, typography, color, and visual hierarchy that make Stitch output feel crafted rather than computed. Part of Google Labs' official Stitch skills ecosystem.
+A semantic design-system skill for Google Stitch. It writes a `DESIGN.md` that encodes visual atmosphere, color calibration, typographic architecture, component behaviors, layout principles, motion philosophy and an explicit list of banned AI design cliches, in the descriptive language Stitch's agent interprets. Use that file as the single source of truth when prompting Stitch for new screens, so the output feels crafted rather than computed. Part of Google Labs' official Stitch skills.
+
+## When NOT to use
+
+- Extracting a DESIGN.md from existing code (use `extract-design-md`)
+- The wider Stitch skill set: design generation, React and shadcn builds (use `google-stitch-skills`)
+- Taste guidance for a coding agent that is not driving Stitch (use `taste-skill`)

@@ -24,37 +24,41 @@ das:
 
 > Catalogue stub — full skill: [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/make-interfaces-better/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/make-interfaces-better/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `make-interfaces-feel-better`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/make-interfaces-feel-better/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/make-interfaces-feel-better/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `make-interfaces-feel-better`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/make-interfaces-better ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add jakubkrehel/make-interfaces-feel-better --skill make-interfaces-better -g -y
+   npx skills add jakubkrehel/make-interfaces-feel-better --skill make-interfaces-feel-better -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add jakubkrehel/make-interfaces-feel-better --skill make-interfaces-better -y
+   npx skills add jakubkrehel/make-interfaces-feel-better --skill make-interfaces-feel-better -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `make-interfaces-better`
+- Skill name: `make-interfaces-feel-better`
 - Trigger phrases: "make interfaces better", "interface polish", "micro-interactions", "polished UI"
 
 ## What it does

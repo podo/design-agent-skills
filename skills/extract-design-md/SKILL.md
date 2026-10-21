@@ -1,16 +1,17 @@
 ---
 name: extract-design-md
 description: |
-  Extract Google Stitch design specifications into DESIGN.md format. Creates a
-  structured design document from Stitch output that can be version-controlled,
-  shared with the team, and used to guide future iterations.
+  Reverse-engineer a Stitch-compatible DESIGN.md design system from existing frontend source
+  code. Analyzes component files, stylesheets, Tailwind configs, theme definitions, and design
+  tokens in React, Vue, Svelte, Angular, or plain HTML/CSS, and writes a structured document that
+  can be version-controlled, shared with the team, and used to keep future UI consistent.
 triggers:
   - "extract design md"
-  - "stitch to DESIGN.md"
-  - "extract stitch design"
-  - "design spec from stitch"
+  - "design system from source code"
+  - "reverse engineer design system"
   - "DESIGN.md"
 das:
+  type: skill
   category: figma-code
   upstream: "https://github.com/google-labs-code/stitch-skills"
   upstream_path: "plugins/stitch-design/skills/extract-design-md/SKILL.md"
@@ -22,39 +23,50 @@ das:
 
 > Catalogue stub — full skill: [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills/blob/main/plugins/stitch-design/skills/extract-design-md/SKILL.md)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/extract-design-md/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/extract-design-md/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `stitch-extract-design-md`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/stitch-extract-design-md/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/stitch-extract-design-md/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `stitch-extract-design-md`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/extract-design-md ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add google-labs-code/stitch-skills --skill extract-design-md -g -y
+   npx skills add google-labs-code/stitch-skills --skill stitch::extract-design-md -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add google-labs-code/stitch-skills --skill extract-design-md -y
+   npx skills add google-labs-code/stitch-skills --skill stitch::extract-design-md -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** Optional Stitch MCP server, only to push the resulting DESIGN.md into a Stitch project (the extraction itself reads source files only)
+- **License:** Apache-2.0
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `extract-design-md`
-- Trigger phrases: "extract design md", "stitch to DESIGN.md", "DESIGN.md"
+- Skill name: `stitch-extract-design-md` (the upstream name is `stitch::extract-design-md`; the CLI installs it under the sanitised directory name)
+- Trigger phrases: "extract design md", "design system from source code", "reverse engineer design system", "DESIGN.md"
 
 ## What it does
 
-Extracts design specifications from Google Stitch output into a structured `DESIGN.md` file — the Google Stitch-compatible format for encoding visual design decisions. The resulting file can be version-controlled, shared across agents, and used to maintain design consistency across iterations. Part of Google Labs' official Stitch skills.
+Reads a frontend codebase and extracts its design system into a `DESIGN.md` file in the format Google Stitch uses: colors, typography, spacing, component patterns, and layout principles, plus notes for Stitch generation. It works from source files only (stylesheets, component files, Tailwind and theme configs, CSS-in-JS), so it needs no build, no running app, and no Stitch connection. Typical uses: auditing the visual language of a repo, reconciling inconsistent styles, or migrating a project's identity into Stitch. The direction is code to DESIGN.md, not Stitch output to DESIGN.md. Part of Google Labs' official Stitch skills.
+
+## When NOT to use
+
+- You have a rendered Stitch project and want its DESIGN.md — use the `design-md` skill from `google-stitch-skills` instead
+- You want design tokens (JSON/CSS) pulled from a live website rather than a DESIGN.md from source — use `extract-design-system`
+- You only want a DESIGN.md for a well-known brand — use `brand-design-md`

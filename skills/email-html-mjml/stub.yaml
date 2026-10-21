@@ -1,7 +1,14 @@
-type: package
+type: skill
 tier: community
 category: email-design
 rank: 1
 upstream: https://github.com/framix-team/skill-email-html-mjml
+upstream_path: email-html-mjml/SKILL.md
 version: latest
-install_default: "npx skills add framix-team/skill-email-html-mjml"
+install_default: npx skills add framix-team/skill-email-html-mjml --skill email-html-mjml
+installed_as: email-html-mjml
+requires:
+  - Node.js 20 or later
+  - MJML installed per project (`npm install -D mjml`), never globally
+license: MIT
+note: "verified 2026-10-21; was type: package with a bare repo install and a pre-check that matched the pointer's own file, so agents never upgraded. Skill lives at email-html-mjml/SKILL.md inside the repo and targets MJML 5.x."

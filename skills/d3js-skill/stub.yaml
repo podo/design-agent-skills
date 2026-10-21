@@ -5,3 +5,9 @@ rank: 2
 upstream: https://github.com/chrisvoncsefalvay/claude-d3js-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3-viz
+license: no LICENSE file in the repository
+note: "verified 2026-10-21; upstream skill name is d3-viz (frontmatter), repo has references/ and assets/ next to SKILL.md. The dtran320/claud3 stub also installs a d3-viz directory (different upstream), so installing both overwrites one"
+installed_as: d3-viz
+conflicts_with:
+  - claud3

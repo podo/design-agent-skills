@@ -1,9 +1,10 @@
 ---
 name: css-animation-skill
 description: |
-  Four-phase workflow — scrapes your live app's design language, interviews you about
-  what to animate, produces a brief and self-contained HTML/CSS animation file, then
-  iterates. Requires Claude-in-Chrome MCP for live scraping.
+  Generates self-contained HTML/CSS animations of app features for walkthroughs,
+  demos, and onboarding. Four-phase workflow: researches your live app's design
+  language in Chrome, interviews you about what to animate, produces a brief and an
+  HTML/CSS animation file, then iterates until approved. Requires Claude-in-Chrome MCP.
 triggers:
   - "CSS animation"
   - "custom animation"
@@ -22,42 +23,47 @@ das:
 
 > Catalogue stub — full skill: [neonwatty/css-animation-skill](https://github.com/neonwatty/css-animation-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/css-animation-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/css-animation-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `css-animation`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/css-animation/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/css-animation/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `css-animation`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/css-animation-skill ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add neonwatty/css-animation-skill --skill css-animation-skill -g -y
+   npx skills add neonwatty/css-animation-skill --skill css-animation -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add neonwatty/css-animation-skill --skill css-animation-skill -y
+   npx skills add neonwatty/css-animation-skill --skill css-animation -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** Claude Code with the Claude-in-Chrome MCP tools; A target app reachable in the browser
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `css-animation-skill`
+- Skill name: `css-animation`
 - Trigger phrases: "CSS animation", "custom animation", "animation from live app", "css-animation-skill"
 
 ## What it does
 
-Runs a four-phase animation creation workflow: (1) scrapes your live app using Claude-in-Chrome MCP to extract the existing design language — colours, fonts, spacing, motion style; (2) interviews you about what element to animate, desired feel, and constraints; (3) produces an animation brief and a self-contained HTML/CSS output file with the custom `@keyframes` animation; (4) iterates based on feedback until the result is approved. Produces bespoke keyframe animations matched to your app's visual identity rather than off-the-shelf library classes.
+Runs a four-phase animation creation workflow: (1) researches your live app using Claude-in-Chrome MCP to extract the existing design language (colours, fonts, spacing) and layout geometry; (2) interviews you about what feature to animate, the style (feature demo or multi-screen carousel) and the key payoff moment; (3) produces an animation brief and a self-contained HTML/CSS output file with the custom animation; (4) runs a freeze-inspect-feedback review loop until the result is approved. Produces bespoke animations matched to your app's visual identity rather than off-the-shelf library classes.
 
 ## When NOT to use
 

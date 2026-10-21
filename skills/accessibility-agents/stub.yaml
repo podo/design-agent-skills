@@ -4,4 +4,118 @@ category: accessibility-quality
 rank: 2
 upstream: https://github.com/Community-Access/accessibility-agents
 version: latest
-install_default: "npx skills add Community-Access/accessibility-agents"
+install_default: npx skills add Community-Access/accessibility-agents
+install_claude:
+  - /plugin marketplace add Community-Access/accessibility-agents
+  - /plugin install accessibility-agents@community-access
+license: MIT
+note: "verified 2026-10-21; package is a single set of Agent Skills: six router skills dispatch the rest by name (Activate the skill \"<name>\"), so a partial --skill install would leave routers calling missing skills; the bare repo install is deliberate and installed_as lists everything it lands"
+installed_as:
+  - accessibility-lead
+  - web-accessibility-wizard
+  - document-accessibility-wizard
+  - markdown-a11y-assistant
+  - developer-hub
+  - github-hub
+  - a11y-core
+  - a11y-tool-builder
+  - accessibility-regression-detector
+  - accessibility-statement
+  - actions-manager
+  - alt-text-headings
+  - analytics
+  - aria-specialist
+  - ci-accessibility
+  - cognitive-accessibility
+  - compliance-mapping
+  - contrast-master
+  - contributions-hub
+  - cross-document-analyzer
+  - cross-page-analyzer
+  - daily-briefing
+  - data-visualization-accessibility
+  - design-system-auditor
+  - desktop-a11y-specialist
+  - desktop-a11y-testing-coach
+  - document-csv-reporter
+  - document-inventory
+  - email-accessibility
+  - epub-accessibility
+  - epub-scan-config
+  - excel-accessibility
+  - forms-specialist
+  - i18n-accessibility
+  - insiders-a11y-tracker
+  - issue-tracker
+  - kb-accessibility-rules
+  - kb-ci-integration
+  - kb-cognitive-accessibility
+  - kb-data-visualization-accessibility
+  - kb-design-system
+  - kb-document-scanning
+  - kb-email-accessibility
+  - kb-framework-accessibility
+  - kb-github-a11y-scanner
+  - kb-github-analytics-scoring
+  - kb-github-scanning
+  - kb-github-shared-instructions
+  - kb-github-workflow-standards
+  - kb-help-url-reference
+  - kb-legal-compliance-mapping
+  - kb-lighthouse-scanner
+  - kb-markdown-accessibility
+  - kb-media-accessibility
+  - kb-mobile-accessibility
+  - kb-office-remediation
+  - kb-path-instructions
+  - kb-playwright-testing
+  - kb-python-development
+  - kb-report-generation
+  - kb-severity-mapping
+  - kb-testing-strategy
+  - kb-web-scanning
+  - kb-web-severity-scoring
+  - keyboard-navigator
+  - lighthouse-bridge
+  - link-checker
+  - live-region-controller
+  - markdown-csv-reporter
+  - markdown-fixer
+  - markdown-scanner
+  - media-accessibility
+  - mobile-accessibility
+  - modal-specialist
+  - notifications-manager
+  - nvda-addon-specialist
+  - office-remediator
+  - office-scan-config
+  - pdf-accessibility
+  - pdf-remediator
+  - pdf-scan-config
+  - performance-accessibility
+  - playwright-scanner
+  - playwright-verifier
+  - powerpoint-accessibility
+  - pr-review
+  - projects-manager
+  - python-specialist
+  - release-manager
+  - repo-admin
+  - repo-manager
+  - scanner-bridge
+  - screen-reader-lab
+  - security-dashboard
+  - tables-data-specialist
+  - team-manager
+  - template-builder
+  - testing-coach
+  - text-quality-reviewer
+  - wcag-aaa
+  - wcag-guide
+  - wcag3-preview
+  - web-component-specialist
+  - web-csv-reporter
+  - web-issue-fixer
+  - wiki-manager
+  - word-accessibility
+  - wxpython-specialist

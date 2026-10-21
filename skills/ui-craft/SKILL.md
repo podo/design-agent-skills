@@ -1,10 +1,11 @@
 ---
 name: ui-craft
 description: |
-  The deepest design engineering skill in the ecosystem. 23 domain references,
-  18 slash commands, 3 style variants, and a standalone anti-slop CLI detector
-  with 33 rules. Covers premium UI taste, component patterns, and opinionated
-  design-engineering workflows.
+  Design engineering skill for AI coding agents: opinionated rules for how interfaces should look,
+  move, and feel, a required discovery phase before coding, domain references, three style variants
+  (minimal, editorial, dense-dashboard), and an anti-slop approach that flags generic patterns such
+  as centered hero sections, Inter-only typography, and three-column card grids. Covers premium UI
+  taste, component patterns, and design-engineering workflows.
 triggers:
   - "ui-craft"
   - "anti-slop"
@@ -16,41 +17,63 @@ das:
   category: design-systems
   upstream: "https://github.com/educlopez/ui-craft"
   version: latest
-  install: false
+  install: true
 ---
 
 # ui-craft
 
 > Catalogue stub — full package: [educlopez/ui-craft](https://github.com/educlopez/ui-craft)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before premium UI design work:
+1. **Is the full skill already installed?**
+   This package installs 4 skills (`ui-craft`, `ui-craft-minimal`, `ui-craft-editorial`, `ui-craft-dense-dashboard`); checking the first.
+   - Global: `f=~/.agents/skills/ui-craft/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/ui-craft/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `ui-craft`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is the package already installed?**
-   Check: your agent's skills directory contains `ui-craft` with content beyond this stub.
-   - Yes → invoke `ui-craft` and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Which agent are you on?**
-   - Claude Code → `npx skills add educlopez/ui-craft` — or send `! npx skills add …` as a chat message (add `-g` for global, omit for project-only)
-   - Cursor → `npx skills add educlopez/ui-craft`
-   - Other → try `npx skills add educlopez/ui-craft` or follow the [GitHub README](https://github.com/educlopez/ui-craft)
+   ```bash
+   [ -e ~/.agents/skills/ui-craft ] && echo "global" || echo "project"
+   ```
 
-## Install command
+   **Global:**
+   ```bash
+   npx skills add educlopez/ui-craft --skill ui-craft ui-craft-minimal ui-craft-editorial ui-craft-dense-dashboard -g -y
+   ```
 
-```bash
-npx skills add educlopez/ui-craft
+   **Project:**
+   ```bash
+   npx skills add educlopez/ui-craft --skill ui-craft ui-craft-minimal ui-craft-editorial ui-craft-dense-dashboard -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
 ```
+/plugin marketplace add educlopez/ui-craft
+/plugin install ui-craft@ui-craft
+```
+
+**Heads-up**
+
+- **Requires:** Plugin route only: bundles the ui-craft-mcp quality-gate MCP server, which Claude Code starts with npx (downloads and runs an npm package)
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `ui-craft`
+- Skill names: `ui-craft`, `ui-craft-minimal`, `ui-craft-editorial`, `ui-craft-dense-dashboard`
 - Trigger phrases: "ui-craft", "anti-slop", "design engineering", "slash commands for design"
 
 ## What it does
 
-The most comprehensive design engineering skill in the ecosystem: 23 domain references, 18 slash commands, 3 style variants (minimal, expressive, editorial), and a standalone anti-slop CLI detector with 33 rules that flags generic patterns like centered hero sections, Inter-only typography, and 3-column card grids. Produces premium, non-generic UI with opinionated taste baked in.
+UI Craft gives AI coding agents the design knowledge they are missing: not templates or component libraries, but craft rules about layout, typography, color, motion, accessibility, dashboards, tables, landing pages, theming, and polish, plus a discovery step that reads the project's existing tokens before building. The main `ui-craft` skill routes by intent (build, animate, review, polish, audit) and tests every UI against "would someone believe AI made this?". Three variants lock the knobs for a style: `ui-craft-minimal` (clean, whitespace-heavy, Linear/Notion-like), `ui-craft-editorial` (magazine and long-form), and `ui-craft-dense-dashboard` (data-heavy admin tools).
+
+The skills CLI route installs the skill and its variants only. Upstream also ships separate command-pass skills with generic names (`craft`, `critique`, `polish`, `audit`, `animate`, `brief`, `tokens`, and others), a Go CLI, review agents, and an MCP quality-gate server (the Claude Code plugin bundles the agents and the server). The command passes are left out of the default install because their short names collide with unrelated skills (`animate`); add any of them by name after `--skill` if you want them.
 
 ## When NOT to use
 

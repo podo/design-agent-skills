@@ -4,4 +4,14 @@ category: accessibility-quality
 rank: 3
 upstream: https://github.com/mastepanoski/claude-skills
 version: latest
-install_default: "npx skills add mastepanoski/claude-skills"
+install_default: npx skills add mastepanoski/claude-skills --skill ux-audit-rethink nielsen-heuristics-audit wcag-accessibility-audit don-norman-principles-audit cognitive-walkthrough ui-design-review information-architecture-audit
+installed_as:
+  - ux-audit-rethink
+  - nielsen-heuristics-audit
+  - wcag-accessibility-audit
+  - don-norman-principles-audit
+  - cognitive-walkthrough
+  - ui-design-review
+  - information-architecture-audit
+license: MIT
+note: "verified 2026-10-21; there is no skill called mastepanoski-skills (the repo is the package). A bare `npx skills add mastepanoski/claude-skills` also installs six non-design skills (gdpr-audit, iso-42001-ai-governance, nist-ai-rmf, owasp-ai-testing, owasp-llm-top10, ai-assessment-scale)."

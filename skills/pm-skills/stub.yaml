@@ -4,4 +4,26 @@ category: product-pm
 rank: 2
 upstream: https://github.com/product-on-purpose/pm-skills
 version: latest
-install_default: "/plugin marketplace add product-on-purpose/pm-skills"
+install_default: npx skills add product-on-purpose/pm-skills --skill define-problem-statement define-hypothesis define-jtbd-canvas define-opportunity-tree discover-interview-synthesis discover-journey-map discover-competitive-analysis foundation-persona develop-design-rationale develop-solution-brief deliver-prd deliver-user-stories deliver-acceptance-criteria deliver-edge-cases measure-experiment-design measure-survey-analysis
+installed_as:
+  - define-problem-statement
+  - define-hypothesis
+  - define-jtbd-canvas
+  - define-opportunity-tree
+  - discover-interview-synthesis
+  - discover-journey-map
+  - discover-competitive-analysis
+  - foundation-persona
+  - develop-design-rationale
+  - develop-solution-brief
+  - deliver-prd
+  - deliver-user-stories
+  - deliver-acceptance-criteria
+  - deliver-edge-cases
+  - measure-experiment-design
+  - measure-survey-analysis
+install_claude:
+  - /plugin marketplace add product-on-purpose/agent-plugins
+  - /plugin install pm-skills@product-on-purpose
+license: Apache-2.0
+note: "verified 2026-10-21; upstream recommends the plugin (all skills, sub-agents and slash commands). The default npx install is a core subset by discovery/define/develop/deliver/measure phase; the whole library is `npx skills add product-on-purpose/pm-skills` with no --skill. Plugin route checked against marketplace.json only, not run; the older pm-skills-marketplace (plugin pm-skills) still works."

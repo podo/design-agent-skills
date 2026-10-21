@@ -11,38 +11,54 @@ triggers:
   - "logo concepts"
   - "logo-designer"
 das:
-  type: package
+  type: skill
   category: design-systems
   upstream: "https://github.com/neonwatty/logo-designer-skill"
+  upstream_path: "skills/logo-designer/SKILL.md"
   version: latest
-  install: false
+  install: true
 ---
 
 # logo-designer-skill
 
-> Catalogue stub — full package: [neonwatty/logo-designer-skill](https://github.com/neonwatty/logo-designer-skill)
+> Catalogue stub — full skill: [neonwatty/logo-designer-skill](https://github.com/neonwatty/logo-designer-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Is the package already installed?**
-   Check: your agent's skills directory contains `logo-designer-skill` with content beyond this stub.
-   - Yes → invoke `logo-designer-skill` and proceed
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   Upstream names this skill `logo-designer`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/logo-designer/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/logo-designer/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `logo-designer`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Which agent are you on?**
-   - Claude Code → `claude plugin add neonwatty/logo-designer-skill`
-   - Cursor → `claude plugin add neonwatty/logo-designer-skill`
-   - Other → `claude plugin add neonwatty/logo-designer-skill` or see [GitHub README](https://github.com/neonwatty/logo-designer-skill)
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/logo-designer-skill ] && echo "global" || echo "project"
+   ```
 
-```bash
-claude plugin add neonwatty/logo-designer-skill
-```
+   **Global:**
+   ```bash
+   npx skills add neonwatty/logo-designer-skill --skill logo-designer -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add neonwatty/logo-designer-skill --skill logo-designer -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **Requires:** an SVG-to-PNG converter for PNG export (resvg, Inkscape, or librsvg)
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `logo-designer-skill`
+- Skill name: `logo-designer`
 - Trigger phrases: "logo design", "SVG logo", "brand mark", "logo concepts", "logo-designer"
 
 ## What it does

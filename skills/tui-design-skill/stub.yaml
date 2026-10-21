@@ -1,7 +1,11 @@
-type: package
+type: skill
 tier: experimental
 category: tui-terminal
 rank: 2
 upstream: https://github.com/gfargo/tui-design-skill
+upstream_path: plugins/tui-design/skills/tui-design/SKILL.md
 version: latest
-install_default: "/plugin marketplace add gfargo/tui-design-skill"
+install_default: npx skills add gfargo/tui-design-skill --skill tui-design
+installed_as: tui-design
+license: MIT
+note: "verified 2026-10-21; the skill is called tui-design (not tui-design-skill) and installs next to this pointer. The old /plugin marketplace add on its own installed nothing. install_claude is deliberately left out only because scripts/lib/lint.mjs wrongly rejects `/plugin install tui-design@tui-design-marketplace` (its check skips any install command containing the word marketplace); the real two-step route, checked against .claude-plugin/marketplace.json and the README but not run, is `/plugin marketplace add gfargo/tui-design-skill` then `/plugin install tui-design@tui-design-marketplace`: restore it as install_claude once the lint is fixed. The author also ships the skill in the central gfargo/skills marketplace (terminal@gfargo-skills, bundled with vhs-cli-demos); that bundle replaces, not complements, this route"

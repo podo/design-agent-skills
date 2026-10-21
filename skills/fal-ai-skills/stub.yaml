@@ -4,5 +4,26 @@ category: creative-3d
 rank: 3
 upstream: https://github.com/fal-ai-community/skills
 version: latest
-install_default: "npx skills add fal-ai-community/<skill>"
-installed_as: fal-generate
+install_default: npx skills add fal-ai-community/skills --skill genmedia model-routing fal-models-catalog fal-prompting fal-recipes character-design cinematography commercial marketing storytelling ugc fal-gamedev fal-redesign fal-regenerate-3d fan-cam genmedia-workflow
+installed_as:
+  - genmedia
+  - model-routing
+  - fal-models-catalog
+  - fal-prompting
+  - fal-recipes
+  - character-design
+  - cinematography
+  - commercial
+  - marketing
+  - storytelling
+  - ugc
+  - fal-gamedev
+  - fal-redesign
+  - fal-regenerate-3d
+  - fan-cam
+  - genmedia-workflow
+requires:
+  - fal.ai account and API key (FAL_KEY); generation calls are charged per endpoint (check cost with `genmedia pricing`)
+  - the genmedia CLI (the genmedia skill installs it with `curl https://genmedia.sh/install -fsS | bash`; source at fal-ai-community/genmedia-cli)
+license: MIT per the README; no LICENSE file in the repo
+note: "verified 2026-10-21; all 16 skills the CLI can see are listed so installed_as is exact (narrow with --skill if you only want some, but the production skills call model-routing and genmedia). A 17th skill, fal-workflow, is invisible to the CLI because its description has an unquoted ': ' (YAML error). Publisher is fal's community org fal-ai-community (homepage fal.ai). Generic directory names (marketing, commercial, storytelling, ugc, cinematography, character-design) may clash with skills from other packages"

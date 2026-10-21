@@ -1,6 +1,11 @@
-type: package
+type: skill
 tier: community
 category: interaction-polish
 rank: 1
 upstream: https://github.com/rastian/interaction-design-skills
+upstream_path: SKILL.md
 version: latest
+install_default: npx skills add rastian/interaction-design-skills --skill interaction-design
+installed_as: interaction-design
+license: no LICENSE file in the repo
+note: "verified 2026-10-21; git clone also works but npx is simpler and does not fail when the target dir exists; installs SKILL.md plus reference/ and README; upstream README still names the old repo 65ping/interaction-design-skill (redirects)"

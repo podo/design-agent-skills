@@ -21,33 +21,37 @@ das:
 
 > Catalogue stub — full skill: [Ashutos1997/claude-design-auditor-skill](https://github.com/Ashutos1997/claude-design-auditor-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/design-auditor/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/design-auditor/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/design-auditor/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/design-auditor/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `design-auditor`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/design-auditor ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
    npx skills add Ashutos1997/claude-design-auditor-skill --skill design-auditor -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
    npx skills add Ashutos1997/claude-design-auditor-skill --skill design-auditor -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** Figma MCP server (optional, only to audit Figma links; without it the skill asks for a screenshot or code)
+- **License:** no LICENSE file in the repo
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -56,7 +60,7 @@ das:
 
 ## What it does
 
-Comprehensive design audit skill that evaluates designs across 19 professional categories: typography, color/contrast, spacing, visual hierarchy, consistency, WCAG accessibility, forms, motion/animation, dark mode, responsive design, loading states, empty states, error states, microcopy, i18n/RTL support, elevation/shadows, iconography, navigation, design tokens, ethical design and dark patterns, and Nielsen heuristics. Produces a 0-100 score with issues ranked by severity so the most impactful problems surface first.
+Comprehensive design audit skill that evaluates designs across 19 professional categories: typography, color/contrast, spacing, visual hierarchy, consistency, WCAG accessibility, forms, motion/animation, dark mode, responsive design, loading states, empty states, error states, microcopy, i18n/RTL support, elevation/shadows, iconography, navigation, design tokens, ethical design and dark patterns, and Nielsen heuristics. Produces a 0-100 score with issues ranked by severity so the most impactful problems surface first. Audits code (HTML, CSS, React, Vue, Tailwind) and screenshots, and Figma links when the Figma MCP server is connected. Replies in English or Korean to match the request. The upstream SKILL.md is large (about 160 KB), so expect a heavy context load when it triggers.
 
 ## When NOT to use
 

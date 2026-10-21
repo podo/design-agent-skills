@@ -3,8 +3,8 @@ name: p5js-hermes
 description: |
   Production pipeline for interactive and generative visual art using p5.js.
   Covers 2D/3D rendering, noise and particle systems, flow fields, GLSL shaders,
-  pixel manipulation, kinetic typography, WebGL, and audio-reactive visuals.
-  10 reference files from NousResearch's Hermes agent.
+  pixel manipulation, kinetic typography, WebGL, and audio-reactive visuals, with
+  headless export to HTML, PNG, GIF, MP4 or SVG. From NousResearch's Hermes agent.
 triggers:
   - "p5js"
   - "p5.js"
@@ -16,7 +16,8 @@ triggers:
   - "audio reactive"
 das:
   category: creative-3d
-  upstream: "https://github.com/nousresearch/hermes-agent"
+  type: skill
+  upstream: "https://github.com/NousResearch/hermes-agent"
   upstream_path: "skills/creative/p5js/SKILL.md"
   version: latest
   install: true
@@ -24,41 +25,52 @@ das:
 
 # p5js-hermes
 
-> Catalogue stub — full skill: [nousresearch/hermes-agent](https://github.com/nousresearch/hermes-agent/blob/main/skills/creative/p5js/SKILL.md)
+> Catalogue stub — full skill: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent/blob/main/skills/creative/p5js/SKILL.md)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/p5js-hermes/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/p5js-hermes/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/p5js/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/p5js/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Detect scope, then install:**
+2. **Install** (the skills CLI cannot install this one):
 
-   To detect scope:
+   The upstream repo is about 1.3 GB, so `npx skills add NousResearch/hermes-agent --skill p5js` never finishes cloning (it timed out even with a 25 minute limit). Sparse-clone only the skill's folder into /tmp and install from that local path (usually well under a minute).
+
+   If an earlier attempt left `/tmp/hermes-agent-sparse` behind, delete it first (`rm -rf /tmp/hermes-agent-sparse`): `git clone` refuses a non-empty directory.
+
    ```bash
    [ -e ~/.agents/skills/p5js-hermes ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add nousresearch/hermes-agent --skill p5js-hermes -g -y
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent-sparse
+   git -C /tmp/hermes-agent-sparse sparse-checkout set skills/creative/p5js
+   npx skills add /tmp/hermes-agent-sparse/skills/creative/p5js -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add nousresearch/hermes-agent --skill p5js-hermes -y
+   git clone --depth=1 --filter=blob:none --sparse https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent-sparse
+   git -C /tmp/hermes-agent-sparse sparse-checkout set skills/creative/p5js
+   npx skills add /tmp/hermes-agent-sparse/skills/creative/p5js -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** Node.js, puppeteer and ffmpeg for the skill's headless export scripts (PNG, GIF, MP4)
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `p5js-hermes`
+- Skill name: `p5js`
 - Trigger phrases: "p5.js", "p5js", "generative art p5", "flow field", "audio reactive"
 
 ## What it does
 
-Full production pipeline for interactive and generative visual art in p5.js. Covers 2D/3D rendering with noise functions, particle systems, flow fields, GLSL shader integration, pixel array manipulation, kinetic typography, WebGL, and audio-reactive visuals. Backed by 10 reference files from NousResearch's Hermes agent — substantially deeper than the official algorithmic-art skill.
+Full production pipeline for interactive and generative visual art in p5.js. Covers 2D/3D rendering with noise functions, particle systems, flow fields, GLSL shader integration, pixel array manipulation, kinetic typography, WebGL, and audio-reactive visuals. Ships reference notes, helper scripts and sketch templates from NousResearch's Hermes agent, and exports finished sketches as HTML, PNG, GIF, MP4 or SVG (the export scripts need Node with puppeteer and ffmpeg). Substantially deeper than the official `algorithmic-art` skill.

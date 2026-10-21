@@ -1,9 +1,9 @@
 ---
 name: nimbalyst-skills
 description: |
-  3 skills from Nimbalyst IDE: Excalidraw diagrams with MCP tool support,
-  UI wireframe mockups alongside architecture diagrams, and data model design.
-  Uses a custom skill registry at nimbalyst.com/skills.
+  Visual-output skills built into the Nimbalyst workspace: Excalidraw diagrams with
+  MCP tool support, UI wireframe mockups, and database ERD design. These are slash
+  commands inside the Nimbalyst app, not standalone installable skills.
 triggers:
   - "Nimbalyst"
   - "nimbalyst excalidraw"
@@ -18,42 +18,32 @@ das:
 
 # nimbalyst-skills
 
-> Catalogue stub — full package: [nimbalyst.com/skills](https://nimbalyst.com/skills)
+> Catalogue stub — platform: [nimbalyst.com/skills](https://nimbalyst.com/skills)
 
-## Decision tree
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
+## Install
 
-Run this for Nimbalyst IDE skill workflows:
+These skills are built into the Nimbalyst desktop app (github.com/nimbalyst/nimbalyst) and drive its Excalidraw, mockup and data-model editors through the app's own MCP tools, so there is nothing to install with the skills CLI. Download the app and use the slash commands inside it.
 
-1. **Is a Nimbalyst skill already installed?**
-   Check: `~/.design-agent-skills/skills/excalidraw/SKILL.md` exists (from Nimbalyst registry).
-   - Yes → invoke the specific skill by name and proceed
-   - No → go to step 2
+**Heads-up**
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+- **License:** MIT (Nimbalyst app)
+<!-- das:install:end -->
 
-## Install command
+## Invoke inside Nimbalyst
 
-```bash
-# Excalidraw with MCP tool support (add elements, arrows, frames, Mermaid import)
-npx skills add nimbalyst/excalidraw
+Are you working inside the Nimbalyst app? Then run the commands directly. If not, download the free, MIT-licensed desktop app (macOS, Windows, Linux) from [github.com/nimbalyst/nimbalyst](https://github.com/nimbalyst/nimbalyst) first.
 
-# UI wireframe mockups alongside architecture diagrams
-npx skills add nimbalyst/mockup
-
-# Data model design
-npx skills add nimbalyst/datamodel
-```
-
-Note: Nimbalyst uses a custom skill registry. If the above fails, install directly from [nimbalyst.com/skills](https://nimbalyst.com/skills).
-
-## Invoke after install
-
-- `excalidraw` (nimbalyst) — "excalidraw with MCP", "interactive excalidraw"
-- `mockup` — "UI mockup", "wireframe alongside architecture"
-- `datamodel` — "data model design"
+- `/excalidraw` — architecture diagrams, flowcharts, system maps (programmatic shapes, arrows, frames, Mermaid import via MCP tools)
+- `/mockup` — UI mockups and wireframes from text descriptions
+- `/datamodel` — database schemas designed visually as ERDs
 
 ## What it does
 
-Nimbalyst IDE's 3 skills with unique MCP-enhanced capabilities: Excalidraw with programmatic element manipulation via MCP tools (add shapes, arrows, frames, import from Mermaid), UI wireframing that co-generates architecture diagrams, and structured data model design.
+Nimbalyst's visual output skills: Excalidraw with programmatic element manipulation through MCP tools, UI wireframing from a text description (`.mockup.html` files), and structured data model design. The artifacts open in Nimbalyst's integrated editors rather than as plain files.
+
+Nimbalyst also publishes a separate [nimbalyst/skills](https://github.com/nimbalyst/skills) repo of portable skills for product, developer, content, and research work. It contains no diagram, mockup, or data-model skill, so it is not a way to get the skills above outside the app.
+
+## When NOT to use
+
+- You are not using the Nimbalyst app → use `excalidraw-diagram` or `wireframer` instead

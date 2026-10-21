@@ -1,9 +1,10 @@
 ---
 name: swiftui-patterns
 description: |
-  Best practices for SwiftUI views and components covering tab architecture,
-  screen composition, and reusable view patterns. Ensures SwiftUI code follows
-  idiomatic structure for maintainable, scalable Apple platform apps.
+  Best practices and example-driven guidance for SwiftUI views and components:
+  tab architecture, navigation hierarchies, screen composition, custom view
+  modifiers, and responsive layouts. Keeps SwiftUI code idiomatic and maintainable
+  for Apple platform apps.
 triggers:
   - "SwiftUI patterns"
   - "SwiftUI components"
@@ -11,7 +12,7 @@ triggers:
   - "SwiftUI screen"
 das:
   category: visual-components
-  upstream: "https://github.com/dimillian/Skills"
+  upstream: "https://github.com/Dimillian/Skills"
   upstream_path: "swiftui-ui-patterns/SKILL.md"
   version: latest
   install: true
@@ -19,36 +20,52 @@ das:
 
 # swiftui-patterns
 
-> Catalogue stub — full skill: [dimillian/Skills](https://github.com/dimillian/Skills)
+> Catalogue stub — full skill: [Dimillian/Skills](https://github.com/Dimillian/Skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any SwiftUI view or component work:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/swiftui-patterns/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `swiftui-patterns` and proceed
-   - No → go to step 2
+   Upstream names this skill `swiftui-ui-patterns`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/swiftui-ui-patterns/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/swiftui-ui-patterns/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `swiftui-ui-patterns`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/swiftui-patterns ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add dimillian/Skills --skill swiftui-ui-patterns
-```
+   **Global:**
+   ```bash
+   npx skills add Dimillian/Skills --skill swiftui-ui-patterns -g -y
+   ```
 
-Or per-agent:
-- Claude Code: `claude skills add dimillian/Skills`
-- Cursor/OpenCode: `npx skills add dimillian/Skills --skill swiftui-ui-patterns`
+   **Project:**
+   ```bash
+   npx skills add Dimillian/Skills --skill swiftui-ui-patterns -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+- **Name collision:** `swiftui-ui-patterns` is also written by `swiftui-claude-skills` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `swiftui-patterns`
+- Skill name: `swiftui-ui-patterns`
 - Trigger phrases: "SwiftUI patterns", "SwiftUI components", "SwiftUI tab architecture", "SwiftUI screen"
 
 ## What it does
 
-Provides best practices for building SwiftUI views and components on Apple platforms, with a focus on tab-based navigation architecture, screen composition patterns, and reusable view structures. Keeps SwiftUI code idiomatic and avoids common architectural mistakes that cause layout or state management issues.
+Provides best practices and example-driven guidance for building SwiftUI views and components on Apple platforms: tab-based navigation architecture with `TabView`, navigation hierarchies, screen composition with stacks and grids, custom view modifiers, `@State` and `@Binding` management, and component-specific patterns with reference examples. Keeps SwiftUI code idiomatic and avoids common architectural mistakes that cause layout or state-management issues.
+
+## When NOT to use
+
+- Liquid Glass (iOS 26) APIs → use `liquid-glass-skill`
+- Visual design direction for SwiftUI apps → use `swiftui-design-skill`
+- A broader SwiftUI skill set → use `swiftui-claude-skills`

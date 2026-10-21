@@ -1,6 +1,16 @@
-type: package
+type: skill
 tier: community
 category: visual-components
 rank: 2
 upstream: https://github.com/gregorymm/humanize-text
+upstream_path: skills/humanize-text/SKILL.md
 version: latest
+install_default: npx skills add gregorymm/humanize-text/skills/humanize-text
+installed_as: humanize-text
+install_claude:
+  - /plugin marketplace add gregorymm/humanize-text
+  - /plugin install humanize-text@gregorymm-humanize-text
+requires:
+  - Figma MCP server (only for the Figma-URL input; raw text and screenshots need nothing)
+license: MIT
+note: "verified 2026-10-21; the subpath install copies just skills/humanize-text (the repo root also has a SKILL.md and 4 MB of gif/figma-plugin files that `--skill humanize-text` would pull in). The upstream README has a typo in the plugin install line: the marketplace is gregorymm-humanize-text, not gregorymm-humanize (plugin route checked against marketplace.json only, not run)"

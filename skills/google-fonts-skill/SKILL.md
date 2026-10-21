@@ -1,10 +1,10 @@
 ---
 name: google-fonts-skill
 description: |
-  Searches 1,923 enriched Google Fonts with personality/mood tags, suggests
-  73 proven pairings, generates CSS custom properties + Tailwind config +
-  embed links, offers 8 modular scales, and 100 pre-made typography showcases.
-  Runs as MCP server or Claude plugin.
+  Searches Google Fonts enriched with personality and mood tags, suggests proven
+  pairings, generates CSS custom properties, Tailwind config, and embed links,
+  and offers modular type scales. Works as a skill with bundled Python scripts,
+  or as an MCP server.
 triggers:
   - "Google Fonts"
   - "font pairing"
@@ -14,53 +14,68 @@ triggers:
   - "font mood"
   - "font personality"
 das:
-  type: platform
+  type: skill
   category: visual-components
   upstream: "https://github.com/sliday/google-fonts-skill"
+  upstream_path: "SKILL.md"
   version: latest
-  install: false
+  install: true
 ---
 
 # google-fonts-skill
 
-> Catalogue stub — full platform skill: [sliday/google-fonts-skill](https://github.com/sliday/google-fonts-skill)
+> Catalogue stub — full skill: [sliday/google-fonts-skill](https://github.com/sliday/google-fonts-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Is the skill already active?** Check if the `google-fonts` MCP server is connected or the plugin is installed.
-   - Yes → proceed directly
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   Upstream names this skill `google-fonts`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/google-fonts/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/google-fonts/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `google-fonts`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Which install method fits your environment?**
-   - MCP server → install with `uvx` (see below)
-   - Claude plugin → install with `claude plugin install` (see below)
-   - If unsure → show both options to the user
+2. **Detect scope, then install:**
 
-## Install methods
+   ```bash
+   [ -e ~/.agents/skills/google-fonts-skill ] && echo "global" || echo "project"
+   ```
 
-### Option A — MCP server
+   **Global:**
+   ```bash
+   npx skills add sliday/google-fonts-skill --skill google-fonts -g -y
+   ```
 
-```bash
-claude mcp add google-fonts -- uvx google-fonts-mcp
+   **Project:**
+   ```bash
+   npx skills add sliday/google-fonts-skill --skill google-fonts -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+claude plugin marketplace add sliday/google-fonts-skill
+claude plugin install google-fonts@google-fonts-skill
 ```
 
-### Option B — Claude plugin
+**Heads-up**
 
-```bash
-claude plugin install google-fonts
-```
-
-> Note: Requires Python/uvx for the MCP path. See the [GitHub README](https://github.com/sliday/google-fonts-skill) for full setup instructions.
+- **Requires:** Python 3 (a skill-only install runs the bundled scripts/search.py and scripts/generate-css.py)
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `google-fonts-skill`
-- MCP server name: `google-fonts`
-- Triggers: "Google Fonts", "font pairing", "modular scale", "typography showcase"
+- Skill name: `google-fonts`
+- Trigger phrases: "Google Fonts", "font pairing", "modular scale", "choose a font", "type scale"
 
 ## What it does
 
-Provides intelligent Google Fonts selection across 1,923 fonts enriched with personality and mood metadata. Suggests from 73 battle-tested pairing combinations, generates ready-to-use CSS custom properties, Tailwind configuration snippets, and Google Fonts embed links. Offers 8 modular type scales and 100 pre-built typography showcases for instant design direction.
+Provides Google Fonts selection backed by an enriched font dataset (personality, contrast, mood, body suitability, quality tier). Runs in single-font mode (one font for headings and body) or pair mode (searches proven pairings first), then generates ready-to-use CSS custom properties, Tailwind configuration, and Google Fonts embed links, with a choice of modular type scales. As a skill it searches the bundled data with `scripts/search.py` and `scripts/generate-css.py`.
+
+Optional MCP route: upstream also ships the same tools as an MCP server (`claude mcp add google-fonts -- uvx google-fonts-mcp`, needs `uv`); the installed skill prefers the MCP tools when that server is connected.
 
 ## When NOT to use
 

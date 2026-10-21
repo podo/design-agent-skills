@@ -5,3 +5,7 @@ rank: 2
 upstream: https://github.com/firatcand/founder-skills
 upstream_path: product-position/SKILL.md
 version: latest
+install_default: npx skills add firatcand/founder-skills --skill product-position
+installed_as: product-position
+license: MIT
+note: "verified 2026-10-21; the repo (about 6 MB) holds several other founder skills, only product-position is installed"

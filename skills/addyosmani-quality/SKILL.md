@@ -1,9 +1,9 @@
 ---
 name: addyosmani-quality
 description: |
-  6 web quality skills from Google Chrome's Addy Osmani: accessibility (WCAG),
-  web quality audit (Lighthouse-style), Core Web Vitals (LCP/INP/CLS),
-  performance, SEO, and security best practices.
+  Web quality skills from Google Chrome's Addy Osmani: a measurement-first
+  web quality audit (Lighthouse-style), accessibility (WCAG 2.2), Core Web
+  Vitals (LCP/INP/CLS), performance, SEO, and security/modern-web best practices.
 triggers:
   - "Addy Osmani"
   - "web quality"
@@ -23,45 +23,49 @@ das:
 
 > Catalogue stub — full package: [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any web quality, performance, or accessibility audit:
+1. **Is the full skill already installed?**
+   This package installs 6 skills (`web-quality-audit`, `accessibility`, `core-web-vitals`, `performance`, `seo`, `best-practices`); checking the first.
+   - Global: `f=~/.agents/skills/web-quality-audit/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/web-quality-audit/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `web-quality-audit`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is an Osmani skill already installed?**
-   Check: `~/.design-agent-skills/skills/web-quality-audit/SKILL.md` exists (representative skill).
-   - Yes → invoke the specific skill by name and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Do you have shell access?**
-   - Yes → install the specific skill below, then invoke it
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+   ```bash
+   [ -e ~/.agents/skills/addyosmani-quality ] && echo "global" || echo "project"
+   ```
 
-## Install command
+   **Global:**
+   ```bash
+   npx skills add addyosmani/web-quality-skills --skill web-quality-audit accessibility core-web-vitals performance seo best-practices -g -y
+   ```
 
-```bash
-# WCAG compliance, screen reader, keyboard navigation
-npx skills add addyosmani/web-quality-skills --skill accessibility
+   **Project:**
+   ```bash
+   npx skills add addyosmani/web-quality-skills --skill web-quality-audit accessibility core-web-vitals performance seo best-practices -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
-# Lighthouse-style: performance, a11y, SEO, best practices
-npx skills add addyosmani/web-quality-skills --skill web-quality-audit
+**Claude Code plugin route:**
 
-# LCP, INP, CLS-specific optimizations
-npx skills add addyosmani/web-quality-skills --skill core-web-vitals
-
-# Loading speed, runtime efficiency, resource optimization
-npx skills add addyosmani/web-quality-skills --skill performance
-
-# Search engine optimization, structured data
-npx skills add addyosmani/web-quality-skills --skill seo
-
-# Security, modern web APIs, code quality
-npx skills add addyosmani/web-quality-skills --skill best-practices
 ```
+/plugin marketplace add addyosmani/web-quality-skills
+/plugin install web-quality-skills@addy-web-quality-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
+- `web-quality-audit` — "Lighthouse audit", "web quality", "audit my site"
 - `accessibility` — "WCAG compliance", "screen reader", "keyboard nav"
-- `web-quality-audit` — "Lighthouse audit", "web quality"
 - `core-web-vitals` — "LCP", "INP", "CLS", "Core Web Vitals"
 - `performance` — "page speed", "loading performance"
 - `seo` — "SEO", "structured data", "crawlability"
@@ -69,4 +73,10 @@ npx skills add addyosmani/web-quality-skills --skill best-practices
 
 ## What it does
 
-Addy Osmani's (Google Chrome) 6-skill web quality suite. Covers the complete quality axis: accessibility (WCAG 2.2), Lighthouse-style holistic audits, Core Web Vitals optimization, loading/runtime performance, SEO, and security best practices — each as a focused, actionable skill.
+Addy Osmani's (Google Chrome) web quality suite. Each skill is a focused, evidence-led playbook: a holistic Lighthouse-style audit (performance, accessibility, SEO, best practices, agentic browsing), WCAG 2.2 accessibility, Core Web Vitals optimization using field and lab data, loading and runtime performance, search visibility and structured data, and security and modern-web best practices. Start with `web-quality-audit` and drop into a focused skill for the fixes.
+
+## When NOT to use
+
+- A single-purpose WCAG 2.2 guidance workflow (design through conformance docs) → use `wcag-ai-skill`
+- Targeted color-contrast and accessibility fixes in code → use `fixing-accessibility`
+- Motion-specific jank (layout thrashing, compositor properties) → use `fixing-motion-performance`

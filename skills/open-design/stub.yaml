@@ -4,3 +4,10 @@ category: creative-3d
 rank: 2
 upstream: https://github.com/nexu-io/open-design
 version: latest
+install_mode: builtin
+manual_reason: "Open Design is an application (a local daemon with a web UI, an optional desktop app and an MCP server), not a skill the skills CLI can install. Pick one route. Desktop app (macOS Apple Silicon or Intel, Windows x64): download it from open-design.ai or github.com/nexu-io/open-design/releases; no Node, pnpm or clone needed. From source (the only route on Linux; needs Node ~24 and pnpm 10.33.x): `git clone https://github.com/nexu-io/open-design.git && cd open-design && corepack enable && pnpm install && pnpm tools-dev run web`, then open the URL it prints (the repository is about 3.4 GB, so add `--depth 1` to the clone to shorten the download). Inside your own coding agent: run `od mcp install claude` (use codex, cursor, opencode and so on for other agents) to connect it to Open Design over MCP; on a macOS desktop install `od` can resolve to /usr/bin/od (octal dump), so copy the snippet from Settings, MCP server in the app instead."
+requires:
+  - a coding-agent CLI on your PATH (Claude Code, Codex, Cursor Agent and others) or a BYOK model API key set in the app's Settings
+  - Node ~24 and pnpm 10.33.x, only for the from-source route
+license: Apache-2.0
+note: "verified 2026-10-21 against the README, QUICKSTART.md and root package.json only; nothing was cloned or run because the repo is about 3.4 GB. No prebuilt Linux app yet. The README also promotes a paid OpenDesign Go/Cloud tier; local use with your own keys needs no account. Counts in the old pointer (31 skills, 71 design systems) were stale"

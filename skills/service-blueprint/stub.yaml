@@ -4,4 +4,13 @@ category: design-review
 rank: 2
 upstream: https://github.com/j-clegg/service-blueprint-skill
 version: latest
-install_default: "npx skills add j-clegg/service-blueprint-skill"
+install_mode: manual
+manual_reason: The upstream SKILL.md has no YAML frontmatter (name, description), so the skills CLI skips it and installs nothing ("No valid skills found"). Clone the repo to a fixed folder and have your agent read its SKILL.md directly; this pointer stays installed as the entry point.
+install_steps:
+  - git clone --depth=1 https://github.com/j-clegg/service-blueprint-skill.git ~/.agents/service-blueprint-skill
+install_check: ~/.agents/service-blueprint-skill/SKILL.md
+installed_as: service-blueprint-skill
+license: MIT
+note: "verified 2026-10-21; npx skills add j-clegg/service-blueprint-skill --list finds no skills (missing frontmatter), so the earlier npx command installed nothing. No fork or branch has frontmatter. upstream_path is left unset on purpose: check-installs would flag the missing frontmatter. Lighter CLI-installable alternative: Owl-Listener/designer-skills ux-strategy/skills/service-blueprint (see the designer-skills stub)"
+conflicts_with:
+  - designer-skills

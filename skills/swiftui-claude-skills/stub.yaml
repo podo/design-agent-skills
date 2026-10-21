@@ -4,4 +4,17 @@ category: visual-components
 rank: 2
 upstream: https://github.com/199-biotechnologies/swiftui-claude-skills
 version: latest
-install_default: "npx skills add 199-biotechnologies/swiftui-claude-skills"
+install_default: npx skills add 199-biotechnologies/swiftui-claude-skills --skill swiftui-liquid-glass "SwiftUI UI/UX Review" swiftui-ui-patterns on-device-ai swiftui-pro swift-testing-pro swift-concurrency-pro swiftdata-pro
+installed_as:
+  - swiftui-liquid-glass
+  - SwiftUI UI/UX Review
+  - swiftui-ui-patterns
+  - on-device-ai
+  - swiftui-pro
+  - swift-testing-pro
+  - swift-concurrency-pro
+  - swiftdata-pro
+license: no LICENSE file in the upstream repo
+note: "verified 2026-10-21. One upstream skill has the frontmatter name `SwiftUI UI/UX Review` (the README calls it swiftui-ux-review); the CLI matches that exact name and installs it as the directory swiftui-ui-ux-review. swiftui-pro, swift-testing-pro, swift-concurrency-pro and swiftdata-pro are vendored copies of Paul Hudson's (twostraws) skills. swiftui-ui-patterns is also installed by the swiftui-patterns stub (dimillian/Skills): different upstreams, see report"
+conflicts_with:
+  - swiftui-patterns

@@ -5,3 +5,9 @@ rank: 2
 upstream: https://github.com/Cornjebus/neo-user-journey
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add Cornjebus/neo-user-journey --skill ux-journey-architect
+installed_as: ux-journey-architect
+requires:
+  - Playwright in your project (@playwright/test and @axe-core/playwright) for the automated journey tests
+license: no LICENSE file in the repo
+note: "verified 2026-10-21. Upstream names the skill ux-journey-architect (repo is neo-user-journey), so it installs next to this pointer"

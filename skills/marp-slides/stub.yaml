@@ -5,3 +5,9 @@ rank: 2
 upstream: https://github.com/robonuggets/marp-slides
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add robonuggets/marp-slides --skill marp-slides
+installed_as: marp-slides
+requires:
+  - Marp for VS Code extension (or @marp-team/marp-cli, run with npx, to export PDF)
+license: no LICENSE file in the repo
+note: "verified 2026-10-21; installs in place of the pointer (SKILL.md + examples/ decks, 24 files)"

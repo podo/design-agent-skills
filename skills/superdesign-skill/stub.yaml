@@ -1,6 +1,16 @@
-type: platform
+type: skill
 tier: community
 category: creative-3d
 rank: 3
 upstream: https://github.com/superdesigndev/superdesign-skill
+upstream_path: skills/superdesign/SKILL.md
 version: latest
+install_default: npx skills add superdesigndev/superdesign-skill --skill superdesign
+install_claude:
+  - /plugin marketplace add superdesigndev/superdesign-skill
+  - /plugin install superdesign@superdesign
+requires:
+  - Superdesign CLI installed globally (`npm install -g @superdesign/cli@latest`) and a Superdesign account (`superdesign login`); the skill drives the hosted superdesign.dev canvas through that CLI
+license: MIT
+note: "verified 2026-10-21; skill name is superdesign (frontmatter of skills/superdesign/SKILL.md), so it installs next to this pointer. Type changed platform -> skill: it is a single installable skill, not a template-variable platform. Upstream recommends the plugin route on Claude Code and warns not to also run npx skills add there (second, unnamespaced copy); plugin invoked as /superdesign:superdesign, checked against manifests only (marketplace superdesign, plugin superdesign), not run"
+installed_as: superdesign

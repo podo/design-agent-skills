@@ -23,18 +23,11 @@
  * Auth: set GITHUB_TOKEN or GH_TOKEN to raise the API rate limit from 60 to 5000/hr.
  * Without a token the script still runs but may be rate-limited on large catalogues.
  */
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { allStubs, onlyFilter, pool } from './lib/stub.mjs';
 
-const ROOT       = path.resolve(fileURLToPath(import.meta.url), '../..');
-const SKILLS_DIR = path.join(ROOT, 'skills');
 const STRICT     = process.argv.includes('--strict');
 const CHECK_PATHS = process.argv.includes('--paths');
-
-const onlyArg = process.argv.find(a => a.startsWith('--only='))?.slice('--only='.length)
-  ?? (process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : undefined);
-const ONLY = onlyArg ? new Set(onlyArg.split(',').map(s => s.trim()).filter(Boolean)) : null;
+const ONLY = onlyFilter();
 
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
 const HEADERS = {
@@ -47,14 +40,16 @@ if (!token) {
   console.warn('⚠ No GITHUB_TOKEN/GH_TOKEN set — unauthenticated API calls are limited to 60/hr.');
 }
 
-const field = (raw, key) => (raw.match(new RegExp(`^${key}:\\s*(.+)$`, 'm')) || [])[1]?.trim();
-
-/** GET with retry on transient errors (network failure, 5xx, secondary rate limit). */
+/**
+ * GET with retry on transient errors (network failure, 5xx, secondary rate limit). GitHub answers a
+ * burst of requests with a plain 403 even when the hourly quota is nowhere near used, so 403 is retried
+ * with a growing delay too; a repo that is really forbidden still ends up as "could not verify".
+ */
 async function getJSON(url, attempt = 1) {
   try {
     const r = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(10000) });
-    if ((r.status >= 500 || r.status === 429) && attempt < 3) {
-      await new Promise(res => setTimeout(res, 500 * attempt));
+    if ((r.status >= 500 || r.status === 429 || r.status === 403) && attempt < (r.status === 403 ? 4 : 3)) {
+      await new Promise(res => setTimeout(res, (r.status === 403 ? 1500 : 500) * attempt));
       return getJSON(url, attempt + 1);
     }
     return r;
@@ -71,20 +66,11 @@ const dead = [];   // hard failures: deleted / blocked
 const stale = [];  // soft: archived / missing path
 let checked = 0;
 
-const dirs = fs.readdirSync(SKILLS_DIR).filter(n => {
-  try { return fs.statSync(path.join(SKILLS_DIR, n)).isDirectory(); } catch { return false; }
-});
-
-await Promise.all(dirs.map(async name => {
+// Bounded: ~160 simultaneous requests trip GitHub's secondary rate limit, which then hides real problems.
+await pool(allStubs(), async stub => {
+  const { name, type, upstream } = stub;
   if (ONLY && !ONLY.has(name)) return;            // PR-scoped: only the changed skills
-  const stubPath = path.join(SKILLS_DIR, name, 'stub.yaml');
-  if (!fs.existsSync(stubPath)) return;
-  const raw = fs.readFileSync(stubPath, 'utf8');
-
-  const type = field(raw, 'type');
   if (!type || type === 'router') return;        // routers have no upstream
-
-  const upstream = field(raw, 'upstream');
   if (!upstream) return;                          // platform stubs may omit it
 
   const repoMatch = upstream.match(/^https?:\/\/github\.com\/([^/]+\/[^/]+?)(?:\.git)?\/?$/);
@@ -108,14 +94,14 @@ await Promise.all(dirs.map(async name => {
   if (data.archived) stale.push(`${name}: ${upstream} → archived (stale upstream)`);
 
   if (CHECK_PATHS) {
-    const upPath = field(raw, 'upstream_path');
+    const upPath = stub.upstream_path;
     if (upPath) {
       const branch = data.default_branch || 'HEAD';
       const r = await getJSON(`https://api.github.com/repos/${repo}/contents/${encodeURI(upPath)}?ref=${branch}`);
       if (r.status === 404) stale.push(`${name}: upstream_path "${upPath}" not found in ${repo}@${branch}`);
     }
   }
-}));
+}, 6);
 
 if (stale.length) {
   console.warn(`\n⚠ ${stale.length} stale/unverified upstream(s):\n  ${stale.join('\n  ')}`);

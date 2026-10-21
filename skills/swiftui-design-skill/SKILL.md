@@ -19,13 +19,14 @@ das:
 
 > Catalogue stub — full skill: [wholiver/swiftui-design-skill](https://github.com/wholiver/swiftui-design-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/swiftui-design-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/swiftui-design-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/swiftui-design-skill/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/swiftui-design-skill/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `swiftui-design-skill`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -42,6 +43,12 @@ das:
    ```bash
    npx skills add wholiver/swiftui-design-skill --skill swiftui-design-skill -y
    ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 

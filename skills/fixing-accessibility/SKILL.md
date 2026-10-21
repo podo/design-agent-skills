@@ -21,28 +21,36 @@ das:
 
 > Catalogue stub — full skill: [ibelick/ui-skills](https://github.com/ibelick/ui-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any accessibility audit or fix:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/fixing-accessibility/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `fixing-accessibility` and proceed
-   - No → go to step 2
+   - Global: `f=~/.agents/skills/fixing-accessibility/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/fixing-accessibility/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `fixing-accessibility`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/fixing-accessibility ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add ibelick/ui-skills --skill fixing-accessibility
-```
+   **Global:**
+   ```bash
+   npx skills add ibelick/ui-skills --skill fixing-accessibility -g -y
+   ```
 
-Or per-agent:
-- Claude Code: `claude skills add ibelick/ui-skills`
-- Cursor/OpenCode: `npx skills add ibelick/ui-skills --skill fixing-accessibility`
+   **Project:**
+   ```bash
+   npx skills add ibelick/ui-skills --skill fixing-accessibility -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -51,4 +59,9 @@ Or per-agent:
 
 ## What it does
 
-Audits components for missing or incorrect ARIA labels, broken keyboard navigation paths, focus management gaps, color contrast failures, and inaccessible form error patterns. Applies concrete code-level fixes so components meet accessibility standards without losing visual design intent.
+Audits components for missing or incorrect ARIA labels, broken keyboard navigation paths, focus management gaps, color contrast failures, and inaccessible form error patterns. Applies concrete code-level fixes so components meet accessibility standards without losing visual design intent. Use it when adding interactive controls, forms or dialogs, or when reviewing WCAG compliance.
+
+## When NOT to use
+
+- Full-site, document (Office/PDF) or markdown accessibility audits with specialist routing — use `accessibility-agents`
+- A structured WCAG 2.2 audit with manual verification steps — use `wcag-audit-patterns`

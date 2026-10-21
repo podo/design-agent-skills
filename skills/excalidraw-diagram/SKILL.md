@@ -1,9 +1,8 @@
 ---
 name: excalidraw-diagram
 description: |
-  Generate beautiful Excalidraw diagrams from natural language. Diagrams that
-  "argue visually" — built-in Playwright visual validation loop, brand-customizable
-  palette, and 3.2k+ GitHub stars. By coleam00.
+  Generate Excalidraw diagrams from natural language. Diagrams that "argue visually", with a
+  built-in Playwright render-and-validate loop and a brand-customizable color palette. By coleam00.
 triggers:
   - "excalidraw diagram"
   - "excalidraw"
@@ -22,33 +21,37 @@ das:
 
 > Catalogue stub — full skill: [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/excalidraw-diagram/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/excalidraw-diagram/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/excalidraw-diagram/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/excalidraw-diagram/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `excalidraw-diagram`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/excalidraw-diagram ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
    npx skills add coleam00/excalidraw-diagram-skill --skill excalidraw-diagram -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
    npx skills add coleam00/excalidraw-diagram-skill --skill excalidraw-diagram -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** uv (Python) and Playwright Chromium for the mandatory render-and-validate loop (`cd .claude/skills/excalidraw-diagram/references && uv sync && uv run playwright install chromium`); The skill hard-codes the project path `.claude/skills/excalidraw-diagram/references`, so install it at project scope (not -g) for the render step to work
+- **License:** no LICENSE file in the repository
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -57,4 +60,9 @@ das:
 
 ## What it does
 
-Generates Excalidraw diagrams from natural language descriptions using a built-in Playwright visual validation loop that iterates until the output looks right. Diagrams are designed to "argue visually" — they communicate reasoning, not just structure. Supports brand-customizable palettes and exports to editable `.excalidraw` files. One of the most starred diagram skills in the ecosystem (3.2k+ stars).
+Generates `.excalidraw` JSON files from natural language descriptions. Diagrams are designed to "argue visually": shapes mirror the concept they represent (fan-outs for one-to-many, timelines for sequences) and include evidence artifacts such as real code snippets or payloads. A render-view-fix loop (Playwright renders the file to PNG, the agent looks at it and fixes layout problems) validates each diagram before delivery. All colors and brand styles live in `references/color-palette.md`, so editing that one file re-skins every diagram. Output is an editable `.excalidraw` file.
+
+## When NOT to use
+
+- Quick ideation sketches where no uv and Playwright toolchain is wanted — use `hand-drawn-diagrams` (lighter weight) or `excalidraw-agents365`
+- Wireframes of screens rather than concept diagrams — use `wireframe-skill`

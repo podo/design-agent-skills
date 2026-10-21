@@ -1,9 +1,10 @@
 ---
 name: tui-design-skill
 description: |
-  Designs clean, professional terminal UIs and CLIs across four ecosystems: Go (Bubble Tea/
-  Lipgloss), Rust (Ratatui), Python (Textual), and TypeScript (Ink). Covers layout patterns,
-  color systems, keybinding conventions, and framework-specific design patterns.
+  Designs, builds, and reviews clean, professional terminal UIs and CLIs across
+  four ecosystems: Go (Bubble Tea/Lipgloss), Rust (Ratatui), Python (Textual),
+  and TypeScript (Ink). Covers layout patterns, color systems, keybinding
+  conventions, discoverability, and framework-specific design patterns.
 triggers:
   - "TUI design"
   - "terminal UI"
@@ -13,44 +14,60 @@ triggers:
   - "Ink TypeScript"
   - "tui-design-skill"
 das:
+  type: skill
   category: tui-terminal
   upstream: "https://github.com/gfargo/tui-design-skill"
+  upstream_path: "plugins/tui-design/skills/tui-design/SKILL.md"
   version: latest
-  install: false
 ---
 
 # tui-design-skill
 
-> Catalogue stub — full package: [gfargo/tui-design-skill](https://github.com/gfargo/tui-design-skill)
+> Catalogue stub — full skill: [gfargo/tui-design-skill](https://github.com/gfargo/tui-design-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Is the package already installed?**
-   Check: `~/.design-agent-skills/skills/tui-design-skill/SKILL.md` exists.
-   - Yes → invoke `tui-design-skill` and proceed
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   Upstream names this skill `tui-design`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/tui-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/tui-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `tui-design`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/tui-design-skill ] && echo "global" || echo "project"
+   ```
 
-```bash
-/plugin marketplace add gfargo/tui-design-skill
-```
+   **Global:**
+   ```bash
+   npx skills add gfargo/tui-design-skill --skill tui-design -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add gfargo/tui-design-skill --skill tui-design -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `tui-design-skill`
+- Skill name: `tui-design`
 - Trigger phrases: "TUI design", "terminal UI", "Bubble Tea", "Ratatui", "Textual Python", "Ink TypeScript"
 
 ## What it does
 
-Provides design knowledge for building professional terminal user interfaces across four major ecosystems: Go with Bubble Tea and Lipgloss for component-based TUIs, Rust with Ratatui for high-performance terminal apps, Python with Textual for rich TUI applications, and TypeScript/Node.js with Ink for React-style terminal rendering. Covers terminal color systems (true color, 256-color, ANSI), layout composition patterns, keybinding conventions, focus management, and framework-specific component design.
+Provides design knowledge for building professional terminal user interfaces and command-line tools across four major ecosystems: Go with Bubble Tea and Lipgloss, Rust with Ratatui, Python with Textual, and TypeScript/Node.js with Ink. A core skill file holds the workflow and cross-cutting rules (layout, color systems from true color to ANSI, keybinding conventions, focus management, discoverability) and loads one framework-specific reference when needed. Covers full-screen TUIs, interactive prompts, and plain CLIs.
 
 ## When NOT to use
 
 - Web UI design — use a frontend-design skill instead
-- When you need a specific framework without TUI layout conventions (the skill adds opinionated design patterns)
+- Deep Textual (Python) work beyond layout conventions — use `textual-tui-skill`
 - Simple CLI argument parsing without interactive UI

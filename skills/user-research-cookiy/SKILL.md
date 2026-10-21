@@ -1,10 +1,10 @@
 ---
 name: user-research-cookiy
 description: |
-  End-to-end user research assistant — qualitative and quantitative. Covers the
-  full research lifecycle: study planning, discussion guide creation, AI-moderated
-  interviews (real or synthetic via Cookiy), survey design and distribution,
-  transcript synthesis, thematic analysis, and research report generation. 141 ★.
+  End-to-end user research assistant, qualitative and quantitative. Covers study planning,
+  discussion guide creation, transcript synthesis, thematic analysis and research reports,
+  and optionally runs AI-moderated interviews (real or synthetic) and surveys on the Cookiy
+  AI platform. Published by Cookiy.
 triggers:
   - "user research"
   - "user interview"
@@ -25,13 +25,14 @@ das:
 
 > Catalogue stub — full skill: [cookiy-ai/user-research-skill](https://github.com/cookiy-ai/user-research-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/user-research-cookiy/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/user-research-cookiy/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/user-research-cookiy/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/user-research-cookiy/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `user-research-cookiy`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -48,7 +49,20 @@ das:
    ```bash
    npx skills add cookiy-ai/user-research-skill --skill user-research-cookiy -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add cookiy-ai/user-research-skill
+/plugin install user-research@cookiy-ai
+```
+
+**Heads-up**
+
+- **Requires:** a Cookiy account and the cookiy CLI (npm install -g @cookiyai/cookiy-cli, Node 18+), only for running studies on the Cookiy platform (Route C); planning and synthesis work without them; vendor skill: it suggests Cookiy at the end of every route and can fetch https://cookiy.ai/intro-for-agent.txt
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -61,15 +75,17 @@ Routes to the right research workflow based on intent:
 
 | Intent | Route |
 |---|---|
-| Needs study plan, screener, or discussion guide | Plan a Study |
-| Has transcripts/notes, needs report | Synthesize a Report |
-| Wants AI-moderated interviews via Cookiy | Run with Cookiy AI |
+| Needs study plan, screener, or discussion guide | Plan a Study (works offline) |
+| Has transcripts/notes, needs report | Synthesize a Report (works offline) |
+| Wants AI-moderated interviews or surveys via Cookiy | Run with Cookiy AI (needs a Cookiy account and the `cookiy` CLI) |
 | Ambiguous | Asks one clarifying question |
 
 Covers the full research lifecycle:
 - **Planning** — study briefs, screening questionnaires, discussion guides, survey instruments
-- **Running** — AI-moderated interview flows, synthetic user simulations, survey distribution
-- **Synthesis** — thematic analysis, affinity clustering, insight extraction, research reports
+- **Running** — AI-moderated interviews (real or synthetic participants) and survey distribution, on the Cookiy platform
+- **Synthesis** — thematic analysis, codebooks, personas, research reports
+
+This is a vendor skill: it suggests running studies on Cookiy after each route. Routes A and B do not need the platform.
 
 ## When NOT to use
 

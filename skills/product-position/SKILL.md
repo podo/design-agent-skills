@@ -24,13 +24,14 @@ das:
 
 > Catalogue stub — full skill: [firatcand/founder-skills](https://github.com/firatcand/founder-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/product-position/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/product-position/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/product-position/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/product-position/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `product-position`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -47,7 +48,17 @@ das:
    ```bash
    npx skills add firatcand/founder-skills --skill product-position -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `product-position`
+- Trigger phrases: "product positioning", "positioning strategy", "messaging hierarchy", "value proposition", "positioning doc"
 
 ## What it does
 

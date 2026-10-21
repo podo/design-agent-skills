@@ -5,3 +5,7 @@ rank: 1
 upstream: https://github.com/meodai/skill.color-expert
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add meodai/skill.color-expert --skill color-expert
+installed_as: color-expert
+license: CC-BY-4.0 (original material; third-party source material keeps its own licenses)
+note: "verified 2026-10-21. Installs the whole repo as the skill directory (~200 files, ~3 MB incl. references/, evals/, and a CLAUDE.md / ROADMAP.md / MAINTENANCE.md)"

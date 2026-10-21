@@ -1,7 +1,16 @@
-type: package
+type: skill
 tier: experimental
 category: data-visualization
 rank: 2
 upstream: https://github.com/dtran320/claud3
+upstream_path: skills/d3-viz/SKILL.md
 version: latest
-install_default: "npx skills add dtran320/claud3"
+install_default: npx skills add dtran320/claud3 --skill d3-viz
+installed_as: d3-viz
+install_claude:
+  - /plugin marketplace add dtran320/claud3
+  - /plugin install d3-viz@claud3
+license: no LICENSE file in the repo
+note: "verified 2026-10-21; the upstream skill is named d3-viz (the repo/plugin is called claud3). Installs the same directory as d3js-skill (a different upstream), so only one of the two can be installed per project."
+conflicts_with:
+  - d3js-skill

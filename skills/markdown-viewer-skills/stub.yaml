@@ -3,6 +3,12 @@ tier: experimental
 category: data-visualization
 rank: 2
 upstream: https://github.com/markdown-viewer/skills
+upstream_path: documd-visuals/SKILL.md
 version: latest
-install_default: "npx skills add markdown-viewer/skills"
-installed_as: vega
+install_default: npx skills add markdown-viewer/skills --skill documd-visuals
+installed_as: documd-visuals
+requires:
+  - A docu.md-compatible Markdown viewer renders the figures live; plain Markdown renderers show them as code blocks
+  - Optional export to html, epub, docx or pdf needs Node 18+ and Chrome/Chromium (npx @markdown-viewer/documd, installed separately)
+license: CC-BY-4.0
+note: "verified 2026-10-21; upstream merged its 14 engine-named skills (vega, uml, cloud, network, security, archimate, bpmn, iot, data-analytics, mindmap, infographic, architecture, infocard, canvas) into one skill documd-visuals with no compatibility stubs; its description marks mermaid, canvas, drawio and dot as not recommended, so the JSON Canvas trigger was dropped"

@@ -3,5 +3,15 @@ tier: official
 category: visual-components
 rank: 1
 upstream: https://github.com/shadcn-ui/ui
+upstream_path: skills/shadcn/SKILL.md
 version: latest
-install_default: "npx skills add shadcn-ui/skills"
+install_default: npx skills add shadcn-ui/ui --skill shadcn
+requires:
+  - "Node.js: the skill runs the shadcn CLI through your package runner (`npx shadcn@latest ...`, fetched from npm at use time), including `info --json` for project context"
+  - A project with a components.json file (or one you are about to create with `shadcn init`)
+license: MIT
+size_mb: 71
+note: "verified 2026-10-21; the repo is large (71 MB) so the clone can approach the CLI's 300 s default under load (one run took 284 s on a loaded machine); the same repo also ships migrate-radix-to-base (not part of this stub, add it with --skill migrate-radix-to-base). The skill's frontmatter sets user-invocable: false, so agents load it automatically from the description. Installs next to this pointer as .agents/skills/shadcn; the google-stitch-skills stub installs a different skill into a shadcn-ui directory"
+installed_as: shadcn
+conflicts_with:
+  - google-stitch-skills

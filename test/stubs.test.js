@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseNpx, parseStubText } from '../scripts/lib/stub.mjs';
 
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../../');
 const SKILLS_DIR = path.join(ROOT, 'skills');
@@ -12,6 +13,13 @@ const VALID_TIERS  = new Set(['official', 'community', 'experimental']);
 const VALID_RANKS  = new Set([1, 2, 3]);
 
 // ── helpers ──────────────────────────────────────────────────────────────────
+
+/** The `npx skills add …` commands of a pointer's generated install block, parsed. */
+const pointerCommands = md => {
+  const block = md.slice(md.indexOf('das:install:start'), md.indexOf('das:install:end'));
+  return [...block.matchAll(/^\s*(npx skills add .*)$/gm)].map(m => parseNpx(m[1])).filter(Boolean);
+};
+const sameSet = (a, b) => a.length === b.length && [...a].sort().join('\0') === [...b].sort().join('\0');
 
 function skillDirs() {
   return fs.readdirSync(SKILLS_DIR).filter(n =>
@@ -168,11 +176,21 @@ describe('type:skill upgrade commands', () => {
       );
     });
 
-    it(`${name}: upgrade command includes skill name`, () => {
-      assert.ok(
-        skill.includes(`--skill ${name}`),
-        `upgrade command must include "--skill ${name}"`
-      );
+    // `--skill` matches the upstream SKILL.md `name`, not our directory name (see installed_as). The pointer's
+    // parsed install commands must install exactly the --skill names of stub.yaml's install_default (a substring
+    // check would pass for a wrong name that merely contains the right one, e.g. ux-writing in ux-writing-skill).
+    // Raw-URL / subpath / manual installs have no --skill and are covered by test/pointers.test.js.
+    it(`${name}: the pointer installs exactly the --skill names of stub.yaml`, () => {
+      const fields = parseStubText(stub);
+      const want = parseNpx(fields.install_default ?? '')?.skills ?? [];
+      if (!want.length) return;
+      const cmds = pointerCommands(skill);
+      assert.ok(cmds.some(c => sameSet(c.skills, want)), `no command in the pointer installs exactly: ${want.join(', ')}`);
+      for (const c of cmds) {
+        for (const n of c.skills) {
+          assert.ok((fields.installed_as ?? []).includes(n), `the pointer installs "${n}", which installed_as does not list`);
+        }
+      }
     });
   }
 });
@@ -221,11 +239,12 @@ describe('CLI data integrity', () => {
 });
 
 describe('stub.yaml field validation', () => {
-  // Keep in sync with documented fields in CLAUDE.md stub.yaml section
   // Keep in sync with documented fields in CLAUDE.md stub.yaml → Fields section
   const KNOWN_FIELDS = new Set([
     'type', 'tier', 'rank', 'category', 'upstream', 'upstream_path', 'version',
-    'install_default', 'installed_as', 'note', 'install_claude', 'install_npm',
+    'install_default', 'installed_as', 'note', 'install_claude',
+    'install_extra', 'install_mode', 'install_steps', 'install_check', 'manual_reason',
+    'requires', 'license', 'size_mb', 'conflicts_with',
   ]);
 
   for (const { name, stub } of skills) {
@@ -271,6 +290,22 @@ describe('catalogue-level invariants', () => {
 });
 
 describe('metadata regression guards', () => {
+  // Regression: the npx route was a bare install of every skill in the repo, which wrote generic names
+  // (code-review, retro, sql-queries, draft-nda, …) over users' own skills and needed a hand-copied 69-name list
+  // that broke whenever upstream added a skill. It is a targeted list now; the full set stays on the plugin route.
+  it('phuryn-pm-skills: npx route is a targeted --skill list without generic-named skills; plugin route kept', () => {
+    const s = skills.find(x => x.name === 'phuryn-pm-skills');
+    assert.ok(s && s.stub, 'phuryn-pm-skills stub missing');
+    const f = parseStubText(s.stub);
+    const p = parseNpx(f.install_default);
+    assert.equal(p.target, 'phuryn/pm-skills');
+    assert.ok(p.skills.length > 0 && sameSet(p.skills, f.installed_as), 'a --skill list that equals installed_as, not a bare install');
+    for (const generic of ['code-review', 'retro', 'sql-queries', 'draft-nda', 'grammar-check']) {
+      assert.ok(!f.installed_as.includes(generic), `${generic} would overwrite a user skill of the same name`);
+    }
+    assert.ok(f.install_claude.some(c => /marketplace add phuryn\/pm-skills/.test(c)), 'the plugin route is still documented');
+  });
+
   // Regression: product-on-purpose/pm-skills shrank from 63 → 55 skills upstream.
   // The stale "63" count must not reappear in the pointer.
   it('pm-skills: no stale "63" skill count', () => {
@@ -289,18 +324,87 @@ describe('metadata regression guards', () => {
     assert.ok(!/\b\d+\s+(design\s+)?(specialists?|slash commands?|design commands?)/i.test(s.skill),
       'design-with-claude must not hardcode a specialist/command count (it goes stale upstream)');
   });
+});
 
-  // Regression: phuryn/pm-skills moved from a single `npx skills add` bundle to a
-  // Claude plugin marketplace (8 plugins). The old install path no longer works,
-  // so neither the stub nor the pointer may advertise it.
-  it('phuryn-pm-skills: uses plugin marketplace install, not stale npx skills add', () => {
-    const s = skills.find(x => x.name === 'phuryn-pm-skills');
-    assert.ok(s && s.skill && s.stub, 'phuryn-pm-skills files missing');
-    assert.ok(!/npx skills add phuryn\/pm-skills/.test(s.skill),
-      'phuryn-pm-skills SKILL.md must not use the stale "npx skills add phuryn/pm-skills" path');
-    assert.ok(!/npx skills add phuryn\/pm-skills/.test(s.stub),
-      'phuryn-pm-skills stub.yaml install_default must not use the stale npx path');
-    assert.ok(/plugin marketplace add phuryn\/pm-skills/.test(s.skill),
-      'phuryn-pm-skills must document the "plugin marketplace add" install');
+describe('install command validity (regression)', () => {
+  // Regression: `npx skills add owner/repo --skill X` resolves X against the upstream
+  // SKILL.md frontmatter `name`, NOT our directory name. ~25 stubs used their directory
+  // name and every upgrade failed with "No matching skills found". Each entry below was
+  // proven by a real `npx skills add` install (2026-10-21). Keep in sync with upstream.
+  const UPSTREAM_SKILL_NAMES = {
+    'ai-graphic-design-skill': 'ai-graphic-design',
+    'animate-skill': 'animate',
+    'claude-wireframe-skill': 'wireframe',
+    'cloudflare-web-perf': 'web-perf',
+    'composio-artifacts': 'artifacts-builder',
+    'copywriting-skill': 'copywriting',
+    'css-animation-skill': 'css-animation',
+    'd3js-skill': 'd3-viz',
+    'data-analysis-skill': 'data-analysis-pro',
+    'design-tokens-skill': 'design-tokens',
+    'digidai-pm': 'product-manager-skills',
+    'extract-design-md': 'stitch::extract-design-md',
+    'guizang-ppt': 'guizang-ppt-skill',
+    'make-interfaces-better': 'make-interfaces-feel-better',
+    'mobile-app-design': 'Mobile App Design Standards',
+    'neo-user-journey': 'ux-journey-architect',
+    'p5js-hermes': 'p5js',
+    'taste-design-stitch': 'taste-design',
+    'taste-skill': 'design-taste-frontend',
+    'ux-designer-skill': 'ux-designer',
+    'ux-writing-skill': 'ux-writing',
+    'wiggle-claude-skill': 'wiggle',
+    'wireframe-skill': 'wireframe',
+  };
+
+  for (const [dir, real] of Object.entries(UPSTREAM_SKILL_NAMES)) {
+    it(`${dir}: installs upstream skill "${real}", not the directory name`, () => {
+      const s = skills.find(x => x.name === dir);
+      assert.ok(s && s.stub && s.skill, `${dir} files missing`);
+      const fields = parseStubText(s.stub);
+      assert.deepEqual(fields.installed_as, [real], `stub.yaml installed_as must be the upstream skill name "${real}"`);
+      // manual routes (a local-path `npx skills add`, no --skill) take the name from the skill's own frontmatter
+      if (!fields.install_default) return;
+      assert.deepEqual(parseNpx(fields.install_default).skills, [real], 'install_default must install exactly that skill');
+      const cmds = pointerCommands(s.skill);
+      assert.ok(cmds.length > 0 && cmds.every(c => sameSet(c.skills, [real])),
+        `every install command in the pointer must use --skill ${real}`);
+      assert.ok(real === dir || cmds.every(c => !c.skills.includes(dir)),
+        `the pointer must not use the directory name as --skill (${dir} is not an upstream skill)`);
+    });
+  }
+
+  // Regression: 54 package stubs still told agents to look for an installed skill under
+  // ~/.design-agent-skills/skills/. The install layout is ~/.agents/skills (global) or
+  // .agents/skills (project), so "already installed?" was always false. The test above only
+  // covered type:skill; this covers every pointer.
+  for (const { name, skill } of skills) {
+    if (!skill) continue;
+    it(`${name}: no legacy ~/.design-agent-skills/ path`, () => {
+      assert.ok(!skill.includes('.design-agent-skills'),
+        'use ~/.agents/skills/<name> or .agents/skills/<name>, not the legacy ~/.design-agent-skills/ path');
+    });
+  }
+});
+
+describe('README counts', () => {
+  // Regression: the skill count and tier counts in the README went stale by hand on every release.
+  const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+  const all = skills.filter(s => s.stub);
+  const real = all.filter(s => yamlGet(s.stub, 'type') !== 'router');
+  const rank = n => real.filter(s => Number(yamlGet(s.stub, 'rank')) === n).length;
+
+  it('--picks, --essentials and --all counts match the stubs', () => {
+    const row = flag => readme.match(new RegExp('\\|[^|]*\\|\\s*`--' + flag + '`\\s*\\|\\s*~?(\\d+)\\s*\\|'))?.[1];
+    assert.equal(Number(row('picks')), rank(1), '--picks count');
+    assert.equal(Number(row('essentials')), rank(1) + rank(2), '--essentials count');
+    assert.equal(Number(row('all')), real.length, '--all count');
+  });
+
+  it('tier counts in the supply chain section match the stubs (routers included)', () => {
+    const m = readme.match(/`official` \((\d+)\), `community` \((\d+)\), `experimental` \((\d+)\)/);
+    assert.ok(m, 'supply chain tier line not found');
+    const tier = t => all.filter(s => yamlGet(s.stub, 'tier') === t).length;
+    assert.deepEqual(m.slice(1).map(Number), [tier('official'), tier('community'), tier('experimental')]);
   });
 });

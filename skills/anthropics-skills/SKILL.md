@@ -1,9 +1,9 @@
 ---
 name: anthropics-skills
 description: |
-  6 official Anthropic skills for frontend design, artifact creation, and presentation.
+  Official Anthropic skills for frontend design, artifact creation, and presentation.
   Covers UI/UX development tools, complex HTML artifacts, visual art in PNG/PDF,
-  professional theme application, brand guidelines, and PowerPoint creation.
+  professional theme application, Anthropic brand guidelines, and PowerPoint creation.
 triggers:
   - "Anthropic skill"
   - "Anthropic frontend design"
@@ -13,6 +13,7 @@ triggers:
   - "brand guidelines"
   - "pptx Anthropic"
 das:
+  type: package
   category: official-suites
   upstream: "https://github.com/anthropics/skills"
   version: latest
@@ -23,40 +24,46 @@ das:
 
 > Catalogue stub — full package: [anthropics/skills](https://github.com/anthropics/skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before using Anthropic official skills:
+1. **Is the full skill already installed?**
+   This package installs 6 skills (`frontend-design`, `web-artifacts-builder`, `canvas-design`, `theme-factory`, `brand-guidelines`, `pptx`); checking the first.
+   - Global: `f=~/.agents/skills/frontend-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/frontend-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `frontend-design`, invoke it and proceed
+   - `pointer` → go to step 2
 
-1. **Is an Anthropic skill already installed?**
-   Check: `~/.design-agent-skills/skills/frontend-design/SKILL.md` exists (representative skill).
-   - Yes → invoke the specific skill by name and proceed
-   - No → go to step 2
+2. **Detect scope, then install:**
 
-2. **Do you have shell access?**
-   - Yes → install the specific skill below, then invoke it
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+   ```bash
+   [ -e ~/.agents/skills/anthropics-skills ] && echo "global" || echo "project"
+   ```
 
-## Install command
+   **Global:**
+   ```bash
+   npx skills add anthropics/skills --skill frontend-design web-artifacts-builder canvas-design theme-factory brand-guidelines pptx -g -y
+   ```
 
-```bash
-# Frontend design and UI/UX development
-npx skills add anthropics/frontend-design
+   **Project:**
+   ```bash
+   npx skills add anthropics/skills --skill frontend-design web-artifacts-builder canvas-design theme-factory brand-guidelines pptx -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
-# Build complex HTML artifacts with React/Tailwind/shadcn
-npx skills add anthropics/web-artifacts-builder
+**Claude Code plugin route:**
 
-# Design visual art in PNG/PDF
-npx skills add anthropics/canvas-design
-
-# Style artifacts with professional themes
-npx skills add anthropics/theme-factory
-
-# Apply brand colors and typography
-npx skills add anthropics/brand-guidelines
-
-# Create, edit, and analyze PowerPoint presentations
-npx skills add anthropics/pptx
 ```
+/plugin marketplace add anthropics/skills
+/plugin install example-skills@anthropic-agent-skills
+/plugin install document-skills@anthropic-agent-skills
+```
+
+**Heads-up**
+
+- **License:** Apache-2.0 for frontend-design, web-artifacts-builder, canvas-design, theme-factory and brand-guidelines; pptx is proprietary (Anthropic, all rights reserved, per its LICENSE.txt); the repo has no root LICENSE
+- **Name collision:** `frontend-design` is also written by `frontend-design` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -69,4 +76,10 @@ npx skills add anthropics/pptx
 
 ## What it does
 
-Anthropic's official skill suite covering design-adjacent workflows: production-quality frontend design guidance, complex multi-component HTML artifact construction with React/Tailwind/shadcn, visual art creation, theme systems, brand application, and PowerPoint generation.
+Anthropic's official skill suite covering design-adjacent workflows: production-quality frontend design guidance, complex multi-component HTML artifact construction with React/Tailwind/shadcn, visual art creation, theme systems, Anthropic's own brand colors and typography, and PowerPoint generation. The `pptx` skill is proprietary (Anthropic, all rights reserved); the other five are Apache-2.0.
+
+## When NOT to use
+
+- Applying a different company's brand — `brand-guidelines` applies Anthropic's brand; use `brand-design-md` for well-known brands
+- A different take on the same job as `frontend-design` — the catalogue also has a `frontend-design` stub from another author that writes to the same install directory; pick one
+- Every other skill in the repo (docx, xlsx, pdf, claude-api, mcp-builder, ...) — this pointer installs only the six listed; add more by passing their names to `--skill`

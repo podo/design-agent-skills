@@ -37,7 +37,7 @@ Activate when the user:
 | [`fixing-accessibility`](../fixing-accessibility/SKILL.md) | ARIA, keyboard nav, focus management, contrast fixes |
 | [`wcag-audit-patterns`](../wcag-audit-patterns/SKILL.md) | WCAG 2.2 audits with remediation |
 | [`wcag-ai-skill`](../wcag-ai-skill/SKILL.md) | WCAG 2.2 full workflow: design → frontend → QA → conformance docs |
-| [`accessibility-agents`](../accessibility-agents/SKILL.md) | 25 specialist a11y agents: web code, Office/PDF docs, markdown auditors |
+| [`accessibility-agents`](../accessibility-agents/SKILL.md) | WCAG 2.2 AA package: router skills for web UI, site audits, Office/PDF/ePub, markdown, desktop and Python tooling, GitHub workflows |
 | [`mastepanoski-skills`](../mastepanoski-skills/SKILL.md) | 6 audits: ux-rethink, Nielsen, WCAG POUR, Don Norman, cognitive walkthrough |
 | [`fixing-motion-performance`](../fixing-motion-performance/SKILL.md) | Layout thrashing, compositor, scroll-linked animation performance |
 | [`addyosmani-quality`](../addyosmani-quality/SKILL.md) | 6-skill suite: a11y, Lighthouse, CWV, perf, SEO, best practices |

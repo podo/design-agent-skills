@@ -4,4 +4,136 @@ category: design-review
 rank: 2
 upstream: https://github.com/Owl-Listener/designer-skills
 version: latest
-install_default: "/plugin marketplace add Owl-Listener/designer-skills"
+install_default: npx skills add Owl-Listener/designer-skills
+installed_as:
+  - a-b-test-design
+  - accessibility-audit
+  - accessibility-test-plan
+  - aesthetic-usability
+  - affinity-diagram
+  - animation-principles
+  - behavioural-analytics
+  - business-design
+  - card-sort-analysis
+  - case-study
+  - click-test-plan
+  - color-system
+  - competitive-analysis
+  - component-spec
+  - concept-selection
+  - content-strategy
+  - conversational-ux
+  - critique-affordance
+  - critique-brand-consistency
+  - critique-color
+  - critique-composition
+  - critique-information-density
+  - critique-typography
+  - critique-visual-hierarchy
+  - dark-mode-design
+  - data-visualization
+  - design-brief
+  - design-critique
+  - design-debt-audit
+  - design-impact-reporting
+  - design-negotiation
+  - design-principles
+  - design-qa-checklist
+  - design-rationale
+  - design-review-process
+  - design-sprint-plan
+  - design-system-adoption
+  - design-system-governance
+  - design-token
+  - design-token-audit
+  - diary-study-plan
+  - documentation-template
+  - doherty-threshold
+  - empathy-map
+  - error-handling-ux
+  - experience-map
+  - feedback-patterns
+  - fitts-law
+  - form-design
+  - gesture-patterns
+  - handoff-spec
+  - heuristic-evaluation
+  - hicks-law
+  - icon-system
+  - illustration-style
+  - information-architecture
+  - interfaces-that-feel
+  - interview-script
+  - jakobs-law
+  - jobs-to-be-done
+  - journey-map
+  - law-of-closure
+  - law-of-common-region
+  - law-of-continuity
+  - law-of-figure-ground
+  - law-of-proximity
+  - law-of-similarity
+  - layout-grid
+  - loading-states
+  - localization-design
+  - metrics-definition
+  - micro-interaction-spec
+  - millers-law
+  - motion-system
+  - naming-convention
+  - navigation-patterns
+  - north-star-vision
+  - onboarding-design
+  - opportunity-framework
+  - parallel-concepts
+  - pattern-library
+  - peak-end-rule
+  - platform-conventions
+  - presentation-deck
+  - prototype-strategy
+  - qual-quant-triangulation
+  - readable-measure
+  - research-repository
+  - responsive-design
+  - search-ux
+  - serial-position-effect
+  - service-blueprint
+  - spacing-system
+  - stakeholder-alignment
+  - state-machine
+  - summarize-interview
+  - survey-design
+  - team-workflow
+  - teslers-law
+  - test-scenario
+  - theming-system
+  - typography-scale
+  - usability-test-plan
+  - user-flow-diagram
+  - user-persona
+  - ux-writing
+  - version-control-strategy
+  - visual-hierarchy
+  - von-restorff-effect
+  - wireframe-spec
+  - zeigarnik-effect
+install_claude:
+  - /plugin marketplace add Owl-Listener/designer-skills
+  - /plugin install design-research@designer-skills
+  - /plugin install design-systems@designer-skills
+  - /plugin install ux-strategy@designer-skills
+  - /plugin install ui-design@designer-skills
+  - /plugin install interaction-design@designer-skills
+  - /plugin install prototyping-testing@designer-skills
+  - /plugin install design-ops@designer-skills
+  - /plugin install designer-toolkit@designer-skills
+  - /plugin install visual-critique@designer-skills
+license: MIT
+note: "verified 2026-10-21; the bare install is deliberate: it is the whole design-practice collection of this repo (same set as the nine local plugins) and the skills reference each other. Pick a subset by passing names to --skill, or install single skills through their own stubs. The marketplace also lists four sibling collections (AI product design, UX program management, design leadership, inclusive design) that live in other repos and are NOT installed here. The old route (`/plugin marketplace add` alone) only registered the marketplace and installed nothing. Plugin names checked against marketplace.json, not run. Installs directories that other stubs with DIFFERENT upstreams also write: design-brief, ux-writing, data-visualization, interview-script, summarize-interview, jobs-to-be-done (see the batch report); many other directories are written by single-skill stubs of this same upstream, which is harmless"
+conflicts_with:
+  - data-viz-agent
+  - design-brief
+  - phuryn-pm-skills
+  - wondelai-skills
+  - service-blueprint
+  - ux-writing-skill

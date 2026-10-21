@@ -1,7 +1,14 @@
-type: package
+type: skill
 tier: experimental
 category: visual-components
 rank: 2
 upstream: https://github.com/haider-nawaz/liquid-glass-skill
+upstream_path: plugins/liquid-glass/skills/liquid-glass/SKILL.md
 version: latest
-install_default: "/plugin marketplace add haider-nawaz/liquid-glass-skill"
+install_default: npx skills add haider-nawaz/liquid-glass-skill --skill liquid-glass
+installed_as: liquid-glass
+install_claude:
+  - /plugin marketplace add haider-nawaz/liquid-glass-skill
+  - /plugin install liquid-glass@liquid-glass-skills
+license: no LICENSE file in the upstream repo
+note: "verified 2026-10-21; the skill installs as liquid-glass (not liquid-glass-skill), next to this pointer; type changed package -> skill. Plugin route checked against upstream README and marketplace.json, not run"

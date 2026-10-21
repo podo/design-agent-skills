@@ -1,9 +1,9 @@
 ---
 name: framer-motion-skills
 description: |
-  Six dedicated Framer Motion skills: core animation, React/Next.js integration,
+  Dedicated Framer Motion skills for React: React and Next.js integration,
   variants and orchestration, scroll animations, gestures (drag/tap/hover), and
-  layout/shared transitions.
+  layout/shared transitions. Community-published, not by the Motion team.
 triggers:
   - "Framer Motion"
   - "framer animation"
@@ -22,34 +22,56 @@ das:
 
 > Catalogue stub — full package: [C-Jeril/framer-motion-skills](https://github.com/C-Jeril/framer-motion-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Is the package already installed?**
-   Check: your agent's skills directory contains `framer-motion-skills` with content beyond this stub.
-   - Yes → invoke `framer-motion-skills` and proceed
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   This package installs 5 skills (`framer-motion-gestures`, `framer-motion-layout`, `framer-motion-react`, `framer-motion-scroll`, `framer-motion-variants`); checking the first.
+   - Global: `f=~/.agents/skills/framer-motion-gestures/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/framer-motion-gestures/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `framer-motion-gestures`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Which agent are you on?**
-   - Claude Code → `npx skills add C-Jeril/framer-motion-skills` — or send `! npx skills add …` as a chat message (add `-g` for global, omit for project-only)
-   - Cursor → `npx skills add C-Jeril/framer-motion-skills`
-   - Other → `npx skills add C-Jeril/framer-motion-skills` or see [GitHub README](https://github.com/C-Jeril/framer-motion-skills)
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/framer-motion-skills ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add C-Jeril/framer-motion-skills
-```
+   **Global:**
+   ```bash
+   npx skills add C-Jeril/framer-motion-skills --skill framer-motion-gestures framer-motion-layout framer-motion-react framer-motion-scroll framer-motion-variants -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add C-Jeril/framer-motion-skills --skill framer-motion-gestures framer-motion-layout framer-motion-react framer-motion-scroll framer-motion-variants -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `framer-motion-skills`
-- Trigger phrases: "Framer Motion", "framer animation", "layout animation", "shared transitions", "motion variants"
+Each skill installs under its own name; the agent picks the right one from the request.
+
+- `framer-motion-react` — "AnimatePresence", "Framer Motion with Next.js", "SSR"
+- `framer-motion-variants` — "variants", "stagger", "orchestrated animation"
+- `framer-motion-scroll` — "useScroll", "parallax", "scroll-linked animation"
+- `framer-motion-gestures` — "drag", "tap", "hover gesture"
+- `framer-motion-layout` — "layoutId", "shared element transition", "reorderable list"
 
 ## What it does
 
-Six dedicated Framer Motion skills covering the full library surface: core animation primitives (`motion` components, `animate`, `initial`, `exit`), React and Next.js integration patterns, variants and animation orchestration (`staggerChildren`, `delayChildren`, `when`), scroll-linked and scroll-triggered animations (`useScroll`, `useTransform`), gesture-driven interactions (drag, tap, hover, `whileDrag`/`whileHover`/`whileTap`), and layout animations with shared element transitions (`layoutId`).
+Separate Framer Motion skills, each covering one slice of the library: React and Next.js integration (`AnimatePresence`, `useAnimation`, SSR), variants and animation orchestration (state machines, stagger, sequencing), scroll-linked and scroll-triggered animation (`useScroll`, `useTransform`, parallax), gesture-driven interaction (drag, pan, tap, hover, focus), and layout animations with shared element transitions (`layoutId`).
+
+The upstream repo also lists a sixth skill for the core API (`framer-motion-core`), but its SKILL.md has a YAML error, so the skills CLI cannot install it today and this pointer leaves it out. For the animation library maintained by the Motion team itself, see the `motion` pointer.
 
 ## When NOT to use
 
-- GSAP-specific projects or complex timeline orchestration (use `gsap-skills`)
-- Vanilla CSS animation without a React framework (use `animate-css-skill`)
+- The official Motion skill (docs search, CSS springs, performance audits, upgrade guides) → use `motion`
+- GSAP-specific projects or complex timeline orchestration → use `gsap-skills`
+- Vanilla CSS animation without a React framework → use `animate-css-skill`

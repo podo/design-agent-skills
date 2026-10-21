@@ -5,3 +5,9 @@ rank: 3
 upstream: https://github.com/rohitg00/awesome-claude-code-toolkit
 upstream_path: agents/data-ai/data-visualization.md
 version: latest
+install_default: npx skills add https://raw.githubusercontent.com/rohitg00/awesome-claude-code-toolkit/main/agents/data-ai/data-visualization.md
+installed_as: data-visualization
+license: Apache-2.0
+note: "upstream file is a Claude Code subagent definition (frontmatter has tools and model), not a SKILL.md; the skills CLI installs it from the raw URL as a skill named data-visualization. The repo has no skill called data-viz-agent."
+conflicts_with:
+  - designer-skills

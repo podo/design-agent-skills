@@ -1,7 +1,17 @@
-type: package
+type: skill
 tier: experimental
 category: presentations
 rank: 2
 upstream: https://github.com/ryanbbrown/revealjs-skill
+upstream_path: skills/revealjs/SKILL.md
 version: latest
-install_default: "/plugin marketplace add ryanbbrown/revealjs-skill"
+install_default: npx skills add ryanbbrown/revealjs-skill --skill revealjs
+installed_as: revealjs
+install_claude:
+  - /plugin marketplace add ryanbbrown/revealjs-skill
+  - /plugin install revealjs@revealjs-skill
+requires:
+  - Node.js (the skill runs its own helper scripts to scaffold decks and open the editor)
+  - optional - puppeteer for the overflow check and decktape via npx for PDF export and screenshots
+license: MIT
+note: "verified 2026-10-21 (npx route really installed); the plugin route was checked against .claude-plugin/marketplace.json only (marketplace revealjs-skill, plugin revealjs); upstream skill is named revealjs, so it installs next to this pointer"

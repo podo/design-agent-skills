@@ -4,4 +4,12 @@ category: motion-animation
 rank: 1
 upstream: https://github.com/C-Jeril/framer-motion-skills
 version: latest
-install_default: "npx skills add C-Jeril/framer-motion-skills"
+install_default: npx skills add C-Jeril/framer-motion-skills --skill framer-motion-gestures framer-motion-layout framer-motion-react framer-motion-scroll framer-motion-variants
+installed_as:
+  - framer-motion-gestures
+  - framer-motion-layout
+  - framer-motion-react
+  - framer-motion-scroll
+  - framer-motion-variants
+license: MIT
+note: "verified 2026-10-21; upstream also lists framer-motion-core, but its SKILL.md has an unquoted `description:` containing `: ` (YAML parse error) so the skills CLI skips it and --skill framer-motion-core finds nothing. Re-check with `npx skills add C-Jeril/framer-motion-skills --list` and add it to installed_as once fixed upstream. The skill descriptions call themselves 'Official Framer Motion skill', but the repo is by C-Jeril, not the Motion team (the Motion team publishes the `motion` stub)"

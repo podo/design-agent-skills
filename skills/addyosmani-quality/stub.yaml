@@ -3,7 +3,17 @@ tier: community
 category: accessibility-quality
 rank: 2
 upstream: https://github.com/addyosmani/web-quality-skills
-upstream_path: skills/web-quality-audit/SKILL.md
 version: latest
-install_default: "npx skills add addyosmani/web-quality-skills --skill <skill>"
-installed_as: web-quality-audit
+install_default: npx skills add addyosmani/web-quality-skills --skill web-quality-audit accessibility core-web-vitals performance seo best-practices
+installed_as:
+  - web-quality-audit
+  - accessibility
+  - core-web-vitals
+  - performance
+  - seo
+  - best-practices
+install_claude:
+  - /plugin marketplace add addyosmani/web-quality-skills
+  - /plugin install web-quality-skills@addy-web-quality-skills
+license: MIT
+note: "verified 2026-10-21; plugin route checked against .claude-plugin/marketplace.json only (not run). Generic dir names accessibility/performance/seo/best-practices can collide with other stubs; see report"

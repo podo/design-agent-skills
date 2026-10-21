@@ -9,6 +9,7 @@ triggers:
   - "accessibility audit"
   - "WCAG 2.2"
 das:
+  type: skill
   category: accessibility-quality
   upstream: "https://github.com/wshobson/agents"
   upstream_path: "plugins/accessibility-compliance/skills/wcag-audit-patterns/SKILL.md"
@@ -18,30 +19,45 @@ das:
 
 # wcag-audit-patterns
 
-> Catalogue stub — full skill: [wshobson/agents](https://github.com/wshobson/agents)
+> Catalogue stub — full skill: [wshobson/agents](https://github.com/wshobson/agents/blob/main/plugins/accessibility-compliance/skills/wcag-audit-patterns/SKILL.md)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-Run this before any WCAG compliance audit:
-
 1. **Is the full skill already installed?**
-   Check: `~/.design-agent-skills/skills/wcag-audit-patterns/SKILL.md` exists AND does NOT contain a `das:` block.
-   - Yes → invoke `wcag-audit-patterns` and proceed
-   - No → go to step 2
+   - Global: `f=~/.agents/skills/wcag-audit-patterns/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/wcag-audit-patterns/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `wcag-audit-patterns`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Do you have shell access?**
-   - Yes → run the install command below, then invoke the skill
-   - No → show the install command; in Claude Code, send it as a chat message starting with `!` — add `-g` for global install or omit for project-only
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/wcag-audit-patterns ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add wshobson/agents --skill wcag-audit-patterns
+   **Global:**
+   ```bash
+   npx skills add wshobson/agents --skill wcag-audit-patterns -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add wshobson/agents --skill wcag-audit-patterns -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add wshobson/agents
+/plugin install accessibility-compliance@claude-code-workflows
 ```
 
-Or per-agent:
-- Claude Code: `claude skills add wshobson/agents`
-- Cursor/OpenCode: `npx skills add wshobson/agents --skill wcag-audit-patterns`
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
@@ -50,4 +66,4 @@ Or per-agent:
 
 ## What it does
 
-Provides structured WCAG 2.2 audit patterns that combine automated testing tools with manual verification checklists. Surfaces failures by success criterion and generates prioritised remediation guidance so teams can address the highest-impact issues first.
+Provides structured WCAG 2.2 audit patterns that combine automated testing tools with manual verification checklists. Surfaces failures by success criterion and generates prioritised remediation guidance so teams can address the highest-impact issues first. It is one skill from the `accessibility-compliance` plugin of `wshobson/agents`, which also carries a screen-reader testing skill, agents, and commands (available through the Claude Code plugin route).

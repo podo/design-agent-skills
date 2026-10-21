@@ -5,3 +5,13 @@ rank: 3
 upstream: https://github.com/zarazhangrui/frontend-slides
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add zarazhangrui/frontend-slides --skill frontend-slides
+installed_as: frontend-slides
+install_claude:
+  - /plugin marketplace add https://github.com/zarazhangrui/frontend-slides
+  - /plugin install frontend-slides@frontend-slides
+requires:
+  - "optional: Python with python-pptx (converting PPT/PPTX)"
+  - "optional: Node.js (PDF export through Playwright; URL deployment also needs a free Vercel account)"
+license: MIT
+note: "verified 2026-10-21; the repo carries a second copy of the skill under plugins/frontend-slides (used by the plugin route), the skills CLI installs the root copy. Skill ships helper scripts (deploy.sh, export-pdf.sh, extract-pptx.py) that are only run when the user asks for deployment, PDF export or PPT conversion."

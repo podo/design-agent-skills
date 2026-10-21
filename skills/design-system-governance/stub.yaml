@@ -5,3 +5,10 @@ rank: 2
 upstream: https://github.com/Owl-Listener/designer-skills
 upstream_path: design-systems/skills/design-system-governance/SKILL.md
 version: latest
+install_default: npx skills add Owl-Listener/designer-skills --skill design-system-governance
+install_claude:
+  - /plugin marketplace add Owl-Listener/designer-skills
+  - /plugin install design-systems@designer-skills
+license: MIT
+note: "verified 2026-10-21; single skill out of the Owl-Listener/designer-skills collection, targeted with --skill so only this directory lands. The Claude Code plugin route installs the whole design-systems plugin (all of that domain's skills and commands, not just this one), checked against .claude-plugin/marketplace.json only, not run"
+installed_as: design-system-governance

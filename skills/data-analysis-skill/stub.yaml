@@ -5,3 +5,8 @@ rank: 3
 upstream: https://github.com/dongzhang84/data-analysis-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add dongzhang84/data-analysis-skill --skill data-analysis-pro
+installed_as: data-analysis-pro
+requires:
+  - Python 3.8+ with pandas, openpyxl, tabulate and chardet (the bundled scripts auto-install missing packages with pip on first run)
+license: MIT

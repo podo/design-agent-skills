@@ -26,37 +26,41 @@ das:
 
 > Catalogue stub — full skill: [ilikescience/design-tokens-skill](https://github.com/ilikescience/design-tokens-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/design-tokens-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/design-tokens-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `design-tokens`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/design-tokens/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/design-tokens/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `design-tokens`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/design-tokens-skill ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add ilikescience/design-tokens-skill --skill design-tokens-skill -g -y
+   npx skills add ilikescience/design-tokens-skill --skill design-tokens -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add ilikescience/design-tokens-skill --skill design-tokens-skill -y
+   npx skills add ilikescience/design-tokens-skill --skill design-tokens -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `design-tokens-skill`
+- Skill name: `design-tokens`
 - Triggers: "design tokens", "DTCG tokens", "W3C tokens", "Terrazzo", "token aliasing"
 
 ## What it does

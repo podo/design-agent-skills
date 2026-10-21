@@ -1,9 +1,9 @@
 ---
 name: d3js-skill
 description: |
-  Create sophisticated data visualizations with D3.js: bar charts, line graphs,
-  scatter plots, interactive visualizations with proper data binding, scales,
-  axes, and animations. Handles real datasets with transformations and transitions.
+  Create custom data visualizations with D3.js: bar, line and scatter charts, chord diagrams,
+  heatmaps, force-directed networks and geographic maps, with proper data binding, scales, axes,
+  transitions and interactivity. Works in React, Vue, Svelte or vanilla JavaScript.
 triggers:
   - "D3.js"
   - "D3 chart"
@@ -22,39 +22,50 @@ das:
 
 > Catalogue stub — full skill: [chrisvoncsefalvay/claude-d3js-skill](https://github.com/chrisvoncsefalvay/claude-d3js-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/d3js-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/d3js-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `d3-viz`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/d3-viz/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/d3-viz/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `d3-viz`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/d3js-skill ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3js-skill -g -y
+   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3-viz -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3js-skill -y
+   npx skills add chrisvoncsefalvay/claude-d3js-skill --skill d3-viz -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **License:** no LICENSE file in the repository
+- **Name collision:** `d3-viz` is also written by `claud3` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `d3js-skill`
+- Skill name: `d3-viz`
 - Trigger phrases: "D3.js", "D3 chart", "D3 visualization", "data visualization D3"
 
 ## What it does
 
-Generates sophisticated D3.js data visualizations with correct data binding patterns, scales, axes, transitions, and interactivity. Handles bar charts, line graphs, scatter plots, heatmaps, and custom chart types. Produces properly structured SVG with real dataset transformations, not just static examples.
+Guides an agent through building bespoke D3.js visualizations with correct data binding patterns, scales, axes, transitions and interactivity (tooltips, zoom and pan, click handling). Covers common patterns such as bar, line and scatter charts, heatmaps, chord diagrams, pie charts and force-directed networks, plus responsive sizing, accessibility and performance practice. Ships reference notes (colour schemes, D3 patterns, scale reference) and starter chart templates next to the skill.
+
+## When NOT to use
+
+- Standard charts where a charting library is enough; D3 is for bespoke visualizations
+- 3D visualization — use `cloudai-threejs`
+- Choosing chart types and accessible palettes across libraries (D3, Chart.js, Matplotlib, Plotly) rather than writing D3 code — use `data-viz-agent`

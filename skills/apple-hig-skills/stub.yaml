@@ -2,7 +2,26 @@ type: package
 tier: community
 category: visual-components
 rank: 1
-upstream: https://github.com/raintree-technology/apple-hig-skills
+upstream: https://github.com/raintree-technology/hig-doctor
 version: latest
-install_default: "npx skills add raintree-technology/apple-hig-skills"
-installed_as: hig-foundations
+install_default: npx skills add raintree-technology/hig-doctor --skill hig-foundations hig-platforms hig-components-controls hig-components-layout hig-components-menus hig-components-dialogs hig-components-status hig-components-search hig-components-system hig-components-content hig-inputs hig-patterns hig-technologies hig-project-context
+install_claude:
+  - /plugin marketplace add raintree-technology/hig-doctor
+  - /plugin install apple-hig-skills@apple-hig-skills
+license: MIT (tooling; Apple reference content is attributed, see upstream THIRD_PARTY_NOTICES.md)
+note: "verified 2026-10-21; upstream repo was renamed raintree-technology/apple-hig-skills -> raintree-technology/hig-doctor (GitHub redirects the old URL). The hig-doctor stub now installs only the hig-doctor-audit skill from the same repo (plugin/skills, invisible to a plain npx skills add), so the two no longer overlap. Plugin route checked against .claude-plugin/marketplace.json only (marketplace apple-hig-skills, plugin apple-hig-skills, bundling the 14 reference skills), not run"
+installed_as:
+  - hig-foundations
+  - hig-platforms
+  - hig-components-controls
+  - hig-components-layout
+  - hig-components-menus
+  - hig-components-dialogs
+  - hig-components-status
+  - hig-components-search
+  - hig-components-system
+  - hig-components-content
+  - hig-inputs
+  - hig-patterns
+  - hig-technologies
+  - hig-project-context

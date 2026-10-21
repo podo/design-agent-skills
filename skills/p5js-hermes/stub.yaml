@@ -2,6 +2,18 @@ type: skill
 tier: official
 category: creative-3d
 rank: 2
-upstream: https://github.com/nousresearch/hermes-agent
+upstream: https://github.com/NousResearch/hermes-agent
 upstream_path: skills/creative/p5js/SKILL.md
 version: latest
+install_mode: manual
+manual_reason: The upstream repo is about 1.3 GB, so `npx skills add NousResearch/hermes-agent --skill p5js` never finishes cloning (it timed out even with a 25 minute limit). Sparse-clone only the skill's folder into /tmp and install from that local path (usually well under a minute).
+install_steps:
+  - git clone --depth=1 --filter=blob:none --sparse https://github.com/NousResearch/hermes-agent.git /tmp/hermes-agent-sparse
+  - git -C /tmp/hermes-agent-sparse sparse-checkout set skills/creative/p5js
+  - npx skills add /tmp/hermes-agent-sparse/skills/creative/p5js
+install_check: .agents/skills/p5js/SKILL.md
+installed_as: p5js
+requires:
+  - Node.js, puppeteer and ffmpeg for the skill's headless export scripts (PNG, GIF, MP4)
+license: MIT
+note: "verified 2026-10-21 (sparse route really installed .agents/skills/p5js); upstream was linked as nousresearch/hermes-agent (lowercase, redirects) and is NousResearch/hermes-agent; the clone goes to /tmp and --depth=1 uses the = form because scripts/check-installs.mjs only keeps dash-prefixed tokens of a git clone line, and a local-path target must not look like owner/repo to test/stubs.test.js; size_mb deliberately not set because its heads-up suggests raising the skills CLI clone timeout, which does not help for this repo"

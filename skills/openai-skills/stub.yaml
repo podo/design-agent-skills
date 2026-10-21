@@ -4,5 +4,15 @@ category: official-suites
 rank: 3
 upstream: https://github.com/openai/skills
 version: latest
-install_default: "npx skills add openai/<skill>"
-installed_as: frontend-skill
+install_default: npx skills add openai/skills --skill imagegen screenshot figma-implement-design figma-code-connect-components figma-create-design-system-rules
+installed_as:
+  - imagegen
+  - screenshot
+  - figma-implement-design
+  - figma-code-connect-components
+  - figma-create-design-system-rules
+requires:
+  - "imagegen: Codex's built-in image_gen tool by default; elsewhere only the explicit CLI fallback works and it needs OPENAI_API_KEY"
+  - "the Figma skills: Figma account and the Figma MCP server"
+license: no repo-level LICENSE file; imagegen and screenshot carry Apache-2.0 license files, each skill ships its own
+note: "verified 2026-10-21; dropped figma-generate-design and figma-generate-library (same directories as figma-official-skills, last install silently overwrote the other) and figma (same directory as figma-skill, a different upstream, and it overlaps figma-implement-design). openai/skills also holds many non-design skills that are not catalogued here."

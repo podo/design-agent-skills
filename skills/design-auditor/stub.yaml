@@ -5,3 +5,9 @@ rank: 2
 upstream: https://github.com/Ashutos1997/claude-design-auditor-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add Ashutos1997/claude-design-auditor-skill --skill design-auditor
+installed_as: design-auditor
+requires:
+  - Figma MCP server (optional, only to audit Figma links; without it the skill asks for a screenshot or code)
+license: no LICENSE file in the repo
+note: "verified 2026-10-21; SKILL.md is about 160 KB, so it is a heavy context load when triggered"

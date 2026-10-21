@@ -2,6 +2,19 @@ type: skill
 tier: experimental
 category: diagrams
 rank: 3
-upstream: https://github.com/Agents365-ai/excalidraw-skill
-upstream_path: skills/excalidraw-skill/SKILL.md
+upstream: https://github.com/Agents365-ai/365-skills
+upstream_path: plugins/excalidraw/skills/excalidraw-skill/SKILL.md
 version: latest
+install_default: npx skills add Agents365-ai/365-skills --skill excalidraw
+installed_as: excalidraw
+install_claude:
+  - /plugin marketplace add Agents365-ai/365-skills
+  - /plugin install excalidraw@365-skills
+requires:
+  - "curl for SVG export through the third-party Kroki API (kroki.io), which receives your diagram content"
+  - "PNG export needs excalidraw-brute-export-cli (npm) and Playwright Firefox; on macOS the skill also patches that global module"
+license: "MIT (plugins/excalidraw/LICENSE; the repository has no top-level LICENSE file)"
+size_mb: 53
+note: "verified 2026-10-21; installed frontmatter has disable-model-invocation: true, so agents that honour it (Claude Code) will not auto-invoke the skill, the user must call it by name; plugin route is the one documented in the plugin README (it writes install excalidraw without the @365-skills suffix), not run; installs the same excalidraw directory as softaworks-agent-toolkit (different upstream)"
+conflicts_with:
+  - softaworks-agent-toolkit

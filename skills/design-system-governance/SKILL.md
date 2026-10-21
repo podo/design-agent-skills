@@ -20,13 +20,14 @@ das:
 
 > Catalogue stub — full skill: [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/design-system-governance/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/design-system-governance/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/design-system-governance/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/design-system-governance/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `design-system-governance`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -43,13 +44,30 @@ das:
    ```bash
    npx skills add Owl-Listener/designer-skills --skill design-system-governance -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add Owl-Listener/designer-skills
+/plugin install design-systems@designer-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `design-system-governance`
+- Trigger phrases: "design system governance", "design system contribution model", "component versioning policy", "design system deprecation"
 
 ## What it does
 
-Owls design-system-governance skill: the three ownership models (centralized / federated / hybrid) with trade-offs, the contribution lifecycle (request → triage → design → review → build → release → communicate), semver as a consumer contract, a deprecation process with migration guidance, and the quality bar a component must clear to enter the system. Public alternatives omit the ownership-model analysis.
+The Owl-Listener design-system-governance skill: the three ownership models (centralized / federated / hybrid) with trade-offs, the contribution lifecycle (request → triage → design → review → build → release → communicate), semver as a consumer contract, a deprecation process with migration guidance, and the quality bar a component must clear to enter the system.
 
 ## When NOT to use
 
 - Authoring tokens themselves → use `design-tokens-skill`
-- Driving adoption of an existing system → see Owl’s design-system-adoption
+- Driving adoption of an existing system → use `design-system-adoption` (a separate skill in the same Owl-Listener repository; this stub does not install it)

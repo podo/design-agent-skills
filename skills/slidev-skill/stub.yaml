@@ -1,7 +1,17 @@
-type: package
+type: skill
 tier: official
 category: presentations
 rank: 1
 upstream: https://github.com/slidevjs/slidev
+upstream_path: skills/slidev/SKILL.md
 version: latest
-install_default: "npx skills add slidevjs/slidev"
+install_default: npx skills add slidevjs/slidev --skill slidev
+installed_as: slidev
+install_claude:
+  - /plugin marketplace add slidevjs/slidev
+  - /plugin install slidev@slidev-plugins
+requires:
+  - Node.js and pnpm (or npm) to run Slidev itself; PDF export also needs playwright-chromium
+license: MIT
+size_mb: 80
+note: "verified 2026-10-21; upstream skill is named slidev (skills/slidev/), so it installs next to this pointer. The CLI clones the whole Slidev monorepo, which took about 190 s under load. Plugin route checked against .claude-plugin/marketplace.json (marketplace slidev-plugins, plugin slidev) only, not run"

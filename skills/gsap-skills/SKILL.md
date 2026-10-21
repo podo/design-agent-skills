@@ -1,7 +1,7 @@
 ---
 name: gsap-skills
 description: |
-  Official GSAP skills suite with 8 focused skills: core GSAP, Timeline, ScrollTrigger,
+  Official GSAP skills from GreenSock: core GSAP, Timeline, ScrollTrigger,
   plugins (Flip/Draggable/SplitText), utils, React (useGSAP hook), performance (60fps),
   and frameworks (Vue/Svelte/Nuxt). Works across Cursor, Claude Code, Copilot.
 triggers:
@@ -22,34 +22,56 @@ das:
 
 > Catalogue stub — full package: [greensock/gsap-skills](https://github.com/greensock/gsap-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
-1. **Is the package already installed?**
-   Check: your agent's skills directory contains `gsap-skills` with content beyond this stub.
-   - Yes → invoke `gsap-skills` and proceed
-   - No → go to step 2
+1. **Is the full skill already installed?**
+   This package installs 8 skills (`gsap-core`, `gsap-timeline`, `gsap-scrolltrigger`, `gsap-plugins`, `gsap-utils`, `gsap-react`, `gsap-performance`, `gsap-frameworks`); checking the first.
+   - Global: `f=~/.agents/skills/gsap-core/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/gsap-core/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `gsap-core`, invoke it and proceed
+   - `pointer` → go to step 2
 
-2. **Which agent are you on?**
-   - Claude Code → `npx skills add https://github.com/greensock/gsap-skills` — or send `! npx skills add …` as a chat message (add `-g` for global, omit for project-only)
-   - Cursor → `npx skills add https://github.com/greensock/gsap-skills`
-   - Other → `npx skills add https://github.com/greensock/gsap-skills` or see [GitHub README](https://github.com/greensock/gsap-skills)
+2. **Detect scope, then install:**
 
-## Install command
+   ```bash
+   [ -e ~/.agents/skills/gsap-skills ] && echo "global" || echo "project"
+   ```
 
-```bash
-npx skills add https://github.com/greensock/gsap-skills
+   **Global:**
+   ```bash
+   npx skills add greensock/gsap-skills --skill gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add greensock/gsap-skills --skill gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
 ```
+/plugin marketplace add greensock/gsap-skills
+/plugin install gsap-skills@gsap-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+- **Name collision:** `gsap-scrolltrigger` is also written by `claudedesignskills` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `gsap-skills`
+- Skill names: `gsap-core`, `gsap-timeline`, `gsap-scrolltrigger`, `gsap-plugins`, `gsap-utils`, `gsap-react`, `gsap-performance`, `gsap-frameworks` (start with `gsap-core`, then `gsap-timeline` and `gsap-scrolltrigger`)
 - Trigger phrases: "GSAP", "GreenSock", "ScrollTrigger", "GSAP timeline", "useGSAP"
 
 ## What it does
 
-Official GreenSock GSAP skills suite comprising 8 focused skills: core GSAP tweening, Timeline orchestration, ScrollTrigger (scroll-linked and scroll-triggered animations), plugin-specific skills for Flip, Draggable, and SplitText, a utilities skill, a React skill covering the `useGSAP` hook and cleanup patterns, a performance skill targeting 60fps GPU-accelerated motion, and a frameworks skill covering Vue, Svelte, and Nuxt integration. Works across Cursor, Claude Code, and GitHub Copilot.
+Official GreenSock GSAP skills split by topic: core tweening (`gsap-core`), Timeline orchestration (`gsap-timeline`), ScrollTrigger for scroll-linked and scroll-triggered animation (`gsap-scrolltrigger`), plugin-specific guidance for Flip, Draggable, SplitText and more (`gsap-plugins`), a utilities skill (`gsap-utils`), React with the `useGSAP` hook and cleanup patterns (`gsap-react`), performance for 60fps GPU-accelerated motion (`gsap-performance`), and Vue, Svelte, and Nuxt integration (`gsap-frameworks`). GSAP and all of its plugins are free, including for commercial use. Works across Cursor, Claude Code, and GitHub Copilot.
 
 ## When NOT to use
 
-- Pure CSS animations without JavaScript (use `animate-css-skill`)
-- Framer Motion projects in React (use `framer-motion-skills`)
+- Pure CSS animations without JavaScript → use `animate-css-skill`
+- Framer Motion projects in React → use `framer-motion-skills`

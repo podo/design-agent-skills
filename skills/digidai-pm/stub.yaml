@@ -5,3 +5,7 @@ rank: 2
 upstream: https://github.com/Digidai/product-manager-skills
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add Digidai/product-manager-skills --skill product-manager-skills
+installed_as: product-manager-skills
+license: CC BY-NC-SA 4.0 (non-commercial, share-alike; GitHub reports it as NOASSERTION)
+note: "verified 2026-10-21; upstream skill is named product-manager-skills, installs next to this pointer"

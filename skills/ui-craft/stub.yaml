@@ -4,4 +4,16 @@ category: design-systems
 rank: 1
 upstream: https://github.com/educlopez/ui-craft
 version: latest
-install_default: "npx skills add educlopez/ui-craft"
+install_default: npx skills add educlopez/ui-craft --skill ui-craft ui-craft-minimal ui-craft-editorial ui-craft-dense-dashboard
+installed_as:
+  - ui-craft
+  - ui-craft-minimal
+  - ui-craft-editorial
+  - ui-craft-dense-dashboard
+install_claude:
+  - /plugin marketplace add educlopez/ui-craft
+  - /plugin install ui-craft@ui-craft
+requires:
+  - "Plugin route only: bundles the ui-craft-mcp quality-gate MCP server, which Claude Code starts with npx (downloads and runs an npm package)"
+license: MIT
+note: "verified 2026-10-21; the skills CLI route installs the skill and its style variants only. The slash-command passes are separate skills with generic names (craft, critique, polish, audit, animate, ...) and are left out of the default so they cannot overwrite same-named directories (animate collides with animate-skill and emilkowalski-skill); add any of them to --skill by name. Upstream's recommended full install is its own CLI (curl | bash installer, not used here) or the plugin (checked against marketplace.json and plugin README only, not run)."

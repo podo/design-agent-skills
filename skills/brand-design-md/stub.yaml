@@ -2,6 +2,12 @@ type: skill
 tier: experimental
 category: design-systems
 rank: 2
-upstream: https://github.com/zephyrwang6/brand-design-md
+upstream: https://github.com/SpaceZephyr/brand-design-md
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add SpaceZephyr/brand-design-md --skill brand-design-md
+installed_as: brand-design-md
+requires:
+  - Node.js and network access at use time (the skill runs `npx getdesign@latest add <brand>`, which downloads and executes an unpinned third-party npm package)
+license: no LICENSE file
+note: "verified 2026-10-21; upstream moved zephyrwang6/brand-design-md -> SpaceZephyr/brand-design-md (old slug still redirects); installed SKILL.md is written in Chinese"

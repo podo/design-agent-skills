@@ -5,7 +5,7 @@ description: |
   (Purposeful, Concise, Conversational, Clear) to all interface copy. Covers
   microcopy patterns for buttons, error messages, empty states, form labels,
   notifications, tooltips, and onboarding. Includes accessibility writing
-  guidelines, voice/tone framework, and before/after examples. v1.6.0.
+  guidelines, voice/tone framework, and before/after examples.
 triggers:
   - "UX writing"
   - "microcopy"
@@ -28,13 +28,15 @@ das:
 
 > Catalogue stub — full skill: [content-designer/ux-writing-skill](https://github.com/content-designer/ux-writing-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/ux-writing-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/ux-writing-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `ux-writing`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/ux-writing/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/ux-writing/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `ux-writing`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -44,23 +46,30 @@ das:
 
    **Global:**
    ```bash
-   npx skills add content-designer/ux-writing-skill --skill ux-writing-skill -g -y
+   npx skills add content-designer/ux-writing-skill --skill ux-writing -g -y
    ```
 
    **Project:**
    ```bash
-   npx skills add content-designer/ux-writing-skill --skill ux-writing-skill -y
+   npx skills add content-designer/ux-writing-skill --skill ux-writing -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+- **Download size:** ~21 MB.
+- **Name collision:** `ux-writing` is also written by `designer-skills` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
-- Skill name: `ux-writing-skill`
+- Skill name: `ux-writing`
 - Triggers: "UX writing", "microcopy", "error message copy", "empty state copy", "button label", "UI copy"
 
 ## What it does
 
-Applies systematic UX writing standards to every piece of interface copy. Four quality dimensions: **Purposeful** (serves user goals), **Concise** (8–14 words for labels), **Conversational** (active voice, second person), **Clear** (no jargon). Covers the most common UI copy patterns:
+Applies systematic UX writing standards to every piece of interface copy. Four quality dimensions: **Purposeful** (serves user goals), **Concise** (fewest words that keep the meaning; about 8–14 words per sentence, 2–4 words for buttons), **Conversational** (active voice, second person), **Clear** (no jargon). Covers the most common UI copy patterns:
 
 - **Buttons & CTAs** — action-verb labels, primary/secondary/destructive framing
 - **Error messages** — what happened, why, how to fix (never blame the user)

@@ -1,8 +1,16 @@
-type: package
+type: skill
 tier: experimental
 category: interaction-polish
 rank: 3
 upstream: https://github.com/0xdesign/design-plugin
 upstream_path: design-and-refine/skills/design-lab/SKILL.md
 version: latest
-install_default: "npx skills add 0xdesign/design-plugin --skill design-lab"
+install_default: npx skills add 0xdesign/design-plugin --skill design-lab
+installed_as: design-lab
+install_claude:
+  - /plugin marketplace add 0xdesign/design-plugin
+  - /plugin install design-and-refine@design-plugins
+requires:
+  - A web project with a running dev server (the variations are previewed in the browser)
+license: no LICENSE file in the upstream repo
+note: "verified 2026-10-21; the npx route copies only the skill directory (SKILL.md and DESIGN_PRINCIPLES.md) and NOT design-and-refine/templates (FeedbackOverlay.tsx), so the agent has to recreate the feedback overlay from the skill text. The Claude plugin route is the complete one; it also registers SessionEnd and Stop hooks that run a cleanup-check script. Plugin route checked against marketplace.json and README only, not run"

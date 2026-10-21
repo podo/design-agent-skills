@@ -1,0 +1,17 @@
+type: skill
+tier: community
+rank: 3
+category: motion-animation
+upstream: https://github.com/alchaincyf/huashu-art-motion
+upstream_path: SKILL.md
+version: latest
+install_default: npx skills add alchaincyf/huashu-art-motion --skill huashu-art-motion
+installed_as: huashu-art-motion
+requires:
+  - uv
+  - ffmpeg
+  - "Playwright Chromium (first run: uv run --with playwright playwright install chromium)"
+  - Skill text and references are in Chinese
+license: "MIT; bundled stroke data is Arphic Public License, fonts are SIL OFL, and the Huashu character artwork and demo videos are demo-use only (not MIT)"
+size_mb: 154
+note: "verified 2026-10-21; size_mb is the measured checkout (55 MB showcase GIFs, 29 MB scripts), GitHub API reports 76 MB packed, installed skill is about 84 MB; the default 300 s clone timeout was hit once on a saturated link, retry with SKILLS_CLONE_TIMEOUT_MS=900000 (clone then took about 70 s)"

@@ -4,4 +4,19 @@ category: design-systems
 rank: 3
 upstream: https://github.com/ryanthedev/design-for-ai
 version: latest
-install_default: "/plugin marketplace add ryanthedev/rtd-claude-inn"
+install_default: npx skills add ryanthedev/design-for-ai --skill prototype clarify usability data-viz
+install_claude:
+  - /plugin marketplace add ryanthedev/rtd-claude-inn
+  - /plugin install design-for-ai@rtd
+requires:
+  - Node.js for the plugin's palette, dealer and detector scripts (scripts/*.mjs)
+  - "Optional: a browser MCP so the prototype skill can render and screenshot mocks"
+license: MIT per plugin.json and README; no LICENSE file in the repository
+note: "verified 2026-10-21; plugin design-for-ai v4.2.0 is listed in the ryanthedev/rtd-claude-inn marketplace (name rtd), whose entry points at ryanthedev/design-for-ai; plugin route checked against manifests only, not run (it writes to ~/.claude). The workflow commands (research, plan, mock, build), two agents and the doctrine files under references/ come only with the plugin; the skills CLI route installs just the four standalone skills, and usability and data-viz are marked non-user-invocable / manual-only for Claude Code (doctrine the workflow reads). Cursor line from the old pointer is not in upstream docs and was dropped"
+installed_as:
+  - prototype
+  - clarify
+  - usability
+  - data-viz
+conflicts_with:
+  - emilkowalski-skill

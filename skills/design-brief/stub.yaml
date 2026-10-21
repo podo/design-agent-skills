@@ -5,3 +5,9 @@ rank: 3
 upstream: https://github.com/nexu-io/open-design
 upstream_path: skills/design-brief/SKILL.md
 version: latest
+install_default: npx skills add https://raw.githubusercontent.com/nexu-io/open-design/main/skills/design-brief/SKILL.md
+installed_as: design-brief
+license: Apache-2.0
+note: "verified 2026-10-21; raw-URL install on purpose: nexu-io/open-design is ~3.5 GB, so `npx skills add nexu-io/open-design --skill design-brief` never finishes cloning. The skill is a single file. Real skill turns an I-Lang or plain-language visual brief into DESIGN.md + brief-preview.html (visual dimensions, not goals/audience/metrics); frontmatter carries an OpenDesign `od:` block that other agents ignore."
+conflicts_with:
+  - designer-skills

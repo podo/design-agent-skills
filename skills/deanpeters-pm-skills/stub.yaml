@@ -4,5 +4,29 @@ category: product-pm
 rank: 1
 upstream: https://github.com/deanpeters/Product-Manager-Skills
 version: latest
-install_default: "npx skills add deanpeters/Product-Manager-Skills"
-installed_as: customer-journey-map
+install_default: npx skills add deanpeters/Product-Manager-Skills --skill customer-journey-map lean-ux-canvas opportunity-solution-tree proto-persona storyboard user-story user-story-mapping discovery-process prd-development
+installed_as:
+  - customer-journey-map
+  - lean-ux-canvas
+  - opportunity-solution-tree
+  - proto-persona
+  - storyboard
+  - user-story
+  - user-story-mapping
+  - discovery-process
+  - prd-development
+install_claude:
+  - /plugin marketplace add deanpeters/Product-Manager-Skills
+  - /plugin install customer-journey-map@pm-skills
+  - /plugin install lean-ux-canvas@pm-skills
+  - /plugin install opportunity-solution-tree@pm-skills
+  - /plugin install proto-persona@pm-skills
+  - /plugin install storyboard@pm-skills
+  - /plugin install user-story@pm-skills
+  - /plugin install user-story-mapping@pm-skills
+  - /plugin install discovery-process@pm-skills
+  - /plugin install prd-development@pm-skills
+license: CC BY-NC-SA 4.0 (non-commercial, share-alike; GitHub shows NOASSERTION)
+note: "verified 2026-10-21; a bare `npx skills add deanpeters/Product-Manager-Skills` installs the whole PM library (dozens of skills), so the install is narrowed to these nine. Plugin names checked against .claude-plugin/marketplace.json only, not run (upstream warns to pick the all-skills bundle product-manager-skills OR individual plugins, not both)"
+conflicts_with:
+  - phuryn-pm-skills

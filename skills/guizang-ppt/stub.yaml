@@ -5,3 +5,9 @@ rank: 3
 upstream: https://github.com/op7418/guizang-ppt-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add op7418/guizang-ppt-skill --skill guizang-ppt-skill
+installed_as: guizang-ppt-skill
+requires:
+  - A browser to preview the generated HTML deck (Node.js only for the optional deck validator scripts)
+license: AGPL-3.0 (copyleft)
+note: "verified 2026-10-21; makes single-file HTML decks (not .pptx); skill text and README are Chinese-first with an English README"

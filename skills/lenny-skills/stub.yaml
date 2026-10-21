@@ -4,3 +4,17 @@ category: product-pm
 rank: 2
 upstream: https://github.com/RefoundAI/lenny-skills
 version: latest
+install_default: npx skills add RefoundAI/lenny-skills --skill customer-interviews continuous-discovery analyzing-user-feedback product-reviews user-onboarding-activation writing-prds growth-model product-taste ai-native-ux ai-assisted-prototyping
+installed_as:
+  - customer-interviews
+  - continuous-discovery
+  - analyzing-user-feedback
+  - product-reviews
+  - user-onboarding-activation
+  - writing-prds
+  - growth-model
+  - product-taste
+  - ai-native-ux
+  - ai-assisted-prototyping
+license: MIT
+note: "verified 2026-10-21; upstream 2.0 restructured the repo (skills renamed, e.g. conducting-user-interviews is now customer-interviews, writing-specs-designs is now writing-prds). The full repo is a large PM and engineering library with generic names, so the default installs only the design-relevant ones; other names can be added to --skill."

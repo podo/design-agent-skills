@@ -4,7 +4,7 @@ category: official-suites
 rank: 1
 upstream: https://github.com/anthropics/skills
 version: latest
-install_default: "npx skills add anthropics/<skill>"
+install_default: npx skills add anthropics/skills --skill frontend-design web-artifacts-builder canvas-design theme-factory brand-guidelines pptx
 installed_as:
   - frontend-design
   - web-artifacts-builder
@@ -12,3 +12,11 @@ installed_as:
   - theme-factory
   - brand-guidelines
   - pptx
+install_claude:
+  - /plugin marketplace add anthropics/skills
+  - /plugin install example-skills@anthropic-agent-skills
+  - /plugin install document-skills@anthropic-agent-skills
+license: Apache-2.0 for frontend-design, web-artifacts-builder, canvas-design, theme-factory and brand-guidelines; pptx is proprietary (Anthropic, all rights reserved, per its LICENSE.txt); the repo has no root LICENSE
+note: "verified 2026-10-21; the repo holds more skills than the design-relevant six listed here, pick others by naming them after --skill (npx skills add anthropics/skills with no --skill installs 20); the plugin route was checked against .claude-plugin/marketplace.json only (marketplace anthropic-agent-skills): example-skills carries the five design skills plus seven others, document-skills carries pptx plus xlsx, docx and pdf, so the plugin route installs more than the six; frontend-design is also installed by the frontend-design stub (Ilm-Alan, different upstream)"
+conflicts_with:
+  - frontend-design

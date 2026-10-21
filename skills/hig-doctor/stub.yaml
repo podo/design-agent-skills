@@ -1,8 +1,14 @@
-type: package
+type: skill
 tier: community
 category: visual-components
 rank: 2
 upstream: https://github.com/raintree-technology/hig-doctor
+upstream_path: plugin/skills/hig-doctor-audit/SKILL.md
 version: latest
-install_default: "npx skills add raintree-technology/hig-doctor"
-installed_as: hig-foundations
+install_default: npx skills add raintree-technology/hig-doctor/plugin/skills/hig-doctor-audit
+installed_as: hig-doctor-audit
+requires:
+  - Node.js with npx and npm registry access at audit time (the skill runs a version-pinned `npx -y hig-doctor@<version> <target> --json`)
+  - "optional companion for the guidance behind each finding: the apple-hig-skills pointer (the hig-* reference skills)"
+license: MIT (tooling; Apple reference content is attributed, see upstream THIRD_PARTY_NOTICES.md)
+note: "verified 2026-10-21; repurposed. raintree-technology/apple-hig-skills was renamed to raintree-technology/hig-doctor, and a bare install of it lands the same hig-* reference skills that the apple-hig-skills stub installs. This stub now installs only the real audit skill (hig-doctor-audit), which lives under plugin/skills and is invisible to a plain `npx skills add raintree-technology/hig-doctor`, hence the subpath install. The upstream Claude plugin (apple-hig-skills@apple-hig-skills) bundles the reference skills, not the audit skill, so no install_claude here."

@@ -1,6 +1,13 @@
-type: package
+type: skill
 tier: community
 category: tui-terminal
 rank: 1
 upstream: https://github.com/aperepel/textual-tui-skill
+upstream_path: skill/SKILL.md
 version: latest
+install_default: npx skills add aperepel/textual-tui-skill --skill textual-tui
+installed_as: textual-tui
+requires:
+  - Python with textual and textual-dev (pip install textual textual-dev) to run what the skill generates
+license: MIT
+note: "verified 2026-10-21; upstream skill is named textual-tui (layout skill/SKILL.md + references/ + assets/), so it installs next to this pointer; the old curl and quickstart.sh routes never installed the skill; no plugin route listed because the README documents none and the plugin manifest has no skills path"

@@ -19,21 +19,39 @@ das:
 
 > Catalogue stub — full package: [j-clegg/service-blueprint-skill](https://github.com/j-clegg/service-blueprint-skill)
 
-## Install the full skill
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
+## Decision tree
 
-Via skills CLI:
+1. **Is the full skill already installed?**
+   - `f=~/.agents/service-blueprint-skill/SKILL.md; [ -e "$f" ] && ! grep -qs "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → invoke it and proceed
+   - `pointer` → go to step 2
 
-```bash
-npx skills add j-clegg/service-blueprint-skill -g -y    # global — all projects
-npx skills add j-clegg/service-blueprint-skill -y       # project — this project only
-```
-> **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+2. **Install** (the skills CLI cannot install this one):
+
+   The upstream SKILL.md has no YAML frontmatter (name, description), so the skills CLI skips it and installs nothing ("No valid skills found"). Clone the repo to a fixed folder and have your agent read its SKILL.md directly; this pointer stays installed as the entry point.
+
+   ```bash
+   git clone --depth=1 https://github.com/j-clegg/service-blueprint-skill.git ~/.agents/service-blueprint-skill
+   ```
+
+**Heads-up**
+
+- **License:** MIT
+- **Name collision:** `service-blueprint` is also written by `designer-skills` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Read `~/.agents/service-blueprint-skill/SKILL.md` and follow it; it points to `METHODOLOGY.md`, `SCHEMA.md` and `RENDERING.md` in the same folder
+- Trigger phrases: "service blueprint", "service design blueprint", "frontstage backstage", "service delivery map"
 
 ## What it does
 
-A ~28.7KB service-blueprint package: sourced methodology (METHODOLOGY.md), a machine-readable blueprint SCHEMA.md, and a RENDERING.md HTML/Mermaid output pipeline. Maps user actions, frontstage, backstage, and support processes across the lines of interaction/visibility/internal-interaction, with timed facilitation and moments-of-truth analysis. Web research picked this over Owl’s (good but lighter) service-blueprint skill.
+A service-blueprint package: sourced methodology (`METHODOLOGY.md`), a machine-readable blueprint schema (`SCHEMA.md`), and an HTML/Mermaid output pipeline (`RENDERING.md`) with example blueprints and a stylesheet. Maps user actions, frontstage, backstage, and support processes across the lines of interaction, visibility and internal interaction, with timed facilitation and moments-of-truth analysis. Follows methodology from Nielsen Norman Group, the UK Government Digital Service and Practical Service Design.
 
 ## When NOT to use
 
 - Single-user emotional journey only → use a journey-map skill
 - High-level UX strategy → use `design-consultation`
+- You want a skill the skills CLI can install and register by name → use `designer-skills`, whose `service-blueprint` skill is a lighter take on the same method

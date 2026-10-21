@@ -5,4 +5,7 @@ rank: 1
 upstream: https://github.com/ibelick/ui-skills
 upstream_path: skills/fixing-accessibility/SKILL.md
 version: latest
-install_default: "npx skills add ibelick/ui-skills --skill fixing-accessibility"
+install_default: npx skills add ibelick/ui-skills --skill fixing-accessibility
+license: MIT
+note: "verified 2026-10-21; single skill out of the ibelick/ui-skills collection, targeted with --skill so only this directory lands"
+installed_as: fixing-accessibility

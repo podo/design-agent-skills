@@ -5,3 +5,10 @@ rank: 3
 upstream: https://github.com/google-labs-code/stitch-skills
 upstream_path: plugins/stitch-utilities/skills/taste-design/SKILL.md
 version: latest
+install_default: npx skills add google-labs-code/stitch-skills --skill taste-design
+installed_as: taste-design
+requires:
+  - access to Google Stitch (stitch.withgoogle.com), where the generated DESIGN.md is used
+  - the Stitch MCP server is optional, for programmatic use (the skill's allowed-tools lists StitchMCP)
+license: Apache-2.0
+note: "verified 2026-10-21; upstream skill is named taste-design, installs next to this pointer. Also installed by google-stitch-skills (same upstream). Upstream's Claude Code route is npx plugins add google-labs-code/stitch-skills --scope project --target claude-code, which is not a /plugin command, so no install_claude is recorded"

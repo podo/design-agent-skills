@@ -5,3 +5,7 @@ rank: 3
 upstream: https://github.com/anthropics/skills
 upstream_path: skills/algorithmic-art/SKILL.md
 version: latest
+install_default: npx skills add anthropics/skills --skill algorithmic-art
+installed_as: algorithmic-art
+license: Apache-2.0 (the skill ships its own LICENSE.txt; the repo has no root license)
+note: "verified 2026-10-21. Claude plugin route exists only as the bundle example-skills@anthropic-agent-skills (installs many unrelated skills), so install_claude is left out"

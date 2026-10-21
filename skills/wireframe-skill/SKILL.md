@@ -2,8 +2,8 @@
 name: wireframe-skill
 description: |
   Generates wireframes from natural language descriptions, outputting machine-readable
-  JSON (.wireframe.json) and interactive HTML with drag-and-drop reordering and undo/redo.
-  Requires only Python 3 and a browser — no design tool accounts needed.
+  JSON (.wireframe.json) and a self-contained interactive HTML preview with drag-and-drop
+  reordering and undo/redo. Needs Python 3 and a browser, no design tool accounts.
 triggers:
   - "wireframe-skill"
   - "yhassy wireframe"
@@ -22,44 +22,50 @@ das:
 
 > Catalogue stub — full skill: [yhassy/wireframe-skill](https://github.com/yhassy/wireframe-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   Check whether the skill at this location still has a `das:` block:
-   - Global: `grep -q "^das:" ~/.agents/skills/wireframe-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/wireframe-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke it and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `wireframe`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/wireframe/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/wireframe/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `wireframe`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
-   To detect scope:
    ```bash
    [ -e ~/.agents/skills/wireframe-skill ] && echo "global" || echo "project"
    ```
 
-   **Global** (installed with `-g`):
+   **Global:**
    ```bash
-   npx skills add yhassy/wireframe-skill --skill wireframe-skill -g -y
+   npx skills add yhassy/wireframe-skill --skill wireframe -g -y
    ```
 
-   **Project** (installed without `-g`):
+   **Project:**
    ```bash
-   npx skills add yhassy/wireframe-skill --skill wireframe-skill -y
+   npx skills add yhassy/wireframe-skill --skill wireframe -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 
+**Heads-up**
+
+- **Requires:** Python 3 (the skill assembles the HTML preview with a python3 one-liner) and a browser to open the preview
+- **License:** MIT
+- **Name collision:** `wireframe` is also written by `claude-wireframe-skill` (its install or its catalogue pointer); installing both overwrites the earlier one.
+<!-- das:install:end -->
 
 ## Invoke after install
 
-Skill name: `wireframe-skill`, triggers: "wireframe-skill", "yhassy wireframe", "JSON wireframe", "interactive wireframe HTML"
+Skill name: `wireframe`, triggers: "wireframe-skill", "yhassy wireframe", "JSON wireframe", "interactive wireframe HTML"
 
 ## What it does
 
-Converts natural language UI descriptions into structured wireframes in two output formats: machine-readable `.wireframe.json` for programmatic use and single-file interactive HTML with drag-and-drop element reordering and undo/redo history. Requires only Python 3 and a modern browser. Ideal for rapid lo-fi ideation before any visual design work begins.
+Converts natural language UI descriptions into structured wireframes in two output formats: machine-readable `.wireframe.json` for programmatic use and a single-file interactive HTML preview with drag-and-drop element reordering, copy/paste, delete and undo/redo history. Can also read a `designs/{design-id}/output/design-spec.md` file from an external design workflow and extract its layout. Requires Python 3 and a modern browser. Ideal for rapid lo-fi ideation before any visual design work begins.
 
 ## When NOT to use
 
 - High-fidelity mockups with color and typography — use wireframer instead
 - Excalidraw-format output — use excalidraw-diagram instead
-- When 5 parallel UX variants are needed — use claude-wireframe-skill instead
+- When 5 parallel UX variants are needed — use claude-wireframe-skill instead; it installs a skill with the same `wireframe` directory name, so choose one of the two

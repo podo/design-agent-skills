@@ -4,4 +4,81 @@ category: product-pm
 rank: 2
 upstream: https://github.com/phuryn/pm-skills
 version: latest
-install_default: "claude plugin marketplace add phuryn/pm-skills"
+install_default: npx skills add phuryn/pm-skills --skill analyze-feature-requests brainstorm-experiments-existing brainstorm-experiments-new brainstorm-ideas-existing brainstorm-ideas-new identify-assumptions-existing identify-assumptions-new interview-script metrics-dashboard opportunity-solution-tree prioritize-assumptions prioritize-features summarize-interview ansoff-matrix business-model lean-canvas monetization-strategy pestle-analysis porters-five-forces pricing-strategy product-strategy product-vision startup-canvas swot-analysis value-proposition brainstorm-okrs create-prd job-stories outcome-roadmap pre-mortem prioritization-frameworks release-notes sprint-plan stakeholder-map strategy-red-team test-scenarios user-stories wwas competitor-analysis customer-journey-map market-segments market-sizing sentiment-analysis user-personas user-segmentation ab-test-analysis cohort-analysis beachhead-segment competitive-battlecard growth-loops gtm-motions gtm-strategy ideal-customer-profile marketing-ideas north-star-metric positioning-ideas product-name value-prop-statements
+installed_as:
+  - analyze-feature-requests
+  - brainstorm-experiments-existing
+  - brainstorm-experiments-new
+  - brainstorm-ideas-existing
+  - brainstorm-ideas-new
+  - identify-assumptions-existing
+  - identify-assumptions-new
+  - interview-script
+  - metrics-dashboard
+  - opportunity-solution-tree
+  - prioritize-assumptions
+  - prioritize-features
+  - summarize-interview
+  - ansoff-matrix
+  - business-model
+  - lean-canvas
+  - monetization-strategy
+  - pestle-analysis
+  - porters-five-forces
+  - pricing-strategy
+  - product-strategy
+  - product-vision
+  - startup-canvas
+  - swot-analysis
+  - value-proposition
+  - brainstorm-okrs
+  - create-prd
+  - job-stories
+  - outcome-roadmap
+  - pre-mortem
+  - prioritization-frameworks
+  - release-notes
+  - sprint-plan
+  - stakeholder-map
+  - strategy-red-team
+  - test-scenarios
+  - user-stories
+  - wwas
+  - competitor-analysis
+  - customer-journey-map
+  - market-segments
+  - market-sizing
+  - sentiment-analysis
+  - user-personas
+  - user-segmentation
+  - ab-test-analysis
+  - cohort-analysis
+  - beachhead-segment
+  - competitive-battlecard
+  - growth-loops
+  - gtm-motions
+  - gtm-strategy
+  - ideal-customer-profile
+  - marketing-ideas
+  - north-star-metric
+  - positioning-ideas
+  - product-name
+  - value-prop-statements
+install_claude:
+  - claude plugin marketplace add phuryn/pm-skills
+  - claude plugin install pm-product-discovery@pm-skills
+  - claude plugin install pm-product-strategy@pm-skills
+  - claude plugin install pm-execution@pm-skills
+  - claude plugin install pm-market-research@pm-skills
+  - claude plugin install pm-data-analytics@pm-skills
+  - claude plugin install pm-go-to-market@pm-skills
+  - claude plugin install pm-marketing-growth@pm-skills
+  - claude plugin install pm-toolkit@pm-skills
+  - claude plugin install pm-ai-shipping@pm-skills
+license: MIT
+size_mb: 22
+note: "verified 2026-10-21; the npx route is a targeted --skill list of the product-management skills (discovery, strategy, execution, market research, go-to-market, marketing and growth, A/B and cohort analysis); a bare install writes every skill in the repo, including generic names (code-review, retro, sql-queries, summarize-meeting, grammar-check, dummy-dataset) that overwrite a user's own skills, and the NDA, privacy-policy and resume skills and the AI shipping kit, which are not product management; those stay available through the plugin route, which keeps them namespaced; competitor-analysis (assimovt-productskills), customer-journey-map and opportunity-solution-tree (deanpeters-pm-skills) and interview-script and summarize-interview (designer-skills) are also written by stubs with different upstreams; plugin route checked against README and marketplace.json, not run"
+conflicts_with:
+  - assimovt-productskills
+  - deanpeters-pm-skills
+  - designer-skills

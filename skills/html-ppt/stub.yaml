@@ -1,0 +1,11 @@
+type: skill
+tier: community
+rank: 3
+category: presentations
+upstream: https://github.com/lewislulu/html-ppt-skill
+upstream_path: SKILL.md
+version: latest
+install_default: npx skills add lewislulu/html-ppt-skill --skill html-ppt
+installed_as: html-ppt
+license: MIT
+note: "verified 2026-10-21; the skill is the whole repo root, so the install copies ~240 files / ~11 MB (templates, themes, examples, README gifs) and took ~140 s under load"

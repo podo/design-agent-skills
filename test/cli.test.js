@@ -237,6 +237,27 @@ describe('bin/cli.js', () => {
       'each entry must have a description string');
   });
 
+  // The published CLI cannot import scripts/lib (only bin/ and skills/ ship), so it keeps its own small stub.yaml
+  // reader. Nothing else ties the two together, so a quoted value or a trailing comment could make the CLI file a
+  // skill under the wrong rank, tier or category without any other test noticing.
+  it('reads type, tier, rank and category of every stub the way scripts/lib/stub.mjs does', async () => {
+    const { allStubs } = await import('../scripts/lib/stub.mjs');
+    const real = allStubs().filter(s => s.type !== 'router');
+    const seen = new Map();
+    for (const category of new Set(real.map(s => s.category))) {
+      const r = spawnSync(process.execPath, [CLI, 'search', category, '--json'], { encoding: 'utf8', timeout: 20000 });
+      assert.equal(r.status, 0, r.stderr);
+      for (const e of JSON.parse(r.stdout)) seen.set(e.name, e);
+    }
+    const diffs = real.flatMap(s => {
+      const e = seen.get(s.name);
+      if (!e) return [`${s.name}: not returned by the CLI`];
+      return [['type', e.type, s.type], ['tier', e.tier, s.tier], ['category', e.category, s.category], ['rank', e.rank, Number(s.rank)]]
+        .filter(([, a, b]) => a !== b).map(([k, a, b]) => `${s.name}.${k}: cli=${a} lib=${b}`);
+    });
+    assert.deepEqual(diffs, []);
+  });
+
   it('add without skill name exits 1 with usage hint', () => {
     const r = spawnSync(process.execPath, [CLI, 'add'], { encoding: 'utf8' });
     assert.equal(r.status, 1, 'add with no skill name must exit 1');

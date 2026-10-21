@@ -3,4 +3,17 @@ tier: community
 category: product-pm
 rank: 2
 upstream: https://github.com/aoshimash/skills
+upstream_path: plugins/aoshimash-skills/skills/create-issue/SKILL.md
 version: latest
+install_default: npx skills add aoshimash/skills --skill create-issue
+installed_as: create-issue
+install_claude:
+  - /plugin marketplace add aoshimash/skills
+  - /plugin install aoshimash-skills@aoshimash-skills
+requires:
+  - "gh CLI installed and authenticated (GitHub issues) or the bee CLI authenticated (Backlog issues)"
+  - Creates issues on your tracker, only after you approve the exact content
+license: MIT
+note: "verified 2026-10-21; repointed: upstream merged the old design-sprint skill into create-issue (commit d3a83422, 2026-07-05), so this stub now installs create-issue and the Design Flow is the former design-sprint; this stub no longer writes a design-sprint directory, which removes the old collision with wondelai-skills; plugin route (documented in upstream README) installs the whole aoshimash-skills collection, not run"
+conflicts_with:
+  - wondelai-skills

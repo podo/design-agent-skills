@@ -5,6 +5,203 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.10.0] — 2026-10-21
+
+Gap analysis against `nexu-io/open-design`, then a full audit of every install command in the
+catalogue (each one was run for real with the skills CLI) and a rebuild of how install
+instructions are stored, generated and checked. Catalogue: 151 → 160 skills; nothing removed.
+
+### Added
+
+- **`hallmark`** — Anti-AI-slop design skill: design, `audit`, `redesign`, and `study`
+  (extract design DNA from a screenshot or URL). rank 2 (`Nutlope/hallmark`)
+- **`kami`** — Paper-style typesetting for resumes, one-pagers, white papers, letters, and
+  decks (PDF/PNG/PPTX). rank 2 (`tw93/Kami`; manual sparse clone, the repo is too big for the
+  CLI's clone timeout)
+- **`html-ppt`** — HTML PPT Studio: themes, layouts, full-deck templates, presenter mode.
+  rank 3 (`lewislulu/html-ppt-skill`)
+- **`humanize-ppt`** — Outline director and post-render checkup for agent-made decks; a
+  planner, not a renderer. rank 3 (`LearnPrompt/humanize-ppt`)
+- **`huashu-art-motion`** — Art-style and explainer video animation by code. rank 3
+  (`alchaincyf/huashu-art-motion`)
+- **`oil-motion`** — Scroll/pointer-driven web animation from AI video or sprite sequences.
+  rank 3 (`oil-oil/oil-motion`)
+- **`wpds`** — Official WordPress Design System skill. rank 3, official
+  (`WordPress/agent-skills --skill wpds`)
+- **`building-components`** — Vercel's guide to accessible, composable UI components. rank 2,
+  official (`vercel/components.build`). Previously advertised inside `vercel-skills` under an
+  install command that did not exist.
+- **`motion`** — The Motion team's own animation skill (Motion, formerly Framer Motion, plus
+  CSS): best practices, docs and example search, CSS springs, performance audits, upgrade
+  guides. rank 2, official (`motiondivision/ai-kit`)
+
+### Changed — how installs are described and checked
+
+- **`stub.yaml` is now the single source of truth for installing.** The install section of every
+  pointer `SKILL.md` is generated between `das:install` markers (`npm run generate`; a test
+  fails if a pointer drifts from its stub). New fields: `installed_as` (required: the skill names
+  the install produces), `install_default`, `install_extra`, `install_claude` (a complete
+  plugin route), `install_mode: npx | manual | builtin` with `manual_reason` and
+  `install_steps`, `install_check`, `requires`, `license`, `size_mb`, `conflicts_with`.
+- **Offline lint** (`npm run lint:stubs`, also part of the tests): install target must be the
+  stub's own upstream repo, no `-g`/`-y`/`--all`/placeholders in `stub.yaml` (including manual
+  `install_steps`), every `--skill` listed in `installed_as`, plugin routes must include the
+  `install` step, no hardcoded skill/agent counts in descriptions or triggers (also "31 design
+  skills"), every stub listed in `design-catalogue`, and `stub.yaml` values that a real YAML
+  parser would read differently (an unquoted `: ` or ` #`) must be quoted.
+- **Name collisions are declared.** Two stubs from different upstreams that write the same skill
+  directory — or one that writes another stub's own pointer directory — must list each other in
+  `conflicts_with`; the pointer then says so. 23 such pairs existed and are now declared.
+- **`npm run verify:installs`** (`scripts/check-installs.mjs`) runs the real skills CLI: `--list`
+  mode checks every target resolves and offers the `--skill` names; `--real` installs each stub
+  into a scratch directory and requires the directories that land to equal `installed_as`
+  exactly (manual stubs replay only `git clone` / sparse-checkout / `npx skills add <path>`, never
+  with `-g`, then must land exactly `installed_as` and satisfy a relative `install_check`;
+  nothing downloaded is ever executed). Only stubs with `size_mb >= 100` get a longer clone
+  timeout, so a repo that is too big for the CLI's 300 s default but not marked heavy fails
+  here instead of for users. Runs on PRs (changed stubs) and weekly (everything).
+  `check-upstreams.mjs` only proves a repo is alive, which is why none of the breakage below
+  was caught.
+- **Manual pointers get the same scope handling as `npx` ones.** `install_steps` no longer
+  carry `-y`/`-g`; the pointer renders Global (`-g -y`) and Project (`-y`) variants, probes a
+  project-relative `install_check` under both `~` and the project, accepts a directory, never
+  counts the pointer's own `SKILL.md`, and tells users to delete a leftover staging clone
+  (`git clone` refuses a non-empty directory).
+- **`install.sh`** — `status` follows `installed_as` (it kept reporting `stub` forever) and
+  `install_check` (file or directory, `~`, absolute, or relative to the scope root), reports a
+  dangling pointer symlink as `BROKEN` before anything else, and is several times faster:
+  `stub_yaml_value` is pure bash (it forked three processes per field, ~480 per `help`),
+  per-stub facts are read once instead of once per agent column, and names are sanitised by
+  one `awk`. The reader strips only a quote pair that wraps a whole value, so commands with
+  quoted multi-word `--skill` names print correctly in `update`, and a test pins it to the JS
+  reader for every scalar key of every stub. `install.sh` tests: 95 s → 32 s.
+- **One stub reader.** `scripts/lib/stub.mjs` now reads CRLF, empty values and trailing
+  comments, is used by every script (`check-upstreams`, `generate-readme-table`, `--only`
+  parsing and `pool()` are shared instead of copied), and was diffed against Ruby's real YAML
+  parser on all 166 stubs. `bin/cli.mjs` ships on its own, so a test pins its view of type, tier,
+  rank and category to the shared reader instead.
+- **`scripts/check-upstreams.mjs`** fired ~160 requests at once, which trips GitHub's secondary
+  rate limit and left up to a fifth of the catalogue "could not verify" (the weekly run too).
+  It now runs a bounded pool and retries 403s.
+- **`scripts/add-skill.mjs`** writes the new schema, rejects `--type router` (it crashed),
+  refuses to overwrite an existing stub and a name that is not lowercase-and-hyphens.
+  **`generate-readme-table.mjs --write`** updates the README table in place.
+- **Weekly `upstream-check.yml`** runs the real-install step even when the upstream step fails.
+
+### Fixed — install commands
+
+Every stub's command was run for real with the skills CLI; the ones that failed or installed
+something other than documented are listed here.
+
+- **~25 stubs installed nothing.** `--skill` matches the upstream `SKILL.md` frontmatter
+  `name`, not our directory name, and the old test enforced the directory name. Every upgrade
+  for `taste-skill`, `ux-writing-skill`, `guizang-ppt`, `d3js-skill`, `wireframe-skill`,
+  `cloudflare-web-perf`, `mobile-app-design`, … failed with "No matching skills found".
+- **54 dead install targets in 11 package stubs** — per-skill shorthand such as
+  `npx skills add anthropics/frontend-design` or `vercel-labs/<skill>` is read as a repo name
+  and fails. Rewritten as `owner/repo --skill name`.
+- **Bare-repo installs that pulled the whole library** are now targeted lists:
+  `coreyhaines-marketing` (3 of ~50), `softaworks-agent-toolkit` (7 design-adjacent),
+  `wondelai-skills` (8 of 65), `openai-skills`, `deanpeters-pm-skills`,
+  `figma-official-skills` (the 16 real skills), `expo-skills` (25 real names; 11 of the
+  15 old ones were gone), `fal-ai-skills` (16).
+- **Repos that moved or merged:** `ux-ui-mastery` is now `phazurlabs/sumi`;
+  `apple-hig-skills` was renamed; `threejs-claude-skill-package` lives under
+  `Impertio-Studio`; `brand-design-md` under `SpaceZephyr`; `markdown-viewer-skills` merged its
+  14 engine skills into `documd-visuals`; `design-sprint` is now `create-issue` in
+  `aoshimash/skills` (upstream merged it); `hig-doctor` installs the real audit skill
+  `hig-doctor-audit`; `phuryn-pm-skills` is installable with `npx` again (the old regression
+  test claiming otherwise was wrong) as a targeted list of its product-management skills, not a
+  bare install that wrote generic names (`code-review`, `retro`, `sql-queries`, `draft-nda`, …)
+  over users' own skills; the full set stays on its plugin route; `styleseed` is one skill,
+  not a clone + `cp`.
+- **Routes that could not work** replaced: `textual-tui-skill` (`curl -o` failed,
+  `quickstart.sh` does not install the skill), `logo-designer-skill` and
+  `interface-design-dammyjay` (`claude plugin add` / `claude skills add` are not Claude Code
+  commands), `google-fonts-skill` (plugin install without `marketplace add`, wrong skill name),
+  `claude2figma` (no skill is named `claude2figma`; it installs four others).
+- **Manual routes where the CLI cannot do it**, each stating why in the pointer:
+  `simota-agent-skills` (cyclic symlinks make the CLI report success and install nothing),
+  `kami`, `hyperframes` (sparse clones), `design-with-claude` (upstream frontmatter is not
+  valid YAML), `nanobanan-ppt`, the gstack skills (`design-consultation`, `design-html`,
+  `design-review-garrytan`, `plan-design-review`, which need gstack's shared tooling),
+  `threejs-ecs-ts` (raw-URL install of 12 core topics; upstream has no `SKILL.md`),
+  `software-ux-research` (sparse clone of a mirror).
+- **Pointers described things that do not exist** and were rewritten from what upstream
+  ships: `ink-google` (upstream `ink` is the `@json-render/ink` terminal renderer, not an
+  "editorial design" skill; now installs from its canonical home `vercel-labs/json-render`),
+  `design-brief` (a visual brief that writes `DESIGN.md`, not a project brief),
+  `plan-design-review` (reviews a plan, not live UI), `design-for-ai` (a four-stage workflow,
+  not CHECKER/APPLIER), `taste-skill` (v1 dials no longer exist), `accessibility-agents`,
+  `google-stitch-skills`, `taste-skill`, `ux-designer-skill`, `mobile-app-design`,
+  `wireframer`, `figma-skill`, `generative-media-skills`, and others. Hardcoded
+  skill/agent/command counts were removed from all pointers; they go stale on every release.
+- **`requires` / `license` heads-ups** now appear in every pointer and the README where they
+  matter: accounts and API keys (`superdesign-skill`, `sleek-design-mobile-apps`, `fal-ai-skills`,
+  `generative-media-skills`), data sent to a third party (`antvis-chart-skills`,
+  `excalidraw-agents365` via Kroki), files written into the project (`wireframer` writes
+  `CLAUDE.md`/`agents.md`, `styleseed` writes `STYLESEED.md`), runtime network fetches
+  (`vercel-skills`, `brand-design-md`), copyleft or restricted licences (`wcag-ai-skill`,
+  `remotion`, `digidai-pm`), and downloads large enough to hit the CLI's clone timeout.
+- **54 pointers** looked for installed skills under the legacy `~/.design-agent-skills/`
+  path, so "already installed?" was always false. Now `~/.agents/skills` / `.agents/skills`.
+- **`nimbalyst-skills`** is a `platform` stub: `/mockup`, `/excalidraw`, `/datamodel` are
+  built into the Nimbalyst app, not installable skills. **`open-design`** is `builtin` for the
+  same reason (an app).
+- Triggers that promised things the skill no longer does were replaced
+  (`design-brief`, `frontend-design` "nordic design" → "swiss design", `ux-ui-mastery`,
+  `open-design` — its "31 design skills" and "71 design systems" counts were still there —
+  `markdown-viewer-skills`, `antvis-chart-skills`, `design-for-ai`).
+- **17 `stub.yaml` files were not valid YAML for a real parser:** 16 had `requires:` items like
+  `- Network access: x`, which parse as a mapping instead of a string, and `creative-director`'s
+  `license: CC-BY-4.0 (attribution required: …)` is a syntax error. Our line reader accepted them
+  all. They are quoted now, the lint rejects the pattern, and a Ruby-parser diff over every stub
+  shows the two readers agree.
+- Router rows, README table and counts regenerated or corrected (All 160, Essentials ~96,
+  Picks 24; official 34, community 72, experimental 60), and a test now keeps the README
+  counts in sync with the stubs.
+
+### Restored
+
+Five pointers that an earlier pass of this release had removed. None was unfindable, so none
+is removed: each was repaired.
+
+- **`software-ux-research`** — the original `vasilyu1983/AI-Agents-public` returns 404; installs
+  from the auto-generated mirror `gabrielmoreira/agent-skills-mirror` (skill v1.3, licence
+  unknown).
+- **`ink-google`** — see above; the skill exists, the old description did not.
+- **`data-viz-agent`** — upstream is a subagent definition; installed here as a skill.
+- **`distinctive-frontend`** — the advertised npm package was never published and the original
+  repo ships a loose `.md`; installs from a verbatim copy in `Zambudio/buenchollo-app`
+  (a personal app repo, so it can vanish).
+- **`service-blueprint`** — installs the package that ships the JSON schema and render pipeline.
+
+### Judgement calls worth a second look
+
+- Plugin routes (`install_claude`) were checked against upstream manifests and READMEs only;
+  running them would write into `~/.claude`.
+- `accessibility-agents` lists all 108 skill names in `installed_as` on purpose (its routers
+  dispatch the others by name); `designer-skills` installs all 111.
+- `composio-artifacts` and `mobile-app-design` moved `official` → `community` (the publisher is
+  not the platform owner). No tier, rank or category was changed on popularity grounds.
+- `distinctive-frontend`, `software-ux-research` rely on mirrors; `threejs-ecs-ts` installs 12
+  of about 50 topics.
+
+### Changed — tests and docs
+
+- **CLAUDE.md** — rewritten for the schema, install-route rules, `conflicts_with`, and the
+  checklist; the type:skill rule that `--skill` must equal the directory name was wrong.
+- **Tests** — new `pointers`, `check-installs` and README-count suites, a fake skills CLI
+  fixture (with a local git repository for manual routes), fixture-catalogue `install.sh status`
+  tests, bash-versus-JS and CLI-versus-JS reader agreement tests over every stub. Removed two
+  obsolete guards (a per-stub install-target regex that the lint now does properly, and the
+  phuryn "no npx" check, replaced by a check of the targeted list). The upgrade-command test now
+  compares the pointer's parsed `--skill` names with `stub.yaml` exactly; the old substring check
+  passed for a wrong name that merely contained the right one (`ux-writing` in `ux-writing-skill`).
+  New tests were checked to fail when the fix they cover is removed.
+
+---
+
 ## [2.9.2] — 2026-08-31
 
 ### Fixed

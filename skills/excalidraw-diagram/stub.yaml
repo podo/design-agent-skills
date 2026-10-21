@@ -5,3 +5,10 @@ rank: 1
 upstream: https://github.com/coleam00/excalidraw-diagram-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add coleam00/excalidraw-diagram-skill --skill excalidraw-diagram
+requires:
+  - uv (Python) and Playwright Chromium for the mandatory render-and-validate loop (`cd .claude/skills/excalidraw-diagram/references && uv sync && uv run playwright install chromium`)
+  - The skill hard-codes the project path `.claude/skills/excalidraw-diagram/references`, so install it at project scope (not -g) for the render step to work
+license: no LICENSE file in the repository
+note: "verified 2026-10-21; upstream README documents only a git clone + cp into .claude/skills; the skills CLI installs the same skill (root SKILL.md plus references/ with render_excalidraw.py and pyproject.toml)"
+installed_as: excalidraw-diagram

@@ -20,13 +20,14 @@ das:
 
 > Catalogue stub — full skill: [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/design-debt-audit/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/design-debt-audit/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   - Global: `f=~/.agents/skills/design-debt-audit/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/design-debt-audit/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `design-debt-audit`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -43,13 +44,31 @@ das:
    ```bash
    npx skills add Owl-Listener/designer-skills --skill design-debt-audit -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Claude Code plugin route:**
+
+```
+/plugin marketplace add Owl-Listener/designer-skills
+/plugin install design-ops@designer-skills
+```
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `design-debt-audit`
+- Trigger phrases: "design debt audit", "design debt triage", "UI inconsistency audit", "design debt register"
 
 ## What it does
 
-Owls design-debt-audit skill: a debt taxonomy (visual / structural / accessibility / documentation / implementation), a 5-step audit process, a Severity×Frequency/Effort prioritization score, and a living debt register. Turns "the UI feels inconsistent" into a triaged, remediable backlog. Nearby public skills cover register lifecycle or code debt but lack Owl’s taxonomy + scoring.
+The design-debt-audit skill from Owl-Listener's designer-skills: a debt taxonomy (visual / structural / accessibility / documentation / implementation), a five-step audit process (scope, classify, quantify, prioritize, remediate), a Severity×Frequency/Effort prioritization score, and a living debt register. Turns "the UI feels inconsistent" into a triaged, remediable backlog.
 
 ## When NOT to use
 
 - Codebase/technical debt (not design) → a code-quality skill
 - Live accessibility violations → use `wcag-audit-patterns`
+- Token coverage specifically, or the rest of the designer-skills plugins → see `designer-skills`

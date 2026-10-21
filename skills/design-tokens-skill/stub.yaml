@@ -5,3 +5,7 @@ rank: 2
 upstream: https://github.com/ilikescience/design-tokens-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add ilikescience/design-tokens-skill --skill design-tokens
+installed_as: design-tokens
+license: MIT
+note: "verified 2026-10-21. Upstream names the skill design-tokens, so it installs next to this pointer"

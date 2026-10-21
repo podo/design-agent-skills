@@ -5,3 +5,7 @@ rank: 2
 upstream: https://github.com/judicael-s/Copywriting-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add judicael-s/Copywriting-skill --skill copywriting
+installed_as: copywriting
+license: MIT
+note: "verified 2026-10-21; the repo root SKILL.md (copywriting) hides five nested skills under skills/ from the CLI list. They are bundled inside the installed copywriting directory but not registered. Standalone subpath installs (npx skills add judicael-s/Copywriting-skill/skills/seo-copywriting) land SKILL.md only, without the shared references/. copywriting is also installed by coreyhaines-marketing (whole-repo install)"

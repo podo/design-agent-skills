@@ -1,0 +1,14 @@
+type: skill
+tier: official
+category: motion-animation
+rank: 2
+upstream: https://github.com/motiondivision/ai-kit
+upstream_path: plugins/motion/skills/motion/SKILL.md
+version: latest
+install_default: npx skills add motiondivision/ai-kit --skill motion
+installed_as: motion
+requires:
+  - "Optional, for docs search and CSS spring generation: Motion's free hosted MCP server (no API key). A skills-only install does not configure it; upstream's own installer is `npx motion-ai`"
+  - "Optional, for MotionScore performance audits and Motion UI source code: a Motion+ membership and its MCP server"
+license: no LICENSE file in the upstream repo
+note: "new stub 2026-10-21: official Motion (formerly Framer Motion) skill from the motiondivision org, added as the maintained alternative to framer-motion-skills (whose core skill is skipped by the CLI because of a YAML error). Not run: the hosted MCP setup and `npx motion-ai`"

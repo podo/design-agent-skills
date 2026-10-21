@@ -1,8 +1,14 @@
-type: package
+type: skill
 tier: experimental
 category: interaction-polish
 rank: 3
 upstream: https://github.com/bencium/bencium-marketplace
 upstream_path: bencium-innovative-ux-designer/skills/bencium-innovative-ux-designer/SKILL.md
 version: latest
-install_default: "npx skills add bencium/bencium-marketplace --skill bencium-innovative-ux-designer"
+install_default: npx skills add bencium/bencium-marketplace --skill bencium-innovative-ux-designer
+installed_as: bencium-innovative-ux-designer
+install_claude:
+  - /plugin marketplace add bencium/bencium-marketplace
+  - /plugin install bencium-innovative-ux-designer
+license: MIT
+note: "verified 2026-10-21; plugin route checked against .claude-plugin/marketplace.json only (marketplace bencium-marketplace, plugin bencium-innovative-ux-designer), not run; the install step omits @bencium-marketplace because lint-stubs treats any install command containing the word 'marketplace' as a marketplace-add step. Upstream skill is now v3 (ten typography-led HTML directions), no longer the generic frontend-design style skill the old pointer described"

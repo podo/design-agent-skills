@@ -1,10 +1,10 @@
 ---
 name: copywriting-skill
 description: |
-  Copywriting toolkit for product and web — persuasion-driven copy for landing
-  pages, feature pages, pricing pages, email sequences, and CTAs. Ships 5 skills:
-  core copywriting, SEO copywriting, social copywriting (LinkedIn + X), French-
-  native copy, and a tone-of-voice generator. Built-in anti-AI-pattern layer.
+  Copywriting toolkit for product and web: persuasion-driven copy for landing
+  pages, feature pages, pricing pages, email sequences, and CTAs, with a built-in
+  anti-AI-pattern layer and reference files for hooks, proof, and concision. The repo also
+  bundles SEO, social (LinkedIn and X), French, career, and tone-of-voice sub-skills.
   Works with Claude Code, Cursor, and Windsurf.
 triggers:
   - "copywriting"
@@ -28,13 +28,15 @@ das:
 
 > Catalogue stub — full skill: [judicael-s/Copywriting-skill](https://github.com/judicael-s/Copywriting-skill)
 
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   - Global: `grep -q "^das:" ~/.agents/skills/copywriting-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - Project: `grep -q "^das:" .agents/skills/copywriting-skill/SKILL.md 2>/dev/null && echo "pointer" || echo "installed"`
-   - No `das:` block → full skill installed, invoke and proceed
-   - `das:` block present → go to step 2
+   Upstream names this skill `copywriting`, so it installs next to this pointer (the pointer is not replaced).
+   - Global: `f=~/.agents/skills/copywriting/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/copywriting/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `copywriting`, invoke it and proceed
+   - `pointer` → go to step 2
 
 2. **Detect scope, then install:**
 
@@ -44,26 +46,30 @@ das:
 
    **Global:**
    ```bash
-   npx skills add judicael-s/copywriting-skill --skill copywriting-skill -g -y
+   npx skills add judicael-s/Copywriting-skill --skill copywriting -g -y
    ```
 
    **Project:**
    ```bash
-   npx skills add judicael-s/copywriting-skill --skill copywriting-skill -y
+   npx skills add judicael-s/Copywriting-skill --skill copywriting -y
    ```
-   > **Claude Code:** send either command as a chat message starting with `!` to run it without leaving the conversation.
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
 
 ## Invoke after install
 
-5 skills available:
+- Skill name: `copywriting`
+- Trigger phrases: "copywriting", "landing page copy", "web copy", "headline copy"
 
-| Skill | Triggers |
-|---|---|
-| `copywriting-skill` | "copywriting", "landing page copy", "web copy", "headline copy" |
-| `seo-copywriting` | "SEO copy", "search-optimized content" |
-| `social-copywriting` | "LinkedIn post", "X post", "social copy" |
-| `french-copywriting` | "French copy", "French landing page" |
-| `tone-of-voice` | "tone of voice", "brand voice guide" |
+The installed `copywriting` directory also carries the bundled sub-skills (`skills/seo-copywriting`, `skills/social-copywriting`, `skills/french-copywriting`, `skills/tone-of-voice`, `skills/career-copywriting`). The skills CLI does not register them as separate skills. To use one as its own skill, install it by subpath (this copies its `SKILL.md` only, without the shared `references/` folder, so it falls back to its built-in baseline rules):
+
+```bash
+npx skills add judicael-s/Copywriting-skill/skills/seo-copywriting
+```
 
 ## What it does
 

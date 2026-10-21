@@ -5,7 +5,7 @@ description: |
   Covers interaction flows, component state design (hover/focus/error/loading/empty),
   micro-interactions, affordances, feedback mechanisms, mental models, task flows,
   gesture design, response time guidelines, and handoff annotations. Grounded in
-  6 Norman principles and 19 Tognazzini principles. v1.0.0.
+  Norman's design principles and Tognazzini's first principles of interaction design.
 triggers:
   - "interaction design"
   - "interaction flow"
@@ -15,9 +15,10 @@ triggers:
   - "interaction spec"
   - "interaction-design"
 das:
-  type: package
+  type: skill
   category: interaction-polish
   upstream: "https://github.com/rastian/interaction-design-skills"
+  upstream_path: "SKILL.md"
   version: latest
 ---
 
@@ -25,30 +26,56 @@ das:
 
 > Catalogue stub — full skill: [rastian/interaction-design-skills](https://github.com/rastian/interaction-design-skills)
 
-## Install the full skill
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
+## Decision tree
 
-```bash
-# Global
-git clone https://github.com/rastian/interaction-design-skills \
-  ~/.agents/skills/interaction-design
+1. **Is the full skill already installed?**
+   - Global: `f=~/.agents/skills/interaction-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/interaction-design/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `interaction-design`, invoke it and proceed
+   - `pointer` → go to step 2
 
-# Project
-git clone https://github.com/rastian/interaction-design-skills \
-  .agents/skills/interaction-design
-```
+2. **Detect scope, then install:**
+
+   ```bash
+   [ -e ~/.agents/skills/interaction-design ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
+   ```bash
+   npx skills add rastian/interaction-design-skills --skill interaction-design -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add rastian/interaction-design-skills --skill interaction-design -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** no LICENSE file in the repo
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill name: `interaction-design`
+- Trigger phrases: "interaction design", "interaction flow", "component states", "micro-interaction", "affordance", "interaction spec"
 
 ## What it does
 
 A practitioner's guide to interaction design — from foundational principles to practical state design, flow specification, and interaction review:
 
 - **Interaction flows** — task flows, user flows, navigation patterns, decision trees
-- **State design** — all 10 component states: default, hover, focus, active, disabled, loading, error, success, empty, skeleton
+- **State design** — the full set of component states: default, hover, focus, active, disabled, loading, error, success, empty, skeleton
 - **Micro-interactions** — trigger → rules → feedback → loops model; timing and easing guidelines
 - **Affordances** — signifiers, feedback, constraints, mapping, consistency, discoverability
-- **IxD principles** — 6 Norman principles (Design of Everyday Things) + 19 Tognazzini principles (First Principles of Interaction Design)
+- **IxD principles** — Norman's principles (Design of Everyday Things) and Tognazzini's First Principles of Interaction Design
 - **Response time** — 100ms/1s/10s thresholds, progress indicators, optimistic UI
 - **Interaction specs** — handoff annotation format, interaction specification documents
 - **Interaction audit** — review checklist against established principles
+
+The install includes a `reference/` folder with the principles, response-time and patterns-and-flows notes the skill points to.
 
 ## When NOT to use
 

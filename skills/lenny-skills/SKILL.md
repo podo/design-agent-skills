@@ -1,17 +1,18 @@
 ---
 name: lenny-skills
 description: |
-  86 PM and product design skills from Lenny Rachitsky's framework. Covers user research,
-  behavioral product design, designing surveys, conducting interviews, running design reviews,
-  user onboarding, growth loops, design systems, and writing specs. 945 stars.
+  Product management and design-adjacent skills distilled from Lenny Rachitsky's podcast and
+  newsletter archive, with named frameworks, checklists, and templates per skill. The catalogue
+  installs the design-relevant ones: customer interviews, continuous discovery, feedback analysis,
+  product reviews, onboarding and activation, PRDs, growth model, product taste, AI-native UX, and
+  AI-assisted prototyping. The full library covers strategy, hiring, growth, and leadership too.
 triggers:
   - "lenny skills"
   - "lenny-skills"
-  - "behavioral product design"
-  - "designing surveys"
-  - "running design reviews"
-  - "growth loops"
-  - "86 PM skills"
+  - "Lenny Rachitsky skills"
+  - "customer interview skill"
+  - "product taste and intuition"
+  - "AI-native UX"
 das:
   type: package
   category: product-pm
@@ -21,38 +22,63 @@ das:
 
 # lenny-skills
 
-> Catalogue stub — full skill: [RefoundAI/lenny-skills](https://github.com/RefoundAI/lenny-skills)
+> Catalogue stub — full package: [RefoundAI/lenny-skills](https://github.com/RefoundAI/lenny-skills)
 
-## Install the full skill
+<!-- das:install:start — generated from stub.yaml by `npm run generate`; edit stub.yaml, not this block -->
+## Decision tree
 
-```bash
-# Global
-npx skills add RefoundAI/lenny-skills -g -y
+1. **Is the full skill already installed?**
+   This package installs 10 skills (`customer-interviews`, `continuous-discovery`, `analyzing-user-feedback`, `product-reviews`, `user-onboarding-activation`, `writing-prds`, `growth-model`, `product-taste`, `ai-native-ux`, `ai-assisted-prototyping`); checking the first.
+   - Global: `f=~/.agents/skills/customer-interviews/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - Project: `f=.agents/skills/customer-interviews/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
+   - `installed` → the skill is installed as `customer-interviews`, invoke it and proceed
+   - `pointer` → go to step 2
 
-# Project
-npx skills add RefoundAI/lenny-skills -y
-```
+2. **Detect scope, then install:**
 
-Then invoke any sub-skill by name, e.g. `/conducting-user-interviews`, `/behavioral-product-design`, `/running-design-reviews`.
+   ```bash
+   [ -e ~/.agents/skills/lenny-skills ] && echo "global" || echo "project"
+   ```
+
+   **Global:**
+   ```bash
+   npx skills add RefoundAI/lenny-skills --skill customer-interviews continuous-discovery analyzing-user-feedback product-reviews user-onboarding-activation writing-prds growth-model product-taste ai-native-ux ai-assisted-prototyping -g -y
+   ```
+
+   **Project:**
+   ```bash
+   npx skills add RefoundAI/lenny-skills --skill customer-interviews continuous-discovery analyzing-user-feedback product-reviews user-onboarding-activation writing-prds growth-model product-taste ai-native-ux ai-assisted-prototyping -y
+   ```
+   > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
+
+**Heads-up**
+
+- **License:** MIT
+<!-- das:install:end -->
+
+## Invoke after install
+
+- Skill names: `customer-interviews`, `continuous-discovery`, `analyzing-user-feedback`, `product-reviews`, `user-onboarding-activation`, `writing-prds`, `growth-model`, `product-taste`, `ai-native-ux`, `ai-assisted-prototyping`
+- Invoke by name (for example `/customer-interviews`) or just describe the task and the matching skill triggers.
 
 ## What it does
 
-86 skills across PM and product design disciplines. Design-relevant sub-skills include:
+Each skill packages the frameworks and templates that Lenny's guests and posts actually use, with sourced insights. The skills installed here:
 
-| Sub-skill | Best for |
-|-----------|----------|
-| `conducting-user-interviews` | Interview scripts, moderation, synthesis |
+| Skill | Best for |
+|-------|----------|
+| `customer-interviews` | Interview scripts, moderation, uncovering pain and behavioral triggers |
+| `continuous-discovery` | Turning customer feedback into a steady engine for product decisions |
 | `analyzing-user-feedback` | Feedback triage, pattern detection, prioritization |
-| `designing-surveys` | Survey structure, question design, bias avoidance |
-| `behavioral-product-design` | Nudges, habit loops, motivation frameworks |
-| `running-design-reviews` | Critique structure, feedback frameworks, async review |
-| `user-onboarding` | Onboarding flows, activation, aha-moment mapping |
-| `design-engineering` | Design↔eng collaboration, handoff, spec quality |
-| `design-systems` | Component governance, token adoption, system adoption |
-| `designing-growth-loops` | Viral loops, network effects, acquisition loops |
-| `writing-specs-designs` | PRD structure, design specs, requirements clarity |
+| `product-reviews` | Facilitating product reviews as strategic deep-dives on craft and alignment instead of status updates |
+| `user-onboarding-activation` | First-run experience, removing friction, reaching the first moment of core value |
+| `writing-prds` | Turning ideas into specs that align engineering and design on the problem and success metrics |
+| `growth-model` | Moving from funnel thinking to a loop-based growth model |
+| `product-taste` | Building a reliable internal compass for what good looks like |
+| `ai-native-ux` | Designing interfaces for probabilistic models: intent, agency, trust, and control |
+| `ai-assisted-prototyping` | Building functional prototypes from natural language or mocks with AI coding tools |
 
-Full list: 86 skills covering strategy, hiring, growth, and product leadership.
+The upstream repo holds many more skills (strategy, pricing, positioning, hiring, fundraising, career). They have generic names, so they are left out of the default install; add any of them by listing its name after `--skill`.
 
 ## When NOT to use
 

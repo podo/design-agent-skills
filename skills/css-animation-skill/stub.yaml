@@ -5,3 +5,10 @@ rank: 3
 upstream: https://github.com/neonwatty/css-animation-skill
 upstream_path: SKILL.md
 version: latest
+install_default: npx skills add neonwatty/css-animation-skill --skill css-animation
+installed_as: css-animation
+requires:
+  - Claude Code with the Claude-in-Chrome MCP tools
+  - A target app reachable in the browser
+license: MIT
+note: "verified 2026-10-21; upstream skill name is css-animation (not css-animation-skill), so it installs next to this pointer"

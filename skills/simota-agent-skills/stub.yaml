@@ -4,4 +4,22 @@ category: interaction-polish
 rank: 3
 upstream: https://github.com/simota/agent-skills
 version: latest
-install_default: "npx skills add simota/agent-skills"
+install_mode: manual
+manual_reason: The skills CLI cannot copy this repo as-is, because every skill folder links to a shared _common folder that links back (cyclic symlinks, ELOOP), and it reports success while installing nothing usable for Claude Code. A sparse clone of only the design-related skill folders leaves those links dangling, so the CLI installs each skill with its reference folder but without the shared _common docs. Upstream's own route is `make link` from a full clone, which symlinks every skill in the repo into ~/.claude/skills, ~/.agents/skills and ~/.gemini/antigravity-cli/skills.
+install_steps:
+  - git clone --depth=1 --filter=blob:none --sparse https://github.com/simota/agent-skills.git /tmp/simota-agent-skills
+  - git -C /tmp/simota-agent-skills sparse-checkout set vision muse frame pixel echo prose ink
+  - npx skills add /tmp/simota-agent-skills --skill vision muse frame pixel echo prose ink
+install_check: .agents/skills/vision/SKILL.md
+installed_as:
+  - vision
+  - muse
+  - frame
+  - pixel
+  - echo
+  - prose
+  - ink
+license: MIT
+note: "verified 2026-10-21 by a real sparse clone + skills CLI install (7 skills, about 1 MB); the plain `npx skills add simota/agent-skills` fails with ELOOP for every agent and still exits 0. The repo holds many more agents (about 90) and their directory names are generic (launch, schema, matrix, pulse, flow, field, ...), which collide with other stubs, so only the design-related ones are installed. Dot, Clay and Sketch from the old pointer do not exist upstream."
+conflicts_with:
+  - ink-google
