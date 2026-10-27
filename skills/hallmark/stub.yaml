@@ -8,5 +8,5 @@ version: latest
 install_default: npx skills add Nutlope/hallmark --skill hallmark
 installed_as: hallmark
 license: MIT
-size_mb: 88
+size_mb: 227
 note: "verified 2026-10-21; the repo is large (site and test thumbnails); the installed skill is a ~67 KB SKILL.md plus about a hundred reference files. A raw single-file URL would drop those files, so the repo is cloned (292 s under heavy network load in the earlier audit, about 9 s on a quiet link)"

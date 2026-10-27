@@ -1,0 +1,15 @@
+type: skill
+tier: community
+rank: 3
+category: creative-3d
+upstream: https://github.com/oso95/scroll-world
+upstream_path: skills/scroll-world/SKILL.md
+version: latest
+install_default: npx skills add oso95/scroll-world --skill scroll-world
+installed_as: scroll-world
+requires:
+  - a paid Higgsfield account with credits, plus the higgsfield CLI installed and authenticated (higgsfield auth login is an interactive OAuth step the agent cannot run for you)
+  - "the monid CLI with a funded balance for the default video chain: Seedance 2.0 is billed per clip in USD (a 1080p six-scene chain is roughly $27), with Higgsfield credits as the fallback biller"
+  - ffmpeg and ffprobe on PATH
+license: MIT
+note: "verified 2026-10-27; the skill is small (about 50 KB) because the cost is in generation, not code: it interviews for topic, story beats and brand kit, generates N scene stills plus N dive-in and N-1 connector clips, then drops a framework-free scroll-scrub engine (references/scrub-engine.js) into any page. Seams must be frame-identical or the page pops between scenes. Do not offer this skill to someone without a funded Higgsfield/Monid account"

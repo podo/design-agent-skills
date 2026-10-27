@@ -66,6 +66,7 @@ das:
 
 **Heads-up**
 
+- **Requires:** Blender 4.x installed locally for blender-web-pipeline (the skill drives it, it does not bundle it); a Spline account for spline-interactive and a Rive account for rive-interactive; both export through the vendor's web editor; an Adobe Substance 3D account for substance-3d-texturing; textures are authored in the vendor app
 - **License:** MIT
 - **Name collision:** `gsap-scrolltrigger` is also written by `gsap-skills` (its install or its catalogue pointer); installing both overwrites the earlier one.
 <!-- das:install:end -->

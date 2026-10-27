@@ -66,7 +66,7 @@ instead of scrolling the full index below:
 | [`hallmark`](../hallmark/SKILL.md) | Anti-AI-slop: design, audit, redesign, and extract design DNA from screenshots/URLs; structural variety |
 | [`emilkowalski-skill`](../emilkowalski-skill/SKILL.md) | Animation decision framework, easing curves, interaction principles |
 | [`make-interfaces-better`](../make-interfaces-better/SKILL.md) | Polish: micro-interactions, typography details, visual refinement |
-| [`ui-craft`](../ui-craft/SKILL.md) | 18 slash commands, anti-slop CLI, 3 style variants — deepest design engineering skill |
+| [`ui-craft`](../ui-craft/SKILL.md) | slash commands, anti-slop CLI, style variants — deepest design engineering skill |
 | [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Swiss, Brutalist, Aurora Maximalism, Retro-Futuristic…) with locked CSS tokens per theme |
 | [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | Distinctive, non-generic interfaces: extreme typography, cohesive themes, staggered animation, layered backgrounds |
 | [`huashu-design`](../huashu-design/SKILL.md) | Magazine-grade typography, CSS Grid, animated prototypes, MP4 export |
@@ -91,9 +91,9 @@ instead of scrolling the full index below:
 | [`p5js-hermes`](../p5js-hermes/SKILL.md) | p5.js creative coding: noise, particles, GLSL, audio-reactive |
 | [`remotion`](../remotion/SKILL.md) | Programmatic video with React |
 | [`motion-design-skill`](../motion-design-skill/SKILL.md) | Official LottieFiles: timing, easing, choreography, Disney 12 principles for UI |
-| [`gsap-skills`](../gsap-skills/SKILL.md) | Official GSAP: 8 skills — core, timeline, ScrollTrigger, Flip, Draggable, SplitText |
+| [`gsap-skills`](../gsap-skills/SKILL.md) | Official GSAP: core, timeline, ScrollTrigger, Flip, Draggable, SplitText |
 | [`motion`](../motion/SKILL.md) | Official Motion team skill (Motion, ex Framer Motion, + CSS): best practices, docs/example search, CSS springs, performance audits, upgrades |
-| [`framer-motion-skills`](../framer-motion-skills/SKILL.md) | 6 Framer Motion skills: core, Next.js, variants, scroll, gestures, layout |
+| [`framer-motion-skills`](../framer-motion-skills/SKILL.md) | Framer Motion: Next.js, variants, scroll, gestures, layout |
 | [`animate-skill`](../animate-skill/SKILL.md) | Emil-inspired Next.js/React patterns: hover, toast, text reveal, modals |
 | [`animate-css-skill`](../animate-css-skill/SKILL.md) | Animate.css v4 + scroll triggers + RTL + prefers-reduced-motion |
 | [`css-animation-skill`](../css-animation-skill/SKILL.md) | Scrapes live app design language, interviews, produces standalone animation file |
@@ -125,7 +125,9 @@ instead of scrolling the full index below:
 | [`color-expert`](../color-expert/SKILL.md) | OKLCH/OKLAB color science, palette generation, contrast |
 | [`baseline-ui`](../baseline-ui/SKILL.md) | Animation durations, typography scale, Tailwind anti-patterns |
 | [`shadcn-ui`](../shadcn-ui/SKILL.md) | shadcn/ui component workflow |
+| [`magic-ui`](../magic-ui/SKILL.md) | Magic UI animated React components: marquee, globe, blur-fade, magic-card, shiny-button |
 | [`building-components`](../building-components/SKILL.md) | Vercel: accessible, composable, themeable UI component authoring |
+| [`dimensional-drawing`](../dimensional-drawing/SKILL.md) | Apple-style monochrome dimensional drawing / spec sheet of a component, plus an optional motion film |
 | [`wpds`](../wpds/SKILL.md) | Official WordPress Design System: components, tokens, patterns (needs WPDS MCP) |
 | [`ui-ux-pro-max`](../ui-ux-pro-max/SKILL.md) | 50+ styles, 97 palettes, 9 tech stacks |
 | [`platform-design-skills`](../platform-design-skills/SKILL.md) | HIG, Material 3 and WCAG 2.2 rules, one skill per platform: iOS, iPadOS, macOS, watchOS, visionOS, tvOS, Android, web |
@@ -193,7 +195,7 @@ instead of scrolling the full index below:
 | [`openai-skills`](../openai-skills/SKILL.md) | Official OpenAI skills: Figma, imagegen, screenshot |
 | [`google-stitch-skills`](../google-stitch-skills/SKILL.md) | Google Stitch skills: design-md, prompt enhancement, React components, shadcn, loop |
 | [`extract-design-md`](../extract-design-md/SKILL.md) | Extract Stitch output into DESIGN.md format |
-| [`claude2figma`](../claude2figma/SKILL.md) | 4 skills enforcing token compliance: colors/fonts/spacing bind to Figma variables |
+| [`claude2figma`](../claude2figma/SKILL.md) | Enforces token compliance: colors/fonts/spacing bind to Figma variables |
 | [`work-with-design-systems`](../work-with-design-systems/SKILL.md) | Inspect (WCAG audit) + Build (6-phase with variable bindings) dual-mode |
 | [`figma-variables-tokens-generator`](../figma-variables-tokens-generator/SKILL.md) | Questionnaire → W3C token ZIP + Figma plugin for import |
 | [`figma-skill`](../figma-skill/SKILL.md) | Figma files via figma-developer-mcp → assets, tokens, code for Tailwind/React/Vue/Svelte/RN/Flutter/CSS (needs Figma token) |
@@ -203,9 +205,9 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
-| [`anthropics-skills`](../anthropics-skills/SKILL.md) | 6 Anthropic skills: frontend-design, artifacts, canvas, theme, brand, pptx |
+| [`anthropics-skills`](../anthropics-skills/SKILL.md) | Anthropic: frontend-design, artifacts, canvas, theme, brand, pptx |
 | [`vercel-skills`](../vercel-skills/SKILL.md) | Vercel skills: web-design-guidelines, writing guidelines, React best practices, composition, view transitions |
-| [`microsoft-skills`](../microsoft-skills/SKILL.md) | 2 Microsoft skills: design review, dark-theme React |
+| [`microsoft-skills`](../microsoft-skills/SKILL.md) | Microsoft: design review, dark-theme React |
 | [`software-mansion-skills`](../software-mansion-skills/SKILL.md) | Official Software Mansion: RN animations, gestures, SVG, on-device AI |
 | [`callstack-agent-skills`](../callstack-agent-skills/SKILL.md) | Official Callstack: RN best practices, profiling, Turbo Modules, upgrade |
 | [`expo-skills`](../expo-skills/SKILL.md) | Official Expo: Expo SDK, EAS Build/Submit, Expo Router |
@@ -244,8 +246,9 @@ instead of scrolling the full index below:
 | [`composio-artifacts`](../composio-artifacts/SKILL.md) | Artifacts connected to GitHub/Slack/Linear via Composio |
 | [`webgpu-claude-skill`](../webgpu-claude-skill/SKILL.md) | Three.js TSL, node materials, GPU compute, WGSL — r183+ |
 | [`threejs-ecs-ts`](../threejs-ecs-ts/SKILL.md) | Three.js + Entity Component Systems + TypeScript |
-| [`threejs-claude-skill-package`](../threejs-claude-skill-package/SKILL.md) | 24 skills: WebGL, WebGPU, R3F, physics, IFC/BIM architecture |
+| [`threejs-claude-skill-package`](../threejs-claude-skill-package/SKILL.md) | WebGL, WebGPU, R3F, physics, IFC/BIM architecture, one skill per topic |
 | [`generative-media-skills`](../generative-media-skills/SKILL.md) | AI media via muapi.ai: cinematic video, Nano Banana images, Seedance, product ads, thumbnails (needs muapi account + CLI) |
+| [`scroll-world`](../scroll-world/SKILL.md) | Scroll-scrubbed "fly through the world" landing page from AI-generated scenes (needs funded Higgsfield/Monid account) |
 | [`open-design`](../open-design/SKILL.md) | Local-first Claude Design alternative: app + daemon running design skills and brand design systems on your own agent (an app, not a skill install) |
 | [`superdesign-skill`](../superdesign-skill/SKILL.md) | Hosted infinite-canvas design agent for UI, decks and graphics; branchable drafts (needs @superdesign/cli + account) |
 
@@ -269,9 +272,9 @@ instead of scrolling the full index below:
 
 | Skill | Best for |
 |-------|----------|
-| [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | 9 skills: journey maps, OST, story mapping, PRD |
+| [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | journey maps, OST, story mapping, PRD |
 | [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | Nine PM plugins: discovery, strategy, execution, market research, analytics, GTM, growth, toolkit, AI shipping |
-| [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
+| [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | CRO: onboarding, page, signup flow |
 | [`pm-skills`](../pm-skills/SKILL.md) | Triple Diamond phase skills, foundation skills (personas, OKRs, lean canvas), Design Sprint and Foundation Sprint tools |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 | [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues (GitHub/Backlog; installs create-issue) |
@@ -312,7 +315,7 @@ instead of scrolling the full index below:
 | "good taste", "anti slop", "premium UI", "not generic" | `taste-skill` or `ui-craft` |
 | "art direction", "look and fix", "real-browser inspector" | `taste-skill` |
 | "no Inter font", "no 3-column cards", "no centered hero" | `taste-skill` or `ui-craft` |
-| "anti-slop detector", "33 rules", "ui-craft", "18 slash commands" | `ui-craft` |
+| "anti-slop detector", "33 rules", "ui-craft", "slash commands" | `ui-craft` |
 | "polish", "micro-interactions", "make it feel better" | `make-interfaces-better` |
 | "animation principles", "easing curves" | `emilkowalski-skill` |
 | "GLSL", "ray march", "WebGL shader" | `shader-dev` |
@@ -342,6 +345,9 @@ instead of scrolling the full index below:
 | "resume", "one-pager", "white paper", "typeset a PDF" | `kami` |
 | "presentation outline", "talk structure", "deck checkup" | `humanize-ppt` |
 | "shadcn", "shadcn component" | `shadcn-ui` |
+| "magic ui", "animated hero", "marquee", "blur-fade" | `magic-ui` |
+| "spec sheet", "redline", "dimensional drawing of a component" | `dimensional-drawing` |
+| "3D scroll landing page", "fly through a world", "diorama site" | `scroll-world` |
 | "WordPress Design System", "WPDS", "Gutenberg UI" | `wpds` |
 | "Hallmark", "design audit", "extract design DNA", "study this design" | `hallmark` |
 | "platform design", "cross-platform rules" | `platform-design-skills` |

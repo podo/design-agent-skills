@@ -63,7 +63,7 @@ claude plugin install styleseed@styleseed
 
 - **Requires:** Node.js and npm (the skill's bundled context compiler and quality gates run as Node scripts); Writes STYLESEED.md (a design lock) and a .styleseed/ directory into your project when its setup and build workflows run
 - **License:** MIT
-- **Large download (~179 MB):** the skills CLI gives up cloning after 300 s; if it times out, retry with `SKILLS_CLONE_TIMEOUT_MS=900000`.
+- **Download size:** ~77 MB.
 <!-- das:install:end -->
 
 ## Invoke after install

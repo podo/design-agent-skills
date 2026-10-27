@@ -117,9 +117,9 @@ Activate when the user:
 
 | Skill | Best for |
 |-------|----------|
-| [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | 9 skills: journey maps, OST, story mapping, PRD |
+| [`deanpeters-pm-skills`](../deanpeters-pm-skills/SKILL.md) | journey maps, OST, story mapping, PRD |
 | [`phuryn-pm-skills`](../phuryn-pm-skills/SKILL.md) | Nine PM plugins: discovery, strategy, execution, market research, analytics, GTM, growth, toolkit, AI shipping |
-| [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | 3 CRO skills: onboarding, page, signup flow |
+| [`coreyhaines-marketing`](../coreyhaines-marketing/SKILL.md) | CRO: onboarding, page, signup flow |
 | [`pm-skills`](../pm-skills/SKILL.md) | Triple Diamond phase skills, foundation skills (personas, OKRs, lean canvas), Design Sprint and Foundation Sprint tools |
 | [`claude-pm-skills`](../claude-pm-skills/SKILL.md) | Product thinking, discovery, prioritization, launch |
 | [`design-sprint`](../design-sprint/SKILL.md) | Research codebase → design feature → decompose into parent + sub-issues (GitHub/Backlog; installs create-issue) |

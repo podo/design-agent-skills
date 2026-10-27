@@ -42,7 +42,7 @@ Activate when the user:
 | [`impeccable`](../impeccable/SKILL.md) | Design fluency: slash commands (polish, audit, critique…), anti-pattern detection, theming, typography, motion |
 | [`hallmark`](../hallmark/SKILL.md) | Anti-AI-slop: design, audit, redesign, and extract design DNA from screenshots/URLs; structural variety |
 | [`make-interfaces-better`](../make-interfaces-better/SKILL.md) | Polish: micro-interactions, typography details, visual refinement |
-| [`ui-craft`](../ui-craft/SKILL.md) | 18 slash commands, anti-slop CLI, 3 style variants — deepest design engineering skill |
+| [`ui-craft`](../ui-craft/SKILL.md) | slash commands, anti-slop CLI, style variants — deepest design engineering skill |
 | [`frontend-design`](../frontend-design/SKILL.md) | 8 aesthetic anchors (Swiss, Brutalist, Aurora Maximalism, Retro-Futuristic…) with locked CSS tokens per theme |
 | [`distinctive-frontend`](../distinctive-frontend/SKILL.md) | Distinctive, non-generic interfaces: extreme typography, cohesive themes, staggered animation, layered backgrounds |
 | [`huashu-design`](../huashu-design/SKILL.md) | Magazine-grade typography, CSS Grid, animated prototypes, MP4 export |

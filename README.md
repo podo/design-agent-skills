@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-161 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+164 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -26,21 +26,21 @@ npx design-agent-skills
 ◆  User scope
 │
 ◇  Which profile?
-│  ● Picks        24 skills  ★ best in class
+│  ● Picks        21 skills  ★ best in class
 │  ○ Essentials   97 skills    full coverage
-│  ○ All         161 skills    everything
+│  ○ All         164 skills    everything
 │  ○ Category →  pick a domain
 └
 
-◆  Picks — 24 skills
+◆  Picks — 21 skills
 │
-◆  Installing 24 skills…
+◆  Installing 21 skills…
 │  ✓ taste-skill
 │  ✓ ui-craft
 │  ✓ gsap-skills
 │  …
 │
-◆  Done — 24 skills in 4.2s
+◆  Done — 21 skills in 4.2s
 ```
 
 Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, and [30+ more](https://github.com/vercel-labs/skills#supported-agents)). Installs skill pointers with symlinks from every agent directory to a single canonical store — one file, all agents.
@@ -49,14 +49,14 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
-| **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
+| **Picks** ★ | `--picks` | 21 | One best-in-class per category. Start here. |
 | **Essentials** | `--essentials` | ~97 | Full coverage, no redundancy. |
-| **All** | `--all` | 161 | Everything including niche and experimental. |
+| **All** | `--all` | 164 | Everything including niche and experimental. |
 
 ```bash
-npx design-agent-skills --picks -g          # 24 best-in-class skills, global
+npx design-agent-skills --picks -g          # 21 best-in-class skills, global
 npx design-agent-skills --essentials -g     # ~97 skills covering all categories
-npx design-agent-skills --all -g            # all 161 (default when no flag)
+npx design-agent-skills --all -g            # all 164 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (161 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (164 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -217,7 +217,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (34), `community` (73), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (35), `community` (79), `experimental` (56) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -243,19 +243,21 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [taste-skill](skills/taste-skill/SKILL.md) ★ | skill | design-systems | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) |
-| [ui-craft](skills/ui-craft/SKILL.md) ★ | package | design-systems | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
 | [brand-design-md](skills/brand-design-md/SKILL.md) | skill | design-systems | [SpaceZephyr/brand-design-md](https://github.com/SpaceZephyr/brand-design-md) |
 | [design-system-governance](skills/design-system-governance/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [frontend-design](skills/frontend-design/SKILL.md) | skill | design-systems | [Ilm-Alan/frontend-design](https://github.com/Ilm-Alan/frontend-design) |
 | [hallmark](skills/hallmark/SKILL.md) | skill | design-systems | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) |
 | [impeccable](skills/impeccable/SKILL.md) | skill | design-systems | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [localization-design](skills/localization-design/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
+| [open-design](skills/open-design/SKILL.md) | platform | design-systems | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
+| [ui-craft](skills/ui-craft/SKILL.md) | package | design-systems | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
 | [ai-graphic-design-skill](skills/ai-graphic-design-skill/SKILL.md) | skill | design-systems | [designrique/ai-graphic-design-skill](https://github.com/designrique/ai-graphic-design-skill) |
 | [design-for-ai](skills/design-for-ai/SKILL.md) | package | design-systems | [ryanthedev/design-for-ai](https://github.com/ryanthedev/design-for-ai) |
 | [distinctive-frontend](skills/distinctive-frontend/SKILL.md) | skill | design-systems | [Zambudio/buenchollo-app](https://github.com/Zambudio/buenchollo-app) |
 | [huashu-design](skills/huashu-design/SKILL.md) | skill | design-systems | [alchaincyf/huashu-design](https://github.com/alchaincyf/huashu-design) |
 | [logo-designer-skill](skills/logo-designer-skill/SKILL.md) | skill | design-systems | [neonwatty/logo-designer-skill](https://github.com/neonwatty/logo-designer-skill) |
 | [styleseed](skills/styleseed/SKILL.md) | package | design-systems | [bitjaru/styleseed](https://github.com/bitjaru/styleseed) |
+| [superdesign-skill](skills/superdesign-skill/SKILL.md) | skill | design-systems | [superdesigndev/superdesign-skill](https://github.com/superdesigndev/superdesign-skill) |
 | [wpds](skills/wpds/SKILL.md) | skill | design-systems | [WordPress/agent-skills](https://github.com/WordPress/agent-skills) |
 
 ### Motion & Animation
@@ -264,13 +266,12 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 |-------|------|----------|----------|
 | [remotion](skills/remotion/SKILL.md) ★ | package | creative-3d | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [generative-media-skills](skills/generative-media-skills/SKILL.md) | package | creative-3d | [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills) |
-| [open-design](skills/open-design/SKILL.md) | platform | creative-3d | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
 | [p5js-hermes](skills/p5js-hermes/SKILL.md) | skill | creative-3d | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) |
 | [algorithmic-art](skills/algorithmic-art/SKILL.md) | skill | creative-3d | [anthropics/skills](https://github.com/anthropics/skills) |
 | [cloudai-threejs](skills/cloudai-threejs/SKILL.md) | package | creative-3d | [CloudAI-X/threejs-skills](https://github.com/CloudAI-X/threejs-skills) |
 | [fal-ai-skills](skills/fal-ai-skills/SKILL.md) | package | creative-3d | [fal-ai-community/skills](https://github.com/fal-ai-community/skills) |
+| [scroll-world](skills/scroll-world/SKILL.md) | skill | creative-3d | [oso95/scroll-world](https://github.com/oso95/scroll-world) |
 | [shader-dev](skills/shader-dev/SKILL.md) | skill | creative-3d | [MiniMax-AI/skills](https://github.com/MiniMax-AI/skills) |
-| [superdesign-skill](skills/superdesign-skill/SKILL.md) | skill | creative-3d | [superdesigndev/superdesign-skill](https://github.com/superdesigndev/superdesign-skill) |
 | [threejs-claude-skill-package](skills/threejs-claude-skill-package/SKILL.md) | package | creative-3d | [Impertio-Studio/Three.js-Claude-Skill-Package](https://github.com/Impertio-Studio/Three.js-Claude-Skill-Package) |
 | [threejs-ecs-ts](skills/threejs-ecs-ts/SKILL.md) | package | creative-3d | [Nice-Wolf-Studio/claude-skills-threejs-ecs-ts](https://github.com/Nice-Wolf-Studio/claude-skills-threejs-ecs-ts) |
 | [webgpu-claude-skill](skills/webgpu-claude-skill/SKILL.md) | skill | creative-3d | [dgreenheck/webgpu-claude-skill](https://github.com/dgreenheck/webgpu-claude-skill) |
@@ -290,7 +291,6 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [design-lab](skills/design-lab/SKILL.md) | skill | interaction-polish | [0xdesign/design-plugin](https://github.com/0xdesign/design-plugin) |
 | [interface-design-dammyjay](skills/interface-design-dammyjay/SKILL.md) | package | interaction-polish | [Dammyjay93/interface-design](https://github.com/Dammyjay93/interface-design) |
 | [simota-agent-skills](skills/simota-agent-skills/SKILL.md) | package | interaction-polish | [simota/agent-skills](https://github.com/simota/agent-skills) |
-| [taste-design-stitch](skills/taste-design-stitch/SKILL.md) | skill | interaction-polish | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
 
 ### Visual Components
 
@@ -301,28 +301,26 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [material-3-skill](skills/material-3-skill/SKILL.md) ★ | skill | visual-components | [hamen/material-3-skill](https://github.com/hamen/material-3-skill) |
 | [shadcn-ui](skills/shadcn-ui/SKILL.md) ★ | package | visual-components | [shadcn-ui/ui](https://github.com/shadcn-ui/ui) |
 | [building-components](skills/building-components/SKILL.md) | skill | visual-components | [vercel/components.build](https://github.com/vercel/components.build) |
-| [copywriting-skill](skills/copywriting-skill/SKILL.md) | skill | visual-components | [judicael-s/Copywriting-skill](https://github.com/judicael-s/Copywriting-skill) |
-| [design-tokens-skill](skills/design-tokens-skill/SKILL.md) | skill | visual-components | [ilikescience/design-tokens-skill](https://github.com/ilikescience/design-tokens-skill) |
 | [google-fonts-skill](skills/google-fonts-skill/SKILL.md) | skill | visual-components | [sliday/google-fonts-skill](https://github.com/sliday/google-fonts-skill) |
 | [hig-doctor](skills/hig-doctor/SKILL.md) | skill | visual-components | [raintree-technology/hig-doctor](https://github.com/raintree-technology/hig-doctor) |
-| [humanize-text](skills/humanize-text/SKILL.md) | skill | visual-components | [gregorymm/humanize-text](https://github.com/gregorymm/humanize-text) |
 | [liquid-glass-skill](skills/liquid-glass-skill/SKILL.md) | skill | visual-components | [haider-nawaz/liquid-glass-skill](https://github.com/haider-nawaz/liquid-glass-skill) |
+| [magic-ui](skills/magic-ui/SKILL.md) | skill | visual-components | [magicuidesign/magicui](https://github.com/magicuidesign/magicui) |
 | [mobile-app-design](skills/mobile-app-design/SKILL.md) | skill | visual-components | [awesome-skills/mobile-app-design](https://github.com/awesome-skills/mobile-app-design) |
 | [platform-design-skills](skills/platform-design-skills/SKILL.md) | package | visual-components | [ehmo/platform-design-skills](https://github.com/ehmo/platform-design-skills) |
 | [swiftui-claude-skills](skills/swiftui-claude-skills/SKILL.md) | package | visual-components | [199-biotechnologies/swiftui-claude-skills](https://github.com/199-biotechnologies/swiftui-claude-skills) |
 | [swiftui-design-skill](skills/swiftui-design-skill/SKILL.md) | skill | visual-components | [wholiver/swiftui-design-skill](https://github.com/wholiver/swiftui-design-skill) |
+| [ui-ux-pro-max](skills/ui-ux-pro-max/SKILL.md) | skill | visual-components | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
 | [awesome-design-skills](skills/awesome-design-skills/SKILL.md) | package | visual-components | [bergside/awesome-design-skills](https://github.com/bergside/awesome-design-skills) |
+| [dimensional-drawing](skills/dimensional-drawing/SKILL.md) | package | visual-components | [enesozturk/dimensional-drawing](https://github.com/enesozturk/dimensional-drawing) |
 | [mobile-app-ui-design](skills/mobile-app-ui-design/SKILL.md) | skill | visual-components | [ceorkm/mobile-app-ui-design](https://github.com/ceorkm/mobile-app-ui-design) |
 | [sleek-design-mobile-apps](skills/sleek-design-mobile-apps/SKILL.md) | skill | visual-components | [sleekdotdesign/agent-skills](https://github.com/sleekdotdesign/agent-skills) |
 | [swiftui-patterns](skills/swiftui-patterns/SKILL.md) | skill | visual-components | [Dimillian/Skills](https://github.com/Dimillian/Skills) |
-| [ui-ux-pro-max](skills/ui-ux-pro-max/SKILL.md) | skill | visual-components | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
 
 ### Accessibility & Quality
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [fixing-accessibility](skills/fixing-accessibility/SKILL.md) ★ | package | accessibility-quality | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
-| [wcag-ai-skill](skills/wcag-ai-skill/SKILL.md) ★ | skill | accessibility-quality | [Raze-Systems/wcag-ai-skill](https://github.com/Raze-Systems/wcag-ai-skill) |
 | [accessibility-agents](skills/accessibility-agents/SKILL.md) | package | accessibility-quality | [Community-Access/accessibility-agents](https://github.com/Community-Access/accessibility-agents) |
 | [addyosmani-quality](skills/addyosmani-quality/SKILL.md) | package | accessibility-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) |
 | [baseline-ui](skills/baseline-ui/SKILL.md) | skill | accessibility-quality | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
@@ -330,6 +328,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [dark-pattern-audit](skills/dark-pattern-audit/SKILL.md) | skill | accessibility-quality | [SidKH/skills](https://github.com/SidKH/skills) |
 | [react-doctor](skills/react-doctor/SKILL.md) | skill | accessibility-quality | [millionco/react-doctor](https://github.com/millionco/react-doctor) |
 | [mastepanoski-skills](skills/mastepanoski-skills/SKILL.md) | package | accessibility-quality | [mastepanoski/claude-skills](https://github.com/mastepanoski/claude-skills) |
+| [wcag-ai-skill](skills/wcag-ai-skill/SKILL.md) | skill | accessibility-quality | [Raze-Systems/wcag-ai-skill](https://github.com/Raze-Systems/wcag-ai-skill) |
 | [wcag-audit-patterns](skills/wcag-audit-patterns/SKILL.md) | skill | accessibility-quality | [wshobson/agents](https://github.com/wshobson/agents) |
 
 ### Design Review
@@ -357,6 +356,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 |-------|------|----------|----------|
 | [figma-official-skills](skills/figma-official-skills/SKILL.md) ★ | package | figma-code | [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide) |
 | [claude2figma](skills/claude2figma/SKILL.md) | package | figma-code | [senlindesign/claude2figma](https://github.com/senlindesign/claude2figma) |
+| [design-tokens-skill](skills/design-tokens-skill/SKILL.md) | skill | figma-code | [ilikescience/design-tokens-skill](https://github.com/ilikescience/design-tokens-skill) |
 | [extract-design-system](skills/extract-design-system/SKILL.md) | skill | figma-code | [arvindrk/extract-design-system](https://github.com/arvindrk/extract-design-system) |
 | [google-stitch-skills](skills/google-stitch-skills/SKILL.md) | package | figma-code | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
 | [work-with-design-systems](skills/work-with-design-systems/SKILL.md) | skill | figma-code | [natdexterra/work-with-design-systems](https://github.com/natdexterra/work-with-design-systems) |
@@ -364,6 +364,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [extract-design-md](skills/extract-design-md/SKILL.md) | skill | figma-code | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
 | [figma-skill](skills/figma-skill/SKILL.md) | skill | figma-code | [nafiurrahmanniloy/figma-skill](https://github.com/nafiurrahmanniloy/figma-skill) |
 | [figma-variables-tokens-generator](skills/figma-variables-tokens-generator/SKILL.md) | package | figma-code | [Shanmus4/figma-variables-tokens-generator](https://github.com/Shanmus4/figma-variables-tokens-generator) |
+| [taste-design-stitch](skills/taste-design-stitch/SKILL.md) | skill | figma-code | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) |
 
 ### Official Suites
 
@@ -440,6 +441,8 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 |-------|------|----------|----------|
 | [ux-writing-skill](skills/ux-writing-skill/SKILL.md) ★ | skill | content-design | [content-designer/ux-writing-skill](https://github.com/content-designer/ux-writing-skill) |
 | [content-strategy](skills/content-strategy/SKILL.md) | skill | content-design | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
+| [copywriting-skill](skills/copywriting-skill/SKILL.md) | skill | content-design | [judicael-s/Copywriting-skill](https://github.com/judicael-s/Copywriting-skill) |
+| [humanize-text](skills/humanize-text/SKILL.md) | skill | content-design | [gregorymm/humanize-text](https://github.com/gregorymm/humanize-text) |
 | [product-position](skills/product-position/SKILL.md) | skill | content-design | [firatcand/founder-skills](https://github.com/firatcand/founder-skills) |
 
 ### Email Design
@@ -460,18 +463,18 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
-| [framer-motion-skills](skills/framer-motion-skills/SKILL.md) ★ | package | motion-animation | [C-Jeril/framer-motion-skills](https://github.com/C-Jeril/framer-motion-skills) |
 | [gsap-skills](skills/gsap-skills/SKILL.md) ★ | package | motion-animation | [greensock/gsap-skills](https://github.com/greensock/gsap-skills) |
-| [animate-skill](skills/animate-skill/SKILL.md) | skill | motion-animation | [delphi-ai/animate-skill](https://github.com/delphi-ai/animate-skill) |
 | [claudedesignskills](skills/claudedesignskills/SKILL.md) | package | motion-animation | [freshtechbro/claudedesignskills](https://github.com/freshtechbro/claudedesignskills) |
 | [design-motion-principles](skills/design-motion-principles/SKILL.md) | skill | motion-animation | [kylezantos/design-motion-principles](https://github.com/kylezantos/design-motion-principles) |
+| [hyperframes](skills/hyperframes/SKILL.md) | package | motion-animation | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) |
 | [motion](skills/motion/SKILL.md) | skill | motion-animation | [motiondivision/ai-kit](https://github.com/motiondivision/ai-kit) |
 | [motion-design-skill](skills/motion-design-skill/SKILL.md) | package | motion-animation | [lottiefiles/motion-design-skill](https://github.com/lottiefiles/motion-design-skill) |
 | [animate-css-skill](skills/animate-css-skill/SKILL.md) | skill | motion-animation | [msrbuilds/animate-css-skill](https://github.com/msrbuilds/animate-css-skill) |
+| [animate-skill](skills/animate-skill/SKILL.md) | skill | motion-animation | [delphi-ai/animate-skill](https://github.com/delphi-ai/animate-skill) |
 | [css-animation-skill](skills/css-animation-skill/SKILL.md) | skill | motion-animation | [neonwatty/css-animation-skill](https://github.com/neonwatty/css-animation-skill) |
 | [fixing-motion-performance](skills/fixing-motion-performance/SKILL.md) | skill | motion-animation | [ibelick/ui-skills](https://github.com/ibelick/ui-skills) |
+| [framer-motion-skills](skills/framer-motion-skills/SKILL.md) | package | motion-animation | [C-Jeril/framer-motion-skills](https://github.com/C-Jeril/framer-motion-skills) |
 | [huashu-art-motion](skills/huashu-art-motion/SKILL.md) | skill | motion-animation | [alchaincyf/huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion) |
-| [hyperframes](skills/hyperframes/SKILL.md) | package | motion-animation | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) |
 | [oil-motion](skills/oil-motion/SKILL.md) | skill | motion-animation | [oil-oil/oil-motion](https://github.com/oil-oil/oil-motion) |
 | [wiggle-claude-skill](skills/wiggle-claude-skill/SKILL.md) | skill | motion-animation | [talknerdytome-labs/wiggle-claude-skill](https://github.com/talknerdytome-labs/wiggle-claude-skill) |
 

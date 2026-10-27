@@ -1,7 +1,7 @@
 type: package
 tier: experimental
 category: design-systems
-rank: 1
+rank: 2
 upstream: https://github.com/educlopez/ui-craft
 version: latest
 install_default: npx skills add educlopez/ui-craft --skill ui-craft ui-craft-minimal ui-craft-editorial ui-craft-dense-dashboard

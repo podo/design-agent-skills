@@ -1,7 +1,7 @@
 type: package
 tier: official
 category: motion-animation
-rank: 3
+rank: 2
 upstream: https://github.com/heygen-com/hyperframes
 version: latest
 install_mode: manual
