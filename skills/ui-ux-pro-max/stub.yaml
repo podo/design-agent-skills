@@ -1,7 +1,7 @@
 type: skill
 tier: community
 category: visual-components
-rank: 3
+rank: 2
 upstream: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
 upstream_path: .claude/skills/ui-ux-pro-max/SKILL.md
 version: latest

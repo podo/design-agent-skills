@@ -1,0 +1,12 @@
+type: skill
+tier: community
+rank: 2
+category: diagrams
+upstream: https://github.com/wheresryan22/anatomy
+upstream_path: SKILL.md
+version: latest
+install_default: npx skills add wheresryan22/anatomy --skill anatomy
+installed_as: anatomy
+license: MIT
+size_mb: 13
+note: "verified 2026-10-27; single skill at repo root. Ships six complete worked examples (dial gauge up to a Raptor engine) plus kit/ and references/; a figure can take 30-90 min, so it is a slow, high-detail skill. Optional companion npm package anatomy-figures serves prebuilt figures only; the skill itself writes framework-free TS/SVG, React components or A4 PDFs and needs no paid services"

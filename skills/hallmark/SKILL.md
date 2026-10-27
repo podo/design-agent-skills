@@ -49,7 +49,7 @@ das:
 **Heads-up**
 
 - **License:** MIT
-- **Download size:** ~88 MB.
+- **Large download (~227 MB):** the skills CLI gives up cloning after 300 s; if it times out, retry with `SKILLS_CLONE_TIMEOUT_MS=900000`.
 <!-- das:install:end -->
 
 ## Invoke after install

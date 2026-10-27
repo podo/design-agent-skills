@@ -1,0 +1,15 @@
+type: package
+tier: community
+rank: 3
+category: visual-components
+upstream: https://github.com/enesozturk/dimensional-drawing
+version: latest
+install_default: npx skills add enesozturk/dimensional-drawing --skill dimensional-drawing dimensional-drawing-motion
+installed_as:
+  - dimensional-drawing
+  - dimensional-drawing-motion
+requires:
+  - Playwright and ffmpeg, only for the headless motion renderer; the Claude artifact route needs neither
+license: MIT
+size_mb: 17
+note: "verified 2026-10-27; two skills, not one. dimensional-drawing makes a single monochrome HTML sheet in Apple's dimensional-drawing style (variable codes instead of numbers, [TBD] for anything not in the source, unbranded by default); dimensional-drawing-motion animates a finished sheet into a ~11 s 1920x1080 film. The motion skill is tuned for Claude's Motion artifact type and falls back to Playwright + ffmpeg elsewhere; it notes that Remotion needs a company licence above 3 people, so porting is not free"

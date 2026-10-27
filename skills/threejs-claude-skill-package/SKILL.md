@@ -40,12 +40,12 @@ das:
 
    **Global:**
    ```bash
-   npx skills add Impertio-Studio/Three.js-Claude-Skill-Package -g -y
+   npx skills add Impertio-Studio/Three.js-Claude-Skill-Package --skill threejs-agents-model-optimizer threejs-agents-scene-builder threejs-core-math threejs-core-raycaster threejs-core-renderer threejs-core-scene-graph threejs-errors-performance threejs-errors-rendering threejs-impl-animation threejs-impl-audio threejs-impl-drei threejs-impl-ifc-viewer threejs-impl-lighting threejs-impl-physics threejs-impl-post-processing threejs-impl-react-three-fiber threejs-impl-shadows threejs-impl-webgpu threejs-impl-xr threejs-syntax-controls threejs-syntax-geometries threejs-syntax-loaders threejs-syntax-materials threejs-syntax-shaders -g -y
    ```
 
    **Project:**
    ```bash
-   npx skills add Impertio-Studio/Three.js-Claude-Skill-Package -y
+   npx skills add Impertio-Studio/Three.js-Claude-Skill-Package --skill threejs-agents-model-optimizer threejs-agents-scene-builder threejs-core-math threejs-core-raycaster threejs-core-renderer threejs-core-scene-graph threejs-errors-performance threejs-errors-rendering threejs-impl-animation threejs-impl-audio threejs-impl-drei threejs-impl-ifc-viewer threejs-impl-lighting threejs-impl-physics threejs-impl-post-processing threejs-impl-react-three-fiber threejs-impl-shadows threejs-impl-webgpu threejs-impl-xr threejs-syntax-controls threejs-syntax-geometries threejs-syntax-loaders threejs-syntax-materials threejs-syntax-shaders -y
    ```
    > **Claude Code:** send a command as a chat message starting with `!` to run it without leaving the conversation.
 

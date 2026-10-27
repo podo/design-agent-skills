@@ -1,0 +1,14 @@
+type: skill
+tier: official
+rank: 2
+category: visual-components
+upstream: https://github.com/magicuidesign/magicui
+upstream_path: skills/magic-ui/SKILL.md
+version: latest
+install_default: npx skills add magicuidesign/magicui --skill magic-ui
+installed_as: magic-ui
+requires:
+  - "Node.js and network access: components are installed through the shadcn CLI from the Magic UI registry, and shadcn must already be initialised in the project"
+license: MIT
+size_mb: 82
+note: "verified 2026-10-27; the repo is the Magic UI docs site plus the skill, so the ~82 MB clone is bigger than the skill itself. The skill ships references/components.md and references/recipes.md and only installs components by name from the @magicui/* registry, so it adds nothing to the project until the agent runs the shadcn add command. tier official: published by the Magic UI team in their own repo"

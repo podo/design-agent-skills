@@ -273,10 +273,11 @@ describe('catalogue-level invariants', () => {
     for (const { name, fm } of skills) {
       if (!fm) continue;
       for (const t of parseTriggers(fm)) {
-        if (seen.has(t)) {
-          dupes.push(`"${t}" on both ${seen.get(t)} and ${name}`);
+        const key = t.toLowerCase();
+        if (seen.has(key)) {
+          dupes.push(`"${t}" on both ${seen.get(key)} and ${name}`);
         } else {
-          seen.set(t, name);
+          seen.set(key, name);
         }
       }
     }

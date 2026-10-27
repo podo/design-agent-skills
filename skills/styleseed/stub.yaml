@@ -14,5 +14,5 @@ requires:
   - Node.js and npm (the skill's bundled context compiler and quality gates run as Node scripts)
   - Writes STYLESEED.md (a design lock) and a .styleseed/ directory into your project when its setup and build workflows run
 license: MIT
-size_mb: 179
+size_mb: 77
 note: "verified 2026-10-21; upstream folded the old 13 /ss-* slash commands and the engine/ copy route into one skill styleseed with internal workflows, so the clone plus cp -r engine route is obsolete; size_mb is the measured checkout, GitHub API reports 77 MB packed; the default 300 s clone timeout was hit once on a saturated link, the clone then took about 60 s with SKILLS_CLONE_TIMEOUT_MS=900000; plugin route is documented in the upstream README, not run"

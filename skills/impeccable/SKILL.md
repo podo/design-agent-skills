@@ -62,7 +62,7 @@ das:
 
 - **Requires:** the skill's launcher (scripts/impeccable) downloads a native engine binary to ~/.impeccable/bin on first run; anonymous usage telemetry is on by default (opt out with IMPECCABLE_NO_TELEMETRY=1 or DO_NOT_TRACK=1)
 - **License:** Apache-2.0
-- **Large download (~737 MB):** the skills CLI gives up cloning after 300 s; if it times out, retry with `SKILLS_CLONE_TIMEOUT_MS=900000`.
+- **Large download (~854 MB):** the skills CLI gives up cloning after 300 s; if it times out, retry with `SKILLS_CLONE_TIMEOUT_MS=900000`.
 <!-- das:install:end -->
 
 ## Invoke after install

@@ -38,7 +38,7 @@ Activate when the user:
 | [`openai-skills`](../openai-skills/SKILL.md) | Official OpenAI skills: Figma, imagegen, screenshot |
 | [`google-stitch-skills`](../google-stitch-skills/SKILL.md) | Google Stitch skills: design-md, prompt enhancement, React components, shadcn, loop |
 | [`extract-design-md`](../extract-design-md/SKILL.md) | Extract Stitch output into DESIGN.md format |
-| [`claude2figma`](../claude2figma/SKILL.md) | 4 skills enforcing token compliance: colors/fonts/spacing → Figma variables |
+| [`claude2figma`](../claude2figma/SKILL.md) | Enforces token compliance: colors/fonts/spacing → Figma variables |
 | [`work-with-design-systems`](../work-with-design-systems/SKILL.md) | Inspect (WCAG audit) + Build (6-phase with variable bindings) dual-mode |
 | [`figma-variables-tokens-generator`](../figma-variables-tokens-generator/SKILL.md) | Questionnaire → W3C token ZIP + Figma plugin for import |
 | [`figma-skill`](../figma-skill/SKILL.md) | Figma files via figma-developer-mcp → assets, tokens, code for Tailwind/React/Vue/Svelte/RN/Flutter/CSS (needs Figma token) |
@@ -49,9 +49,10 @@ Activate when the user:
 
 | Skill | Best for |
 |-------|----------|
-| [`anthropics-skills`](../anthropics-skills/SKILL.md) | 6 Anthropic skills: frontend-design, artifacts, canvas, theme, brand, pptx |
+| [`anthropics-skills`](../anthropics-skills/SKILL.md) | Anthropic: frontend-design, artifacts, canvas, theme, brand, pptx |
 | [`vercel-skills`](../vercel-skills/SKILL.md) | Vercel skills: web-design-guidelines, writing guidelines, React best practices, composition, view transitions |
-| [`microsoft-skills`](../microsoft-skills/SKILL.md) | 2 Microsoft skills: design review, dark-theme React |
+| [`microsoft-skills`](../microsoft-skills/SKILL.md) | Microsoft: design review, dark-theme React |
 | [`software-mansion-skills`](../software-mansion-skills/SKILL.md) | Official Software Mansion: RN animations, gestures, SVG, on-device AI |
 | [`callstack-agent-skills`](../callstack-agent-skills/SKILL.md) | Official Callstack: RN best practices, profiling, Turbo Modules, upgrade |
 | [`expo-skills`](../expo-skills/SKILL.md) | Official Expo: Expo SDK, EAS Build/Submit, Expo Router |
+| [`composio-artifacts`](../composio-artifacts/SKILL.md) | Anthropic artifact patterns wired to GitHub/Slack/Linear through Composio (vendored copy) |

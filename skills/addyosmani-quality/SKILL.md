@@ -7,7 +7,7 @@ description: |
 triggers:
   - "Addy Osmani"
   - "web quality"
-  - "core web vitals"
+  - "performance audit"
   - "web accessibility"
   - "Lighthouse audit"
   - "SEO audit"

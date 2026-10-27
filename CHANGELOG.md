@@ -5,6 +5,83 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.12.0] — 2026-10-27
+
+Three new skills plus a metadata audit of the whole catalogue, both prompted by a review of the
+wider design-skill ecosystem. Catalogue: 161 → 164 skills; nothing removed.
+
+### Added
+
+- **`magic-ui`** — Magic UI animated React components (marquee, globe, blur-fade, magic-card,
+  shiny-button), installed through the shadcn registry rather than copied. Fills the one real gap
+  the audit found: an animated-component catalogue, which existed only as a buried sub-skill inside
+  a stale third-party package and was unreachable by intent. rank 2, tier official
+  (`magicuidesign/magicui`; 22.8k stars, MIT)
+- **`dimensional-drawing`** — Apple-style monochrome dimensional drawing of a component:
+  plan view, shadow envelope, exploded axonometric, nested-corner detail, and variable tables.
+  Ships a companion motion skill for an ~11 s specification film. rank 3
+  (`enesozturk/dimensional-drawing`; 1k stars, MIT, two skills)
+- **`scroll-world`** — Scroll-scrubbed “fly through the world” landing page assembled from
+  AI-generated scenes with frame-identical seams. Declares its paid dependencies (funded
+  Higgsfield or Monid account) in `requires:`. rank 3
+  (`oso95/scroll-world`; 10.5k stars, MIT)
+
+### Changed
+
+- **Ranks corrected against reality** — `ui-ux-pro-max` 3→2 (141k stars, the largest upstream in
+  the catalogue); `hyperframes` 3→2 (73k stars, official); `framer-motion-skills` 1→3 (10 stars,
+  unofficial, and its `framer-motion-core` skill does not exist); `ui-craft` 1→2 and
+  `wcag-ai-skill` 1→3, removing duplicate Picks; `animate-skill` 2→3 (stale, unlicensed,
+  duplicates `emilkowalski-skill`).
+- **Tiers corrected** — `taste-skill` (103k stars, a Pick), `open-design` (104k stars),
+  `cloudai-threejs` and `claudedesignskills` are no longer `experimental`, which is reserved
+  for new or unverified sources and is excluded from default installs.
+- **Categories corrected** — `open-design` and `superdesign-skill` out of `creative-3d`;
+  `copywriting-skill` and `humanize-text` to `content-design`; `design-tokens-skill` and
+  `taste-design-stitch` to `figma-code`.
+- **Domain routers** — `motion-catalogue` gains `design-motion-principles`, `fixing-motion-performance`,
+  `magic-ui` and `scroll-world`; `figma-catalogue` gains `composio-artifacts`.
+
+### Fixed
+
+- **Install truth** — `hallmark` 88→227 MB, `impeccable` 737→854 MB, `styleseed` 179→77 MB,
+  so the clone-size warning fires on the skills that need it and not on the ones that don't.
+  `threejs-claude-skill-package` now names all 24 skills instead of installing a bare repo.
+  `claudedesignskills` declares its Blender, Spline, Rive and Substance accounts.
+  `hyperframes` follows upstream's restructure: `installed_as` is now the four skills upstream
+  labels core (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`) instead of
+  six names that no longer exist, which is what the real-install check was failing on.
+- **Hardcoded counts in router prose** — the count-claim lint gate only catches two-digit numbers
+  (single-digit claims are deliberately allowed), so a dozen “8 skills”, “6 Anthropic skills” and
+  “24 skills” lines had accumulated in the catalogue tables. Those rows now describe capabilities
+  instead of counting them.
+- **Trigger collision test** — the duplicate-trigger test compared case-sensitively, so
+  `core web vitals` and `Core Web Vitals` coexisted; comparison is now case-insensitive and
+  `addyosmani-quality` uses a distinct trigger.
+
+---
+
+## [2.11.0] — 2026-10-27
+
+One new skill, prompted by a review of the wider design-skill ecosystem (the other thirteen
+suggestions there were already in the catalogue, or had no `SKILL.md` to install).
+Catalogue: 160 → 161 skills; nothing removed.
+
+### Added
+
+- **`anatomy`** — Interactive isometric figures that explain a mechanism by drawing it: a real
+  machine whose moving parts *are* the concept, with one lit accent part and a live readout.
+  Outputs framework-free TS/SVG, React components, or A4 PDFs. rank 2
+  (`wheresryan22/anatomy`; 21k stars, MIT, single skill at the repo root)
+
+### Notes
+
+- Fills a real gap: every existing diagramming skill draws static pages, and nothing in the
+  catalogue produced an interactive explanatory figure.
+- Slow, high-detail skill (30–90 min for a Figure), so it stays rank 2 rather than a Pick.
+
+---
+
 ## [2.10.0] — 2026-10-21
 
 Gap analysis against `nexu-io/open-design`, then a full audit of every install command in the
