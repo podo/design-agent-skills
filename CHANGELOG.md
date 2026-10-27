@@ -48,9 +48,13 @@ wider design-skill ecosystem. Catalogue: 161 → 164 skills; nothing removed.
   so the clone-size warning fires on the skills that need it and not on the ones that don't.
   `threejs-claude-skill-package` now names all 24 skills instead of installing a bare repo.
   `claudedesignskills` declares its Blender, Spline, Rive and Substance accounts.
-- **Count-claim lint** — the gate only matched two-digit numbers, so single-digit claims such as
-  “8 skills” passed; the regex now allows intervening words such as “design” or “brand design”, and the router prose has been rewritten to
-  describe capabilities instead of counting them.
+  `hyperframes` follows upstream's restructure: `installed_as` is now the four skills upstream
+  labels core (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`) instead of
+  six names that no longer exist, which is what the real-install check was failing on.
+- **Hardcoded counts in router prose** — the count-claim lint gate only catches two-digit numbers
+  (single-digit claims are deliberately allowed), so a dozen “8 skills”, “6 Anthropic skills” and
+  “24 skills” lines had accumulated in the catalogue tables. Those rows now describe capabilities
+  instead of counting them.
 - **Trigger collision test** — the duplicate-trigger test compared case-sensitively, so
   `core web vitals` and `Core Web Vitals` coexisted; comparison is now case-insensitive and
   `addyosmani-quality` uses a distinct trigger.
