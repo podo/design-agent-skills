@@ -9,18 +9,12 @@ manual_reason: The repository is about 500 MB (showcase media and test baselines
 install_steps:
   - git clone --depth=1 --filter=blob:none --sparse https://github.com/heygen-com/hyperframes.git /tmp/hyperframes-skills
   - git -C /tmp/hyperframes-skills sparse-checkout set skills
-  - npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-core hyperframes-cli hyperframes-animation hyperframes-audio hyperframes-creative hyperframes-keyframes hyperframes-registry hyperframes-studio media-use
+  - npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-cli hyperframes-registry media-use
   - rm -rf /tmp/hyperframes-skills
 installed_as:
   - hyperframes
-  - hyperframes-core
   - hyperframes-cli
-  - hyperframes-animation
-  - hyperframes-audio
-  - hyperframes-creative
-  - hyperframes-keyframes
   - hyperframes-registry
-  - hyperframes-studio
   - media-use
 install_claude:
   - claude plugin marketplace add heygen-com/hyperframes
@@ -30,4 +24,4 @@ requires:
   - Network access at use time. The entry skill installs the workflow skills it routes to (slideshow, general-video, product-launch-video and others) on demand with `npx hyperframes skills update <workflow>`
   - HeyGen CLI sign-in (free OAuth allowance) only for background music, TTS voiceover and avatar video. Sound effects and animation authoring need no account
 license: Apache-2.0
-note: "verified 2026-10-21; size_mb deliberately omitted: the repo is 501 MB but the sparse route downloads under 20 MB. The 10 installed skills are the upstream 'core set' (README: standalone installs default to the core set and the router installs workflows lazily; same list as the core-skills plugin in marketplace.json). A bare `npx skills add heygen-com/hyperframes -y` installs all published skills, including generically named ones (figma, slideshow, general-video) that would collide with other stubs. The plugin route installs the full bundle; checked against marketplace.json and README only, not run"
+note: "verified 2026-10-27; size_mb deliberately omitted: the repo is 501 MB but the sparse route downloads under 20 MB. Upstream now publishes 7 skills and labels hyperframes, hyperframes-cli, hyperframes-registry and media-use as its core set, so those are what this stub installs; the general skills (figma, remotion-to-hyperframes, slideshow) are deliberately excluded because their names would collide with other stubs. The router installs workflows lazily. The plugin route installs the full bundle; the sparse install route is verified by a real install, the plugin route is not"

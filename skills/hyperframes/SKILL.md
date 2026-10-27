@@ -27,7 +27,7 @@ das:
 ## Decision tree
 
 1. **Is the full skill already installed?**
-   This package installs 10 skills (`hyperframes`, `hyperframes-core`, `hyperframes-cli`, `hyperframes-animation`, `hyperframes-audio`, `hyperframes-creative`, `hyperframes-keyframes`, `hyperframes-registry`, `hyperframes-studio`, `media-use`); checking the first.
+   This package installs 4 skills (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`); checking the first.
    - Global: `f=~/.agents/skills/hyperframes/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
    - Project: `f=.agents/skills/hyperframes/SKILL.md; [ -f "$f" ] && ! grep -q "^das:" "$f" && echo "installed" || echo "pointer"`
    - `installed` → the skill is installed as `hyperframes`, invoke it and proceed
@@ -47,7 +47,7 @@ das:
    ```bash
    git clone --depth=1 --filter=blob:none --sparse https://github.com/heygen-com/hyperframes.git /tmp/hyperframes-skills
    git -C /tmp/hyperframes-skills sparse-checkout set skills
-   npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-core hyperframes-cli hyperframes-animation hyperframes-audio hyperframes-creative hyperframes-keyframes hyperframes-registry hyperframes-studio media-use -g -y
+   npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-cli hyperframes-registry media-use -g -y
    rm -rf /tmp/hyperframes-skills
    ```
 
@@ -55,7 +55,7 @@ das:
    ```bash
    git clone --depth=1 --filter=blob:none --sparse https://github.com/heygen-com/hyperframes.git /tmp/hyperframes-skills
    git -C /tmp/hyperframes-skills sparse-checkout set skills
-   npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-core hyperframes-cli hyperframes-animation hyperframes-audio hyperframes-creative hyperframes-keyframes hyperframes-registry hyperframes-studio media-use -y
+   npx skills add /tmp/hyperframes-skills --skill hyperframes hyperframes-cli hyperframes-registry media-use -y
    rm -rf /tmp/hyperframes-skills
    ```
 
