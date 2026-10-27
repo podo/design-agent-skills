@@ -65,6 +65,7 @@ Activate when the user:
 | Skill | Best for |
 |-------|----------|
 | [`excalidraw-diagram`](../excalidraw-diagram/SKILL.md) | Excalidraw diagrams with a visual validation loop |
+| [`anatomy`](../anatomy/SKILL.md) | Interactive isometric figures where a real machine *is* the explanation |
 | [`hand-drawn-diagrams`](../hand-drawn-diagrams/SKILL.md) | Quick hand-drawn sketch diagrams |
 | [`excalidraw-agents365`](../excalidraw-agents365/SKILL.md) | Excalidraw tuned for coding agent workflows |
 | [`wireframer`](../wireframer/SKILL.md) | Low-fidelity wireframes, structure-first |

@@ -5,6 +5,27 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.11.0] — 2026-10-27
+
+One new skill, prompted by a review of the wider design-skill ecosystem (the other thirteen
+suggestions there were already in the catalogue, or had no `SKILL.md` to install).
+Catalogue: 160 → 161 skills; nothing removed.
+
+### Added
+
+- **`anatomy`** — Interactive isometric figures that explain a mechanism by drawing it: a real
+  machine whose moving parts *are* the concept, with one lit accent part and a live readout.
+  Outputs framework-free TS/SVG, React components, or A4 PDFs. rank 2
+  (`wheresryan22/anatomy`; 21k stars, MIT, single skill at the repo root)
+
+### Notes
+
+- Fills a real gap: every existing diagramming skill draws static pages, and nothing in the
+  catalogue produced an interactive explanatory figure.
+- Slow, high-detail skill (30–90 min for a Figure), so it stays rank 2 rather than a Pick.
+
+---
+
 ## [2.10.0] — 2026-10-21
 
 Gap analysis against `nexu-io/open-design`, then a full audit of every install command in the

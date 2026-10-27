@@ -215,6 +215,7 @@ instead of scrolling the full index below:
 | Skill | Best for |
 |-------|----------|
 | [`excalidraw-diagram`](../excalidraw-diagram/SKILL.md) | Excalidraw diagrams with a visual validation loop |
+| [`anatomy`](../anatomy/SKILL.md) | Interactive isometric figures where a real machine *is* the explanation |
 | [`hand-drawn-diagrams`](../hand-drawn-diagrams/SKILL.md) | Quick hand-drawn sketch diagrams |
 | [`excalidraw-agents365`](../excalidraw-agents365/SKILL.md) | Excalidraw tuned for coding agent workflows |
 | [`wireframer`](../wireframer/SKILL.md) | Low-fidelity wireframes, structure-first |
@@ -330,6 +331,7 @@ instead of scrolling the full index below:
 | "HIG compliance", "fix HIG" | `hig-doctor` |
 | "mermaid", "C4 diagram", "draw.io" | `softaworks-agent-toolkit` |
 | "excalidraw" | `excalidraw-diagram` |
+| "isometric", "explainer figure", "illustrate how X works" | `anatomy` |
 | "wireframe", "lo-fi", "layout skeleton" | `wireframer` |
 | "D3", "chart", "data visualization" | `d3js-skill` or `antvis-chart-skills` |
 | "customer journey", "user story", "PRD" | `deanpeters-pm-skills` or `phuryn-pm-skills` |

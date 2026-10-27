@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-160 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+161 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -27,8 +27,8 @@ npx design-agent-skills
 │
 ◇  Which profile?
 │  ● Picks        24 skills  ★ best in class
-│  ○ Essentials   96 skills    full coverage
-│  ○ All         160 skills    everything
+│  ○ Essentials   97 skills    full coverage
+│  ○ All         161 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -50,13 +50,13 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 24 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~96 | Full coverage, no redundancy. |
-| **All** | `--all` | 160 | Everything including niche and experimental. |
+| **Essentials** | `--essentials` | ~97 | Full coverage, no redundancy. |
+| **All** | `--all` | 161 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 24 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~96 skills covering all categories
-npx design-agent-skills --all -g            # all 160 (default when no flag)
+npx design-agent-skills --essentials -g     # ~97 skills covering all categories
+npx design-agent-skills --all -g            # all 161 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (160 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (161 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -217,7 +217,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (34), `community` (72), `experimental` (60) — experimental excluded by default
+- **Tier classification** — `official` (34), `community` (73), `experimental` (60) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -383,6 +383,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | Skill | Type | Category | Upstream |
 |-------|------|----------|----------|
 | [excalidraw-diagram](skills/excalidraw-diagram/SKILL.md) ★ | skill | diagrams | [coleam00/excalidraw-diagram-skill](https://github.com/coleam00/excalidraw-diagram-skill) |
+| [anatomy](skills/anatomy/SKILL.md) | skill | diagrams | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) |
 | [softaworks-agent-toolkit](skills/softaworks-agent-toolkit/SKILL.md) | package | diagrams | [softaworks/agent-toolkit](https://github.com/softaworks/agent-toolkit) |
 | [wireframe-skill](skills/wireframe-skill/SKILL.md) | skill | diagrams | [yhassy/wireframe-skill](https://github.com/yhassy/wireframe-skill) |
 | [wireframer](skills/wireframer/SKILL.md) | skill | diagrams | [agilek/wireframer-skill](https://github.com/agilek/wireframer-skill) |
