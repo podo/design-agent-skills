@@ -1,7 +1,7 @@
 # design-agent-skills
 
 A curated catalogue of design skills for Claude Code, Cursor, Codex, OpenCode, and 30+ other AI coding agents.
-164 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
+165 skills covering UI craft, motion, Figma workflows, accessibility, data viz, presentations, PM tools, content design, and user research.
 Skills install on demand — the catalogue is a lightweight index, not a bulk download.
 
 ## Install
@@ -28,7 +28,7 @@ npx design-agent-skills
 ◇  Which profile?
 │  ● Picks        21 skills  ★ best in class
 │  ○ Essentials   97 skills    full coverage
-│  ○ All         164 skills    everything
+│  ○ All         165 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -51,12 +51,12 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 |---------|------|--------|----------|
 | **Picks** ★ | `--picks` | 21 | One best-in-class per category. Start here. |
 | **Essentials** | `--essentials` | ~97 | Full coverage, no redundancy. |
-| **All** | `--all` | 164 | Everything including niche and experimental. |
+| **All** | `--all` | 165 | Everything including niche and experimental. |
 
 ```bash
 npx design-agent-skills --picks -g          # 21 best-in-class skills, global
 npx design-agent-skills --essentials -g     # ~97 skills covering all categories
-npx design-agent-skills --all -g            # all 164 (default when no flag)
+npx design-agent-skills --all -g            # all 165 (default when no flag)
 ```
 
 Filter by category (composable with any profile):
@@ -102,7 +102,7 @@ The catalogue has two tiers:
 
 **Tier 1 — Routing layer** (6 domain catalogues): permanently owned by this repo. `skills update` always pulls the latest routing logic from here, regardless of what else is installed.
 
-**Tier 2 — Implementation pointers** (164 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
+**Tier 2 — Implementation pointers** (165 skills): lightweight entries that tell an agent what a skill does and how to fetch the full version. When an agent reads a pointer and needs the real skill, it runs:
 
 ```bash
 # Global install:
@@ -217,7 +217,7 @@ Skills install from GitHub via `npx skills add`. Upstream repos don't publish ve
 
 **What we do instead:**
 
-- **Tier classification** — `official` (35), `community` (79), `experimental` (56) — experimental excluded by default
+- **Tier classification** — `official` (35), `community` (80), `experimental` (56) — experimental excluded by default
 - **Routing layer** — domain catalogues (Tier 1) are permanently owned here; your update path to them is always intact
 - **`skills update`** — re-fetches each skill from its current source; run regularly to stay current
 
@@ -251,6 +251,7 @@ Domain routers — activate when the user asks for a skill by domain. Route to t
 | [localization-design](skills/localization-design/SKILL.md) | skill | design-systems | [Owl-Listener/designer-skills](https://github.com/Owl-Listener/designer-skills) |
 | [open-design](skills/open-design/SKILL.md) | platform | design-systems | [nexu-io/open-design](https://github.com/nexu-io/open-design) |
 | [ui-craft](skills/ui-craft/SKILL.md) | package | design-systems | [educlopez/ui-craft](https://github.com/educlopez/ui-craft) |
+| [agentic-design-systems](skills/agentic-design-systems/SKILL.md) | skill | design-systems | [thedesignproject/agent-skills](https://github.com/thedesignproject/agent-skills) |
 | [ai-graphic-design-skill](skills/ai-graphic-design-skill/SKILL.md) | skill | design-systems | [designrique/ai-graphic-design-skill](https://github.com/designrique/ai-graphic-design-skill) |
 | [design-for-ai](skills/design-for-ai/SKILL.md) | package | design-systems | [ryanthedev/design-for-ai](https://github.com/ryanthedev/design-for-ai) |
 | [distinctive-frontend](skills/distinctive-frontend/SKILL.md) | skill | design-systems | [Zambudio/buenchollo-app](https://github.com/Zambudio/buenchollo-app) |

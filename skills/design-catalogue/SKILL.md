@@ -80,6 +80,7 @@ instead of scrolling the full index below:
 | [`format-storybook`](../format-storybook/SKILL.md) | Storybook story structure, template composition, controls, Chromatic, CSF patterns |
 | [`localization-design`](../localization-design/SKILL.md) | RTL mirroring, per-language text expansion, non-Latin type, cultural color/icon traps |
 | [`design-system-governance`](../design-system-governance/SKILL.md) | Ownership models, contribution lifecycle, semver contract, deprecation policy |
+| [`agentic-design-systems`](../agentic-design-systems/SKILL.md) | Scaffold or audit a component library for AI agents: machine-readable props, variants, relationships, anti-patterns |
 
 ### Motion & Animation
 
@@ -387,6 +388,7 @@ instead of scrolling the full index below:
 | "Figma token compliance", "Figma variables enforcement" | `claude2figma` |
 | "extract tokens website", "reverse-engineer CSS" | `extract-design-system` |
 | "Figma design system build", "variable bindings" | `work-with-design-systems` |
+| "AI-readable design system", "component metadata for agents", "agentic design system" | `agentic-design-systems` |
 | "React Native animations", "Reanimated", "Gesture Handler" | `software-mansion-skills` |
 | "Expo", "EAS Build", "Expo Router" | `expo-skills` |
 | "React Native profiling", "Turbo Modules", "brownfield" | `callstack-agent-skills` |

@@ -1,0 +1,10 @@
+type: skill
+tier: community
+rank: 3
+category: design-systems
+upstream: https://github.com/thedesignproject/agent-skills
+upstream_path: skills/agentic-design-systems/SKILL.md
+version: latest
+install_default: npx skills add thedesignproject/agent-skills --skill agentic-design-systems
+installed_as: agentic-design-systems
+license: MIT

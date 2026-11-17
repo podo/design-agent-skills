@@ -5,6 +5,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.13.0] — 2026-11-17
+
+One new skill, from a community request. Catalogue: 164 → 165 skills; nothing removed.
+
+### Added
+
+- **`agentic-design-systems`** — Scaffold or audit a component library whose main consumer is an
+  AI agent: machine-readable metadata for props, variants, relationships, component-scoped tokens
+  and anti-patterns. Not covered by the token, DESIGN.md or governance skills already listed.
+  rank 3, tier community (`thedesignproject/agent-skills`; 102 stars, MIT)
+
+---
+
 ## [2.12.0] — 2026-10-27
 
 Three new skills plus a metadata audit of the whole catalogue, both prompted by a review of the
