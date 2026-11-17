@@ -57,6 +57,7 @@ Activate when the user:
 | [`format-storybook`](../format-storybook/SKILL.md) | Storybook file structure, template composition, controls, Chromatic visual regression, CSF patterns |
 | [`localization-design`](../localization-design/SKILL.md) | RTL mirroring, per-language text expansion, non-Latin type, cultural color/icon traps |
 | [`design-system-governance`](../design-system-governance/SKILL.md) | Ownership models, contribution lifecycle, semver contract, deprecation policy |
+| [`agentic-design-systems`](../agentic-design-systems/SKILL.md) | Scaffold or audit a component library for AI agents: machine-readable props, variants, relationships, anti-patterns |
 
 ## Color, Typography & Components
 
