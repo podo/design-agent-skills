@@ -5,6 +5,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.14.1] — 2026-11-17
+
+### Fixed
+
+- `npx design-agent-skills --dry-run` with no profile flag in a non-interactive shell installed instead
+  of previewing. It now takes the same path as `--all` and prints the dry-run list (#27).
+- `--list` and `--list --json` counted experimental stubs that no profile installs (165 against the 109
+  of `--all`). They now count what the profiles install and say how many experimental skills are left
+  out; `--include-experimental` counts them (#28).
+
+---
+
 ## [2.14.0] — 2026-11-17
 
 Experimental stubs are now opt-in in the `npx` CLI, as `install.sh`, CLAUDE.md and the README always said.

@@ -342,31 +342,54 @@ describe('bin/cli.js', () => {
     assert.equal(listed.get('--all').withExp.length, real.length, '--all --include-experimental lists every stub');
   });
 
-  // "All" runs `npx skills add <package>`, which installs the whole package. Without --include-experimental it
-  // has to name the skills instead, routers included. A fake npx on PATH records what the CLI would run.
-  it('"All" names every non-experimental skill and router instead of installing the whole package', () => {
-    const stubs = allStubs();
+  // Runs the CLI with a fake `npx` first on PATH that records its arguments, one per line.
+  // `argv` is null when the CLI never ran npx.
+  const runWithFakeNpx = (...flags) => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'das-fake-npx-'));
     const out = path.join(dir, 'args.txt');
     fs.writeFileSync(path.join(dir, 'npx'), '#!/bin/sh\nprintf \'%s\\n\' "$@" > "$FAKE_NPX_OUT"\n', { mode: 0o755 });
-    const run = (...flags) => {
+    try {
       const r = spawnSync(process.execPath, [CLI, ...flags, '--project'], {
         encoding: 'utf8', timeout: 10000, env: { ...process.env, PATH: `${dir}${path.delimiter}${process.env.PATH}`, FAKE_NPX_OUT: out },
       });
       assert.equal(r.status, 0, r.stderr);
-      return fs.readFileSync(out, 'utf8').trim().split('\n');
-    };
-    try {
-      const wanted = stubs.filter(s => s.type === 'router' || s.tier !== 'experimental').map(s => s.name).sort();
-      for (const flags of [['--all'], []]) {
-        const argv = run(...flags);
-        const at = argv.indexOf('--skill');
-        assert.deepEqual(argv.slice(0, 3), ['skills', 'add', 'podo/design-agent-skills']);
-        assert.ok(at > 0, `${flags.join(' ') || '(no flags)'} must pass --skill names`);
-        assert.deepEqual(argv.slice(at + 1).sort(), wanted);
-      }
-      assert.deepEqual(run('--all', '--include-experimental'), ['skills', 'add', 'podo/design-agent-skills'],
-        '--include-experimental keeps the whole-package install');
+      return { stdout: r.stdout, argv: fs.existsSync(out) ? fs.readFileSync(out, 'utf8').trim().split('\n') : null };
     } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  };
+
+  // Regression (#27): without a profile flag in a non-interactive shell the CLI installed even with --dry-run.
+  it('bare non-interactive --dry-run previews and never runs npx', () => {
+    const { stdout, argv } = runWithFakeNpx('--dry-run');
+    assert.ok(stdout.includes('Dry run'), 'must print the dry-run header');
+    assert.equal(argv, null, '--dry-run must not run npx');
+  });
+
+  // Regression (#28): --list counted experimental stubs that no profile installs.
+  it('--list counts match what --all installs, and --include-experimental counts everything', () => {
+    const real = allStubs().filter(s => s.type !== 'router');
+    const total = flags => {
+      const r = spawnSync(process.execPath, [CLI, '--list', '--json', ...flags], { encoding: 'utf8' });
+      assert.equal(r.status, 0, r.stderr);
+      return JSON.parse(r.stdout).reduce((n, e) => n + e.count, 0);
+    };
+    assert.equal(total([]), real.filter(s => s.tier !== 'experimental').length);
+    assert.equal(total(['--include-experimental']), real.length);
+    const text = spawnSync(process.execPath, [CLI, '--list'], { encoding: 'utf8' }).stdout;
+    assert.ok(text.includes('experimental skills not counted'), '--list must say experimental stubs are left out');
+  });
+
+  // "All" runs `npx skills add <package>`, which installs the whole package. Without --include-experimental it
+  // has to name the skills instead, routers included.
+  it('"All" names every non-experimental skill and router instead of installing the whole package', () => {
+    const wanted = allStubs().filter(s => s.type === 'router' || s.tier !== 'experimental').map(s => s.name).sort();
+    for (const flags of [['--all'], []]) {
+      const { argv } = runWithFakeNpx(...flags);
+      const at = argv.indexOf('--skill');
+      assert.deepEqual(argv.slice(0, 3), ['skills', 'add', 'podo/design-agent-skills']);
+      assert.ok(at > 0, `${flags.join(' ') || '(no flags)'} must pass --skill names`);
+      assert.deepEqual(argv.slice(at + 1).sort(), wanted);
+    }
+    assert.deepEqual(runWithFakeNpx('--all', '--include-experimental').argv, ['skills', 'add', 'podo/design-agent-skills'],
+      '--include-experimental keeps the whole-package install');
   });
 });
