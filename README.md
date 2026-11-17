@@ -26,9 +26,9 @@ npx design-agent-skills
 ◆  User scope
 │
 ◇  Which profile?
-│  ● Picks        21 skills  ★ best in class
-│  ○ Essentials   97 skills    full coverage
-│  ○ All         165 skills    everything
+│  ● Picks        20 skills  ★ best in class
+│  ○ Essentials   70 skills    full coverage
+│  ○ All         109 skills    everything
 │  ○ Category →  pick a domain
 └
 
@@ -49,14 +49,15 @@ Auto-detects all installed agents (Claude Code, Cursor, Codex, OpenCode, Droid, 
 
 | Profile | Flag | Skills | Best for |
 |---------|------|--------|----------|
-| **Picks** ★ | `--picks` | 21 | One best-in-class per category. Start here. |
-| **Essentials** | `--essentials` | ~97 | Full coverage, no redundancy. |
-| **All** | `--all` | 165 | Everything including niche and experimental. |
+| **Picks** ★ | `--picks` | 20 | One best-in-class per category. Start here. |
+| **Essentials** | `--essentials` | ~70 | Full coverage, no redundancy. |
+| **All** | `--all` | 109 | Everything except experimental. Add `--include-experimental` for those too. |
 
 ```bash
-npx design-agent-skills --picks -g          # 21 best-in-class skills, global
-npx design-agent-skills --essentials -g     # ~97 skills covering all categories
-npx design-agent-skills --all -g            # all 165 (default when no flag)
+npx design-agent-skills --picks -g          # 20 best-in-class skills, global
+npx design-agent-skills --essentials -g     # ~70 skills covering all categories
+npx design-agent-skills --all -g            # all 109 (default when no flag)
+npx design-agent-skills --all --include-experimental -g   # plus the experimental tier
 ```
 
 Filter by category (composable with any profile):

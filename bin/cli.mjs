@@ -23,6 +23,7 @@ Options:
   --picks             Rank-1 skills — best in class per category
   --essentials        Rank-1 + rank-2 skills — full coverage
   --all               All skills (default for non-TTY)
+  --include-experimental  Also include experimental-tier skills (excluded by default)
   --category <name>   Filter by category (combine with any profile)
   -g, --global        Install to user scope   (~/.agents/skills/)
   -p, --project       Install to project scope (.agents/skills/)
@@ -93,7 +94,7 @@ function readStubs() {
 
 function filterStubs(stubs, { maxRank, category }) {
   return stubs.filter(s => {
-    if (s.type === 'router') return false;
+    if (!isVisible(s)) return false;
     if (maxRank != null && s.rank > maxRank) return false;
     if (category && s.category !== category) return false;
     return true;
@@ -196,6 +197,13 @@ function runDirect(command, extraArgs = []) {
   process.exit(result.status || 0);
 }
 
+// "All" installs the whole package, which includes experimental stubs, so without
+// --include-experimental it names every other skill (routers too) in one call.
+function installAll(stubs, scopeFlag) {
+  const only = flagExp ? [] : ['--skill', ...stubs.filter(s => !isExcluded(s)).map(s => s.name)];
+  runDirect('add', [PACKAGE, ...only, ...scopeFlag]);
+}
+
 function installSkills(names, scope) {
   const scopeFlag = scope === 'global' ? ['-g'] : [];
   const t0 = Date.now();
@@ -229,6 +237,10 @@ const cmd         = args[0] || '';
 const flagPicks   = args.includes('--picks');
 const flagEss     = args.includes('--essentials');
 const flagAll     = args.includes('--all');
+const flagExp     = args.includes('--include-experimental');
+// Experimental stubs are opt-in, matching install.sh and the docs.
+const isExcluded  = s => s.tier === 'experimental' && !flagExp;
+const isVisible   = s => s.type !== 'router' && !isExcluded(s);
 const flagGlobal  = args.some(a => a === '-g' || a === '--global');
 const flagProject = args.some(a => a === '-p' || a === '--project');
 const catArgIdx   = args.indexOf('--category');
@@ -299,7 +311,8 @@ if (isSearch) {
     process.stdout.write(`\n${matches.length} skill(s) matching "${searchQuery}":\n\n`);
     for (const s of matches) {
       const rankStr = s.rank ? `rank-${s.rank}` : '';
-      process.stdout.write(`  ${s.name.padEnd(30)} ${s.category.padEnd(22)} ${rankStr}\n`);
+      const note = isExcluded(s) ? '  [experimental: left out of profiles unless --include-experimental]' : '';
+      process.stdout.write(`  ${s.name.padEnd(30)} ${s.category.padEnd(22)} ${rankStr}${note}\n`);
     }
     process.stdout.write('\n');
   }
@@ -392,9 +405,9 @@ if (flagCat && !VALID_CATEGORIES.has(flagCat)) {
 
 async function main() {
   const stubs = readStubs();
-  const r1  = stubs.filter(s => s.type !== 'router' && s.rank === 1).length;
-  const r12 = stubs.filter(s => s.type !== 'router' && s.rank <= 2).length;
-  const all = stubs.filter(s => s.type !== 'router').length;
+  const r1  = stubs.filter(s => isVisible(s) && s.rank === 1).length;
+  const r12 = stubs.filter(s => isVisible(s) && s.rank <= 2).length;
+  const all = stubs.filter(isVisible).length;
 
   // ── scope ──────────────────────────────────────────────────────────────────
   let scope;
@@ -417,7 +430,7 @@ async function main() {
 
   // Non-TTY with no profile flags → batch install all (backward compat)
   if (!profileSet && !TTY) {
-    runDirect('add', [PACKAGE, ...scopeFlag]);
+    installAll(stubs, scopeFlag);
     return;
   }
 
@@ -452,7 +465,7 @@ async function main() {
       const cats = [...VALID_CATEGORIES].filter(c => c !== 'meta').sort();
       const catOpts = cats.map(c => ({
         label: c,
-        desc: `${stubs.filter(s => s.type !== 'router' && s.category === c).length} skills`,
+        desc: `${stubs.filter(s => isVisible(s) && s.category === c).length} skills`,
       }));
       const catI = await selectArrow('Pick a category:', catOpts);
       category = cats[catI];
@@ -469,14 +482,14 @@ async function main() {
       process.stdout.write('\n');
       process.exit(0);
     }
-    runDirect('add', [PACKAGE, ...scopeFlag]);
+    installAll(stubs, scopeFlag);
     return;
   }
 
   // ── filtered install ───────────────────────────────────────────────────────
   const filtered = filterStubs(stubs, { maxRank, category });
   if (filtered.length === 0) {
-    console.error('No skills match the selected profile/category.');
+    console.error(`No skills match the selected profile/category.${flagExp ? '' : ' Experimental skills are hidden; add --include-experimental.'}`);
     process.exit(1);
   }
 

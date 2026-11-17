@@ -393,13 +393,15 @@ describe('README counts', () => {
   const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
   const all = skills.filter(s => s.stub);
   const real = all.filter(s => yamlGet(s.stub, 'type') !== 'router');
-  const rank = n => real.filter(s => Number(yamlGet(s.stub, 'rank')) === n).length;
+  // Profiles leave experimental stubs out unless --include-experimental is passed.
+  const shown = real.filter(s => yamlGet(s.stub, 'tier') !== 'experimental');
+  const rank = n => shown.filter(s => Number(yamlGet(s.stub, 'rank')) === n).length;
 
   it('--picks, --essentials and --all counts match the stubs', () => {
     const row = flag => readme.match(new RegExp('\\|[^|]*\\|\\s*`--' + flag + '`\\s*\\|\\s*~?(\\d+)\\s*\\|'))?.[1];
     assert.equal(Number(row('picks')), rank(1), '--picks count');
     assert.equal(Number(row('essentials')), rank(1) + rank(2), '--essentials count');
-    assert.equal(Number(row('all')), real.length, '--all count');
+    assert.equal(Number(row('all')), shown.length, '--all count');
   });
 
   it('tier counts in the supply chain section match the stubs (routers included)', () => {
