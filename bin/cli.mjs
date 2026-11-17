@@ -241,6 +241,7 @@ const flagExp     = args.includes('--include-experimental');
 // Experimental stubs are opt-in, matching install.sh and the docs.
 const isExcluded  = s => s.tier === 'experimental' && !flagExp;
 const isVisible   = s => s.type !== 'router' && !isExcluded(s);
+const countIn     = (stubs, c) => stubs.filter(s => isVisible(s) && s.category === c).length;
 const flagGlobal  = args.some(a => a === '-g' || a === '--global');
 const flagProject = args.some(a => a === '-p' || a === '--project');
 const catArgIdx   = args.indexOf('--category');
@@ -272,18 +273,21 @@ if (flagHelp) {
 if (flagList) {
   const stubs = readStubs();
   const cats  = [...VALID_CATEGORIES].filter(c => c !== 'meta').sort();
-  const total = stubs.filter(s => s.type !== 'router').length;
+  const total = stubs.filter(isVisible).length;
+  const hidden = stubs.filter(s => s.type !== 'router' && isExcluded(s)).length;
   if (flagJson) {
     const data = cats.map(c => ({
       category: c,
-      count: stubs.filter(s => s.type !== 'router' && s.category === c).length,
+      count: countIn(stubs, c),
       description: CATEGORY_DESCRIPTIONS[c] ?? '',
     }));
     process.stdout.write(JSON.stringify(data, null, 2) + '\n');
   } else {
-    process.stdout.write(`\ndesign-agent-skills — ${total} skills across ${cats.length} categories\n\n`);
+    process.stdout.write(`\ndesign-agent-skills — ${total} skills across ${cats.length} categories\n`);
+    if (hidden) process.stdout.write(`(${hidden} experimental skills not counted: add --include-experimental)\n`);
+    process.stdout.write('\n');
     for (const c of cats) {
-      const n    = stubs.filter(s => s.type !== 'router' && s.category === c).length;
+      const n    = countIn(stubs, c);
       const desc = CATEGORY_DESCRIPTIONS[c] ?? '';
       process.stdout.write(`  ${c.padEnd(30)}${String(n).padStart(3)} skills   ${desc}\n`);
     }
@@ -428,16 +432,11 @@ async function main() {
 
   // ── profile ────────────────────────────────────────────────────────────────
 
-  // Non-TTY with no profile flags → batch install all (backward compat)
-  if (!profileSet && !TTY) {
-    installAll(stubs, scopeFlag);
-    return;
-  }
-
   let maxRank  = null;
   let category = flagCat || null;
 
-  if (profileSet) {
+  // Non-TTY with no profile flags → "All" (backward compat); it honours --dry-run like the other profiles
+  if (profileSet || !TTY) {
     if (flagPicks)    maxRank = 1;
     else if (flagEss) maxRank = 2;
     // flagAll → maxRank stays null; flagCat → category already set
@@ -465,7 +464,7 @@ async function main() {
       const cats = [...VALID_CATEGORIES].filter(c => c !== 'meta').sort();
       const catOpts = cats.map(c => ({
         label: c,
-        desc: `${stubs.filter(s => isVisible(s) && s.category === c).length} skills`,
+        desc: `${countIn(stubs, c)} skills`,
       }));
       const catI = await selectArrow('Pick a category:', catOpts);
       category = cats[catI];
