@@ -33,7 +33,8 @@ jobs:
           const dirs = fs.readdirSync(SKILLS_DIR).filter(n =>
             fs.statSync(path.join(SKILLS_DIR, n)).isDirectory()
           );
-          // Live counts: All = non-router stubs; Picks = rank 1; Essentials = rank 1 + rank 2.
+          // Live counts: total = non-router stubs; Picks = rank 1; Essentials = rank 1 + rank 2.
+          // Profiles leave experimental stubs out (the CLI needs --include-experimental for them).
           let nonRouter = 0, picks = 0, essentials = 0;
           for (const name of dirs) {
             const stub = path.join(SKILLS_DIR, name, 'stub.yaml');
@@ -41,6 +42,7 @@ jobs:
             const raw = fs.readFileSync(stub, 'utf8');
             if (/^type:\s*router/m.test(raw)) continue;
             nonRouter++;
+            if (/^tier:\s*experimental/m.test(raw)) continue;
             const rank = Number((raw.match(/^rank:\s*(\d+)/m) || [])[1]);
             if (rank === 1) { picks++; essentials++; }
             else if (rank === 2) { essentials++; }

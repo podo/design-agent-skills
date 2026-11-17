@@ -1,9 +1,11 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { allStubs } from '../scripts/lib/stub.mjs';
 
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../../');
 const CLI  = path.join(ROOT, 'bin', 'cli.mjs');
@@ -307,5 +309,64 @@ describe('bin/cli.js', () => {
     const data = JSON.parse(r.stdout);
     assert.ok(Array.isArray(data), 'search --json must output a JSON array');
     assert.ok(data.length > 0, 'search "figma" --json must return results');
+  });
+
+  // ── experimental stubs are opt-in (regression: the CLI installed them in every profile while
+  //    install.sh, CLAUDE.md and the README said they were excluded by default) ──────────────────────────
+  const dryRun = (...flags) => {
+    const r = spawnSync(process.execPath, [CLI, ...flags, '--project', '--dry-run'], { encoding: 'utf8', timeout: 10000 });
+    assert.equal(r.status, 0, r.stderr);
+    return r.stdout.split('\n').filter(l => /^ {2}\S+$/.test(l)).map(l => l.trim());
+  };
+
+  it('supports --include-experimental flag', () => {
+    assert.ok(src.includes('--include-experimental'), 'must support --include-experimental');
+  });
+
+  it('profiles and categories leave out experimental stubs by default and keep them with --include-experimental', () => {
+    const real = allStubs().filter(s => s.type !== 'router');
+    const experimental = new Set(real.filter(s => s.tier === 'experimental').map(s => s.name));
+    assert.ok(experimental.size > 0, 'fixture: the catalogue must contain experimental stubs');
+    const profiles = [['--picks'], ['--essentials'], ['--all'], ['--category', 'figma-code']];
+    const listed = new Map();
+    for (const flags of profiles) {
+      const names = dryRun(...flags);
+      const withExp = dryRun(...flags, '--include-experimental');
+      listed.set(flags[0], { names, withExp });
+      assert.ok(names.length > 0, `${flags.join(' ')} listed nothing`);
+      assert.deepEqual(names.filter(n => experimental.has(n)), [], `${flags.join(' ')} must not list experimental stubs`);
+      assert.ok(withExp.some(n => experimental.has(n)), `${flags.join(' ')} --include-experimental must list them`);
+    }
+    assert.equal(listed.get('--all').names.length, real.filter(s => s.tier !== 'experimental').length,
+      '--all lists every non-experimental stub');
+    assert.equal(listed.get('--all').withExp.length, real.length, '--all --include-experimental lists every stub');
+  });
+
+  // "All" runs `npx skills add <package>`, which installs the whole package. Without --include-experimental it
+  // has to name the skills instead, routers included. A fake npx on PATH records what the CLI would run.
+  it('"All" names every non-experimental skill and router instead of installing the whole package', () => {
+    const stubs = allStubs();
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'das-fake-npx-'));
+    const out = path.join(dir, 'args.txt');
+    fs.writeFileSync(path.join(dir, 'npx'), '#!/bin/sh\nprintf \'%s\\n\' "$@" > "$FAKE_NPX_OUT"\n', { mode: 0o755 });
+    const run = (...flags) => {
+      const r = spawnSync(process.execPath, [CLI, ...flags, '--project'], {
+        encoding: 'utf8', timeout: 10000, env: { ...process.env, PATH: `${dir}${path.delimiter}${process.env.PATH}`, FAKE_NPX_OUT: out },
+      });
+      assert.equal(r.status, 0, r.stderr);
+      return fs.readFileSync(out, 'utf8').trim().split('\n');
+    };
+    try {
+      const wanted = stubs.filter(s => s.type === 'router' || s.tier !== 'experimental').map(s => s.name).sort();
+      for (const flags of [['--all'], []]) {
+        const argv = run(...flags);
+        const at = argv.indexOf('--skill');
+        assert.deepEqual(argv.slice(0, 3), ['skills', 'add', 'podo/design-agent-skills']);
+        assert.ok(at > 0, `${flags.join(' ') || '(no flags)'} must pass --skill names`);
+        assert.deepEqual(argv.slice(at + 1).sort(), wanted);
+      }
+      assert.deepEqual(run('--all', '--include-experimental'), ['skills', 'add', 'podo/design-agent-skills'],
+        '--include-experimental keeps the whole-package install');
+    } finally { fs.rmSync(dir, { recursive: true, force: true }); }
   });
 });

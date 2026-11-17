@@ -5,6 +5,27 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [2.14.0] — 2026-11-17
+
+Experimental stubs are now opt-in in the `npx` CLI, as `install.sh`, CLAUDE.md and the README always said.
+
+### Changed
+
+- **`npx design-agent-skills` leaves experimental stubs out by default.** Every profile (`--picks`,
+  `--essentials`, `--all`, the bare non-interactive install, `--category`) used to include them with a
+  warning. Counts are now Picks 20, Essentials 70, All 109 (were 21, 97, 165). Pass
+  `--include-experimental` to get the old behaviour. `add <skill>` is unchanged: naming a skill installs it.
+- **"All" now names the skills it installs** (routers included) in a single `npx skills add --skill ...`
+  call instead of installing the whole package, which would have pulled the experimental tier in.
+  With `--include-experimental` it still installs the whole package.
+
+### Fixed
+
+- The CLI, `install.sh` and the docs disagreed about experimental stubs. Regression tests cover the
+  dry-run output of every profile and the arguments passed to `npx skills add`.
+
+---
+
 ## [2.13.0] — 2026-11-17
 
 One new skill, from a community request. Catalogue: 164 → 165 skills; nothing removed.
